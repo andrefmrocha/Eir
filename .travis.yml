@@ -1,0 +1,5 @@
+jobs:
+  include:
+    - name: deploy
+      if: branch = master
+      script: ./deploy.sh
