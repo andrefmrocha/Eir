@@ -7,10 +7,13 @@ request({
     content: {}
 }).then((response) => {
     const content = document.getElementById('content');
-    content.innerHTML = `<ul>`;
+    const ul = document.createElement('ul');
+    ul.setAttribute('id', 'houses-list');
     response.forEach((house) => {
-        content.innerHTML+= `<li>${house.description} - ${house.price_per_day}</li>`;
+        const li = document.createElement('li');
+        li.setAttribute('class', 'house-item');
+        li.innerHTML+= `${house.description} - ${house.price_per_day}`;
+        ul.appendChild(li);
     });
-    content.innerHTML += `</ul>`;
-    console.log(response);
+    content.appendChild(ul);
 }).catch(() => console.log('Failed to fetch data'));
