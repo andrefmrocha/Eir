@@ -1,8 +1,8 @@
 import { request } from './network.js'
-
+import env from './env.js'
 
 request({
-    url: 'http://localhost:8000/api/fetch_houses.php',
+    url: `${env.host}/api/fetch_houses.php`,
     method: 'GET',
     content: {}
 }).then((response) => {

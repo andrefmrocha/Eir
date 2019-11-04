@@ -17,11 +17,9 @@ export function request(props) {
 
         const response = await fetch(url, options)
             .then(res => {
-                console.log(res);
                 return { status: res.status, result: res.json() }
             })
             .catch(() => reject('Unkown error'));
-        console.log(response);
 
         response.result.then(data => {
             if (response.status == 200 || response.status == 201) {
