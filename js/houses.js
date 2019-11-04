@@ -16,4 +16,8 @@ request({
         ul.appendChild(li);
     });
     content.appendChild(ul);
-}).catch(() => console.log('Failed to fetch data'));
+}).catch(() => {
+    const content = document.getElementById('content');
+    content.innerHTML = `Failed to get the current houses! Please try again later.`
+    console.error('Failed to fetch data')
+});
