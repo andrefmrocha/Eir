@@ -1,0 +1,25 @@
+:root{
+    --primary-color: #52a470;
+    --background-color: #ffffff;
+    --gold-color: #f5cb33;
+    --accent-color: #39734e;
+}
+
+nav {
+    display: flex;
+    justify-content: space-around;
+}
+
+nav img {
+    width: 3em;
+    height: 3em;
+}
+
+nav ul {
+    display: flex;
+    justify-content: space-between;
+}
+
+nav li {
+    display: inline-block;
+}
