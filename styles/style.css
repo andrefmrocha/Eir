@@ -1,25 +1,87 @@
-:root{
-    --primary-color: #52a470;
-    --background-color: #ffffff;
-    --gold-color: #f5cb33;
-    --accent-color: #39734e;
+:root {
+  --primary-color: #52a470;
+  --background-color: #ffffff;
+  --gold-color: #f5cb33;
+  --accent-color: #39734e;
 }
 
 nav {
-    display: flex;
-    justify-content: space-around;
+  display: flex;
+  justify-content: space-around;
+  padding: 1em 0;
+  border-bottom: 0.8em solid var(--primary-color);
 }
 
 nav img {
-    width: 3em;
-    height: 3em;
+  width: 5em;
+  height: 5em;
 }
 
 nav ul {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
+}
+
+nav li:first-child {
+  color: var(--gold-color);
+}
+
+nav li:last-child {
+  padding: 0.5em;
+  border-radius: 0.3em;
+  border: 2px solid var(--accent-color);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
 }
 
 nav li {
-    display: inline-block;
+  display: inline-block;
+  padding: 0 1em;
+  font-size: 0.9em;
+  margin: auto;
+  color: var(--accent-color);
+  text-transform: uppercase;
+}
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--primary-color);
+  padding: 1.3em 20em;
+}
+
+footer ul {
+  padding-left: 0;
+}
+
+footer li {
+  display: block;
+  color: white;
+  margin: 0.4em 0.5em;
+  font-size: 0.8em;
+}
+
+footer li:first-child {
+  font-weight: bold;
+  margin-bottom: 1em;
+  font-size: 0.9em;
+}
+
+#email {
+  background-color: var(--primary-color);
+  color: white;
+  border: 2px solid;
+  padding: 0.5em;
+  border-radius: 0.3em;
+}
+
+#subscribe {
+    color: var(--gold-color);
+    background-color: white;
+    padding: 0.5em 2em;
+    border-radius: 0.4em;
+    margin: 1em;
 }

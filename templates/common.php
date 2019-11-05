@@ -11,21 +11,22 @@ function drawHeader()
         <link href="styles/style.css" rel="stylesheet">
         <title>Eir</title>
     </head>
+
     <body>
         <nav>
             <img src="assets/logo.svg" alt="Eir logo">
             <ul>
                 <li>
-                    Owner
+                    <a href="#">Owner</a>
                 </li>
                 <li>
-                    Euro €
+                    <a href="#">Eur €</a>
                 </li>
                 <li>
-                    Log In
+                    <a href="#">Log In</a>
                 </li>
                 <li>
-                    Sign Up
+                    <a href="#">Sign Up</a>
                 </li>
             </ul>
         </nav>
@@ -35,8 +36,60 @@ function drawHeader()
     <?php
     function drawFooter()
     { ?>
-
+        <footer> 
+            <ul>
+                <li>
+                    Contacts
+                </li>
+                <li>
+                    +351 232 678 903
+                </li>
+                <li>
+                    eir@eir.com
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    Customer Service
+                </li>
+                <li>
+                    Ordering & Payment
+                </li>
+                <li>
+                    Cancelling
+                </li>
+                <li>
+                    FAQ
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    Information Service
+                </li>
+                <li>
+                    Careers
+                </li>
+                <li>
+                    Privacy Policy
+                </li>
+                <li>
+                    Terms & Conditions
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    Subscribe to EIR via Email
+                </li>
+                <li>
+                    Get the latestes offers and promotions right away
+                </li>
+                <li>
+                    <input id="email"type="text" placeholder="Email Address">
+                    <input id="subscribe" type="submit" value="Subscribe">
+                </li>
+            </ul>
+        </footer>
         <body>
 
     </html>
-<?php }
+<?php } ?>
