@@ -8,7 +8,6 @@ CREATE TABLE User (
   country VARCHAR(2),
   bio VARCHAR
 );
-
 DROP TABLE IF EXISTS PlaceLocation;
 CREATE TABLE PlaceLocation(
   id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -18,7 +17,6 @@ CREATE TABLE PlaceLocation(
   latitude REAL,
   longitude REAL
 );
-
 DROP TABLE IF EXISTS Place;
 CREATE TABLE Place (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -29,13 +27,12 @@ CREATE TABLE Place (
   country VARCHAR(2) NOT NULL,
   city place_location INT REFERENCES PlaceLocation(id) NOT NULL
 );
-
 DROP TABLE IF EXISTS Rental;
 CREATE TABLE Rental (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   guest INTEGER REFERENCES User(id) NOT NULL,
   place INTEGER REFERENCES Place(id) NOT NULL,
-  checkin_date TEXT NOT NULL,
-  checkout_date TEXT NOT NULL,
+  checkin_date DATE NOT NULL,
+  checkout_date DATE NOT NULL,
   UNIQUE(place, checkin_date, checkout_date)
 );
