@@ -3,6 +3,7 @@
   --background-color: #ffffff;
   --gold-color: #f5cb33;
   --accent-color: #39734e;
+  --primary-variant: #a9d2b8;
 }
 
 nav {
@@ -38,7 +39,7 @@ a {
   color: inherit;
 }
 
-nav div{
+nav div {
   display: none;
 }
 
@@ -85,11 +86,11 @@ footer li:first-child {
 }
 
 #subscribe {
-    color: var(--gold-color);
-    background-color: white;
-    padding: 0.5em 2em;
-    border-radius: 0.4em;
-    margin: 1em;
+  color: var(--gold-color);
+  background-color: white;
+  padding: 0.5em 2em;
+  border-radius: 0.4em;
+  margin: 1em;
 }
 
 #mainpage-img {
@@ -121,11 +122,11 @@ footer li:first-child {
   color: var(--primary-color);
 }
 
-#mainpage-section{
+#mainpage-section {
   min-height: 80vh;
 }
 
-.card div{
+.card div {
   margin: 0.5em auto;
 }
 
@@ -142,17 +143,60 @@ footer li:first-child {
   margin-top: 0.3em;
 }
 
-.card #submit{
+.card #submit {
   background-color: var(--primary-color);
   border: 0;
   padding: 0.8em 2em;
   font-size: 0.8em;
 }
 
-div#dates{
+div#dates {
   display: flex;
 }
-div#dates label > input{
+div#dates label > input {
   display: inline-block;
   width: 50%;
+}
+
+#filters {
+  background-color: var(--primary-variant);
+  color: var(--background-color);
+  font-size: 0.7em;
+}
+
+#filters div{
+  display: flex;
+  flex-wrap: wrap;
+  margin: auto;
+  width: 75%;
+}
+
+#filters ul li:first-child {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+#filters li {
+  display: block;
+}
+
+#filters li input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  border: 1px solid var(--background-color);
+  padding: 0.3em;
+  border-radius: 20%;
+  transition-duration: 0.3s;
+  background-color: var(--primary-variant);
+}
+
+#filters li input:checked{
+  background-color: var(--background-color);
+}
+
+#filters li label {
+  display: inline-block;
+  height: 100%;
 }
