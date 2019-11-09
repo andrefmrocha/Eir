@@ -8,13 +8,16 @@ function drawHeader()
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="/js/houses.js" type="module"></script>
+        <script src="/js/hamburguer.js" type="module"></script>
         <link href="styles/style.css" rel="stylesheet">
+        <link href="styles/responsive.css" rel="stylesheet">
         <title>Eir</title>
     </head>
 
     <body>
         <nav>
             <img src="assets/logo.svg" alt="Eir logo">
+            <div>☰</div>
             <ul>
                 <li>
                     <a href="#">Owner</a>

@@ -7,7 +7,8 @@
 
 nav {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  flex-wrap: wrap;
   padding: 1em 0;
   border-bottom: 0.8em solid var(--primary-color);
 }
@@ -37,6 +38,10 @@ a {
   color: inherit;
 }
 
+nav div{
+  display: none;
+}
+
 nav li {
   display: inline-block;
   padding: 0 1em;
@@ -50,7 +55,8 @@ footer {
   display: flex;
   justify-content: space-between;
   background-color: var(--primary-color);
-  padding: 1.3em 20em;
+  padding: 1.3em 1vw;
+  flex-wrap: wrap;
 }
 
 footer ul {
@@ -116,7 +122,7 @@ footer li:first-child {
 }
 
 #mainpage-section{
-  height: 80vh;
+  min-height: 80vh;
 }
 
 .card div{
@@ -148,5 +154,5 @@ div#dates{
 }
 div#dates label > input{
   display: inline-block;
-  width: 8em;
+  width: 50%;
 }
