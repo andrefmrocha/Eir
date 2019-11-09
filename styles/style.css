@@ -85,3 +85,68 @@ footer li:first-child {
     border-radius: 0.4em;
     margin: 1em;
 }
+
+#mainpage-img {
+  width: 98.9%;
+  height: 80vh;
+  position: absolute;
+}
+
+.card {
+  position: relative;
+  display: inline-block;
+  padding: 1.5em;
+  background-color: var(--background-color);
+  margin: 0 0 0 8em;
+  top: 7em;
+  width: 17em;
+}
+
+.card > div {
+  font-size: 1.1em;
+  font-weight: bold;
+  margin: auto;
+}
+
+.card > div > h6 {
+  display: inline-block;
+  font-size: 1em;
+  margin: auto;
+  color: var(--primary-color);
+}
+
+#mainpage-section{
+  height: 80vh;
+}
+
+.card div{
+  margin: 0.5em auto;
+}
+
+.card label {
+  font-size: 0.8em;
+  color: var(--primary-color);
+}
+.card label > input {
+  display: block;
+  border: 0.5px solid var(--primary-color);
+  padding: 0.5em;
+  width: 90%;
+  margin-bottom: 0.5em;
+  margin-top: 0.3em;
+}
+
+.card #submit{
+  background-color: var(--primary-color);
+  border: 0;
+  padding: 0.8em 2em;
+  font-size: 0.8em;
+}
+
+div#dates{
+  display: flex;
+}
+div#dates label > input{
+  display: inline-block;
+  width: 8em;
+}
