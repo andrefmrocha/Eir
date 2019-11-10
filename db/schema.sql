@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS User;
 CREATE TABLE User (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  id INTEGER PRIMARY KEY,
   email VARCHAR NOT NULL UNIQUE,
   password_hash VARCHAR NOT NULL,
   username VARCHAR NOT NULL UNIQUE,
@@ -10,7 +10,7 @@ CREATE TABLE User (
 );
 DROP TABLE IF EXISTS PlaceLocation;
 CREATE TABLE PlaceLocation(
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  id INTEGER PRIMARY KEY,
   country VARCHAR(2) NOT NULL,
   region VARCHAR NOT NULL,
   city VARCHAR,
@@ -20,21 +20,24 @@ CREATE TABLE PlaceLocation(
 );
 DROP TABLE IF EXISTS Place;
 CREATE TABLE Place (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  id INTEGER PRIMARY KEY,
   title VARCHAR NOT NULL,
   place_owner INTEGER REFERENCES User(id) NOT NULL,
   price_per_day REAL NOT NULL,
-  description VARCHAR,
+  small_description VARCHAR,
+  big_description VARCHAR,
   place_location INT REFERENCES PlaceLocation(id) NOT NULL
 );
 DROP TABLE IF EXISTS Rental;
 CREATE TABLE Rental (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  id INTEGER PRIMARY KEY,
   guest INTEGER REFERENCES User(id) NOT NULL,
   place INTEGER REFERENCES Place(id) NOT NULL,
   checkin DATE NOT NULL,
   checkout DATE NOT NULL,
-  UNIQUE(place, checkin, checkout)
+  UNIQUE(place, checkin),
+  UNIQUE(place, checkout),
+  CHECK (checkin < checkout)
 );
 INSERT INTO User (
     id,
@@ -176,7 +179,7 @@ INSERT INTO Place(
     title,
     place_owner,
     price_per_day,
-    description,
+    small_description,
     place_location
   )
 VALUES
@@ -230,9 +233,39 @@ VALUES
   );
 INSERT INTO Rental(guest, place, checkin, checkout)
 VALUES
-  (2, 1, '2019-12-13', '2019-12-16'),
-  (1, 6, '2019-11-14', '2019-11-16'),
-  (9, 3, '2020-02-01', '2020-02-09'),
-  (5, 4, '2019-12-21', '2019-12-27'),
-  (6, 6, '2019-11-16', '2019-11-19'),
-  (3, 5, '2020-01-04', '2019-01-07');
+  (
+    2,
+    1,
+    strftime('%s', '2019-12-13'),
+    strftime('%s', '2019-12-16')
+  ),
+  (
+    1,
+    6,
+    strftime('%s', '2019-11-14'),
+    strftime('%s', '2019-11-16')
+  ),
+  (
+    9,
+    3,
+    strftime('%s', '2020-02-01'),
+    strftime('%s', '2020-02-09')
+  ),
+  (
+    5,
+    4,
+    strftime('%s', '2019-12-21'),
+    strftime('%s', '2019-12-27')
+  ),
+  (
+    6,
+    6,
+    strftime('%s', '2019-11-16'),
+    strftime('%s', '2019-11-19')
+  ),
+  (
+    3,
+    5,
+    strftime('%s', '2020-01-04'),
+    strftime('%s', '2020-01-07')
+  );
