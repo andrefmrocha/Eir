@@ -1,6 +1,8 @@
 <?php
 include_once('../templates/common.php');
-drawHeader();
+drawHeader([
+    '../js/houses.js'
+]);
 ?>
 <section id="filters">
     <div>
@@ -134,6 +136,8 @@ drawHeader();
             </li>
         </ul>
     </div>
+</section>
+<section id="houses">
 </section>
 <?php
 drawFooter();

@@ -1,5 +1,5 @@
 <?php
-function drawHeader()
+function drawHeader($scripts)
 { ?>
     <!DOCTYPE html>
     <html>
@@ -7,8 +7,11 @@ function drawHeader()
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script src="../js/houses.js" type="module"></script>
+        <script src="https://kit.fontawesome.com/ac3e82986f.js" crossorigin="anonymous"></script>
         <script src="../js/hamburguer.js" type="module"></script>
+        <?php foreach ($scripts as $script) {?>
+            <script src=<?=$script?> type="module"></script>
+        <?php }?>    
         <link href="../styles/style.css" rel="stylesheet">
         <link href="../styles/responsive.css" rel="stylesheet">
         <title>Eir</title>
@@ -97,5 +100,3 @@ function drawHeader()
 
     </html>
 <?php } ?>
-
-

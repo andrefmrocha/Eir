@@ -162,6 +162,7 @@ div#dates label > input {
   background-color: var(--primary-variant);
   color: var(--background-color);
   font-size: 0.7em;
+  margin-bottom: 4em;
 }
 
 #filters div{
@@ -199,4 +200,53 @@ div#dates label > input {
 #filters li label {
   display: inline-block;
   height: 100%;
+}
+
+#houses{
+  margin: auto;
+  max-width: 50em;
+}
+
+#houses article{
+  display: flex;
+  margin: auto;
+  max-width: 50em;
+  flex-wrap: wrap;
+  margin: 2em 0;
+}
+
+#houses article img {
+  width: 20em;
+  height: 15em;
+}
+
+#houses article div div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+#houses article header {
+  font-size: 1.5em;
+  color: var(--accent-color);
+}
+
+#houses article header::before,
+#houses article header::after{
+  content: '"';
+}
+
+#houses article div{
+  padding: 1em;
+}
+
+#houses article div div span {
+  flex-basis: 50%;
+  display: inline-block;
+  padding: 0.7em 0 0.7em 0;
+  color: var(--primary-color);
+}
+
+#houses article div div span:nth-child(even){
+  text-align: end;
 }
