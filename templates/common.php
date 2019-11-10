@@ -19,7 +19,9 @@ function drawHeader($scripts)
 
     <body>
         <nav>
-            <img src="../assets/logo.svg" alt="Eir logo">
+            <a href="/">
+              <img src="../assets/logo.svg" alt="Eir logo">
+            </a>
             <div>☰</div>
             <ul>
                 <li>

@@ -48,7 +48,7 @@ function drawMainPage()
 <?php }
 
 include_once('../templates/common.php');
-drawHeader();
+drawHeader([]);
 drawMainPage();
 drawFooter();
 ?>
