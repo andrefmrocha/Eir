@@ -53,7 +53,7 @@ drawHeader([
             </li>
             <li>
                 <input id="resorts" type="checkbox">
-                <label for="resorts">Resorts</label>
+                <label for="resorts">Swimming Pool</label>
             </li>
         </ul>
         <ul>

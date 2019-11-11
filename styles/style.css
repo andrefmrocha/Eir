@@ -3,7 +3,7 @@
   --background-color: #ffffff;
   --gold-color: #f5cb33;
   --accent-color: #39734e;
-  --primary-variant: #a9d2b8;
+  --primary-variant: #75b68d;
 }
 
 nav {
@@ -172,6 +172,10 @@ div#dates label > input {
   width: 75%;
 }
 
+#filters div ul:last-child {
+  margin-left: auto;
+}
+
 #filters ul li:first-child {
   font-size: 1.2em;
   font-weight: bold;
@@ -202,28 +206,26 @@ div#dates label > input {
   height: 100%;
 }
 
-#houses{
-  margin: auto;
-  max-width: 50em;
-}
 
 #houses article{
   display: flex;
   margin: auto;
-  max-width: 50em;
   flex-wrap: wrap;
-  margin: 2em 0;
+  width: 45em;
+  justify-content: center;
 }
 
 #houses article img {
   width: 20em;
   height: 15em;
+  border-radius: 3%;
 }
 
 #houses article div div {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  max-width: 20em;
 }
 
 #houses article header {
@@ -236,15 +238,31 @@ div#dates label > input {
   content: '"';
 }
 
-#houses article div{
-  padding: 1em;
+#houses article > div{
+  padding: 0.5em;
+  margin-left: 1em;
+  max-width: 20em;
+}
+
+#houses article > div > div{
+  margin-left: 0.4em;
+}
+
+
+#fas{
+  font-size: 1.5em;
+  color: var(--accent-color);
 }
 
 #houses article div div span {
   flex-basis: 50%;
   display: inline-block;
-  padding: 0.7em 0 0.7em 0;
+  padding: 0.7em 0;
   color: var(--primary-color);
+}
+
+#houses article div div span span {
+  margin: 0 0.5em;
 }
 
 #houses article div div span:nth-child(even){
