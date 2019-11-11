@@ -6,7 +6,8 @@ CREATE TABLE User (
   full_name VARCHAR NOT NULL,
   birth_date DATE NOT NULL,
   country VARCHAR(2),
-  bio VARCHAR
+  bio VARCHAR,
+  photo VARCHAR
 );
 DROP TABLE IF EXISTS Tag;
 CREATE TABLE Tag (
@@ -49,7 +50,8 @@ CREATE TABLE Place (
   price_per_day REAL NOT NULL,
   max_guest_number INTEGER NOT NULL,
   description VARCHAR NOT NULL,
-  place_location INT REFERENCES PlaceLocation(id) NOT NULL
+  place_location INT REFERENCES PlaceLocation(id) NOT NULL,
+  photo VARCHAR NOT NULL
 );
 DROP TABLE IF EXISTS Rental;
 CREATE TABLE Rental (
@@ -151,7 +153,8 @@ INSERT INTO User (
     birth_date,
     country,
     full_name,
-    bio
+    bio,
+    photo
   )
 VALUES
   (
@@ -161,7 +164,8 @@ VALUES
     strftime('%s', '1999-11-15'),
     'PT',
     'João Matos',
-    NULL
+    NULL,
+    '5dc95ffc7a20e'
   ),
   (
     2,
@@ -170,7 +174,8 @@ VALUES
     strftime('%s', '1986-03-27'),
     'BR',
     'Brenda Correia',
-    'Traveller, lifestyle influencer, proud mom to two babies. I am a super quiet guest and can negotiate reviews for a discount.'
+    'Traveller, lifestyle influencer, proud mom to two babies. I am a super quiet guest and can negotiate reviews for a discount.',
+    NULL
   ),
   (
     3,
@@ -179,7 +184,8 @@ VALUES
     strftime('%s', '1994-01-02'),
     NULL,
     'Aceline DeGrasse',
-    'Cat lover, loves culture. J''aime la France.'
+    'Cat lover, loves culture. J''aime la France.',
+    NULL
   ),
   (
     4,
@@ -188,6 +194,7 @@ VALUES
     strftime('%s', '1962-08-13'),
     'ES',
     'A. Castellanos Roque',
+    NULL,
     NULL
   ),
   (
@@ -197,7 +204,8 @@ VALUES
     strftime('%s', '1974-04-25'),
     'US',
     'Charles Kessler',
-    'Loan officer from Michigan. Love nature.'
+    'Loan officer from Michigan. Love nature.',
+    '5dc9608e33c1b'
   ),
   (
     6,
@@ -206,6 +214,7 @@ VALUES
     strftime('%s', '1988-06-23'),
     NULL,
     'Gustavo Almeida',
+    NULL,
     NULL
   ),
   (
@@ -215,7 +224,8 @@ VALUES
     strftime('%s', '2000-01-01'),
     'UK',
     'A Catfish/Scammer',
-    'Hey Cutie <3, following this there is usually a description of sexual acts the ''person'' implies they want to perform with the possible scam victim, or a link to a fake dating website'
+    'Hey Cutie <3, following this there is usually a description of sexual acts the ''person'' implies they want to perform with the possible scam victim, or a link to a fake dating website',
+    '5dc961ec5fa9e'
   ),
   (
     8,
@@ -224,7 +234,8 @@ VALUES
     strftime('%s', '1969-02-10'),
     'BR',
     'Guilherme G. Pereira',
-    'Serial entrepreneur. Originally from Campinas, SP, but now living in Lisbon. Carpe Diem.'
+    'Serial entrepreneur. Originally from Campinas, SP, but now living in Lisbon. Carpe Diem.',
+    NULL
   ),
   (
     9,
@@ -233,7 +244,8 @@ VALUES
     strftime('%s', '1982-07-12'),
     'BE',
     'Alysa te Pas',
-    NULL
+    NULL,
+    '5dc9621423a8a'
   );
 INSERT INTO Region (id, country, name)
 VALUES
@@ -302,7 +314,8 @@ INSERT INTO Place (
     price_per_day,
     max_guest_number,
     description,
-    place_location
+    place_location,
+    photo
   )
 VALUES
   (
@@ -313,7 +326,8 @@ VALUES
     145.5,
     4,
     'Enjoy the best stay in Lisbon with our modern apartment. Recently refurbished, it has all the conveniences you need, such as WiFi, an Espresso machine, heating and AC, and much more, and is in a central location with great public transport accessibility.',
-    1
+    1,
+    '5dc959eea7d5f'
   ),
   (
     2,
@@ -323,7 +337,8 @@ VALUES
     23.5,
     18,
     'Located on an old abandoned factory in a run-down suburb, you wouldn''t expect a hostel to win a Best Hostel in Portugal for three years in a row, but here we are. We have the best environment for the energetic traveler such as yourself, so come join us. We have community dinner every night and offer free transfers for a night out in the city.',
-    2
+    2,
+    '5dc959efbd9c7'
   ),
   (
     3,
@@ -333,7 +348,8 @@ VALUES
     70.0,
     2,
     'Experience the best of atlantic nature in the beautify Azores. Our traditional Azorean house provides you with a authentic experience, and you can use it as a base to explore Terceira island. Breakfast delivery included for an extra €8.5/person/day fee.',
-    3
+    3,
+    '5dc959f080098'
   ),
   (
     4,
@@ -343,7 +359,8 @@ VALUES
     140.0,
     6,
     'Explore the traditional Biscay villages, the land, the sea and the fishers, the gastronomy, and everything else the Basque Country has to offer you, and stay at our appartment.',
-    4
+    4,
+    '5dc959f207b24'
   ),
   (
     5,
@@ -353,7 +370,8 @@ VALUES
     92.90,
     4,
     ' Explore the traditional Galician villages, the land, the sea and the fishers, the gastronomy, and everything else this Spanish region has to  offer you, and stay at our contry house.',
-    5
+    5,
+    '5dc959f2bb151'
   ),
   (
     6,
@@ -363,7 +381,8 @@ VALUES
     230.0,
     2,
     ' Enjoy the best stay in Copenhagen with our modern apartment.Recently refurbished, it has all the conveniences you need, such as WiFi, an Espresso machine, heating and AC, and much more, and is in a central location with great public transport accessibility.',
-    6
+    6,
+    '5dc959f41a10c'
   );
 INSERT INTO PlaceTag (place, tag)
 VALUES
