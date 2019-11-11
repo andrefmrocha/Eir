@@ -21,19 +21,19 @@ const houses = [
 
 function generateIcons(){
     const houseIcon = document.createElement('i');
-    houseIcon.setAttribute('class', 'fas fa-home');
+    houseIcon.setAttribute('class', 'fas fa-lg fa-home');
     const starIcon = document.createElement('i');
-    starIcon.setAttribute('class', 'fas fa-star');
+    starIcon.setAttribute('class', 'fas fa-lg fa-star');
     const bedIcon = document.createElement('i');
-    bedIcon.setAttribute('class', 'fas fa-bed');
+    bedIcon.setAttribute('class', 'fas fa-lg fa-bed');
     const moneyIcon = document.createElement('i');
-    moneyIcon.setAttribute('class', 'fas fa-money-bill-wave');
+    moneyIcon.setAttribute('class', 'fas fa-lg fa-money-bill-wave');
     const petIcon = document.createElement('i');
-    petIcon.setAttribute('class', 'fas fa-paw');
+    petIcon.setAttribute('class', 'fas fa-lg fa-paw');
     const babyIcon = document.createElement('i');
-    babyIcon.setAttribute('class', 'fas fa-baby');
+    babyIcon.setAttribute('class', 'fas fa-lg fa-baby');
     const swimmingPoolIcon = document.createElement('i');
-    swimmingPoolIcon.setAttribute('class', 'fas fa-swimming-pool');
+    swimmingPoolIcon.setAttribute('class', 'fas fa-lg fa-swimming-pool');
     return {
         houseIcon,
         starIcon,

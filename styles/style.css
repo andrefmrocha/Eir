@@ -163,9 +163,10 @@ div#dates label > input {
   color: var(--background-color);
   font-size: 0.7em;
   margin-bottom: 4em;
+  padding: 1em;
 }
 
-#filters div{
+#filters div:first-child{
   display: flex;
   flex-wrap: wrap;
   margin: auto;
@@ -206,13 +207,23 @@ div#dates label > input {
   height: 100%;
 }
 
+.button {
+  background: var(--accent-color);
+  padding: 0.5em;
+  width: 10em;
+  text-align: center;
+  margin: 0.5em auto;
+  border-radius: 5%;
+}
+
 
 #houses article{
   display: flex;
   margin: auto;
   flex-wrap: wrap;
-  width: 45em;
+  max-width: 45em;
   justify-content: center;
+  padding-bottom: 1em;
 }
 
 #houses article img {
@@ -252,6 +263,10 @@ div#dates label > input {
 #fas{
   font-size: 1.5em;
   color: var(--accent-color);
+}
+
+i.fa-star{
+  color: var(--gold-color);
 }
 
 #houses article div div span {

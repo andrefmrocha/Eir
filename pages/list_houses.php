@@ -115,26 +115,29 @@ drawHeader([
                 Order by:
             </li>
             <li>
-                <input id="popular" type="checkbox">
+                <input name="order" id="popular" name="popular" type="radio">
                 <label for="popular">Popular</label>
             </li>
             <li>
-                <input id="rating-lowest" type="checkbox">
+                <input name="order" id="rating-lowest" name="rating-lowest" type="radio">
                 <label for="rating-lowest">Rating (lowest-to-highest)</label>
             </li>
             <li>
-                <input id="rating-highest" type="checkbox">
+                <input name="order" id="rating-highest" name="rating-highest" type="radio">
                 <label for="rating-highest">Rating (highest-to-lowest)</label>
             </li>
             <li>
-                <input id="price-lowest" type="checkbox">
+                <input name="order" id="price-lowest" name="price-lowest" type="radio">
                 <label for="price-lowest">Price (lowest-to-highest)</label>
             </li>
             <li>
-                <input id="price-highest" type="checkbox">
+                <input name="order" id="price-highest" id="price-highest" type="radio">
                 <label for="price-highest">Price (highest-to-lowest)</label>
             </li>
         </ul>
+    </div>
+    <div class="button">
+        Update
     </div>
 </section>
 <section id="houses">
