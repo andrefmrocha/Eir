@@ -8,24 +8,47 @@ CREATE TABLE User (
   country VARCHAR(2),
   bio VARCHAR
 );
+DROP TABLE IF EXISTS Tag;
+CREATE TABLE Tag (
+  id INTEGER PRIMARY KEY,
+  name VARCHAR NOT NULL
+);
+DROP TABLE IF EXISTS PlaceType;
+CREATE TABLE PlaceType (
+  id INTEGER PRIMARY KEY,
+  name VARCHAR NOT NULL
+);
+DROP TABLE IF EXISTS Region;
+CREATE TABLE Region (
+  id INTEGER PRIMARY KEY,
+  country VARCHAR(2) NOT NULL,
+  name VARCHAR NOT NULL,
+  UNIQUE(country, name)
+);
+DROP TABLE IF EXISTS City;
+CREATE TABLE City (
+  id INTEGER PRIMARY KEY,
+  region INTEGER REFERENCES Region(id) NOT NULL,
+  name VARCHAR NOT NULL,
+  UNIQUE(region, name)
+);
 DROP TABLE IF EXISTS PlaceLocation;
 CREATE TABLE PlaceLocation(
   id INTEGER PRIMARY KEY,
-  country VARCHAR(2) NOT NULL,
-  region VARCHAR NOT NULL,
-  city VARCHAR,
+  city INTEGER REFERENCES City(id) NOT NULL,
   address VARCHAR,
-  latitude REAL,
-  longitude REAL
+  latitude REAL NOT NULL,
+  longitude REAL NOT NULL
 );
 DROP TABLE IF EXISTS Place;
 CREATE TABLE Place (
   id INTEGER PRIMARY KEY,
   title VARCHAR NOT NULL,
+  type INTEGER REFERENCES PlaceType(id),
   place_owner INTEGER REFERENCES User(id) NOT NULL,
   price_per_day REAL NOT NULL,
-  small_description VARCHAR,
-  big_description VARCHAR,
+  max_guest_number INTEGER NOT NULL,
+  description VARCHAR,
   place_location INT REFERENCES PlaceLocation(id) NOT NULL
 );
 DROP TABLE IF EXISTS Rental;
@@ -39,6 +62,26 @@ CREATE TABLE Rental (
   UNIQUE(place, checkout),
   CHECK (checkin < checkout)
 );
+DROP TABLE IF EXISTS PlaceTag;
+CREATE TABLE PlaceTag (
+  place INTEGER REFERENCES Place(id),
+  tag INTEGER REFERENCES Tag(id),
+  PRIMARY KEY(place, tag)
+);
+INSERT INTO PlaceType (id, name)
+VALUES
+  (1, 'Apartment'),
+  (2, 'Beach House'),
+  (3, 'Vacation House'),
+  (4, 'Resort'),
+  (5, 'Hostel'),
+  (6, 'Hotel');
+INSERT INTO Tag (id, name)
+VALUES
+  (1, 'Baby Friendly'),
+  (2, 'Pet Friendly'),
+  (3, 'Breakfast Included'),
+  (4, 'Green Spaces');
 INSERT INTO User (
     id,
     email,
@@ -130,107 +173,144 @@ VALUES
     'Alysa te Pas',
     NULL
   );
-INSERT INTO PlaceLocation(id, country, city, region, address)
+INSERT INTO Region(id, country, name)
+VALUES
+  (1, 'PT', 'Lisbon Metropolitan Area'),
+  (2, 'PT', 'Terceira Island, Azores'),
+  (3, 'ES', 'Biscay, Basque Country'),
+  (4, 'ES', 'A Coruña Province, Galicia'),
+  (5, 'DK', 'Copenhagen Metro Area');
+INSERT INTO City(id, region, name)
+VALUES
+  (1, 1, 'Lisboa'),
+  (2, 1, 'Sintra'),
+  (3, 2, 'Vila Nova'),
+  (4, 3, 'Morga'),
+  (5, 4, 'San Sadurniño'),
+  (6, 5, 'København');
+INSERT INTO PlaceLocation(id, city, address, latitude, longitude)
 VALUES
   (
     1,
-    'PT',
-    'Lisboa',
-    'Lisbon Metro',
-    'Av. Forças Armadas 32'
+    1,
+    'Av. Forças Armadas 22',
+    38.748188,
+    -9.150062
   ),
   (
     2,
-    'PT',
-    'Mem Martins',
-    'Lisbon Metro',
-    'R. Germana Tânger 107 3C'
+    2,
+    'R. Germana Tânger 107, 3C',
+    38.818438,
+    -9.383188
   ),
   (
     3,
-    'PT',
-    'Vila Nova',
-    'Terceira Island, Azores',
-    'R Refugo 44'
+    3,
+    'R. do Passo 27',
+    38.782293,
+    -27.149776
   ),
   (
     4,
-    'ES',
-    'Morga',
-    'Biscay',
-    'c/ Valadouro 26'
+    4,
+    'Morgakoene Auzoa, 19B',
+    43.300438,
+    -2.750312
   ),
   (
     5,
-    'ES',
-    'San Sadurniño',
-    'A Coruña',
-    'c/ Quevedo 52'
+    5,
+    'Agra Abaixo, 8',
+    43.537063,
+    -8.070562
   ),
   (
     6,
-    'DK',
-    'København V',
-    'Copenhagen Metro',
-    'Verstergade 65'
+    6,
+    'Verstergade 39',
+    55.676687,
+    12.568813
   );
 INSERT INTO Place(
     id,
     title,
+    type,
     place_owner,
     price_per_day,
-    small_description,
+    max_guest_number,
+    description,
     place_location
   )
 VALUES
   (
     1,
     'City Living Lisbon',
+    1,
     8,
     145.5,
+    4,
     'Enjoy the best stay in Lisbon with our modern apartment. Recently refurbished, it has all the conveniences you need, such as WiFi, an Espresso machine, heating and AC, and much more, and is in a central location with great public transport accessibility.',
     1
   ),
   (
     2,
     'The Jungle Book',
+    5,
     6,
     23.5,
+    18,
     'Located on an old abandoned factory in a run-down suburb, you wouldn''t expect a hostel to win a Best Hostel in Portugal for three years in a row, but here we are. We have the best environment for the energetic traveler such as yourself, so come join us. We have community dinner every night and offer free transfers for a night out in the city.',
     2
   ),
   (
     3,
     'Island Retreat',
+    3,
     5,
     70.0,
+    2,
     'Experience the best of atlantic nature in the beautify Azores. Our traditional Azorean house provides you with a authentic experience, and you can use it as a base to explore Terceira island. Breakfast delivery included for an extra €8.5/person/day fee.',
     3
   ),
   (
     4,
-    'Basque Experience',
+    ' Basque Experience ',
+    3,
     4,
     140.0,
+    6,
     'Explore the traditional Biscay villages, the land, the sea and the fishers, the gastronomy, and everything else the Basque Country has to offer you, and stay at our appartment.',
     4
   ),
   (
     5,
-    'Galician Experience',
+    ' Galician Experience ',
+    3,
     4,
     92.90,
-    'Explore the traditional Galician villages, the land, the sea and the fishers, the gastronomy, and everything else this Spanish region has to offer  you, and stay at our contry house.',
+    4,
+    ' Explore the traditional Galician villages, the land, the sea and the fishers, the gastronomy, and everything else this Spanish region has to  offer you, and stay at our contry house.',
     5
   ),
   (
     6,
-    'City Living Copenhagen',
+    ' City Living Copenhagen ',
+    1,
     8,
     230.0,
-    'Enjoy the best stay in Copenhagen with our modern apartment. Recently refurbished, it has all the conveniences you need, such as WiFi, an Espresso machine, heating and AC, and much more, and is in a central location with great public transport accessibility.',
+    2,
+    ' Enjoy the best stay in Copenhagen with our modern apartment.Recently refurbished, it has all the conveniences you need, such as WiFi, an Espresso machine, heating and AC, and much more, and is in a central location with great public transport accessibility.',
     6
   );
+INSERT INTO PlaceTag(place, tag)
+VALUES
+  (1, 1),
+  (2, 2),
+  (2, 3),
+  (3, 2),
+  (3, 3),
+  (6, 1);
 INSERT INTO Rental(guest, place, checkin, checkout)
 VALUES
   (
