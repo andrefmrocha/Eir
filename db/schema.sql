@@ -60,7 +60,7 @@ CREATE TABLE Rental (
   checkout DATE NOT NULL,
   UNIQUE(place, checkin),
   UNIQUE(place, checkout),
-  CHECK (checkin < checkout)
+  CONSTRAINT CheckinBeforeCheckout CHECK (checkin < checkout)
 );
 DROP TABLE IF EXISTS PlaceTag;
 CREATE TABLE PlaceTag (
@@ -68,6 +68,68 @@ CREATE TABLE PlaceTag (
   tag INTEGER REFERENCES Tag(id),
   PRIMARY KEY(place, tag)
 );
+DROP TRIGGER IF EXISTS RentalDatesAreAvailableOnInsert;
+CREATE TRIGGER RentalDatesAreAvailableOnInsert BEFORE
+INSERT ON Rental FOR EACH ROW
+  WHEN EXISTS (
+    SELECT
+      *
+    FROM (
+        SELECT
+          *
+        FROM Rental
+        WHERE
+          Rental.place = New.place
+      ) AS existing
+    WHERE
+      (
+        (
+          New.checkin >= existing.checkin
+          AND New.checkin < existing.checkout
+        )
+        OR (
+          New.checkout > existing.checkin
+          AND New.checkout <= existing.checkout
+        )
+      )
+  ) BEGIN
+SELECT
+  RAISE(
+    ABORT,
+    'The inserted dates overlap with an existing rental'
+  );
+END;
+DROP TRIGGER IF EXISTS RentalDatesAreAvailableOnUpdate;
+CREATE TRIGGER RentalDatesAreAvailableUpdate BEFORE
+UPDATE ON Rental FOR EACH ROW
+  WHEN EXISTS (
+    SELECT
+      *
+    FROM (
+        SELECT
+          *
+        FROM Rental
+        WHERE
+          Rental.place = New.place
+      ) AS existing
+    WHERE
+      (
+        (
+          New.checkin >= existing.checkin
+          AND New.checkin < existing.checkout
+        )
+        OR (
+          New.checkout > existing.checkin
+          AND New.checkout <= existing.checkout
+        )
+      )
+  ) BEGIN
+SELECT
+  RAISE(
+    ABORT,
+    'The new dates overlap with an existing rental'
+  );
+END;
 INSERT INTO PlaceType (id, name)
 VALUES
   (1, 'Apartment'),
