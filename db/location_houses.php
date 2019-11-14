@@ -23,9 +23,13 @@
         return $tag['name'];
     }
 
+    function getRating($rating){
+        return $rating['rating'];
+    }
+
     function getHousesTags(&$houses){
+        $db = Database::instance()->db();
         foreach($houses as $key => $house){
-            $db = Database::instance()->db();
             $stmt = $db->prepare('
                 SELECT Tag.name
                 FROM Place, PlaceTag, Tag
@@ -36,3 +40,19 @@
             $houses[$key]['tags'] = $tags;
         }
     }
+
+    function getHousesRatings(&$houses){
+        $db = Database::instance()->db();
+        foreach ($houses as $key => $house) {
+            $stmt = $db->prepare('
+                SELECT rating
+                FROM Place, Rating
+                WHERE Place.id = Rating.place AND Place.id = ?;
+            ');
+            $stmt->execute(array($house['id']));
+            $ratings = array_map('getRating', $stmt->fetchAll());
+            $houses[$key]['rating'] = array_sum($ratings) / count($ratings);
+        }
+    }
+
+?> 

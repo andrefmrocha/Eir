@@ -70,6 +70,14 @@ CREATE TABLE PlaceTag (
   tag INTEGER REFERENCES Tag(id),
   PRIMARY KEY(place, tag)
 );
+DROP TABLE IF EXISTS Rating;
+CREATE TABLE Rating (
+  id INTEGER PRIMARY KEY,
+  place INTEGER REFERENCES Place(id),
+  rating REAL NOT NULL,
+  comment VARCHAR,
+  CONSTRAINT RatingValue CHECK (rating >= 0 AND rating <= 5)
+);
 DROP TRIGGER IF EXISTS RentalDatesAreAvailableOnInsert;
 CREATE TRIGGER RentalDatesAreAvailableOnInsert BEFORE
 INSERT ON Rental FOR EACH ROW

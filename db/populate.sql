@@ -296,4 +296,13 @@ VALUES
     strftime('%s', '2020-01-04'),
     strftime('%s', '2020-01-07')
   );
+
+  INSERT INTO Rating (place, rating, comment) VALUES 
+  (1, 3, 'Good place but lacked space'),
+  (1, 5, 'Best Place on Earth!'),
+  (2, 4, 'Had fun.'),
+  (3, 3, 'Should have expected an island to be this humid'),
+  (4, 5, 'Interesting experience!'),
+  (5, 5, 'Interesting experience!'),
+  (6, 5, 'Loved the place!');
   
