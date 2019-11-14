@@ -34,26 +34,22 @@ async function getAllHouses() {
     });
 }
 
+function getIcon(iconName) {
+    const icon = document.createElement('i');
+    icon.setAttribute('class', `fas fa-lg ${iconName}`);
+    return icon;
+}
 
 function generateIcons() {
-    const houseIcon = document.createElement('i');
-    houseIcon.setAttribute('class', 'fas fa-lg fa-home');
-    const starIcon = document.createElement('i');
-    starIcon.setAttribute('class', 'fas fa-lg fa-star');
-    const bedIcon = document.createElement('i');
-    bedIcon.setAttribute('class', 'fas fa-lg fa-bed');
-    const moneyIcon = document.createElement('i');
-    moneyIcon.setAttribute('class', 'fas fa-lg fa-money-bill-wave');
-    const petIcon = document.createElement('i');
-    petIcon.setAttribute('class', 'fas fa-lg fa-paw');
-    const babyIcon = document.createElement('i');
-    babyIcon.setAttribute('class', 'fas fa-lg fa-baby');
-    const swimmingPoolIcon = document.createElement('i');
-    swimmingPoolIcon.setAttribute('class', 'fas fa-lg fa-swimming-pool');
-    const breakfastIcon = document.createElement('i');
-    breakfastIcon.setAttribute('class', 'fas fa-lg fa-utensils');
-    const greenSpacesIcon = document.createElement('i');
-    breakfastIcon.setAttribute('class', 'fas fa-lg fa-seedling');
+    const houseIcon = getIcon('fa-home');
+    const starIcon = getIcon('fa-star');
+    const bedIcon = getIcon('fa-bed');
+    const moneyIcon = getIcon('fa-money-bill-wave');
+    const petIcon = getIcon('fa-paw');
+    const babyIcon = getIcon('fa-baby');
+    const swimmingPoolIcon = getIcon('fa-swimming-pool');
+    const breakfastIcon = getIcon('fa-utensils');
+    const greenSpacesIcon = getIcon('fa-seedling');
     return {
         houseIcon,
         starIcon,
@@ -65,6 +61,17 @@ function generateIcons() {
         breakfastIcon,
         greenSpacesIcon
     }
+}
+
+
+
+function createOptionalTag(tagText, icon){
+    const tag = document.createElement('span');
+    const tagSpan = document.createElement('span');
+    tagSpan.innerText = tagText;
+    tag.appendChild(icon);
+    tag.appendChild(tagSpan);
+    return tag;
 }
 
 
@@ -106,41 +113,19 @@ function addNewHouses(houses) {
         price.appendChild(icons.moneyIcon);
         houseCharateristics.appendChild(price);
         if (house.tags.indexOf('Baby Friendly') != -1) {
-            const babyFriendly = document.createElement('span');
-            const babyFriendlyText = document.createElement('span');
-            babyFriendlyText.innerText = 'Baby Friendly';
-            babyFriendly.appendChild(icons.babyIcon);
-            babyFriendly.appendChild(babyFriendlyText);
-            houseCharateristics.appendChild(babyFriendly);
+            houseCharateristics.appendChild(createOptionalTag('Baby Friendly', icons.babyIcon));
         }
-        if (house.tags.indexOf('Pet Friendly') != -1) {
-            const petFriendly = document.createElement('span');
-            const petFriendlyText = document.createElement('span');
-            petFriendlyText.innerText = 'Pet Friendly';
-            petFriendly.appendChild(icons.petIcon);
-            petFriendly.appendChild(petFriendlyText);
-            houseCharateristics.appendChild(petFriendly);
+        if (house.tags.indexOf('Pet Friendly') != -1) {        
+            houseCharateristics.appendChild(createOptionalTag('Pet Friendly', icons.petIcon));
         }
         if (house.tags.indexOf('Swimming Pool') != -1) {
-            const swimmingPool = document.createElement('span');
-            const swimmingPoolText = document.createElement('span');
-            swimmingPoolText.innerText = 'Swimming Pool';
-            swimmingPool.appendChild(icons.swimmingPoolIcon);
-            swimmingPool.appendChild(swimmingPoolText);
+            houseCharateristics.appendChild(createOptionalTag('Swimming Pool', icons.swimmingPoolIcon));
         }
         if (house.tags.indexOf('Breakfast Included') != -1) {
-            const breakfast = document.createElement('span');
-            const breakfastText = document.createElement('span');
-            breakfastText.innerText = 'Swimming Pool';
-            breakfast.appendChild(icons.breakfastIcon);
-            breakfast.appendChild(breakfastText);
+            houseCharateristics.appendChild(createOptionalTag('Breakfast Included', icons.breakfastIcon));
         }
         if (house.tags.indexOf('Green Spaces') != -1) {
-            const greenSpaces = document.createElement('span');
-            const greenSpacesText = document.createElement('span');
-            greenSpacesText.innerText = 'Green Spaces';
-            greenSpaces.appendChild(icons.greenSpacesIcon);
-            greenSpaces.appendChild(greenSpaces);
+            houseCharateristics.appendChild(createOptionalTag('Green Spaces', icons.greenSpacesIcon));
         }
         article.appendChild(img);
         houseDescription.appendChild(houseCharateristics);
