@@ -25,11 +25,11 @@ function drawMainPage()
                 <div id="dates">
                     <label for="check-in">
                         Check In
-                        <input name="check" id="check-in" type="date">
+                        <input name="checkin" id="check-in" type="date">
                     </label>
                     <label for="check-out">
                         Check Out
-                        <input name="check" id="check-out" type="date">
+                        <input name="checkout" id="check-out" type="date">
                     </label>
                 </div>
                 <div>
