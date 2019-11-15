@@ -4,5 +4,6 @@
     $house = getHousebyId($_GET['id']);
     $house['rating'] = getHouseRating($house);
     $house['tags'] = getHouseTag($house);
+    $house['reviews'] = getHouseReviews($_GET['id']);
     echo json_encode($house);
 ?>

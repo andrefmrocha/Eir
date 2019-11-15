@@ -73,3 +73,15 @@
         $stmt->execute(array($id));
         return $stmt->fetch();
     }
+
+    function getHouseReviews($id){
+        $db = Database::instance()->db();
+        $stmt = $db->prepare('
+            SELECT Rating.*
+            FROM Place, Rating
+            WHERE Place.id = ? AND Rating.place = Place.id
+        ');
+        $stmt->execute(array($id));
+        return $stmt->fetchAll();
+
+    }

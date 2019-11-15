@@ -1,6 +1,6 @@
 'use strict';
 
-function getIcon(iconName) {
+export function getIcon(iconName) {
   const icon = document.createElement('i');
   icon.setAttribute('class', `fas fa-lg ${iconName}`);
   return icon;

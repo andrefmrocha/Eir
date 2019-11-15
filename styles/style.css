@@ -105,8 +105,11 @@ footer li:first-child {
   padding: 1.5em;
   background-color: var(--background-color);
   margin: 0 0 0 8em;
-  top: 7em;
   width: 17em;
+}
+
+span.card{
+  top: 7em;
 }
 
 .card > div {
@@ -260,7 +263,7 @@ div#dates label > input {
 }
 
 
-#fas{
+.fas{
   font-size: 1.5em;
   color: var(--accent-color);
 }
@@ -290,15 +293,18 @@ i.fa-star{
 
 #house-information{
   display: grid;
-  grid-template-columns: 3fr 2fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
-#house-information article{
-  grid-column: 1/2;
+#description{
+  grid-column: 1/4;
   font-size: 1.1em;
+  padding-right: 1em;
 }
 #house-information aside{
-  grid-column: 2/3;
+  grid-column: 4/5;
+  border-left: 1px solid var(--accent-color);
+  padding-left: 2em;
 }
 
 #house-information aside > div{
@@ -309,12 +315,63 @@ i.fa-star{
 #house-information aside > div > *{
   flex-basis: 100%;
   margin: 0.5em 0;
+  color: var(--primary-color);
+}
+
+#house-information aside > div > span > span {
+  display: inline-block;
+  padding: 0 0.5em;
+}
+
+#reviews{
+  grid-column: 1/3;
+}
+
+#reviews div{
+  font-size: 0.9em;
+}
+
+#reviews > span{
+  display: flex;
+  justify-content: space-between;
+  padding: 0.7em 0;
+}
+
+#reviews > span > span{
+  display: flex;
+  justify-content: space-between;
+  padding: 0.7em 0;
+  font-size: 0.9em;
+}
+
+
+#reviews > span > span > span{
+  margin: 0.5em;
+  padding-right: 1em;
+  color: var(--primary-color);
+}
+
+#reviews > span > span > span:first-child{
+  border-right: 1px solid var(--accent-color);
+}
+
+#reviews > div > div {
+  margin: 1em 0;
+}
+
+#reserve{
+  grid-column: 3/5;
+  padding: 1.5em;
+  border: 1px solid var(--primary-color);
+  margin: 4em 1em;
 }
 
 .title{
   color: var(--accent-color);
-  font-size: 1.3em;
-  margin: 0.7em 0;
+  font-size: 1.2em;
+  padding: 0.7em 0;
+  margin: 0;
+  font-weight: normal;
 }
 
 
