@@ -1,0 +1,28 @@
+{
+  "name": "eir",
+  "version": "1.0.0",
+  "description": "Development of the project Eir for LTW course @FEUP",
+  "main": ".eslintrc.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "php-lint": "phplint 'api/*.php' 'db/*.php' 'pages/*.php'  'template/*.php'",
+    "lint": "eslint --ext .js --quiet . && prettier --check '**/*.{js,json, css,html}' && npm run php-lint",
+    "lint-fix": "eslint --ext .js --quiet --fix . && prettier --write '**/*.{js,json, css,html}'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andrefmrocha/Eir.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andrefmrocha/Eir/issues"
+  },
+  "homepage": "https://github.com/andrefmrocha/Eir#readme",
+  "dependencies": {
+    "eslint": "^6.6.0",
+    "eslint-config-prettier": "^6.5.0",
+    "phplint": "^2.0.1",
+    "prettier": "^1.19.1"
+  }
+}
