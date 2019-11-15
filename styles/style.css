@@ -283,3 +283,39 @@ i.fa-star{
 #houses article div div span:nth-child(even){
   text-align: end;
 }
+
+#house-page{
+  padding: 0 15em;
+}
+
+#house-information{
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+}
+
+#house-information article{
+  grid-column: 1/2;
+  font-size: 1.1em;
+}
+#house-information aside{
+  grid-column: 2/3;
+}
+
+#house-information aside > div{
+  display: flex;
+  flex-direction: column;
+}
+
+#house-information aside > div > *{
+  flex-basis: 100%;
+  margin: 0.5em 0;
+}
+
+.title{
+  color: var(--accent-color);
+  font-size: 1.3em;
+  margin: 0.7em 0;
+}
+
+
+

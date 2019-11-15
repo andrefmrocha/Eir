@@ -27,32 +27,49 @@
         return $rating['rating'];
     }
 
-    function getHousesTags(&$houses){
+    function getHouseTag($house){
         $db = Database::instance()->db();
+        $stmt = $db->prepare('
+                    SELECT Tag.name
+                    FROM Place, PlaceTag, Tag
+                    WHERE Place.id = PlaceTag.place AND Tag.id = PlaceTag.tag AND Place.id = ?
+                ');
+        $stmt->execute(array($house['id']));
+        $tags = array_map('getTag', $stmt->fetchAll());
+        return $tags;
+    }
+
+    function getHousesTags(&$houses){
         foreach($houses as $key => $house){
-            $stmt = $db->prepare('
-                SELECT Tag.name
-                FROM Place, PlaceTag, Tag
-                WHERE Place.id = PlaceTag.place AND Tag.id = PlaceTag.tag AND Place.id = ?
-            ');
-            $stmt->execute(array($house['id']));
-            $tags = array_map('getTag', $stmt->fetchAll());
-            $houses[$key]['tags'] = $tags;
+            $houses[$key]['tags'] = getHouseTag($house);
         }
+    }
+
+    function getHouseRating(&$house){
+        $db = Database::instance()->db();
+        $stmt = $db->prepare('
+                    SELECT rating
+                    FROM Place, Rating
+                    WHERE Place.id = Rating.place AND Place.id = ?;
+                ');
+        $stmt->execute(array($house['id']));
+        $ratings = array_map('getRating', $stmt->fetchAll());
+        return array_sum($ratings) / count($ratings);
     }
 
     function getHousesRatings(&$houses){
-        $db = Database::instance()->db();
         foreach ($houses as $key => $house) {
-            $stmt = $db->prepare('
-                SELECT rating
-                FROM Place, Rating
-                WHERE Place.id = Rating.place AND Place.id = ?;
-            ');
-            $stmt->execute(array($house['id']));
-            $ratings = array_map('getRating', $stmt->fetchAll());
-            $houses[$key]['rating'] = array_sum($ratings) / count($ratings);
+            $houses[$key]['rating'] = getHouseRating($house);
         }
     }
 
-?> 
+    function getHousebyId($id){
+        $db = Database::instance()->db();
+        $stmt = $db->prepare('
+            SELECT *
+            FROM Place NATURAL JOIN City, Region
+            WHERE Place.id = ? AND City.region = Region.id
+        ');
+        $stmt->execute(array($id));
+        return $stmt->fetch();
+    }

@@ -1,3 +1,5 @@
+'use strict';
+
 export function request(props) {
   return new Promise(async function(resolve, reject) {
     let { url, method, content } = props;
