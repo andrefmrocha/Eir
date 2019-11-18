@@ -119,7 +119,8 @@ VALUES
   (2, 'PT', 'Terceira Island, Azores'),
   (3, 'ES', 'Biscay, Basque Country'),
   (4, 'ES', 'A Coruña Province, Galicia'),
-  (5, 'DK', 'Copenhagen Metro Area');
+  (5, 'DK', 'Copenhagen Metro Area'),
+  (6, 'US', 'New York');
 INSERT INTO City (id, region, name)
 VALUES
   (1, 1, 'Lisboa'),
@@ -127,7 +128,8 @@ VALUES
   (3, 2, 'Vila Nova'),
   (4, 3, 'Morga'),
   (5, 4, 'San Sadurniño'),
-  (6, 5, 'København');
+  (6, 5, 'København'),
+  (7, 5, 'New York');
 INSERT INTO PlaceLocation (id, city, address, latitude, longitude)
 VALUES
   (
@@ -171,6 +173,13 @@ VALUES
     'Verstergade 39',
     55.676687,
     12.568813
+  ),
+  (
+    7,
+    7,
+    '510 East 6th Street',
+    40.725088,
+    -73.983283
   );
 INSERT INTO Place (
     id,
@@ -180,8 +189,7 @@ INSERT INTO Place (
     price_per_day,
     max_guest_number,
     description,
-    place_location,
-    photo
+    place_location
   )
 VALUES
   (
@@ -192,8 +200,7 @@ VALUES
     145.5,
     4,
     'Enjoy the best stay in Lisbon with our modern apartment. Recently refurbished, it has all the conveniences you need, such as WiFi, an Espresso machine, heating and AC, and much more, and is in a central location with great public transport accessibility.',
-    1,
-    '5dc959eea7d5f'
+    1
   ),
   (
     2,
@@ -203,8 +210,7 @@ VALUES
     23.5,
     18,
     'Located on an old abandoned factory in a run-down suburb, you wouldn''t expect a hostel to win a Best Hostel in Portugal for three years in a row, but here we are. We have the best environment for the energetic traveler such as yourself, so come join us. We have community dinner every night and offer free transfers for a night out in the city.',
-    2,
-    '5dc959efbd9c7'
+    2
   ),
   (
     3,
@@ -214,8 +220,7 @@ VALUES
     70.0,
     2,
     'Experience the best of atlantic nature in the beautify Azores. Our traditional Azorean house provides you with a authentic experience, and you can use it as a base to explore Terceira island. Breakfast delivery included for an extra €8.5/person/day fee.',
-    3,
-    '5dc959f080098'
+    3
   ),
   (
     4,
@@ -225,8 +230,7 @@ VALUES
     140.0,
     6,
     'Explore the traditional Biscay villages, the land, the sea and the fishers, the gastronomy, and everything else the Basque Country has to offer you, and stay at our appartment.',
-    4,
-    '5dc959f207b24'
+    4
   ),
   (
     5,
@@ -236,8 +240,7 @@ VALUES
     92.90,
     4,
     ' Explore the traditional Galician villages, the land, the sea and the fishers, the gastronomy, and everything else this Spanish region has to  offer you, and stay at our contry house.',
-    5,
-    '5dc959f2bb151'
+    5
   ),
   (
     6,
@@ -247,8 +250,17 @@ VALUES
     230.0,
     2,
     ' Enjoy the best stay in Copenhagen with our modern apartment.Recently refurbished, it has all the conveniences you need, such as WiFi, an Espresso machine, heating and AC, and much more, and is in a central location with great public transport accessibility.',
-    6,
-    '5dc959f41a10c'
+    6
+  ),
+  (
+    7,
+    'Luxury Flats NYC',
+    1,
+    5,
+    230.0,
+    5,
+    'In the East Village district of New York, close to NYU - New York University, Luxury Flats NYC has free WiFi and washing machine. This appartment has accomodations with a balcony.' || char(10) || 'The appartment is composed of 3 separate bedrooms, a living room, a fully equiped kitchen with a dishwasher and oven, and 3 bathrooms. A TV is available.' || char(10) || 'Bloomingdales is 1.8 km from the apartement, while Flatiron Building is 1.9 km from the property. The nearest airport is LaGuardia Airport, 14.5 km from Luxury Flats NYC.' || char(10) || 'East Village is a great choice for travellers interested in food, restaurants and culture',
+    7
   );
 INSERT INTO PlaceTag (place, tag)
 VALUES
@@ -296,13 +308,31 @@ VALUES
     strftime('%s', '2020-01-04'),
     strftime('%s', '2020-01-07')
   );
-
-  INSERT INTO Rating (place, rating, comment) VALUES 
+INSERT INTO Rating (place, rating, comment)
+VALUES
   (1, 3, 'Good place but lacked space'),
   (1, 5, 'Best Place on Earth!'),
   (2, 4, 'Had fun.'),
-  (3, 3, 'Should have expected an island to be this humid'),
+  (
+    3,
+    3,
+    'Should have expected an island to be this humid'
+  ),
   (4, 5, 'Interesting experience!'),
   (5, 5, 'Interesting experience!'),
   (6, 5, 'Loved the place!');
-  
+INSERT INTO PlacePhoto (place, author, resource_id)
+VALUES
+  (1, 4, '5dc959eea7d5f'),
+  (2, 6, '5dc959efbd9c7'),
+  (3, 5, '5dc959f080098'),
+  (4, 4, '5dc959f207b24'),
+  (5, 4, '5dc959f2bb151'),
+  (6, 8, '5dc959f41a10c'),
+  (7, 5, '5dd291670d21f'),
+  (7, 5, '5dd2919bd1e59'),
+  (7, 5, '5dd291b456a1a'),
+  (7, 5, '5dd291d7395d2'),
+  (7, 5, '5dd29204b2273'),
+  (7, 5, '5dd2921e5a591'),
+  (7, 5, '5dd2923c89025');
