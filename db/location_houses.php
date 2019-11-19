@@ -39,7 +39,7 @@ function getHouseTag($house)
                     FROM Place, PlaceTag, Tag
                     WHERE Place.id = PlaceTag.place AND Tag.id = PlaceTag.tag AND Place.id = ?
                 ');
-    $stmt->execute(array($house['id']));
+    $stmt->execute(array($house['place_id']));
     $tags = array_map('getTag', $stmt->fetchAll());
     return $tags;
 }
@@ -59,9 +59,10 @@ function getHouseRating(&$house)
                     FROM Place, Rating
                     WHERE Place.id = Rating.place AND Place.id = ?;
                 ');
-    $stmt->execute(array($house['id']));
+    $stmt->execute(array($house['place_id']));
     $ratings = array_map('getRating', $stmt->fetchAll());
-    return array_sum($ratings) / count($ratings);
+    $num_ratings = count($ratings);
+    return $num_ratings > 0 ? array_sum($ratings) / count($ratings) : 'N/A';
 }
 
 function getHousesRatings(&$houses)
@@ -75,7 +76,7 @@ function getHousebyId($id)
 {
     $db = Database::instance()->db();
     $stmt = $db->prepare('
-            SELECT *
+            SELECT Place.id as place_id, *
             FROM Place NATURAL JOIN City, Region
             WHERE Place.id = ? AND City.region = Region.id
         ');
@@ -103,7 +104,7 @@ function getHousePhotos(&$house)
             FROM Place, PlacePhoto as Photo
             WHERE Place.id = ? AND Photo.place = Place.id
             ');
-    $stmt->execute(array($house['id']));
+    $stmt->execute(array($house['place_id']));
     return array_map(function ($photo) {
         return $photo['photo_id'];
     }, $stmt->fetchAll());

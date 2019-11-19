@@ -129,7 +129,7 @@ VALUES
   (4, 3, 'Morga'),
   (5, 4, 'San Sadurniño'),
   (6, 5, 'København'),
-  (7, 5, 'New York');
+  (7, 6, 'New York');
 INSERT INTO PlaceLocation (id, city, address, latitude, longitude)
 VALUES
   (
