@@ -3,7 +3,7 @@
 import { request } from './network.js';
 import env from './env.js';
 import { createHouseTags } from './tags.js';
-import { getPhoto } from './image.js'
+import { getPhoto } from './image.js';
 
 const urlParams = new URL(window.location).searchParams;
 

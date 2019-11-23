@@ -2,14 +2,19 @@
 
 import { request } from './network.js';
 import env from './env.js';
-import { createHouseTags, getIcon } from './tags.js';
-import { getPhoto } from './image.js'
+import { createHouseInformation, getIcon } from './tags.js';
+import { getPhoto } from './image.js';
 
 const urlParams = new URL(window.location).searchParams;
 
 const houseInformation = document.querySelector('#house-information');
 
 const carousel = document.querySelector('#photos-carousel');
+
+const housesCarousel = {
+  selected: 0,
+  houses: []
+};
 
 getHouseInfo();
 
@@ -33,7 +38,7 @@ async function getHouseInfo() {
   description.appendChild(innerText);
 
   const tags = document.createElement('div');
-  createHouseTags(tags, house);
+  createHouseInformation(tags, house);
   information.appendChild(tags);
   const comments = document.createElement('div');
 
@@ -52,24 +57,50 @@ async function getHouseInfo() {
   buildCarousel(house);
 }
 
-
-
-function buildCarousel(house){
+function buildCarousel(house) {
   const image = document.createElement('img');
   image.setAttribute('class', 'active');
   image.src = getPhoto(house.photo);
   carousel.appendChild(image);
-  for (let i = 0; i < 4 ; i++){
-    const row = carousel.querySelector('div');
+  for (let i = 0; i < 4; i++) {
     const imageSel = document.createElement('img');
-    if(i == 1){
-      imageSel.setAttribute('class', 'selected');
-    }
     imageSel.src = getPhoto(house.photo);
-    row.appendChild(imageSel);
+    housesCarousel.houses.push(imageSel);
+  }
+
+  displayNewCarousel();
+}
+
+function displayNewCarousel() {
+  removeCarouselData();
+  const image = document.createElement('img');
+  image.setAttribute('class', 'active');
+  image.src = housesCarousel.houses[housesCarousel.selected].src;
+  carousel.appendChild(image);
+  const row = document.createElement('div');
+  housesCarousel.houses.forEach((house, index) => {
+    if (index === housesCarousel.selected) house.setAttribute('class', 'selected');
+    row.appendChild(house);
+  });
+  carousel.appendChild(row);
+}
+
+function removeCarouselData() {
+  while (carousel.firstElementChild) {
+    carousel.removeChild(carousel.firstElementChild);
   }
 }
 
-document.querySelector('fa-arrow-left').addEventListener('click', () => {
+document.querySelector('.fa-arrow-left').addEventListener('click', () => {
+  housesCarousel.houses[housesCarousel.selected].removeAttribute('class');
+  const nextSelection = housesCarousel.selected - 1;
+  housesCarousel.selected = nextSelection < 0 ? housesCarousel.houses.length - 1 : nextSelection;
+  displayNewCarousel();
+});
 
+document.querySelector('.fa-arrow-right').addEventListener('click', () => {
+  housesCarousel.houses[housesCarousel.selected].removeAttribute('class');
+  const nextSelection = ++housesCarousel.selected % housesCarousel.houses.length;
+  housesCarousel.selected = nextSelection;
+  displayNewCarousel();
 });

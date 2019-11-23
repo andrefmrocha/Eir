@@ -6,10 +6,6 @@ function getTouristHousePage()
         <section id="carousel">
             <i class="fas fa-arrow-left"></i>
             <section id="photos-carousel">
-                <div>
-                    <div>
-                    </div>
-                </div>
             </section>
             <i class="fas fa-arrow-right"></i>
         </section>
