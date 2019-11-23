@@ -76,20 +76,26 @@ function getHousebyId($id)
 {
     $db = Database::instance()->db();
     $stmt = $db->prepare('
-            SELECT Place.id as place_id, *
+            SELECT *
             FROM Place NATURAL JOIN City, Region
             WHERE Place.id = ? AND City.region = Region.id
         ');
     $stmt->execute(array($id));
-    return $stmt->fetch();
+    $house = $stmt->fetch();
+    if ($house) {
+        $house['id'] = $id;
+    }
+    return $house;
 }
 
 function getHouseReviews($id)
 {
     $db = Database::instance()->db();
     $stmt = $db->prepare('
-            SELECT Rating.*
-            FROM Place, Rating
+            SELECT Rating.rating, Rating.comment, Rating.user, User.full_name, User.photo
+            FROM
+                Place, Rating INNER JOIN User 
+                ON Rating.user = User.id
             WHERE Place.id = ? AND Rating.place = Place.id
         ');
     $stmt->execute(array($id));

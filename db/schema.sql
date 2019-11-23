@@ -72,8 +72,9 @@ CREATE TABLE PlaceTag (
 DROP TABLE IF EXISTS Rating;
 CREATE TABLE Rating (
   id INTEGER PRIMARY KEY,
-  place INTEGER REFERENCES Place(id),
+  place INTEGER REFERENCES Place(id) NOT NULL,
   rating REAL NOT NULL,
+  user INTEGER REFERENCES User(id) NOT NULL,
   comment VARCHAR,
   CONSTRAINT RatingValue CHECK (
     rating >= 0
