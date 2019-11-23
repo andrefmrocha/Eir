@@ -28,6 +28,8 @@ async function getHouseInfo() {
     }
   });
 
+  displayHouseTitle(house);
+
   const description = houseInformation.querySelector('#description');
   const information = houseInformation.querySelector('aside');
   const reviews = houseInformation.querySelector('#reviews');
@@ -58,15 +60,11 @@ async function getHouseInfo() {
 }
 
 function buildCarousel(house) {
-  const image = document.createElement('img');
-  image.setAttribute('class', 'active');
-  image.src = getPhoto(house.photo);
-  carousel.appendChild(image);
-  for (let i = 0; i < 4; i++) {
+  housesCarousel.houses = house.photos.map((photo) => {
     const imageSel = document.createElement('img');
-    imageSel.src = getPhoto(house.photo);
-    housesCarousel.houses.push(imageSel);
-  }
+    imageSel.src = getPhoto(photo);
+    return imageSel;
+  });
 
   displayNewCarousel();
 }
@@ -104,3 +102,11 @@ document.querySelector('.fa-arrow-right').addEventListener('click', () => {
   housesCarousel.selected = nextSelection;
   displayNewCarousel();
 });
+
+
+function displayHouseTitle(house){
+  const title = document.querySelector('#house-description h1');
+  const location = document.querySelector('#house-description h3 span');
+  title.innerText = house.title;
+  location.innerText = house.name;
+}

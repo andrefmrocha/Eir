@@ -3,6 +3,23 @@
 function getTouristHousePage()
 { ?>
     <div id="house-page">
+        <section id="house-title">
+            <div id="house-description">
+                <h1>
+                </h1>
+                <h3>
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>
+                    </span>
+                </h3>
+            </div>
+            <aside>
+                <img src="../assets/user_photos/eir_5dc961ec5fa9e.jpg" alt="House owner" />
+                <span>
+                    Michael
+                </span>
+            </aside>
+        </section>
         <section id="carousel">
             <i class="fas fa-arrow-left"></i>
             <section id="photos-carousel">

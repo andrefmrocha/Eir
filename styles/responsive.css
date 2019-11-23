@@ -17,6 +17,11 @@
         display: block;
         width: 90%;
     }
+
+    #photos-carousel,
+    #photos-carousel > div{
+        width: 65vw;
+    }
 }
 
 @media screen and (max-width: 900px){
@@ -59,5 +64,34 @@
     #houses article img{
         margin: auto;
         width: 18em;
+    }
+}
+
+@media screen and (max-width: 800px){
+    #house-page{
+        padding: 0;
+    }
+
+    #reviews{
+        grid-column: 1/5;
+    }
+
+    #house-information article h2{
+        text-align: center;
+    }
+
+    #reviews > span{
+        justify-content: space-evenly;
+    }
+
+    #reserve{
+        margin: auto;
+        grid-column: 1/5;
+        margin: 0;
+        margin-bottom: 2em;
+    }
+
+    #reserve.card{
+        width: 80%;
     }
 }

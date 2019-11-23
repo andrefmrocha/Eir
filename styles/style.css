@@ -391,9 +391,7 @@ i.fa-star{
 }
 
 #photos-carousel div img {
-  flex: 2 1 auto;
-  max-width: 100%;
-  max-height: 100%;
+  flex: 1 1 0px;
   border: 0.5px solid black;
 }
 
@@ -405,7 +403,6 @@ i.fa-star{
 #photos-carousel img.active{
   flex-basis: 100%;
   order: 1;
-  height: 17em;
   border: 0.5px solid black;
 }
 
@@ -413,11 +410,49 @@ i.fa-star{
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
-  justify-content: center
+  justify-content: center;
+  margin-bottom: 4em;
 }
 
 #carousel i {
   margin: 0 1em;
+}
+
+#house-title{
+  display: flex;
+  justify-content: space-between;
+  margin: 1.5em 0;
+}
+
+#house-title aside  {
+  display: flex;
+  flex-direction: column;
+}
+
+#house-title aside span {
+  margin: auto;
+}
+
+#house-title aside img {
+  border-radius: 50%;
+  width: 4.5em;
+  height: 4.5em;
+}
+
+
+#house-description h1::before,
+#house-description h1::after{
+  content: "\"";
+}
+
+#house-description h1{
+  color: var(--primary-color);
+}
+
+#house-description h3{
+  color: var(--accent-color);
+  font-size: 0.9em;
+  font-weight: normal;
 }
 
 
