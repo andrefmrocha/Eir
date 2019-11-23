@@ -39,7 +39,7 @@ function getHouseTag($house)
                     FROM Place, PlaceTag, Tag
                     WHERE Place.id = PlaceTag.place AND Tag.id = PlaceTag.tag AND Place.id = ?
                 ');
-    $stmt->execute(array($house['place_id']));
+    $stmt->execute(array($house['id']));
     $tags = array_map('getTag', $stmt->fetchAll());
     return $tags;
 }
@@ -59,7 +59,7 @@ function getHouseRating(&$house)
                     FROM Place, Rating
                     WHERE Place.id = Rating.place AND Place.id = ?;
                 ');
-    $stmt->execute(array($house['place_id']));
+    $stmt->execute(array($house['id']));
     $ratings = array_map('getRating', $stmt->fetchAll());
     $num_ratings = count($ratings);
     return $num_ratings > 0 ? array_sum($ratings) / count($ratings) : 'N/A';
@@ -76,20 +76,26 @@ function getHousebyId($id)
 {
     $db = Database::instance()->db();
     $stmt = $db->prepare('
-            SELECT Place.id as place_id, *
+            SELECT *
             FROM Place NATURAL JOIN City, Region
             WHERE Place.id = ? AND City.region = Region.id
         ');
     $stmt->execute(array($id));
-    return $stmt->fetch();
+    $house = $stmt->fetch();
+    if ($house) {
+        $house['id'] = $id;
+    }
+    return $house;
 }
 
 function getHouseReviews($id)
 {
     $db = Database::instance()->db();
     $stmt = $db->prepare('
-            SELECT Rating.*
-            FROM Place, Rating
+            SELECT Rating.rating, Rating.comment, Rating.user, User.full_name, User.photo
+            FROM
+                Place, Rating INNER JOIN User 
+                ON Rating.user = User.id
             WHERE Place.id = ? AND Rating.place = Place.id
         ');
     $stmt->execute(array($id));
@@ -104,7 +110,7 @@ function getHousePhotos(&$house)
             FROM Place, PlacePhoto as Photo
             WHERE Place.id = ? AND Photo.place = Place.id
             ');
-    $stmt->execute(array($house['place_id']));
+    $stmt->execute(array($house['id']));
     return array_map(function ($photo) {
         return $photo['photo_id'];
     }, $stmt->fetchAll());
