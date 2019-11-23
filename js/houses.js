@@ -3,7 +3,7 @@
 import { request } from './network.js';
 import env from './env.js';
 import { createHouseTags } from './tags.js';
-import { getPhoto } from './image.js';
+import { getPlacePhoto } from './image.js';
 
 const urlParams = new URL(window.location).searchParams;
 
@@ -44,7 +44,7 @@ function addNewHouses(houses) {
   houses.forEach(house => {
     const article = document.createElement('article');
     const img = document.createElement('img');
-    img.src = getPhoto(house.photo);
+    img.src = getPlacePhoto(house.photo);
     const houseDescription = document.createElement('div');
     const header = document.createElement('header');
     header.innerText = house.title;

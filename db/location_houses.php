@@ -122,3 +122,14 @@ function getHousesPhotos(&$houses)
         $houses[$key]['photo'] = getHousePhotos($house)[0];
     }
 }
+
+function getOwnerInfo($owner){
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('
+        SELECT photo, full_name
+        FROM User
+        WHERE User.id = ? 
+    ');
+    $stmt->execute(array($owner));
+    return $stmt->fetch();
+}

@@ -355,8 +355,26 @@ i.fa-star{
   border-right: 1px solid var(--accent-color);
 }
 
-#reviews > div > div {
+#reviews > div > article {
   margin: 1em 0;
+}
+
+#reviews > div > article > div {
+  display: flex;
+  align-items: center;
+}
+
+#reviews > div h4{
+  font-size: 1.2em;
+  font-weight: normal;
+  display: inline-block;
+  margin: 0;
+  padding-left: 0.8em;
+  color: var(--primary-color);
+}
+
+#reviews > div p{
+  font-size: 0.9em;
 }
 
 #reserve{
@@ -404,6 +422,7 @@ i.fa-star{
   flex-basis: 100%;
   order: 1;
   border: 0.5px solid black;
+  height: 35vh;
 }
 
 #carousel {
@@ -427,13 +446,14 @@ i.fa-star{
 #house-title aside  {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 #house-title aside span {
   margin: auto;
 }
 
-#house-title aside img {
+.photo-avatar {
   border-radius: 50%;
   width: 4.5em;
   height: 4.5em;

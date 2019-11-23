@@ -3,7 +3,7 @@
 import { request } from './network.js';
 import env from './env.js';
 import { createHouseInformation, getIcon } from './tags.js';
-import { getPhoto } from './image.js';
+import { getPlacePhoto, getPersonPhoto } from './image.js';
 
 const urlParams = new URL(window.location).searchParams;
 
@@ -45,8 +45,19 @@ async function getHouseInfo() {
   const comments = document.createElement('div');
 
   house.reviews.forEach(review => {
-    const comment = document.createElement('div');
-    comment.innerText = review.comment;
+    const comment = document.createElement('article');
+    const commentName = document.createElement('h4');
+    commentName.innerText = review.full_name;
+    const avatar = document.createElement('img');
+    avatar.setAttribute('class', 'photo-avatar');
+    avatar.src = getPersonPhoto(review.photo);
+    const commentOwner = document.createElement('div');
+    commentOwner.appendChild(avatar);
+    commentOwner.appendChild(commentName);
+    const commentText = document.createElement('p');
+    commentText.innerText = review.comment;
+    comment.appendChild(commentOwner);
+    comment.appendChild(commentText);
     comments.appendChild(comment);
   });
   reviews.appendChild(comments);
@@ -60,9 +71,9 @@ async function getHouseInfo() {
 }
 
 function buildCarousel(house) {
-  housesCarousel.houses = house.photos.map((photo) => {
+  housesCarousel.houses = house.photos.map(photo => {
     const imageSel = document.createElement('img');
-    imageSel.src = getPhoto(photo);
+    imageSel.src = getPlacePhoto(photo);
     return imageSel;
   });
 
@@ -103,10 +114,14 @@ document.querySelector('.fa-arrow-right').addEventListener('click', () => {
   displayNewCarousel();
 });
 
-
-function displayHouseTitle(house){
+function displayHouseTitle(house) {
   const title = document.querySelector('#house-description h1');
   const location = document.querySelector('#house-description h3 span');
   title.innerText = house.title;
   location.innerText = house.name;
+
+  const img = document.querySelector('#house-title aside img');
+  img.src = getPersonPhoto(house.owner.photo);
+  const name = document.querySelector('#house-title aside span');
+  name.innerText = house.owner.full_name;
 }
