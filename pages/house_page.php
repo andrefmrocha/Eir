@@ -3,7 +3,15 @@
 function getTouristHousePage()
 { ?>
     <div id="house-page">
-        <section id="photos-carousel">
+        <section id="carousel">
+            <i class="fas fa-arrow-left"></i>
+            <section id="photos-carousel">
+                <div>
+                    <div>
+                    </div>
+                </div>
+            </section>
+            <i class="fas fa-arrow-right"></i>
         </section>
         <section id="house-information">
             <article id="description">

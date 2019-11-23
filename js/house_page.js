@@ -3,10 +3,13 @@
 import { request } from './network.js';
 import env from './env.js';
 import { createHouseTags, getIcon } from './tags.js';
+import { getPhoto } from './image.js'
 
 const urlParams = new URL(window.location).searchParams;
 
 const houseInformation = document.querySelector('#house-information');
+
+const carousel = document.querySelector('#photos-carousel');
 
 getHouseInfo();
 
@@ -46,4 +49,27 @@ async function getHouseInfo() {
   rating.appendChild(ratingAvg);
   rating.appendChild(getIcon('fa-star'));
   numReviews.innerText = `${house.reviews.length} Reviews`;
+  buildCarousel(house);
 }
+
+
+
+function buildCarousel(house){
+  const image = document.createElement('img');
+  image.setAttribute('class', 'active');
+  image.src = getPhoto(house.photo);
+  carousel.appendChild(image);
+  for (let i = 0; i < 4 ; i++){
+    const row = carousel.querySelector('div');
+    const imageSel = document.createElement('img');
+    if(i == 1){
+      imageSel.setAttribute('class', 'selected');
+    }
+    imageSel.src = getPhoto(house.photo);
+    row.appendChild(imageSel);
+  }
+}
+
+document.querySelector('fa-arrow-left').addEventListener('click', () => {
+
+});

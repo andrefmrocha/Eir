@@ -374,5 +374,51 @@ i.fa-star{
   font-weight: normal;
 }
 
+#photos-carousel{
+  width: 27em;
+  display: flex;
+  flex-wrap: wrap;
+  border: 0.5px solid black;
+  align-items: center;
+}
+
+#photos-carousel > div{
+  display: flex;
+  justify-content: center;
+  flex-wrap: nowrap;
+  width: 27em;
+  order: 2;
+}
+
+#photos-carousel div img {
+  flex: 2 1 auto;
+  max-width: 100%;
+  max-height: 100%;
+  border: 0.5px solid black;
+}
+
+#photos-carousel div img.selected {
+  opacity: 60%;
+}
+
+
+#photos-carousel img.active{
+  flex-basis: 100%;
+  order: 1;
+  height: 17em;
+  border: 0.5px solid black;
+}
+
+#carousel {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center
+}
+
+#carousel i {
+  margin: 0 1em;
+}
+
 
 
