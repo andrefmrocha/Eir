@@ -15,7 +15,7 @@
     }
     div#dates label > input{
         display: block;
-        width: 90%;
+        width: 100%;
     }
 
     #photos-carousel,

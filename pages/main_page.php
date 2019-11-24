@@ -7,7 +7,7 @@ function drawMainPage()
         <img id="mainpage-img" src="../assets/house.jpg" alt="Beautiful House">
         <span class="card">
             <div>
-                Find <h6> the place </h6> to stay that best suits your <h6> personality </h6>
+                Find <h6> the place </h6> to stay that best suits your <h6> personality </h6>.
             </div>
             <form action="list_houses.php" method="get">
                 <div>

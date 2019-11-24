@@ -4,6 +4,12 @@
   --gold-color: #f5cb33;
   --accent-color: #39734e;
   --primary-variant: #75b68d;
+  font-family: 'Montserrat', sans-serif;
+}
+
+::placeholder {
+  color: lightgrey;
+  opacity: 50%;
 }
 
 nav {
@@ -11,15 +17,17 @@ nav {
   justify-content: space-between;
   flex-wrap: wrap;
   padding: 1em 0;
-  border-bottom: 0.8em solid var(--primary-color);
+  border-bottom: 0.5em solid var(--primary-color);
 }
 
 nav img {
   width: 5em;
   height: 5em;
+  padding-left: 1.5em;
 }
 
 nav ul {
+  padding-right: 1.5em;
   display: flex;
   justify-content: space-between;
 }
@@ -29,14 +37,15 @@ nav li:first-child {
 }
 
 nav li:last-child {
-  padding: 0.5em;
+  padding: 0.8em 0.4em 0.8em 0.4em;
   border-radius: 0.3em;
-  border: 2px solid var(--accent-color);
+  border: 1.5px solid var(--accent-color);
 }
 
 a {
   text-decoration: none;
   color: inherit;
+  padding: 0vw 0.7vw;
 }
 
 nav div {
@@ -47,6 +56,7 @@ nav li {
   display: inline-block;
   padding: 0 1em;
   font-size: 0.9em;
+  font-weight: bold;
   margin: auto;
   color: var(--accent-color);
   text-transform: uppercase;
@@ -56,7 +66,7 @@ footer {
   display: flex;
   justify-content: space-between;
   background-color: var(--primary-color);
-  padding: 1.3em 1vw;
+  padding: 1vw 3vw 0.5vw 3vw;
   flex-wrap: wrap;
 }
 
@@ -68,6 +78,7 @@ footer li {
   display: block;
   color: white;
   margin: 0.4em 0.5em;
+  padding-top: 0.5vw;
   font-size: 0.8em;
 }
 
@@ -80,7 +91,7 @@ footer li:first-child {
 #email {
   background-color: var(--primary-color);
   color: white;
-  border: 2px solid;
+  border: 1.5px solid;
   padding: 0.5em;
   border-radius: 0.3em;
 }
@@ -91,10 +102,11 @@ footer li:first-child {
   padding: 0.5em 2em;
   border-radius: 0.4em;
   margin: 1em;
+  font-weight: bold;
 }
 
 #mainpage-img {
-  width: 98.9%;
+  width: 98.95%;
   height: 80vh;
   position: absolute;
 }
@@ -103,9 +115,10 @@ footer li:first-child {
   position: relative;
   display: inline-block;
   padding: 1.5em;
+  border-radius: 0.5em;
   background-color: var(--background-color);
-  margin: 0 0 0 8em;
-  width: 17em;
+  margin: 0 8em 0 8em;
+  width: auto;
 }
 
 span.card{
@@ -130,35 +143,52 @@ span.card{
 }
 
 .card div {
+  display: flex;
   margin: 0.5em auto;
+  padding: 0.1vh 0.3em;
 }
 
 .card label {
   font-size: 0.8em;
   color: var(--primary-color);
+  font-weight: bold;
+  padding-bottom: 0.1em;
 }
+
 .card label > input {
   display: block;
-  border: 0.5px solid var(--primary-color);
+  border: 1.5px solid var(--primary-color);
+  border-radius: 0.3em;
+  flex-grow: 1;
+  width: 35em;
   padding: 0.5em;
-  width: 90%;
   margin-bottom: 0.5em;
   margin-top: 0.3em;
 }
 
 .card #submit {
+  display: block;
   background-color: var(--primary-color);
+  color: white;
+  font-weight: bold;
+  border-radius: 0.3em;
   border: 0;
-  padding: 0.8em 2em;
+  width: 35em;
   font-size: 0.8em;
+  padding: 1em 3em;
+  margin-right: auto;
+  margin-top: 1vh;
+  flex-grow: 1;
 }
 
 div#dates {
   display: flex;
+  justify-content: space-between;
+
 }
 div#dates label > input {
-  display: inline-block;
-  width: 50%;
+  position: relative;
+  width: 16em;
 }
 
 #filters {
