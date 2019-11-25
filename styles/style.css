@@ -199,7 +199,6 @@ div#dates label > input {
   background-color: var(--primary-variant);
   color: var(--background-color);
   font-size: 0.7em;
-  margin-bottom: 4em;
   padding: 1em;
 }
 
@@ -220,7 +219,8 @@ div#dates label > input {
 }
 
 #filters li {
-  display: block;
+  display: flex;
+  align-items: center;
 }
 
 #filters li input {
@@ -229,11 +229,12 @@ div#dates label > input {
   -o-appearance: none;
   appearance: none;
   border: 1px solid var(--background-color);
+  height: 0.5em;
+  width: 0.5em;
   padding: 0.3em;
   border-radius: 20%;
   transition-duration: 0.3s;
   background-color: var(--primary-variant);
-  
 }
 
 #filters li input:checked{
@@ -242,16 +243,27 @@ div#dates label > input {
 
 #filters li label {
   display: inline-block;
+  font-weight: lighter;
   height: 100%;
+  margin: 0.5vh 0.4vw;
+  margin-top: 0.9vh;
+  letter-spacing: 0.05em;
+
+}
+
+#filters li:first-child {
+  margin-bottom: 1vh;
 }
 
 .button {
   background: var(--accent-color);
-  padding: 0.5em;
+  padding: 0.8em 0.5em;
   width: 10em;
   text-align: center;
+  font-weight: bold;
   margin: 0.5em auto;
-  border-radius: 5%;
+  border-radius: 0.3em;
+  letter-spacing: 0.1em;
 }
 
 
@@ -259,27 +271,29 @@ div#dates label > input {
   display: flex;
   margin: auto;
   flex-wrap: wrap;
-  max-width: 45em;
+  max-width: 55em;
   justify-content: center;
-  padding-bottom: 1em;
+  padding: 6vh 0em;
 }
 
 #houses article img {
-  width: 20em;
+  width: 25em;
   height: 15em;
-  border-radius: 3%;
+  border-radius: 0.4em;
 }
 
 #houses article div div {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  max-width: 20em;
+  max-width: 25em;
 }
 
 #houses article header {
   font-size: 1.5em;
+  font-weight: bold;
   color: var(--accent-color);
+  margin-bottom: 2vh;
 }
 
 #houses article header::before,
@@ -289,17 +303,16 @@ div#dates label > input {
 
 #houses article > div{
   padding: 0.5em;
-  margin-left: 1em;
-  max-width: 20em;
-}
+  margin-left: 1.5em;
+  max-width: 30em;
+  margin-left: 1.5em;
 
-#houses article > div > div{
-  margin-left: 0.4em;
 }
-
 
 .fas{
+  text-align: center;
   font-size: 1.5em;
+  width: 3vw;
   color: var(--accent-color);
 }
 
@@ -312,10 +325,12 @@ i.fa-star{
   display: inline-block;
   padding: 0.7em 0;
   color: var(--primary-color);
+  font-weight: lighter;
+  letter-spacing: 0.05em;
 }
 
 #houses article div div span span {
-  margin: 0 0.5em;
+  margin: 0em 0.6em;
 }
 
 #houses article div div span:nth-child(even){
