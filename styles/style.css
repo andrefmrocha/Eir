@@ -4,7 +4,7 @@
   --gold-color: #f5cb33;
   --accent-color: #39734e;
   --primary-variant: #75b68d;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
 }
 
 ::placeholder {
@@ -126,14 +126,16 @@ span.card{
 }
 
 .card > p {
+  text-align: center;
   font-size: 1.1em;
   font-weight: bold;
   margin: auto;
+  letter-spacing: 0.4px;
 }
 
 .card > p > strong {
   display: inline-block;
-  font-size: 1em;
+  font-size: 1.0em;
   margin: auto;
   color: var(--primary-color);
 }
@@ -269,7 +271,7 @@ div#dates label > input {
 
 #houses article{
   display: flex;
-  margin: auto;
+  margin: 2em auto;
   flex-wrap: wrap;
   max-width: 55em;
   justify-content: center;
