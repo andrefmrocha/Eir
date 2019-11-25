@@ -125,20 +125,20 @@ span.card{
   top: 7em;
 }
 
-.card > div {
+.card > p {
   font-size: 1.1em;
   font-weight: bold;
   margin: auto;
 }
 
-.card > div > strong {
+.card > p > strong {
   display: inline-block;
   font-size: 1em;
   margin: auto;
   color: var(--primary-color);
 }
 
-.card > div > strong:last-child {
+.card > p > strong:last-child {
   margin-right: 0;
 }
 
