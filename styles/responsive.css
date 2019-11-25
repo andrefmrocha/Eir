@@ -88,8 +88,12 @@
 
     #houses article img{
         margin: auto;
-        width: 18em;
+        width: 30em;
     }
+
+    #houses article header {
+        margin-top: 2em;
+      }
 }
 
 @media screen and (max-width: 800px){
