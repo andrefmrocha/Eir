@@ -3,6 +3,7 @@
   --background-color: #ffffff;
   --gold-color: #f5cb33;
   --accent-color: #39734e;
+  --alert-color: #b00000;
   --primary-variant: #75b68d;
 }
 
@@ -153,8 +154,24 @@ span.card{
   font-size: 0.8em;
 }
 
+#dates label{
+  flex-basis: 50%;
+}
+
+form p.form-error{
+  font-size: 0.7em;
+  display: none;
+  flex-basis: 100%;
+  color: var(--alert-color);
+}
+
+form p.form-error.active{
+  display: block;
+}
+
 div#dates {
   display: flex;
+  flex-wrap: wrap;
 }
 div#dates label > input {
   display: inline-block;
@@ -474,6 +491,5 @@ i.fa-star{
   font-size: 0.9em;
   font-weight: normal;
 }
-
 
 

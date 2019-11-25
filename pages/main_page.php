@@ -38,6 +38,8 @@ function drawMainPage()
                         <input name="people" id="people" type="number">
                     </label>
                 </div>
+                <p id="date-input" class="form-error">* checkin must be before checkout.</p>
+                <p id="people-input" class="form-error">* number of people must be a positive number</p>
                 <div>
                     <input id="submit" type="submit" value="Search">
                 </div>
@@ -48,7 +50,7 @@ function drawMainPage()
 <?php }
 
 include_once('../templates/common.php');
-drawHeader([]);
+drawHeader(['../js/main_page.js']);
 drawMainPage();
 drawFooter();
 ?>
