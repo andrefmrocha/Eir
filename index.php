@@ -1,7 +1,6 @@
 <?php
     session_start();
-    include_once('templates/common.php');
-    drawHeader();
-    drawMainPage();
-    drawFooter();
+    echo "Meias";
+    header('Location: pages/main_page.php');
+    die();
 ?>

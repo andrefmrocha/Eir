@@ -1,5 +1,5 @@
 <?php
-function drawHeader()
+function drawHeader($scripts)
 { ?>
     <!DOCTYPE html>
     <html>
@@ -7,17 +7,40 @@ function drawHeader()
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script src="/js/houses.js" type="module"></script>
-        <script src="/js/hamburguer.js" type="module"></script>
-        <link href="styles/style.css" rel="stylesheet">
-        <link href="styles/responsive.css" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/ac3e82986f.js" crossorigin="anonymous"></script>
+        <script src="../js/hamburguer.js" type="module"></script>
+        <?php foreach ($scripts as $script) { ?>
+            <script src=<?= $script ?> type="module"></script>
+        <?php } ?>
+        <link href="../styles/style.css" rel="stylesheet">
+        <link href="../styles/responsive.css" rel="stylesheet">
+        <link rel="shortcut icon" href="/favicon.ico">
+        <link rel="icon" sizes="16x16 32x32 64x64" href="../assets/favicon/favicon.ico">
+        <link rel="icon" type="image/png" sizes="196x196" href="../assets/favicon/favicon-192.png">
+        <link rel="icon" type="image/png" sizes="160x160" href="../assets/favicon/favicon-160.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="../assets/favicon/favicon-96.png">
+        <link rel="icon" type="image/png" sizes="64x64" href="../assets/favicon/favicon-64.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon/favicon-32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon/favicon-16.png">
+        <link rel="apple-touch-icon" href="../assets/favicon/favicon-57.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="../assets/favicon/favicon-114.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="../assets/favicon/favicon-72.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="../assets/favicon/favicon-144.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="../assets/favicon/favicon-60.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="../assets/favicon/favicon-120.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="../assets/favicon/favicon-76.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="../assets/favicon/favicon-152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="../assets/favicon/favicon-180.png">
+        <meta name="msapplication-TileColor" content="#FFFFFF">
+        <meta name="msapplication-TileImage" content="../assets/favicon/favicon-144.png">
+        <meta name="msapplication-config" content="../assets/favicon/browserconfig.xml">
         <title>Eir</title>
     </head>
 
     <body>
         <nav>
             <a href="/">
-                <img src="assets/logo.svg" alt="Eir logo">
+                <img src="../assets/logo.svg" alt="Eir logo">
             </a>
             <div>☰</div>
             <ul>
@@ -98,54 +121,4 @@ function drawHeader()
         <body>
 
     </html>
-<?php } ?>
-
-
-<?php
-function drawMainPage()
-{
-
-    ?>
-    <section id="mainpage-section">
-        <img id="mainpage-img" src="assets/house.jpg" alt="Beautiful House">
-        <span class="card">
-            <div>
-                Find <h6> the place </h6> to stay that best suits your <h6> personality </h6>
-            </div>
-            <form action="pages/list-houses.php" method="GET">
-                <div>
-                    <label for="country">
-                        Country
-                        <input id="country" type="text">
-                    </label>
-                </div>
-                <div>
-                    <label for="city">
-                        City
-                        <input id="city" type="text">
-                    </label>
-                </div>
-                <div id="dates">
-                    <label for="check-in">
-                        Check In
-                        <input id="check-in" type="date">
-                    </label>
-                    <label for="check-out">
-                        Check Out
-                        <input id="check-out" type="date">
-                    </label>
-                </div>
-                <div>
-                    <label for="people">
-                        People
-                        <input id="people" type="number">
-                    </label>
-                </div>
-                <div>
-                    <input id="submit" type="submit" value="Search">
-                </div>
-            </form>
-        </span>
-    </section>
-
 <?php } ?>

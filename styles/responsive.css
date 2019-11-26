@@ -49,3 +49,15 @@
         margin-top: 1.5em;
     }
 }
+
+@media screen and (max-width: 750px){
+    #houses article div{
+        padding: 0;
+        margin: auto;
+    }
+
+    #houses article img{
+        margin: auto;
+        width: 18em;
+    }
+}
