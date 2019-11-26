@@ -50,8 +50,7 @@ CREATE TABLE Place (
   price_per_day REAL NOT NULL,
   max_guest_number INTEGER NOT NULL,
   description VARCHAR NOT NULL,
-  place_location INT REFERENCES PlaceLocation(id) NOT NULL,
-  photo VARCHAR NOT NULL
+  place_location INT REFERENCES PlaceLocation(id) NOT NULL
 );
 DROP TABLE IF EXISTS Rental;
 CREATE TABLE Rental (
@@ -73,10 +72,21 @@ CREATE TABLE PlaceTag (
 DROP TABLE IF EXISTS Rating;
 CREATE TABLE Rating (
   id INTEGER PRIMARY KEY,
-  place INTEGER REFERENCES Place(id),
+  place INTEGER REFERENCES Place(id) NOT NULL,
   rating REAL NOT NULL,
+  user INTEGER REFERENCES User(id) NOT NULL,
   comment VARCHAR,
-  CONSTRAINT RatingValue CHECK (rating >= 0 AND rating <= 5)
+  CONSTRAINT RatingValue CHECK (
+    rating >= 0
+    AND rating <= 5
+  )
+);
+DROP TABLE IF EXISTS PlacePhoto;
+CREATE TABLE PlacePhoto (
+  id INTEGER PRIMARY KEY,
+  place INTEGER REFERENCES Place(id) NOT NULL,
+  author INTEGER REFERENCES User(id) NOT NULL,
+  resource_id VARCHAR UNIQUE NOT NULL
 );
 DROP TRIGGER IF EXISTS RentalDatesAreAvailableOnInsert;
 CREATE TRIGGER RentalDatesAreAvailableOnInsert BEFORE
