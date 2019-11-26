@@ -3,44 +3,50 @@ function drawMainPage()
 {
 
     ?>
-    <section id="mainpage-section">
-        <img id="mainpage-img" src="../assets/house.jpg" alt="Beautiful House">
+    <section id="signup-section">
+        <img id="signup-img" src="../assets/house.jpg" alt="Beautiful House">
         <span class="card">
-            <div>
-                Find <h6> the place </h6> to stay that best suits your <h6> personality </h6>
-            </div>
             <form action="list_houses.php" method="get">
                 <div>
+                    <label for="full-name">
+                        Full Name
+                        <input name="full-name" id="full-name" type="text">
+                    </label>
+                </div>
+                <div>
+                    <label for="form-email">
+                        Email
+                        <input name="form-email" id="form-email" type="text">
+                    </label>
+                </div>
+                <div>
+                    <label for="password">
+                        Password
+                        <input name="password" id="password" type="password">
+                    </label>
+                </div>
+                <div>
+                    <label for="confirm-password">
+                        Confirm Password
+                        <input name="confirm-password" id="confirm-password" type="password">
+                    </label>
+                </div>
+                <div class="two-inputs">
+                    <label for="birthday">
+                        Birthday
+                        <input name="birthday" id="birthday" type="date">
+                    </label>
                     <label for="country">
                         Country
                         <input name="country" id="country" type="text">
                     </label>
                 </div>
                 <div>
-                    <label for="city">
-                        City
-                        <input name="city" id="city" type="text">
-                    </label>
+                    <input id="submit" type="submit" value="Sign Up">
                 </div>
-                <div id="dates">
-                    <label for="check-in">
-                        Check In
-                        <input name="checkin" id="check-in" type="date">
-                    </label>
-                    <label for="check-out">
-                        Check Out
-                        <input name="checkout" id="check-out" type="date">
-                    </label>
-                </div>
-                <div>
-                    <label for="people">
-                        People
-                        <input name="people" id="people" type="number">
-                    </label>
-                </div>
-                <div>
-                    <input id="submit" type="submit" value="Search">
-                </div>
+                <p>
+                    Alread have an account? <a href="#">Log in</a>
+                </p>
             </form>
         </span>
     </section>
