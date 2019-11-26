@@ -1,0 +1,51 @@
+@media screen and (max-width: 550px){
+    #mainpage-img {
+        position: static;
+    }
+
+    .card {
+        position: static;
+        width: 100%;
+        margin: auto;
+        margin-top: 1em;
+        padding: 0.5em;
+    }
+    div#dates {
+        display: block;
+    }
+    div#dates label > input{
+        display: block;
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 900px){
+
+    nav ul li{
+        display: block;
+        width: 10em;
+        margin: auto 0;
+    }
+
+    nav div{
+        display: block;
+        font-size: 1.5em;
+        color: var(--accent-color);
+        margin: auto 1.5em auto auto;
+        border: 0.5px solid var(--accent-color);
+        padding: 0.2em 0.4em;
+        border-radius: 5px;
+    }
+    
+    nav ul{
+        display: none;
+    }
+
+    nav ul.visible{
+        display: block;
+        flex-basis: 100%;
+        flex-grow: 1;
+        padding-left: 0;
+        margin-top: 1.5em;
+    }
+}
