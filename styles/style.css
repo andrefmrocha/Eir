@@ -97,7 +97,7 @@ footer li:first-child {
 #signup-img,
 #mainpage-img {
   width: 98.9%;
-  height: 80vh;
+  height: 100%;
   position: absolute;
 }
 
@@ -129,24 +129,30 @@ span.card{
 
 #signup-section,
 #mainpage-section {
-  min-height: 80vh;
+  min-height: 90vh;
 }
 
 .card div {
   margin: 0.5em auto;
+  flex-basis: 100%;
+  display: flex;
 }
 
 .card label {
   font-size: 0.8em;
   color: var(--primary-color);
+  flex-basis: 90%;
 }
 .card label > input {
   display: block;
   border: 0.5px solid var(--primary-color);
   padding: 0.5em;
-  width: 90%;
   margin-bottom: 0.5em;
   margin-top: 0.3em;
+  width: 100%;
+}
+.card label > span {
+  flex-basis: 5%;
 }
 
 .card #submit {
@@ -160,14 +166,17 @@ span.card{
   flex-basis: 50%;
 }
 
-form p.form-error{
+form .form-error{
   font-size: 0.7em;
   display: none;
-  flex-basis: 100%;
   color: var(--alert-color);
 }
 
-form p.form-error.active{
+form p.form-error{
+  flex-basis: 100%;
+}
+
+form .form-error.active{
   display: block;
 }
 
@@ -520,9 +529,15 @@ i.fa-star{
   color: white;
   padding: 1em 4em;
   border-radius: 0.5em;
+  margin: auto;
+  display: block;
 }
 
-#signup-section form p{
+#signup-section form{
+  display: flex;
+  flex-wrap: wrap;
+}
+#signup-section form p:last-child{
   color: var(--primary-variant);
   margin: auto;
   text-align: center;
@@ -544,10 +559,10 @@ i.fa-star{
   flex-wrap: wrap;
 }
 
-.two-inputs label {
+.two-inputs > div {
   flex-basis: 50%;
 }
 
 .two-inputs label > input{
-  width: 80%;
+  width: 95%;
 }

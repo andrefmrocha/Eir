@@ -5,15 +5,14 @@
         $db = Database::instance()->db();
         $stmt = $db->prepare('INSERT INTO User (
         email, password_hash, birth_date,
-        country, full_name, bio) 
-        VALUES (?, ?, ?, ?, ?, ?)');
+        country, full_name) 
+        VALUES (?, ?, ?, ?, ?)');
         $stmt->execute(array(
             $user['email'],
             $hash, 
             $user['birth_date'],
             $user['country'],
-            $user['full_name'],
-            $user['bio']
+            $user['full_name']
         ));
     }
 
