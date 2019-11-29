@@ -59,7 +59,7 @@ function drawMainPage()
                     <input id="submit" type="submit" value="Sign Up">
                 </div>
                 <p>
-                    Alread have an account? <a href="#">Log in</a>
+                    Alread have an account? <a href="login_page.php">Log in</a>
                 </p>
             </form>
         </span>
@@ -68,6 +68,7 @@ function drawMainPage()
 <?php }
 
 include_once('../templates/common.php');
+include_once('../templates/on_logged_in.php');
 drawHeader(['../js/signup_page.js']);
 drawMainPage();
 drawFooter();

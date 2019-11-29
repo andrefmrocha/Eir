@@ -132,10 +132,14 @@ span.card{
   min-height: 90vh;
 }
 
-.card div {
-  margin: 0.5em auto;
-  flex-basis: 100%;
+
+#signup-section .card div {
   display: flex;
+}
+
+.card div {
+  flex-basis: 100%;
+  margin: 0.5em auto;
 }
 
 .card label {

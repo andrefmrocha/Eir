@@ -7,20 +7,12 @@ import { showError, removeError, validateEmail } from './form_validation.js';
 document.querySelector('form').addEventListener('submit', async ev => {
   ev.preventDefault();
   let error = false;
-  const name = document.querySelector('#full-name');
   const email = document.querySelector('#form-email');
   const password = document.querySelector('#password');
-  const confirmPassword = document.querySelector('#confirm-password');
-  const birthday = document.querySelector('#birthday');
-  const country = document.querySelector('#country');
-  ['valid-email-input', 'password-match-input', 'required-input'].forEach(removeError);
+  ['valid-email-input', 'user-not-found', 'wrong-password', 'required-input'].forEach(removeError);
   const formValues = {
-    'fullname-input': name,
     'email-input': email,
-    'password-input': password,
-    'confirm-password-input': confirmPassword,
-    'birthday-input': birthday,
-    'country-input': country
+    'password-input': password
   };
 
   Object.keys(formValues).forEach(formValue => {
@@ -41,27 +33,21 @@ document.querySelector('form').addEventListener('submit', async ev => {
     showError('valid-email-input');
   }
 
-  if (password.value && confirmPassword.value && password.value != confirmPassword.value) {
-    showError('password-match-input');
-  }
   if (!error) {
     const response = await request({
-      url: `${env.host}api/signup.php`,
+      url: `${env.host}api/login.php`,
       method: 'POST',
       content: {
-        full_name: name.value,
         email: email.value,
-        password: password.value,
-        birth_date: birthday.value,
-        country: country.value
+        password: password.value
       }
     });
     switch (response.status) {
-      case 400:
-        showError('valid-email-input');
+      case 401:
+        showError('wrong-password');
         break;
-      case 403:
-        showError('register-email-input');
+      case 404:
+        showError('user-not-found');
         break;
       default:
         window.location.replace(`${env.host}`);
