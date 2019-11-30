@@ -15,6 +15,10 @@
     }
     div#dates label > input{
         display: block;
+        width: 100%;
+    }
+
+    .card form > div{
         width: 90%;
     }
 

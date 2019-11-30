@@ -1,4 +1,5 @@
 <?php
+include_once('../api/session.php');
 function drawHeader($scripts)
 { ?>
     <!DOCTYPE html>
@@ -50,12 +51,22 @@ function drawHeader($scripts)
                 <li>
                     <a href="#">Eur €</a>
                 </li>
-                <li>
-                    <a href="#">Log In</a>
-                </li>
-                <li>
-                    <a href="#">Sign Up</a>
-                </li>
+                <?php
+                    if (isset($_SESSION['user'])) { ?>
+                    <li>
+                        <a href="logout_page.php">Log out</a>
+                    </li>
+                <?php    } else { ?>
+                    <li>
+                        <a href="login_page.php">Log In</a>
+                    </li>
+                    <li>
+                        <a href="sign_up_page.php">Sign Up</a>
+                    </li>
+                <?php
+                    }
+                    ?>
+
             </ul>
         </nav>
     <?php }

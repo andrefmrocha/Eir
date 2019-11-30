@@ -34,6 +34,8 @@ export function request(props) {
           reject(data);
         }
       })
-      .catch(() => resolve({}));
+      .catch(() => {
+        resolve(response);
+      });
   });
 }

@@ -94,9 +94,10 @@ footer li:first-child {
   margin: 1em;
 }
 
+#signup-img,
 #mainpage-img {
   width: 98.9%;
-  height: 80vh;
+  height: 100%;
   position: absolute;
 }
 
@@ -126,25 +127,35 @@ span.card{
   color: var(--primary-color);
 }
 
-#mainpage-section {
-  min-height: 80vh;
+#form-section {
+  min-height: 100vh;
+}
+
+
+.user-form .card div {
+  display: flex;
 }
 
 .card div {
+  flex-basis: 100%;
   margin: 0.5em auto;
 }
 
 .card label {
   font-size: 0.8em;
   color: var(--primary-color);
+  flex-basis: 90%;
 }
 .card label > input {
   display: block;
   border: 0.5px solid var(--primary-color);
   padding: 0.5em;
-  width: 90%;
   margin-bottom: 0.5em;
   margin-top: 0.3em;
+  width: 100%;
+}
+.card label > span {
+  flex-basis: 5%;
 }
 
 .card #submit {
@@ -158,14 +169,17 @@ span.card{
   flex-basis: 50%;
 }
 
-form p.form-error{
+form .form-error{
   font-size: 0.7em;
   display: none;
-  flex-basis: 100%;
   color: var(--alert-color);
 }
 
-form p.form-error.active{
+form p.form-error{
+  flex-basis: 100%;
+}
+
+form .form-error.active{
   display: block;
 }
 
@@ -498,4 +512,60 @@ i.fa-star{
   font-weight: normal;
 }
 
+.user-form{
+  display: flex;
+}
 
+.user-form{
+  font-weight: bold;
+}
+
+
+
+.user-form .card{
+  margin: auto;
+  top: 0;
+  width: 40vw;
+}
+
+.user-form #submit{
+  color: white;
+  padding: 1em 4em;
+  border-radius: 0.5em;
+  margin: auto;
+  display: block;
+}
+
+.user-form form{
+  display: flex;
+  flex-wrap: wrap;
+}
+.user-form form p:last-child{
+  color: var(--primary-variant);
+  margin: auto;
+  text-align: center;
+  font-size: 0.9em;
+  font-weight: normal;
+}
+
+.user-form form p a{
+  color: var(--gold-color);
+}
+
+.user-form form > div:last-child{
+  text-align: center;
+}
+
+.two-inputs{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.two-inputs > div {
+  flex-basis: 50%;
+}
+
+.two-inputs label > input{
+  width: 95%;
+}
