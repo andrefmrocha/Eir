@@ -4,7 +4,7 @@ function drawMainPage()
 
     ?>
     <section id="mainpage-section">
-        <img id="mainpage-img" src="../assets/house.jpg" alt="Beautiful House">
+        <img id="mainpage-img" src="../assets/house.jpg" alt="Beautiful House"> 
         <span class="card">
             <p>
                 Find <strong> the place </strong> to stay that best suits your <strong> personality </strong>.
