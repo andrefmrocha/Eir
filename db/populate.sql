@@ -265,6 +265,7 @@ VALUES
 INSERT INTO PlaceTag (place, tag)
 VALUES
   (1, 1),
+  (1, 3),
   (2, 2),
   (2, 3),
   (3, 2),
