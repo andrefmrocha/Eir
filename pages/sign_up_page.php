@@ -3,7 +3,7 @@ function drawMainPage()
 {
 
     ?>
-    <section id="signup-section">
+    <section id="form-section" class="user-form">
         <img id="signup-img" src="../assets/login-house.jpg" alt="Beautiful House">
         <span class="card">
             <form action="list_houses.php" method="get">

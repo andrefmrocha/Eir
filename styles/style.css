@@ -127,13 +127,12 @@ span.card{
   color: var(--primary-color);
 }
 
-#signup-section,
-#mainpage-section {
-  min-height: 90vh;
+#form-section {
+  min-height: 100vh;
 }
 
 
-#signup-section .card div {
+.user-form .card div {
   display: flex;
 }
 
@@ -513,23 +512,23 @@ i.fa-star{
   font-weight: normal;
 }
 
-#signup-section{
+.user-form{
   display: flex;
 }
 
-#signup-section{
+.user-form{
   font-weight: bold;
 }
 
 
 
-#signup-section .card{
+.user-form .card{
   margin: auto;
   top: 0;
   width: 40vw;
 }
 
-#signup-section #submit{
+.user-form #submit{
   color: white;
   padding: 1em 4em;
   border-radius: 0.5em;
@@ -537,11 +536,11 @@ i.fa-star{
   display: block;
 }
 
-#signup-section form{
+.user-form form{
   display: flex;
   flex-wrap: wrap;
 }
-#signup-section form p:last-child{
+.user-form form p:last-child{
   color: var(--primary-variant);
   margin: auto;
   text-align: center;
@@ -549,11 +548,11 @@ i.fa-star{
   font-weight: normal;
 }
 
-#signup-section form p a{
+.user-form form p a{
   color: var(--gold-color);
 }
 
-#signup-section form > div:last-child{
+.user-form form > div:last-child{
   text-align: center;
 }
 
