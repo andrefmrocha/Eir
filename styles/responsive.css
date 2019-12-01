@@ -10,6 +10,11 @@
         margin-top: 1em;
         padding: 0.5em;
     }
+
+    #form-section.profile .card{
+        position: relative;
+    }
+
     div#dates {
         display: block;
     }
@@ -29,6 +34,10 @@
 
     #photos-carousel img.active{
         height: 100%;
+    }
+
+    .card.profile .two-inputs div {
+        flex-basis: 100%;
     }
 }
 

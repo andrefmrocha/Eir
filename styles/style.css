@@ -146,7 +146,8 @@ span.card{
   color: var(--primary-color);
   flex-basis: 90%;
 }
-.card label > input {
+.card label > input, 
+.card label > textarea {
   display: block;
   border: 0.5px solid var(--primary-color);
   padding: 0.5em;
@@ -520,8 +521,6 @@ i.fa-star{
   font-weight: bold;
 }
 
-
-
 .user-form .card{
   margin: auto;
   top: 0;
@@ -568,4 +567,85 @@ i.fa-star{
 
 .two-inputs label > input{
   width: 95%;
+}
+
+
+.card > section{
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+}
+.card > section > img:first-child,
+.card > section > img:last-child{
+  width: 30%;
+}
+
+.card.profile{
+  width: 60vw;
+  padding: 3em;
+}
+
+.card > section > img:first-child{
+  transform: scaleX(-1) ;
+}
+
+.card > section > img:nth-child(2){
+  width: 30%;
+  border-radius: 50%;
+}
+
+#form-section.profile{
+  min-height: 130vh;
+}
+
+#form-section.profile #signup-img{
+  min-height: 130vh;
+}
+
+#rentals-history {
+  padding: 1em 15vw;
+  height: max-content;
+}
+
+#rentals-history > h3 {
+  font-size: 1.7em;
+  color: var(--primary-color);
+  padding-bottom: 1em;
+}
+
+#rentals-history > div {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+#rentals-history div div {
+  flex: 1 1 0px;
+}
+
+#rentals-history > div > span {
+  flex-basis: 50%;
+}
+#rentals-history > div > span img {
+  width: 100%;
+  border-radius: 0.5em;
+}
+
+#rentals-history > div p:nth-child(2){
+  color: var(--accent-color);
+  font-size: 1.2em;
+}
+
+#rentals-history > div p:nth-child(2)::before,
+#rentals-history > div p:nth-child(2)::after{
+  content: "\"";
+}
+
+#rentals-history > div p > strong{
+  color: var(--primary-color);
+}
+#rentals-history > div p:last-child{
+  font-weight: lighter;
+  color: var(--accent-color);
+  text-align: right;
 }
