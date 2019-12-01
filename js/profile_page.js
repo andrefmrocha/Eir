@@ -47,10 +47,10 @@ document.querySelector('form').addEventListener('submit', async ev => {
       birth_date: birthday.value,
       country: country.value,
       bio: description.value
-    }
-    if (password.value != "" && confirmPassword.value != "" && password.value != confirmPassword.value) {
+    };
+    if (password.value != '' && confirmPassword.value != '' && password.value != confirmPassword.value) {
       showError('password-match-input');
-    } else if (password.value != "" && confirmPassword != value) {
+    } else if (password.value != '' && confirmPassword != value) {
       body.password = password.value;
     }
     const response = await request({
@@ -68,7 +68,6 @@ async function getProfile() {
     content: {}
   });
 
-
   const formParameters = {
     email: formEmail,
     full_name: fullname,
@@ -82,10 +81,9 @@ async function getProfile() {
   );
 
   profilePic.src = getPersonPhoto(profile.photo);
-
 }
 
-async function getRentalHistory(){
+async function getRentalHistory() {
   const houses = await request({
     url: `${env.host}api/get_rental_history.php`,
     method: 'GET',
@@ -94,7 +92,7 @@ async function getRentalHistory(){
 
   const housesDiv = document.querySelector('#rentals-history > div');
 
-  houses.forEach((house) => {
+  houses.forEach(house => {
     const image = document.createElement('img');
     image.src = getPlacePhoto(house.photo);
     const wrapper = document.createElement('span');

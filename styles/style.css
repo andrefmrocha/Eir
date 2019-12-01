@@ -29,10 +29,14 @@ nav li:first-child {
   color: var(--gold-color);
 }
 
-nav li:last-child {
+nav li:last-child.last {
   padding: 0.5em;
   border-radius: 0.3em;
   border: 2px solid var(--accent-color);
+}
+
+nav li:last-child img{
+  border-radius: 50%;
 }
 
 a {
