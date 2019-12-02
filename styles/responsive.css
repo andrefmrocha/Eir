@@ -1,30 +1,41 @@
-@media screen and (max-width: 550px){
+@media screen and (max-width: 810px){
     #mainpage-img {
         position: static;
+        width: 100%;
+        height: auto;
     }
 
     .card {
+        display: block;
         position: static;
-        width: 100%;
-        margin: auto;
-        margin-top: 1em;
+        width: 29em;
+        margin: 2em auto;
+        padding: 0em;
+    }
+
+    .card label {
+        font-size: 0.8em;
+    }
+      
+    .card label > input {
+        display: flex;
+        flex-grow: 1;
+        width: 33em;
         padding: 0.5em;
+        margin-bottom: 0.5em;
+        margin-top: 0.3em;
     }
 
-    #form-section.profile .card{
-        position: relative;
+    .card #submit {
+        text-align: center;
+        width: 36em;
+        flex-grow: 0;
+        padding: auto;
     }
 
-    div#dates {
-        display: block;
-    }
     div#dates label > input{
-        display: block;
-        width: 100%;
-    }
-
-    .card form > div{
-        width: 90%;
+        display: flex;
+        width: 15em;
     }
 
     #photos-carousel,
@@ -46,7 +57,7 @@
     nav ul li{
         display: block;
         width: 10em;
-        margin: auto 0;
+        margin: auto auto;
     }
 
     nav div{
@@ -54,9 +65,10 @@
         font-size: 1.5em;
         color: var(--accent-color);
         margin: auto 1.5em auto auto;
-        border: 0.5px solid var(--accent-color);
-        padding: 0.2em 0.4em;
+        border: 2px solid var(--accent-color);
+        padding: 0.2em 0.5em;
         border-radius: 5px;
+        cursor: pointer;
     }
     
     nav ul{
@@ -64,11 +76,17 @@
     }
 
     nav ul.visible{
-        display: block;
-        flex-basis: 100%;
-        flex-grow: 1;
+        display: flex;
+        flex-basis: auto;
+        justify-content: space-between;
         padding-left: 0;
-        margin-top: 1.5em;
+        margin: 1.5em auto 0.5em auto;
+        max-width: 90%;
+    }
+
+    nav li:last-child {
+        padding: 0.8em 0em;
+        text-align: center;
     }
 
 
@@ -101,7 +119,19 @@
 
     #houses article img{
         margin: auto;
-        width: 18em;
+        width: 30em;
+    }
+
+    #houses article header {
+        margin-top: 1em;
+    }
+
+    .fas{
+        text-align: center;
+    }
+
+    #houses article div div span span{
+        margin: 0em 1.5em;
     }
 }
 
