@@ -4,7 +4,11 @@
   --gold-color: #f5cb33;
   --accent-color: #39734e;
   --primary-variant: #75b68d;
+}
+
+body {
   font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+  font: normal 15px 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 ::placeholder {
@@ -109,7 +113,7 @@ footer li:first-child {
 
 #mainpage-img {
   width: 98.95%;
-  height: 80vh;
+  height: 40em;
   position: absolute;
 }
 
@@ -120,7 +124,7 @@ footer li:first-child {
   border-radius: 0.5em;
   background-color: var(--background-color);
   margin: 0 8em 0 8em;
-  width: auto;
+  width: 30em;
 }
 
 span.card{
@@ -147,7 +151,7 @@ span.card{
 }
 
 #mainpage-section {
-  min-height: 80vh;
+  min-height: 40em;
 }
 
 .card div {
@@ -161,6 +165,11 @@ span.card{
   color: var(--primary-color);
   font-weight: bold;
   padding-bottom: 0.1em;
+  flex-basis: 100%;
+}
+
+.card #dates label{
+  flex-basis: 0;
 }
 
 .card label > input {
@@ -168,10 +177,11 @@ span.card{
   border: 1.5px solid var(--primary-color);
   border-radius: 0.3em;
   flex-grow: 1;
-  width: 35em;
+  width: 100%;
   padding: 0.5em;
   margin-bottom: 0.5em;
   margin-top: 0.3em;
+  box-sizing: border-box;
 }
 
 .card #submit {
