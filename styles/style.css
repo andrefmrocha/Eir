@@ -109,7 +109,7 @@ footer li:first-child {
 
 #mainpage-img {
   width: 98.95%;
-  height: 80vh;
+  height: 40em;
   position: absolute;
 }
 
@@ -147,7 +147,7 @@ span.card{
 }
 
 #mainpage-section {
-  min-height: 80vh;
+  min-height: 40em;
 }
 
 .card div {
