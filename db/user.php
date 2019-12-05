@@ -16,14 +16,14 @@
         ));
     }
 
-    function updateUser($id, $user){
+    function updateUser($id, $user, $photo){
         $storedUser = getUserById($id);
         $password = isset($user['password']) ? password_hash($user['password'], PASSWORD_DEFAULT) : $storedUser['password_hash']; 
         $db = Database::instance()->db();
         $stmt = $db->prepare('UPDATE User 
         SET email = :email, birth_date = :birth_date,
         country = :country, full_name = :full_name, bio = :bio,
-        photo = :photo, password_hash = :password_hash
+        photo = :photo, password_hash = :password_hash, photo = :photo
         WHERE id = :id');
         $stmt->execute([
             ':email' => $user['email'],
@@ -33,7 +33,8 @@
             ':bio' => $user['bio'],
             ':photo' => isset($user['photo']) ? $user['photo'] : null,
             ':id' => $id,
-            ':password_hash' => $password
+            ':password_hash' => $password,
+            ':photo' => $photo
         ]);
     }
 

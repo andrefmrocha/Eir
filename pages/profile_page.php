@@ -6,12 +6,18 @@ function drawMainPage()
     <section id="form-section" class="user-form profile">
         <img id="signup-img" src="../assets/login-house.jpg" alt="Beautiful House">
         <span class="card profile">
-            <section>
-                <img src="../assets/profile-leaf.svg" alt="Profile ornament left leaf" />
-                <img alt="Profile picture" />
-                <img src="../assets/profile-leaf.svg" alt="Profile ornament left leaf" />
-            </section>
-            <form action="#" method="get">
+            <form action="#" method="get" enctype="multipart/form-data">
+                <section>
+                    <img src="../assets/profile-leaf.svg" alt="Profile ornament left leaf" />
+                    <div class="image-upload">
+                        <label for="profile-picture">
+                            <img src="https://icon-library.net/images/upload-photo-icon/upload-photo-icon-21.jpg" />
+                        </label>
+
+                        <input id="profile-picture" name="profile-picture" type="file" alt="Profile picture" />
+                    </div>
+                    <img src="../assets/profile-leaf.svg" alt="Profile ornament left leaf" />
+                </section>
                 <div>
                     <label for="full-name">
                         Full Name
@@ -77,7 +83,7 @@ function drawMainPage()
     <section id="rentals-history">
         <h3>History</h3>
         <div>
-            
+
         </div>
     </section>
 

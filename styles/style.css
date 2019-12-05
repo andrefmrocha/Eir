@@ -574,14 +574,14 @@ i.fa-star{
 }
 
 
-.card > section{
+.card section{
   margin: auto;
   display: flex;
   justify-content: center;
   align-items: baseline;
 }
-.card > section > img:first-child,
-.card > section > img:last-child{
+.card section > img:first-child,
+.card section > img:last-child{
   width: 30%;
 }
 
@@ -590,13 +590,39 @@ i.fa-star{
   padding: 3em;
 }
 
-.card > section > img:first-child{
+.card section > img:first-child{
   transform: scaleX(-1) ;
 }
 
-.card > section > img:nth-child(2){
+.card section div img{
   width: 30%;
   border-radius: 50%;
+  cursor: pointer;
+}
+
+.card .image-upload label{
+  flex-basis: 80%;
+  margin: auto;
+}
+
+.card section > img {
+  flex-basis: 30%;
+} 
+
+.card section > div {
+  flex-basis: 35%;
+} 
+
+.card section > div > label > img {
+  width: 100%;
+}
+
+.card section > div {
+  margin: 0;
+}
+
+.image-upload>input {
+  display: none;
 }
 
 #form-section.profile{
