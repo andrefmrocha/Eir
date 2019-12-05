@@ -54,7 +54,7 @@ function generateInformation(textInfo, icon, reversed) {
 
 export function createHouseTags(node, house) {
   const icons = generateIcons();
-  node.appendChild(generateInformation(house.name, icons.houseIcon));
+  node.appendChild(generateInformation(house.type, icons.houseIcon));
   node.appendChild(generateInformation(house.rating, icons.starIcon, true));
   node.appendChild(generateInformation(`${house.max_guest_number} Beds`, icons.bedIcon));
   node.appendChild(generateInformation(`${house.price_per_day}€`, icons.moneyIcon, true));

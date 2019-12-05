@@ -23,12 +23,18 @@ function getHousesByLocation($location)
     return $stmt->fetchAll();
 }
 
-function filterHousesByType($houses, $type)
+function filterHousesByType($houses, $types)
 {
+    $types = array_map(
+        function ($type) {
+            return trim($type);
+        },
+        explode(',', $types)
+    );
     $filtered = array_filter(
         $houses,
-        function ($house) use (&$type) {
-            return $house['type'] == $type;
+        function ($house) use (&$types) {
+            return in_array($house['type'], $types, true);
         }
     );
     return array_values($filtered);
@@ -36,12 +42,11 @@ function filterHousesByType($houses, $type)
 
 function filterHousesByTag($houses, $tags)
 {
-    $tags = explode(',', $tags);
     $tags = array_map(
         function ($tag) {
             return trim($tag);
         },
-        $tags
+        explode(',', $tags)
     );
     $filtered = array_filter(
         $houses,
@@ -98,13 +103,22 @@ function filterHousesByMinGuests($houses, $guests)
     return array_values($filtered);
 }
 
-function filterHousesByRating($houses, $rating)
+function filterHousesByRating($houses, $ratings)
 {
+    $ratings = array_map(
+        function ($rating) {
+            return intval(trim($rating));
+        },
+        explode(',', $ratings)
+    );
+    foreach ($ratings as $rating) {
+        error_log($rating);
+    }
     $filtered = array_filter(
         $houses,
-        function ($house) use ($rating) {
+        function ($house) use (&$ratings) {
             return ($house['rating'] != 'N/A')
-                && round($house['rating']) == $rating;
+                && in_array(round($house['rating']), $ratings);
         }
     );
     return array_values($filtered);
