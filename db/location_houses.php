@@ -4,14 +4,15 @@ function getHousesByLocation($location)
 {
     $db = Database::instance()->db();
     $query = '
-        SELECT title, price_per_day, max_guest_number, Place.id, PlaceType.name AS type
-        FROM Place NATURAL JOIN City, Region, Rental, PlaceType
+        SELECT DISTINCT title, price_per_day, max_guest_number, Place.id, PlaceType.name AS type
+        FROM Place INNER JOIN City, Region, Rental, PlaceType, PlaceLocation
         WHERE City.name = :city AND Region.country = :country
         AND Region.id = City.region
-        AND Rental.place = City.id AND (
+        AND City.id = PlaceLocation.city
+        AND (
             (checkin > :checkin AND checkout > :checkin)
             OR (checkin < :checkout AND checkout < :checkout)
-        AND Place.type = PlaceType.id);
+        AND Place.type = PlaceType.id AND Place.place_location = PlaceLocation.id);
         ';
     $stmt = $db->prepare($query);
     $stmt->execute([
@@ -190,7 +191,7 @@ function getHouseReviews($id)
     $stmt = $db->prepare('
             SELECT Rating.rating, Rating.comment, Rating.user, User.full_name, User.photo
             FROM
-                Place, Rating INNER JOIN User 
+                Place, Rating INNER JOIN User
                 ON Rating.user = User.id
             WHERE Place.id = :id AND Rating.place = Place.id
         ');
