@@ -83,7 +83,11 @@ function drawMainPage()
     <section id="rentals-history">
         <h3>History</h3>
         <div>
+            <i class="fas fa-chevron-left"></i>
+            <p>
 
+            </p>
+            <i class="fas fa-chevron-right"></i>
         </div>
     </section>
 

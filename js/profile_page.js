@@ -2,6 +2,8 @@ import env from './env.js';
 import { request } from './network.js';
 import { getPersonPhoto, getPlacePhoto } from './image.js';
 import { removeError, showError, validateEmail } from './form_validation.js';
+import carousel from './carousel.js';
+
 
 const profilePic = document.querySelector('.card section div img');
 const picInput = document.querySelector('#profile-picture');
@@ -108,9 +110,9 @@ async function getRentalHistory() {
     content: {}
   });
 
-  const housesDiv = document.querySelector('#rentals-history > div');
+  const housesNode = document.querySelector('#rentals-history > div > p');
 
-  houses.forEach(house => {
+  carousel.photos = houses.map(house => {
     const image = document.createElement('img');
     image.src = getPlacePhoto(house.photo);
     const wrapper = document.createElement('span');
@@ -121,8 +123,15 @@ async function getRentalHistory() {
     dates.innerHTML = `Between <strong> ${house.checkin} </strong> and <strong> ${house.checkout} </strong>`;
     wrapper.appendChild(title);
     wrapper.appendChild(dates);
-    housesDiv.appendChild(wrapper);
+    return wrapper;
   });
+  carousel.buildCarousel(housesNode);
+
+  const left = document.querySelector('.fa-chevron-left');
+  const right = document.querySelector('.fa-chevron-right');
+
+  left.addEventListener('click', () => carousel.previous(housesNode));
+  right.addEventListener('click', () => carousel.next(housesNode));
 }
 
 getProfile();

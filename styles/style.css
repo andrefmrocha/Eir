@@ -634,7 +634,7 @@ i.fa-star{
 }
 
 #rentals-history {
-  padding: 1em 15vw;
+  padding: 1em 10vw;
   height: max-content;
 }
 
@@ -644,20 +644,34 @@ i.fa-star{
   padding-bottom: 1em;
 }
 
-#rentals-history > div {
+#rentals-history > div > p {
   display: flex;
   flex-wrap: nowrap;
+  justify-content: space-between;
+  flex-basis: 90%;
 }
 
-#rentals-history div div {
-  flex: 1 1 0px;
+#rentals-history > div{
+  display: flex;
+  flex-wrap:  nowrap;
+  align-items: center;
+  justify-content: space-around;
+  max-width: 60em;
+  margin: auto;
 }
 
-#rentals-history > div > span {
-  flex-basis: 50%;
+#rentals-history > div > i{
+  flex-basis: 5%;
+  margin: 0 1em;
 }
-#rentals-history > div > span img {
+
+
+#rentals-history > div span {
+  flex-basis: 49%;
+}
+#rentals-history > div span img {
   width: 100%;
+  height: 35vh;
   border-radius: 0.5em;
 }
 
@@ -666,8 +680,8 @@ i.fa-star{
   font-size: 1.2em;
 }
 
-#rentals-history > div p:nth-child(2)::before,
-#rentals-history > div p:nth-child(2)::after{
+#rentals-history > div > p p:nth-child(2)::before,
+#rentals-history > div > p p:nth-child(2)::after{
   content: "\"";
 }
 
