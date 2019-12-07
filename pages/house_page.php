@@ -14,7 +14,7 @@ function getTouristHousePage()
                 </h3>
             </div>
             <aside>
-                <img src="" alt="House owner" class="photo-avatar"/>
+                <img src="" alt="House owner" class="photo-avatar" />
                 <span>
                 </span>
             </aside>
@@ -36,19 +36,7 @@ function getTouristHousePage()
                     Information
                 </h2>
             </aside>
-            <article id="reviews">
-                <span>
-                    <h2 class="title">
-                        Reviews
-                    </h2>
-                    <span>
-                        <span>
-                        </span>
-                        <span>
-                        </span>
-                    </span>
-                </span>
-            </article>
+
             <article id="reserve" class="card">
                 <h3>Make a reservation now</h3>
                 <form action="#" method="post">
@@ -70,6 +58,21 @@ function getTouristHousePage()
                     </div>
                 </form>
             </article>
+            <?php include_once('../templates/calendar.php');
+            getCalendar(); ?>
+            <article id="reviews">
+                <span>
+                    <h2 class="title">
+                        Reviews
+                    </h2>
+                    <span>
+                        <span>
+                        </span>
+                        <span>
+                        </span>
+                    </span>
+                </span>
+            </article>
         </section>
     </div>
 <?php
@@ -77,7 +80,10 @@ function getTouristHousePage()
 
 include_once('../templates/common.php');
 drawHeader([
-    '../js/house_page.js'
+    '../js/house_page.js',
+    '../js/calendar.js'
+], [
+    '../styles/calendar.css'
 ]);
 getTouristHousePage();
 drawFooter();

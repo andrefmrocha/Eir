@@ -1,0 +1,51 @@
+.calendar {
+    border: 1px solid var(--primary-color);
+    padding: 0 1em;
+}
+
+.calendar > div {
+    display: flex;
+    flex-wrap: nowrap;
+    align-content: space-between;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--primary-color);
+}
+
+.calendar > div h5 {
+    font-size: 1em;
+    margin: 1em 0;
+}
+
+.calendar table{
+    empty-cells: show;
+    border-collapse: collapse;
+}
+
+.calendar table td {
+    width: 2em;
+    height: 2em;
+    border: 0.5px solid var(--calendar-border);
+    text-align: center;
+    color: var(--primary-color);
+    font-size: 0.9em;
+}
+
+.calendar table td.unavailable {
+    color: var(--reserved);
+}
+
+.calendar table td.selected{
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.calendar table th{
+    font-size: 0.7em;
+    color: var(--primary-color);
+}
+
+.calendar > div i{
+    flex-basis: 5%;
+    font-size: 0.8em;
+}

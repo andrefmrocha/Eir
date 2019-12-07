@@ -1,6 +1,6 @@
 <?php
 include_once('../api/session.php');
-function drawHeader($scripts)
+function drawHeader($scripts, $styles)
 { ?>
     <!DOCTYPE html>
     <html>
@@ -12,6 +12,9 @@ function drawHeader($scripts)
         <script src="../js/hamburguer.js" type="module"></script>
         <?php foreach ($scripts as $script) { ?>
             <script src=<?= $script ?> type="module"></script>
+        <?php } ?>
+        <?php foreach ($styles as $style) { ?>
+            <link href=<?= $style ?> rel="stylesheet">
         <?php } ?>
         <link href="../styles/style.css" rel="stylesheet">
         <link href="../styles/responsive.css" rel="stylesheet">

@@ -94,7 +94,7 @@ function drawMainPage()
 <?php }
 
 include_once('../templates/common.php');
-drawHeader(['../js/profile_page.js']);
+drawHeader(['../js/profile_page.js'],[]);
 drawMainPage();
 drawFooter();
 ?>

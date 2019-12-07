@@ -105,13 +105,28 @@
     }
 }
 
-@media screen and (max-width: 800px){
+@media screen and (max-width: 950px){
     #house-page{
         padding: 0;
     }
 
-    #house-information article h2{
-        text-align: center;
+}
+
+@media screen and (max-width: 450px){
+    #house-information > aside {
+        flex-basis: 100%;
+        border-left: 0px;
+        margin-bottom: 2em;
+        margin: 1em 2em;
+        padding-left: 0px;
     }
 
+    #house-information article {
+        flex-basis: 100%;
+        margin: 1em 2em;
+    }
+
+    #house-information h2{
+        text-align: left;
+    }
 }
