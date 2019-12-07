@@ -23,22 +23,27 @@ async function getHouses(extraParams) {
     content: {}
   });
 
-  possibleCountries.forEach(async country => {
-    const content = {
-      city,
-      checkin,
-      checkout,
-      people,
-      country: country.alpha2Code,
-      ...extraParams
-    };
-    const houses = await request({
-      url: `${env.host}/api/get_houses.php`,
-      method: 'POST',
-      content
-    });
-    if (houses) addNewHouses(houses);
-  });
+  const results = await Promise.all(
+    possibleCountries.map(async country => {
+      const content = {
+        city,
+        checkin,
+        checkout,
+        people,
+        country: country.alpha2Code,
+        ...extraParams
+      };
+      console.log(content);
+      const houses = await request({
+        url: `${env.host}/api/get_houses.php`,
+        method: 'POST',
+        content
+      });
+      console.log(houses);
+      return houses ? houses : [];
+    })
+  );
+  return results.reduce((prev, curr) => prev.concat(curr));
 }
 
 async function updateAllHouses() {
@@ -52,18 +57,31 @@ async function updateAllHouses() {
     if (params[key] == '') delete params[key];
   });
 
+  let results = [];
+
   deleteHouses();
   const prices = filters.getActivePriceRanges();
   if (prices.length > 0) {
-    prices.forEach(async range =>
-      getHouses({
-        ...params,
-        ...getPriceRangeParameters(range)
-      })
-    );
+    results = (
+      await Promise.all(
+        prices.map(
+          async range =>
+            await getHouses({
+              ...params,
+              ...getPriceRangeParameters(range)
+            })
+        )
+      )
+    ).reduce((prev, curr) => prev.concat(curr));
   } else {
-    getHouses({ ...params });
+    results = await getHouses({ ...params });
   }
+
+  const sort = filters.getActiveHouseSort();
+  console.log(results);
+  results.sort(getSortKey(sort));
+  console.log(results);
+  addNewHouses(results);
 }
 
 function getPriceRangeParameters(range) {
@@ -88,15 +106,15 @@ function getPriceRangeParameters(range) {
 function getSortKey(sort) {
   switch (sort) {
     case 'rating-lowest':
-      return (h1, h2) => (!h1.rating || h1.rating == 'N/A' ? h1 : h1.rating < h2.rating ? h1 : h2);
+      return (h1, h2) => (!h1.rating || h1.rating == 'N/A' ? -1 : h1.rating < h2.rating ? -1 : 1);
     case 'rating-highest':
-      return (h1, h2) => (!h1.rating || h1.rating == 'N/A' ? h2 : h1.rating > h2.rating ? h1 : h2);
+      return (h1, h2) => (!h1.rating || h1.rating == 'N/A' ? 1 : h1.rating > h2.rating ? -1 : 1);
     case 'price-lowest':
-      return (h1, h2) => (!h1.price ? h1 : h1.price < h2.price ? h1 : h2);
+      return (h1, h2) => (!h1.price_per_day ? -1 : h1.price_per_day < h2.price_per_day ? -1 : 1);
     case 'price-highest':
-      return (h1, h2) => (!h1.price ? h2 : h1.price > h2.price ? h1 : h2);
+      return (h1, h2) => (!h1.price_per_day ? 1 : h1.price_per_day > h2.price_per_day ? -1 : 1);
     default:
-      return (h1, h2) => h1;
+      return (h1, h2) => -1;
   }
 }
 
