@@ -33,13 +33,11 @@ async function getHouses(extraParams) {
         country: country.alpha2Code,
         ...extraParams
       };
-      console.log(content);
       const houses = await request({
         url: `${env.host}/api/get_houses.php`,
         method: 'POST',
         content
       });
-      console.log(houses);
       return houses ? houses : [];
     })
   );
@@ -78,9 +76,7 @@ async function updateAllHouses() {
   }
 
   const sort = filters.getActiveHouseSort();
-  console.log(results);
   results.sort(getSortKey(sort));
-  console.log(results);
   addNewHouses(results);
 }
 
