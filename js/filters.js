@@ -41,7 +41,7 @@ export function getActiveHouseSort() {
   return sort;
 }
 
-function getPriceRangeParameters(range) {
+export function getPriceRangeParameters(range) {
   switch (range) {
     case '0-50':
       return { max_price: 50 };
@@ -60,7 +60,7 @@ function getPriceRangeParameters(range) {
   }
 }
 
-function getSortKey(sort) {
+export function getSortKey(sort) {
   switch (sort) {
     case 'rating-lowest':
       return (h1, h2) => (!h1.rating || h1.rating == 'N/A' ? -1 : h1.rating < h2.rating ? -1 : 1);
