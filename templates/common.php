@@ -10,6 +10,7 @@ function drawHeader($scripts, $styles)
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://kit.fontawesome.com/ac3e82986f.js" crossorigin="anonymous"></script>
         <script src="../js/hamburguer.js" type="module"></script>
+        <script src="../js/common.js" defer type="module"></script>
         <?php foreach ($scripts as $script) { ?>
             <script src=<?= $script ?> type="module"></script>
         <?php } ?>
@@ -49,7 +50,7 @@ function drawHeader($scripts, $styles)
             <div>☰</div>
             <ul>
                 <li>
-                    <a href="#">Owner</a>
+                    <a href="#" id="page-view"></a>
                 </li>
                 <li>
                     <a href="#">Eur €</a>

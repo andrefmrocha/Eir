@@ -88,6 +88,17 @@ function getHousebyId($id)
     return $house;
 }
 
+function getHousebyIds($house_id, $user_id){
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('
+            SELECT *
+            FROM Place 
+            WHERE Place.id = ? AND Place.place_owner = ?
+        ');
+    $stmt->execute(array($house_id, $user_id));
+    return $stmt->fetch();
+}
+
 function getHouseReviews($id)
 {
     $db = Database::instance()->db();

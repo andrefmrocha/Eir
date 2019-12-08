@@ -7,10 +7,14 @@
 .calendar > div {
     display: flex;
     flex-wrap: nowrap;
-    align-content: space-between;
-    justify-content: space-between;
+    align-content: center;
+    justify-content: center;
     align-items: center;
     color: var(--primary-color);
+}
+
+.calendar > div.controllers{
+    justify-content: space-between;
 }
 
 .calendar > div h5 {

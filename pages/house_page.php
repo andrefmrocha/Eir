@@ -106,7 +106,8 @@ include_once('../templates/common.php');
 drawHeader([
     '../js/house_page.js',
 ], [
-    '../styles/calendar.css'
+    '../styles/calendar.css',
+    '../styles/house_page.css'
 ]);
 getTouristHousePage();
 drawFooter();

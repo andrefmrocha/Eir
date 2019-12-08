@@ -3,9 +3,7 @@ function getCalendar()
 { ?>
     <article class="calendar">
         <div>
-            <i class="fas fa-chevron-left"></i>
             <h5>November 2019</h5>
-            <i class="fas fa-chevron-right"></i>
         </div>
         <table>
             <thead>

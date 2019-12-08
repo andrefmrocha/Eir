@@ -5,15 +5,15 @@ const urlParams = new URL(window.location).searchParams;
 const calendar = document.querySelector('.calendar');
 let fullTable = calendar.querySelector('table');
 const monthText = calendar.querySelector('div > h5');
-const previous = calendar.querySelector('.fa-chevron-left');
-const next = calendar.querySelector('.fa-chevron-right');
+const monthTitle = calendar.querySelector('div');
 
 const checkin = document.querySelector('#check-in');
 const checkout = document.querySelector('#check-out');
+const tr = calendar.querySelectorAll('tbody tr');
 
 const calendarTable = {
   date: new Date(),
-  table: calendar.querySelectorAll('td')
+  table: []
 };
 const months = [
   'January',
@@ -38,14 +38,46 @@ function generateDateString(date, text) {
   return `${generateYearandMonthString(date)}-${text < 10 ? '0' + text : text}`;
 }
 
-export async function buildCalendar(date) {
+export async function buildCalendar(date, controllers) {
+  if (date) calendarTable.date = date;
+
+  calendarTable.table = [];
+  for (let i = 0; i < 6; i++) {
+    for (let j = 0; j < 7; j++) {
+      tr[i].removeChild(tr[i].firstElementChild);
+      const cell = document.createElement('td');
+      tr[i].appendChild(cell);
+      calendarTable.table.push(cell);
+    }
+  }
+
+  if (controllers) {
+    const previous = document.createElement('i');
+    previous.setAttribute('class', 'fa fa-chevron-left');
+    const next = document.createElement('i');
+    next.setAttribute('class', 'fa fa-chevron-right');
+    while (monthTitle.firstElementChild) {
+      monthTitle.removeChild(monthTitle.firstElementChild);
+    }
+    monthTitle.appendChild(previous);
+    monthTitle.appendChild(monthText);
+    monthTitle.appendChild(next);
+    monthTitle.setAttribute('class', 'controllers')
+    previous.addEventListener('click', () =>
+      buildCalendar(new Date(calendarTable.date.getFullYear(), calendarTable.date.getMonth() - 1), true)
+    );
+
+    next.addEventListener('click', () =>
+     buildCalendar(new Date(calendarTable.date.getFullYear(), calendarTable.date.getMonth() + 1), true));
+
+  }
+
   const table = calendarTable.table;
 
   table.forEach(value => {
     value.innerText = '';
     value.removeAttribute('class', 'unavailable');
   });
-  if (date) calendarTable.date = date;
   const rentals = await request({
     url: `${env.host}api/house_rentals.php`,
     method: 'POST',
@@ -61,7 +93,7 @@ export async function buildCalendar(date) {
   const numDays = new Date(year, month + 1, 0).getDate();
   let day = new Date(year, month).getDay();
   const now = new Date().getDate();
-  for (let i = 1; i <= numDays; i++, day++) {
+  for (let i = 1; i <= numDays; i++ , day++) {
     const currentDay = `${generateYearandMonthString(calendarTable.date)}-${i}`;
     if (now > day || rentals.find(rental => rental.checkin <= currentDay && rental.checkout >= currentDay)) {
       table[day].setAttribute('class', 'unavailable');
@@ -71,11 +103,6 @@ export async function buildCalendar(date) {
   calendarClicks(calendarTable);
 }
 
-previous.addEventListener('click', () =>
-  buildCalendar(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1))
-);
-
-next.addEventListener('click', () => buildCalendar(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1)));
 
 function fillSelected(start, end) {
   const table = calendarTable.table;

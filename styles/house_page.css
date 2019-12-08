@@ -1,0 +1,15 @@
+div.owner-photos{
+    flex: 1 1 0px;
+    border: 1px solid black;
+    height: 20vh;
+}
+
+#carousel > div.owner-photos > img{
+    width: 100%;
+    height: 100%;
+} 
+
+#carousel.owner-view{
+    flex-wrap: wrap;
+    justify-content: center;
+}
