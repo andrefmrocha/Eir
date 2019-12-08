@@ -326,22 +326,31 @@ i.fa-star{
 }
 
 #house-page{
-  padding: 0 15em;
+  padding: 0 10vh;
 }
 
 #house-information{
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
+  align-content: space-between;
+  align-items: center;
+}
+
+#house-information article{
+  margin: 1em 2em;
 }
 
 #description{
-  flex-basis: 60%;
   font-size: 1.1em;
   padding-right: 1em;
+  flex: 1 0 40em;
+  max-width: 55%;
 }
+
+
 #house-information aside{
-  flex-basis: 10%;
+  flex-grow: 1;
   border-left: 1px solid var(--accent-color);
   padding-left: 2em;
 }
@@ -417,13 +426,34 @@ i.fa-star{
 }
 
 #reserve{
-  flex-basis: 43%;
+  flex-grow: 1;
   border: 1px solid var(--primary-color);
   margin: 0em;
+  max-width: 50vw;
 }
 
-#calendar{
-  flex-basis: 43%;
+#reserve  div:nth-child(3){
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#reserve  div:nth-child(3) > p {
+  color: var(--accent-color);
+}
+#reserve  div:nth-child(3) > p > strong{
+  color: var(--primary-color);
+  font-weight: normal;
+}
+
+#reserve div:nth-child(4) input{
+  background-color: var(--primary-color);
+  color: white;
+  padding: 0.8em;
+}
+
+.calendar{
+  flex-grow: 1;
 }
 
 .title{

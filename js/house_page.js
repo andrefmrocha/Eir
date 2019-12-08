@@ -4,10 +4,14 @@ import { request } from './network.js';
 import env from './env.js';
 import { createHouseInformation, getIcon } from './tags.js';
 import { getPlacePhoto, getPersonPhoto } from './image.js';
+import { showError, removeError } from './form_validation.js';
+import { buildCalendar, validateDate } from './calendar.js';
 
 const urlParams = new URL(window.location).searchParams;
 
 const houseInformation = document.querySelector('#house-information');
+const housePrice = document.querySelector('#reserve div:nth-child(3) p:last-child strong');
+const totalPrice = document.querySelector('#reserve div:nth-child(3) p:first-child strong');
 
 const carousel = document.querySelector('#photos-carousel');
 
@@ -16,7 +20,10 @@ const housesCarousel = {
   houses: []
 };
 
+let max_guest = 0;
+
 getHouseInfo();
+buildCalendar();
 
 async function getHouseInfo() {
   const id = urlParams.get('id');
@@ -28,7 +35,11 @@ async function getHouseInfo() {
     }
   });
 
+  max_guest = house.max_guest_number;
+
   displayHouseTitle(house);
+
+  housePrice.innerText = house.price_per_day;
 
   const description = houseInformation.querySelector('#description');
   const information = houseInformation.querySelector('aside');
@@ -131,3 +142,73 @@ function displayHouseTitle(house) {
   const name = document.querySelector('#house-title aside span');
   name.innerText = house.owner.full_name;
 }
+
+const reservation = document.querySelector('#reserve');
+const checkin = reservation.querySelector('#check-in');
+const checkout = reservation.querySelector('#check-out');
+
+reservation.addEventListener('submit', async ev => {
+  ev.preventDefault();
+  const number = reservation.querySelector('#people');
+  let error = false;
+
+  const formValues = {
+    'checkin-checkout-input': [checkin.value, checkout],
+    'people-input': [number.value]
+  };
+
+  Object.keys(formValues).forEach(key => {
+    removeError(key);
+    const value = formValues[key].indexOf('');
+    if (value != -1) {
+      const errorMessage = document.querySelector('#required-input');
+      errorMessage.setAttribute('class', 'form-error active');
+
+      error = true;
+      showError(key);
+    }
+  });
+
+  if (number.value > max_guest) {
+    showError('num-people');
+  }
+
+  if (!error) {
+    const response = await request({
+      url: `${env.host}api/reserve.php`,
+      method: 'POST',
+      content: {
+        house_id: urlParams.get('id'),
+        checkin: checkin.value,
+        checkout: checkout.value
+      }
+    });
+    switch (response.status) {
+      case 500:
+        showError('server-error');
+        break;
+      case 401:
+        showError('login-error');
+        break;
+      case 201:
+        break;
+    }
+  }
+});
+
+const dateListener = async () => {
+  removeError('invalid-dates');
+  if (checkin.value != '' && checkout.value != '') {
+    const validation = await validateDate(checkin.value, checkout.value);
+    if (!validation) {
+      checkin.value = '';
+      checkout.value = '';
+      showError('invalid-dates');
+    }
+    const numDays = (new Date(checkout.value) - new Date(checkin.value)) / (1000 * 60 * 60 * 24) + 1;
+    totalPrice.innerText = Number(housePrice.innerText) * numDays;
+  }
+};
+
+checkin.addEventListener('change', dateListener);
+checkout.addEventListener('change', dateListener);

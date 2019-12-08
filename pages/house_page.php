@@ -49,17 +49,41 @@ function getTouristHousePage()
                             Check Out
                             <input name="checkout" id="check-out" type="date">
                         </label>
+                        <span id="checkin-checkout-input" class="form-error">**</span>
                     </div>
                     <div>
                         <label for="people">
                             People
                             <input name="people" id="people" type="number">
                         </label>
+                        <span id="people-input" class="form-error">**</span>
                     </div>
+                    <div>
+                        <p>
+                            Total:
+                            <strong>
+                                0€
+                            </strong>
+                        </p>
+                        <p>
+                            <strong></strong>
+                            <i class="fas fa-money-bill-wave"></i>
+                        </p>
+                    </div>
+                    <div>
+                        <label for="submit">
+                            <input name="submit" id="people" type="submit" value="Make Reservation">
+                        </label>
+                    </div>
+                    <p id="num-people" class="form-error">* Exceeded number of guests!</p>
+                    <p id="invalid-dates" class="form-error">* Invalid dates</p>
+                    <p id="server-error" class="form-error">* An error has ocurred, please try again later</p>
+                    <p id="login-error" class="form-error">* Please Log In Before Making a Reservation</p>
+                    <p id="required-input" class="form-error">** Field is required</p>
                 </form>
             </article>
             <?php include_once('../templates/calendar.php');
-            getCalendar(); ?>
+                getCalendar(); ?>
             <article id="reviews">
                 <span>
                     <h2 class="title">
@@ -81,7 +105,6 @@ function getTouristHousePage()
 include_once('../templates/common.php');
 drawHeader([
     '../js/house_page.js',
-    '../js/calendar.js'
 ], [
     '../styles/calendar.css'
 ]);

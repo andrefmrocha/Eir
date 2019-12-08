@@ -1,6 +1,7 @@
 .calendar {
     border: 1px solid var(--primary-color);
     padding: 0 1em;
+    max-width: 50vw;
 }
 
 .calendar > div {
@@ -20,11 +21,14 @@
 .calendar table{
     empty-cells: show;
     border-collapse: collapse;
+    margin: auto;
+    margin-bottom: 1em;
+    width: 90%;
 }
 
 .calendar table td {
-    width: 2em;
-    height: 2em;
+    width: 2.5em;
+    height: 2.5em;
     border: 0.5px solid var(--calendar-border);
     text-align: center;
     color: var(--primary-color);

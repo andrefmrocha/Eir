@@ -1,132 +1,124 @@
-@media screen and (max-width: 550px){
-    #mainpage-img {
-        position: static;
-    }
+@media screen and (max-width: 550px) {
+  #mainpage-img {
+    position: static;
+  }
 
-    .card {
-        position: static;
-        width: 100%;
-        margin: auto;
-        margin-top: 1em;
-        padding: 0.5em;
-    }
+  .card {
+    position: static;
+    width: 100%;
+    margin: auto;
+    margin-top: 1em;
+    padding: 0.5em;
+  }
 
-    #form-section.profile .card{
-        position: relative;
-    }
+  #form-section.profile .card {
+    position: relative;
+  }
 
-    div#dates {
-        display: block;
-    }
-    div#dates label > input{
-        display: block;
-        width: 100%;
-    }
+  div#dates {
+    display: block;
+  }
+  div#dates label > input {
+    display: block;
+    width: 100%;
+  }
 
-    .card form > div{
-        width: 90%;
-    }
+  .card form > div {
+    width: 90%;
+  }
 
-    #photos-carousel,
-    #photos-carousel > div{
-        width: 65vw;
-    }
+  #photos-carousel,
+  #photos-carousel > div {
+    width: 65vw;
+  }
 
-    #photos-carousel img.active{
-        height: 100%;
-    }
+  #photos-carousel img.active {
+    height: 100%;
+  }
 
-    .card.profile .two-inputs div {
-        flex-basis: 100%;
-    }
+  .card.profile .two-inputs div {
+    flex-basis: 100%;
+  }
 }
 
-@media screen and (max-width: 900px){
+@media screen and (max-width: 900px) {
+  nav ul li {
+    display: block;
+    width: 10em;
+    margin: auto 0;
+  }
 
-    nav ul li{
-        display: block;
-        width: 10em;
-        margin: auto 0;
-    }
+  nav div {
+    display: block;
+    font-size: 1.5em;
+    color: var(--accent-color);
+    margin: auto 1.5em auto auto;
+    border: 0.5px solid var(--accent-color);
+    padding: 0.2em 0.4em;
+    border-radius: 5px;
+  }
 
-    nav div{
-        display: block;
-        font-size: 1.5em;
-        color: var(--accent-color);
-        margin: auto 1.5em auto auto;
-        border: 0.5px solid var(--accent-color);
-        padding: 0.2em 0.4em;
-        border-radius: 5px;
-    }
-    
-    nav ul{
-        display: none;
-    }
+  nav ul {
+    display: none;
+  }
 
-    nav ul.visible{
-        display: block;
-        flex-basis: 100%;
-        flex-grow: 1;
-        padding-left: 0;
-        margin-top: 1.5em;
-    }
-
-
-    #reviews > span{
-        justify-content: space-evenly;
-    }
-
-    #reserve{
-        margin: auto;
-        grid-column: 1/5;
-        margin: 0;
-        margin-bottom: 2em;
-    }
-
-    #reserve.card{
-        width: 80%;
-    }
-
-    #reviews{
-        grid-column: 1/5;
-    }
-
+  nav ul.visible {
+    display: block;
+    flex-basis: 100%;
+    flex-grow: 1;
+    padding-left: 0;
+    margin-top: 1.5em;
+  }
 }
 
-@media screen and (max-width: 750px){
-    #houses article div{
-        padding: 0;
-        margin: auto;
-    }
+@media screen and (max-width: 750px) {
+  #houses article div {
+    padding: 0;
+    margin: auto;
+  }
 
-    #houses article img{
-        margin: auto;
-        width: 18em;
-    }
+  #houses article img {
+    margin: auto;
+    width: 18em;
+  }
 }
 
-@media screen and (max-width: 950px){
-    #house-page{
-        padding: 0;
-    }
+@media screen and (max-width: 1000px) {
+  #house-page {
+    padding: 0;
+  }
 
+  #description {
+    max-width: 40%;
+  }
 }
 
-@media screen and (max-width: 450px){
-    #house-information > aside {
-        flex-basis: 100%;
-        border-left: 0px;
-        margin-bottom: 2em;
-        margin: 1em 2em;
-        padding-left: 0px;
-    }
+@media screen and (max-width: 650px) {
+  #house-information > aside {
+    flex-basis: 100%;
+    border-left: 0px;
+    margin-bottom: 2em;
+    margin: 1em 2em;
+    padding-left: 0px;
+  }
 
-    #house-information article {
-        flex-basis: 100%;
-        margin: 1em 2em;
-    }
+  #description {
+    max-width: 100%;
+  }
 
-    #house-information h2{
-        text-align: left;
+  #house-information article {
+    flex-basis: 100%;
+    margin: 1em 2em;
+  }
+
+  #house-information h2 {
+    text-align: left;
+  }
+}
+
+@media screen and (max-width: 500px) {
+    #reserve,
+    .calendar{
+        max-width: 100%;
     }
 }
