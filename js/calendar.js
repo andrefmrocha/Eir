@@ -1,92 +1,117 @@
 import { request } from './network.js';
-import env from './env.js'
+import env from './env.js';
 const urlParams = new URL(window.location).searchParams;
 
 const calendar = document.querySelector('.calendar');
+let fullTable = calendar.querySelector('table');
 const monthText = calendar.querySelector('div > h5');
 const previous = calendar.querySelector('.fa-chevron-left');
 const next = calendar.querySelector('.fa-chevron-right');
 
-const calendarTable = calendar.querySelectorAll('td');
-const months = ["January", "February", "March",
-    "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+const checkin = document.querySelector('#check-in');
+const checkout = document.querySelector('#check-out');
 
-let currentDate = new Date();
+const calendarTable = {
+  date: new Date(),
+  table: calendar.querySelectorAll('td')
+};
+const months = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December'
+];
 
 function generateYearandMonthString(date) {
-    return `${date.getFullYear()}-${date.getMonth() + 1}`
+  return `${date.getFullYear()}-${date.getMonth() + 1}`;
 }
 
-let start, end;
+function generateDateString(date, text) {
+  return `${generateYearandMonthString(date)}-${text < 10 ? '0' + text : text}`;
+}
 
 async function buildCalendar(date) {
-    calendarTable.forEach(value => {
-        value.innerText = '';
-        value.removeAttribute('class', 'unavailable');
-    });
-    if (date) currentDate = date;
-    const rentals = await request({
-        url: `${env.host}api/house_rentals.php`,
-        method: 'POST',
-        content: {
-            house_id: urlParams.get('id'),
-            date: generateYearandMonthString(currentDate)
-        }
-    });
+  const table = calendarTable.table;
 
-    console.log(rentals);
-    const month = currentDate.getMonth();
-    const year = currentDate.getFullYear();
-    monthText.innerText = `${months[month]} ${year}`
-    const numDays = (new Date(year, month + 1, 0)).getDate();
-    let day = (new Date(year, month)).getDay();
-    for (let i = 1; i <= numDays; i++ , day++) {
-        const currentDay = `${generateYearandMonthString(currentDate)}-${i}`;
-        if (rentals.find(rental => rental.checkin <= currentDay && rental.checkout >= currentDay)) {
-            calendarTable[day].setAttribute('class', 'unavailable');
-        }
-        calendarTable[day].innerText = i;
+  table.forEach(value => {
+    value.innerText = '';
+    value.removeAttribute('class', 'unavailable');
+  });
+  if (date) calendarTable.date = date;
+  const rentals = await request({
+    url: `${env.host}api/house_rentals.php`,
+    method: 'POST',
+    content: {
+      house_id: urlParams.get('id'),
+      date: generateYearandMonthString(calendarTable.date)
     }
+  });
+
+  const month = calendarTable.date.getMonth();
+  const year = calendarTable.date.getFullYear();
+  monthText.innerText = `${months[month]} ${year}`;
+  const numDays = new Date(year, month + 1, 0).getDate();
+  let day = new Date(year, month).getDay();
+  for (let i = 1; i <= numDays; i++, day++) {
+    const currentDay = `${generateYearandMonthString(calendarTable.date)}-${i}`;
+    if (rentals.find(rental => rental.checkin <= currentDay && rental.checkout >= currentDay)) {
+      table[day].setAttribute('class', 'unavailable');
+    }
+    table[day].innerText = i;
+  }
 }
 
 buildCalendar();
 
 previous.addEventListener('click', () =>
-    buildCalendar(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1)));
+  buildCalendar(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1))
+);
 
-next.addEventListener('click', () =>
-    buildCalendar(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1)));
+next.addEventListener('click', () => buildCalendar(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1)));
 
-const listeners = {};
+function calendarClicks() {
+  const table = calendarTable.table;
+  table.forEach((day, index) => {
+    day.addEventListener('click', () => {
+      if (!calendarTable.selecting) {
+        calendarTable.selecting = true;
+        table.forEach(day => {
+          if (day.className != 'unavailable') day.removeAttribute('class');
+        });
+        day.setAttribute('class', 'selected');
+        for (let i = index + 1; i < table.length; i++) {
+          if (table[i].className == 'unavailable') break;
 
+          table[i].addEventListener('mouseover', () => {
+            for (let j = index + 1; j < table.length; j++) {
+              if (j <= i) table[j].setAttribute('class', 'selected');
+              else if (table[j].className == 'unavailable') break;
+              else table[j].removeAttribute('class');
+            }
+          });
 
-function initialClickListener(day, index) {
-    const func = () => {
-        start = day.innerText;
-        for (let i = index + 1; i < calendarTable.length; i++) {
-            console.log(listeners[calendarTable[i]]);
-            if (calendarTable[i].className == "unavailable") break;
-            calendarTable[i].removeEventListener('click', listeners[calendarTable[i]]);
-
-            calendarTable[i].addEventListener('mouseover', () => {
-                for (let j = index + 1; j <= i; j++) {
-                    calendarTable[j].setAttribute('class', 'selected');
-                }
-            });
-
-            calendarTable[i].addEventListener('click', () => {
-                end = calendarTable[i].innerText;
-                console.log(day.innerText);
-                console.log(end);
-            });
+          table[i].addEventListener('click', () => {
+            const newTable = fullTable.cloneNode(true);
+            calendar.replaceChild(newTable, fullTable);
+            fullTable = newTable;
+            calendarTable.table = newTable.querySelectorAll('td');
+            calendarClicks();
+            checkin.value = generateDateString(calendarTable.date, day.innerText);
+            checkout.value = generateDateString(calendarTable.date, table[i].innerText);
+            calendarTable.selecting = false;
+          });
         }
-    }
-    return func;
+      }
+    });
+  });
 }
 
-
-calendarTable.forEach((day, index) => {
-    const listener = initialClickListener(day, index);
-    listeners[day] = listener;
-    day.addEventListener('click', listener);
-});
+calendarClicks(calendarTable);
