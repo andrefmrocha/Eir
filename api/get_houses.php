@@ -16,5 +16,6 @@ if (array_key_exists('rating', $_POST))
 getHousesTags($houses);
 if (array_key_exists('filters', $_POST))
     $houses = filterHousesByTag($houses, $_POST['filters']);
+getHousesReservationCounts($houses);
 getHousesPhotos($houses);
 echo json_encode($houses);

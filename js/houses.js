@@ -34,7 +34,7 @@ async function getHouses(extraParams) {
         ...extraParams
       };
       const houses = await request({
-        url: `${env.host}/api/get_houses.php`,
+        url: `${env.host}api/get_houses.php`,
         method: 'POST',
         content
       });
@@ -66,7 +66,7 @@ async function updateAllHouses() {
           async range =>
             await getHouses({
               ...params,
-              ...getPriceRangeParameters(range)
+              ...filters.getPriceRangeParameters(range)
             })
         )
       )
@@ -76,42 +76,9 @@ async function updateAllHouses() {
   }
 
   const sort = filters.getActiveHouseSort();
-  results.sort(getSortKey(sort));
+  const key = filters.getSortKey(sort);
+  results.sort(key);
   addNewHouses(results);
-}
-
-function getPriceRangeParameters(range) {
-  switch (range) {
-    case '0-50':
-      return { max_price: 50 };
-    case '50-100':
-      return { min_price: 50, max_price: 100 };
-    case '100-150':
-      return { min_price: 100, max_price: 150 };
-    case '150-200':
-      return { min_price: 150, max_price: 200 };
-    case '200-250':
-      return { min_price: 200, max_price: 250 };
-    case '250-plus':
-      return { min_price: 250 };
-    default:
-      return {};
-  }
-}
-
-function getSortKey(sort) {
-  switch (sort) {
-    case 'rating-lowest':
-      return (h1, h2) => (!h1.rating || h1.rating == 'N/A' ? -1 : h1.rating < h2.rating ? -1 : 1);
-    case 'rating-highest':
-      return (h1, h2) => (!h1.rating || h1.rating == 'N/A' ? 1 : h1.rating > h2.rating ? -1 : 1);
-    case 'price-lowest':
-      return (h1, h2) => (!h1.price_per_day ? -1 : h1.price_per_day < h2.price_per_day ? -1 : 1);
-    case 'price-highest':
-      return (h1, h2) => (!h1.price_per_day ? 1 : h1.price_per_day > h2.price_per_day ? -1 : 1);
-    default:
-      return (h1, h2) => -1;
-  }
 }
 
 function deleteHouses() {

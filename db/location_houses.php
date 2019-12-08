@@ -167,6 +167,27 @@ function getHousesRatings(&$houses)
     }
 }
 
+function getHouseReservationCount(&$house)
+{
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('
+                    SELECT COUNT(*)
+                    FROM Place, Rental
+                    WHERE Place.id = Rental.place AND Place.id = :id;
+                ');
+    $stmt->execute([
+        ':id' => $house['id']
+    ]);
+    return $stmt->fetch()['COUNT(*)'];
+}
+
+function getHousesReservationCounts(&$houses)
+{
+    foreach ($houses as $key => $house) {
+        $houses[$key]['reservation_count'] = getHouseReservationCount($house);
+    }
+}
+
 function getHousebyId($id)
 {
     $db = Database::instance()->db();
