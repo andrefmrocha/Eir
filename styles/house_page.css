@@ -1,7 +1,22 @@
-div.owner-photos{
-    flex: 1 1 0px;
+#carousel > div{
+    flex: 0 1 20%;
     border: 1px solid black;
     height: 20vh;
+}
+
+#carousel .add-new-photo input{
+    display: none;
+}
+
+#carousel .add-new-photo label {
+    height: 100%;
+}
+
+#carousel .add-new-photo label i{
+    margin: auto;
+    display: block;
+    position: relative;
+    text-align: center;
 }
 
 #carousel > div.owner-photos > img{
@@ -11,7 +26,7 @@ div.owner-photos{
 
 #carousel.owner-view{
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
 #calendars {
@@ -29,4 +44,10 @@ div.owner-photos{
 
 .fas.hidden {
     color: var(--reserved);
+}
+
+#edit-button {
+    padding: 0.8em 3.5em;
+    background-color: var(--primary-color);
+    color: white;
 }

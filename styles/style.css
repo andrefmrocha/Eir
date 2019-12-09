@@ -348,6 +348,12 @@ i.fa-star{
   max-width: 55%;
 }
 
+#description textarea{
+  width: 100%;
+  height: 10em;
+  font-size: inherit;
+}
+
 
 #house-information aside{
   flex-grow: 1;

@@ -85,7 +85,6 @@ export async function buildCalendar(date, single) {
   const numDays = new Date(year, month + 1, 0).getDate();
   let day = new Date(year, month).getDay();
   const now = new Date();
-  console.log('Meias');
   for (let i = 1; i <= numDays; i++, day++) {
     const currentDay = `${generateYearandMonthString(date)}-${i}`;
     if (
