@@ -61,8 +61,9 @@ async function getHouseInfo() {
     comments.appendChild(comment);
   });
   reviews.appendChild(comments);
+  const sum = house.reviews.reduce((acc, value) => Number(acc.rating) + Number(value.rating));
   const ratingAvg = document.createElement('span');
-  ratingAvg.innerText = house.rating;
+  ratingAvg.innerText = sum / house.reviews.length;
   rating.appendChild(ratingAvg);
   rating.appendChild(getIcon('fa-star'));
   numReviews.innerText = `${house.reviews.length} Reviews`;

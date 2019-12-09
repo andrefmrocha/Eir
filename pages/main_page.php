@@ -3,7 +3,7 @@ function drawMainPage()
 {
 
     ?>
-    <section id="form-section">
+    <section id="mainpage-section">
         <img id="mainpage-img" src="../assets/house.jpg" alt="Beautiful House">
         <span class="card">
             <div>

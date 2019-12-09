@@ -3,32 +3,126 @@ include_once('../db/connection.php');
 function getHousesByLocation($location)
 {
     $db = Database::instance()->db();
-    $stmt = $db->prepare('
-        SELECT title, price_per_day, max_guest_number, Place.id, PlaceType.name
-        FROM Place NATURAL JOIN City, Region, Rental, PlaceType
-        WHERE City.name = ? AND Region.country = ? AND Region.id = City.region
-        AND Rental.place = City.id AND ((checkin > ? AND checkout > ?) OR (checkin < ? AND checkout < ?)
-        AND Place.type = PlaceType.id);
-        ');
-    $stmt->execute(array(
-        $location['city'],
-        $location['country'],
-        $location['checkin'],
-        $location['checkin'],
-        $location['checkout'],
-        $location['checkout']
-    ));
+    $query = '
+        SELECT DISTINCT title, price_per_day, max_guest_number, Place.id, PlaceType.name AS type
+        FROM Place INNER JOIN City, Region, Rental, PlaceType, PlaceLocation
+        WHERE City.name = :city AND Region.country = :country
+        AND Region.id = City.region
+        AND City.id = PlaceLocation.city
+        AND (
+            (checkin > :checkin AND checkout > :checkin)
+            OR (checkin < :checkout AND checkout < :checkout)
+        AND Place.type = PlaceType.id AND Place.place_location = PlaceLocation.id);
+        ';
+    $stmt = $db->prepare($query);
+    $stmt->execute([
+        ':city' => $location['city'],
+        ':country' => $location['country'],
+        ':checkin' => $location['checkin'],
+        ':checkout' => $location['checkout']
+    ]);
     return $stmt->fetchAll();
 }
 
-function getTag($tag)
+function filterHousesByType($houses, $types)
 {
-    return $tag['name'];
+    $types = array_map(
+        function ($type) {
+            return trim($type);
+        },
+        explode(',', $types)
+    );
+    $filtered = array_filter(
+        $houses,
+        function ($house) use (&$types) {
+            return in_array($house['type'], $types, true);
+        }
+    );
+    return array_values($filtered);
 }
 
-function getRating($rating)
+function filterHousesByTag($houses, $tags)
 {
-    return $rating['rating'];
+    $tags = array_map(
+        function ($tag) {
+            return trim($tag);
+        },
+        explode(',', $tags)
+    );
+    $filtered = array_filter(
+        $houses,
+        function ($house) use ($tags) {
+            $house_tags = $house['tags'];
+            $map = array_map(
+                function ($tag) use ($house_tags) {
+                    return array_search($tag, $house_tags) !== false;
+                },
+                $tags
+            );
+            return array_reduce(
+                $map,
+                function ($acc, $val) {
+                    return $acc && $val;
+                },
+                true
+            );
+        }
+    );
+    return array_values($filtered);
+}
+
+function filterHousesByMaxPrice($houses, $price)
+{
+    $filtered = array_filter(
+        $houses,
+        function ($house) use ($price) {
+            return $house['price_per_day'] <= $price;
+        }
+    );
+    return array_values($filtered);
+}
+
+function filterHousesByMinPrice($houses, $price)
+{
+    $filtered = array_filter(
+        $houses,
+        function ($house) use ($price) {
+            return $house['price_per_day'] >= $price;
+        }
+    );
+    return array_values($filtered);
+}
+
+function filterHousesByMinGuests($houses, $guests)
+{
+    $filtered = array_filter(
+        $houses,
+        function ($house) use ($guests) {
+            return $house['max_guest_number'] >= $guests;
+        }
+    );
+    return array_values($filtered);
+}
+
+function filterHousesByRating($houses, $ratings)
+{
+    $ratings = array_map(
+        function ($rating) {
+            return intval(trim($rating));
+        },
+        explode(',', $ratings)
+    );
+    foreach ($ratings as $rating) {
+        error_log($rating);
+    }
+    $filtered = array_filter(
+        $houses,
+        function ($house) use (&$ratings) {
+            return ($house['rating'] != 'N/A')
+                && in_array(round($house['rating']), $ratings);
+        }
+    );
+    return array_values($filtered);
 }
 
 function getHouseTag($house)
@@ -37,11 +131,12 @@ function getHouseTag($house)
     $stmt = $db->prepare('
                     SELECT Tag.name
                     FROM Place, PlaceTag, Tag
-                    WHERE Place.id = PlaceTag.place AND Tag.id = PlaceTag.tag AND Place.id = ?
+                    WHERE Place.id = PlaceTag.place AND Tag.id = PlaceTag.tag AND Place.id = :id
                 ');
-    $stmt->execute(array($house['id']));
-    $tags = array_map('getTag', $stmt->fetchAll());
-    return $tags;
+    $stmt->execute([
+        ':id' => $house['id']
+    ]);
+    return $stmt->fetchAll(PDO::FETCH_COLUMN, 'name');
 }
 
 function getHousesTags(&$houses)
@@ -60,7 +155,7 @@ function getHouseRating(&$house)
                     WHERE Place.id = Rating.place AND Place.id = ?;
                 ');
     $stmt->execute(array($house['id']));
-    $ratings = array_map('getRating', $stmt->fetchAll());
+    $ratings = $stmt->fetchAll(PDO::FETCH_COLUMN, 'rating');
     $num_ratings = count($ratings);
     return $num_ratings > 0 ? array_sum($ratings) / count($ratings) : 'N/A';
 }
@@ -72,15 +167,38 @@ function getHousesRatings(&$houses)
     }
 }
 
+function getHouseReservationCount(&$house)
+{
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('
+                    SELECT COUNT(*)
+                    FROM Place, Rental
+                    WHERE Place.id = Rental.place AND Place.id = :id;
+                ');
+    $stmt->execute([
+        ':id' => $house['id']
+    ]);
+    return $stmt->fetch()['COUNT(*)'];
+}
+
+function getHousesReservationCounts(&$houses)
+{
+    foreach ($houses as $key => $house) {
+        $houses[$key]['reservation_count'] = getHouseReservationCount($house);
+    }
+}
+
 function getHousebyId($id)
 {
     $db = Database::instance()->db();
     $stmt = $db->prepare('
             SELECT *
             FROM Place NATURAL JOIN City, Region
-            WHERE Place.id = ? AND City.region = Region.id
+            WHERE Place.id = :id AND City.region = Region.id
         ');
-    $stmt->execute(array($id));
+    $stmt->execute([
+        ':id' => 'id'
+    ]);
     $house = $stmt->fetch();
     if ($house) {
         $house['id'] = $id;
@@ -94,11 +212,13 @@ function getHouseReviews($id)
     $stmt = $db->prepare('
             SELECT Rating.rating, Rating.comment, Rating.user, User.full_name, User.photo
             FROM
-                Place, Rating INNER JOIN User 
+                Place, Rating INNER JOIN User
                 ON Rating.user = User.id
-            WHERE Place.id = ? AND Rating.place = Place.id
+            WHERE Place.id = :id AND Rating.place = Place.id
         ');
-    $stmt->execute(array($id));
+    $stmt->execute([
+        ':id' => $id
+    ]);
     return $stmt->fetchAll();
 }
 
@@ -108,12 +228,13 @@ function getHousePhotos(&$house)
     $stmt = $db->prepare('
             SELECT Photo.resource_id as photo_id
             FROM Place, PlacePhoto as Photo
-            WHERE Place.id = ? AND Photo.place = Place.id
+            WHERE Place.id = :id AND Photo.place = Place.id
             ');
-    $stmt->execute(array($house['id']));
-    return array_map(function ($photo) {
-        return $photo['photo_id'];
-    }, $stmt->fetchAll());
+    $stmt->execute([
+        ':id' => $house['id']
+    ]);
+
+    return $stmt->fetchAll(PDO::FETCH_COLUMN, 'photo_id');
 }
 
 function getHousesPhotos(&$houses)
@@ -123,13 +244,16 @@ function getHousesPhotos(&$houses)
     }
 }
 
-function getOwnerInfo($owner){
+function getOwnerInfo($owner_id)
+{
     $db = Database::instance()->db();
     $stmt = $db->prepare('
         SELECT photo, full_name
         FROM User
-        WHERE User.id = ? 
+        WHERE User.id = :id
     ');
-    $stmt->execute(array($owner));
+    $stmt->execute([
+        ':id' => $owner_id
+    ]);
     return $stmt->fetch();
 }
