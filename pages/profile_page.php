@@ -80,8 +80,8 @@ function drawMainPage()
             </form>
         </span>
     </section>
-    <section id="rentals-history">
-        <h3>History</h3>
+    <section id="profile-carrousel">
+        <h3></h3>
         <div>
             <i class="fas fa-chevron-left"></i>
             <p>
@@ -94,7 +94,7 @@ function drawMainPage()
 <?php }
 
 include_once('../templates/common.php');
-drawHeader(['../js/profile_page.js'],[]);
+drawHeader(['../js/profile_page.js'], []);
 drawMainPage();
 drawFooter();
 ?>

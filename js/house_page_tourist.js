@@ -5,13 +5,12 @@ import env from './env.js';
 import { getPlacePhoto } from './image.js';
 import { showError, removeError } from './form_validation.js';
 import { buildCalendar, validateDate } from './calendar.js';
-import buildMainHouseInfo from './house_helper_functions.js'
+import buildMainHouseInfo from './house_helper_functions.js';
 
 const carousel = document.querySelector('#photos-carousel');
 const housePrice = document.querySelector('#reserve div:nth-child(3) p:last-child strong');
 const totalPrice = document.querySelector('#reserve div:nth-child(3) p:first-child strong');
 const urlParams = new URL(window.location).searchParams;
-
 
 const housesCarousel = {
   selected: 0,
@@ -50,7 +49,6 @@ function buildCarousel(house) {
     });
     return container;
   });
-
 
   displayNewCarousel();
 }
@@ -91,7 +89,6 @@ export default async function getHouseInfo() {
     housesCarousel.selected = nextSelection;
     displayNewCarousel();
   });
-
 
   checkin.addEventListener('change', dateListener);
   checkout.addEventListener('change', dateListener);
@@ -157,4 +154,3 @@ export default async function getHouseInfo() {
   buildMainHouseInfo(house);
   buildCarousel(house);
 }
-

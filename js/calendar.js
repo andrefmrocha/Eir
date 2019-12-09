@@ -62,14 +62,14 @@ export async function buildCalendar(date, controllers) {
     monthTitle.appendChild(previous);
     monthTitle.appendChild(monthText);
     monthTitle.appendChild(next);
-    monthTitle.setAttribute('class', 'controllers')
+    monthTitle.setAttribute('class', 'controllers');
     previous.addEventListener('click', () =>
       buildCalendar(new Date(calendarTable.date.getFullYear(), calendarTable.date.getMonth() - 1), true)
     );
 
     next.addEventListener('click', () =>
-     buildCalendar(new Date(calendarTable.date.getFullYear(), calendarTable.date.getMonth() + 1), true));
-
+      buildCalendar(new Date(calendarTable.date.getFullYear(), calendarTable.date.getMonth() + 1), true)
+    );
   }
 
   const table = calendarTable.table;
@@ -93,7 +93,7 @@ export async function buildCalendar(date, controllers) {
   const numDays = new Date(year, month + 1, 0).getDate();
   let day = new Date(year, month).getDay();
   const now = new Date().getDate();
-  for (let i = 1; i <= numDays; i++ , day++) {
+  for (let i = 1; i <= numDays; i++, day++) {
     const currentDay = `${generateYearandMonthString(calendarTable.date)}-${i}`;
     if (now > day || rentals.find(rental => rental.checkin <= currentDay && rental.checkout >= currentDay)) {
       table[day].setAttribute('class', 'unavailable');
@@ -102,7 +102,6 @@ export async function buildCalendar(date, controllers) {
   }
   calendarClicks(calendarTable);
 }
-
 
 function fillSelected(start, end) {
   const table = calendarTable.table;
