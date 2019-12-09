@@ -628,6 +628,17 @@ i.fa-star{
 
 .card.profile textarea#description{
   width: 100%;
+  border: 1.5px solid var(--primary-color);
+}
+
+.card.profile textarea#description:focus{
+  outline: none !important;
+  width: 100%;
+  border: 2px solid var(--primary-color);
+}
+
+input:focus {
+  outline: none !important
 }
 
 .card.profile div label div{
@@ -762,7 +773,7 @@ i.fa-star{
   font-size: 1.7em;
   color: var(--primary-color);
   padding-bottom: 1em;
-  padding-left: 5em;
+  padding-left: 5vw;
 }
 
 #rentals-history > div > p {
