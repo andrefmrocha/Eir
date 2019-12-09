@@ -1,6 +1,6 @@
 @media screen and (max-width: 810px){
-    #mainpage-img {
-        position: static;
+    #mainpage-img , #profile-img{
+        position: relative;
         width: 100%;
         height: auto;
     }
@@ -13,6 +13,10 @@
         padding: 0em;
     }
 
+    .card.profile {
+        width: auto;
+    }
+
     .card label {
         font-size: 0.8em;
     }
@@ -20,7 +24,6 @@
     .card label > input {
         display: flex;
         flex-grow: 1;
-        width: 33em;
         padding: 0.5em;
         margin-bottom: 0.5em;
         margin-top: 0.3em;
@@ -28,7 +31,6 @@
 
     .card #submit {
         text-align: center;
-        width: 36em;
         flex-grow: 0;
         padding: auto;
     }

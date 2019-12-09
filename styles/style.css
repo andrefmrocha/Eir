@@ -163,6 +163,8 @@ span.card{
   display: flex;
   margin: 0.5em auto;
   padding: 0.1vh 0.3em;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .card label {
@@ -170,7 +172,8 @@ span.card{
   color: var(--primary-color);
   font-weight: bold;
   padding-bottom: 0.1em;
-  flex-basis: 100%;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .card #dates label{
@@ -178,10 +181,9 @@ span.card{
 }
 
 .card label > input {
-  display: block;
   border: 1.5px solid var(--primary-color);
   border-radius: 0.3em;
-  flex-grow: 1;
+  flex-grow: 0;
   width: 100%;
   padding: 0.5em;
   margin-bottom: 0.5em;
@@ -197,7 +199,7 @@ span.card{
   font-weight: bold;
   border-radius: 0.3em;
   border: 0;
-  width: 35em;
+  width: 100%;
   font-size: 0.8em;
   padding: 1em 3em;
   margin-right: auto;
@@ -229,6 +231,7 @@ div#dates {
 }
 
 div#dates label > input {
+  width: auto;
   position: static;
   width: 16em;
 }
@@ -570,8 +573,71 @@ i.fa-star{
   font-weight: normal;
 }
 
+/* Profile Page  */
+
+.card.profile {
+  position: relative;
+  display: inline-block;
+  padding: 1.5em;
+  border-radius: 0.5em;
+  background-color: var(--background-color);
+  margin: 0 8em 0 8em;
+  width: 30em;
+}
+
+.card.profile div {
+  display: flex;
+  margin: 0.1em auto;
+  padding: 0.4em 0.3em 0em 0.3em;
+  width: 100%;
+}
+
+.card.profile label {
+  font-size: 0.8em;
+  color: var(--primary-color);
+  font-weight: bold;
+  padding-bottom: 0.1em;
+  flex-basis: 100%;
+}
+
+.card.profile div.image-upload {
+  display: inline;
+  text-align: center;
+}
+
+#profile-img {
+  width: 98.95%;
+  height: 60em;
+  position: absolute;
+}
+
+.card.profile div.two-inputs div {
+  margin: 0;
+  padding: 0;
+  position: static;
+}
+
+
+.card.profile div.two-inputs div:last-child{
+  margin-left: 1em;
+}
+
+.card.profile div.two-inputs div label input#country{
+  padding: 0.65em 0.5em;
+}
+
+.card.profile textarea#description{
+  width: 100%;
+}
+
+.card.profile div label div{
+  padding-left: 0em;
+}
+
+
 .user-form{
   display: flex;
+  flex-wrap: wrap;
 }
 
 .user-form{
@@ -588,8 +654,9 @@ i.fa-star{
   color: white;
   padding: 1em 4em;
   border-radius: 0.5em;
-  margin: auto;
+  margin: 1em auto 0.5em auto;
   display: block;
+  width: 100%;
 }
 
 .user-form form{
@@ -615,7 +682,6 @@ i.fa-star{
 .two-inputs{
   display: flex;
   justify-content: space-between;
-  flex-wrap: wrap;
 }
 
 .two-inputs > div {
@@ -623,37 +689,46 @@ i.fa-star{
 }
 
 .two-inputs label > input{
-  width: 95%;
+  width: 100%;
 }
 
-
-.card section{
+.card > section{
   margin: auto;
   display: flex;
   justify-content: center;
   align-items: baseline;
 }
-.card section > img:first-child,
-.card section > img:last-child{
-  width: 30%;
+
+.card section{
+  display: inline-block;
+  align-content: space-between;
+  margin: 0.5em auto;
+  margin-bottom: 1.5em;
+}
+
+.card section div img{
+  width: 11vw;
+  border-radius: 50%;
+  cursor: pointer;
+  vertical-align: bottom;
+}
+
+.card section > img:first-child, .card section > img:last-child{
+  width: 13vw;
+  vertical-align: bottom;
 }
 
 .card.profile{
-  width: 60vw;
-  padding: 3em;
+  width: 45vw;
+  padding: 7vh 5vw;
+  margin: auto;
 }
 
 .card section > img:first-child{
   transform: scaleX(-1) ;
 }
 
-.card section div img{
-  width: 30%;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-.card .image-upload label{
+.card.image-upload label{
   flex-basis: 80%;
   margin: auto;
 }
@@ -666,20 +741,12 @@ i.fa-star{
   flex-basis: 35%;
 } 
 
-.card section > div > label > img {
-  width: 100%;
-}
-
-.card section > div {
-  margin: 0;
-}
-
 .image-upload>input {
   display: none;
 }
 
 #form-section.profile{
-  min-height: 130vh;
+  min-height: 60em;
 }
 
 #form-section.profile #signup-img{
@@ -695,6 +762,7 @@ i.fa-star{
   font-size: 1.7em;
   color: var(--primary-color);
   padding-bottom: 1em;
+  padding-left: 5em;
 }
 
 #rentals-history > div > p {
