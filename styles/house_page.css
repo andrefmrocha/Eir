@@ -13,3 +13,20 @@ div.owner-photos{
     flex-wrap: wrap;
     justify-content: center;
 }
+
+#calendars {
+    flex-basis: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#calendars > div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.fas.hidden {
+    color: var(--reserved);
+}

@@ -5,13 +5,15 @@ import env from './env.js';
 import { getPlacePhoto } from './image.js';
 import { showError, removeError } from './form_validation.js';
 import { buildCalendar, validateDate } from './calendar.js';
-import buildMainHouseInfo from './house_helper_functions.js'
+import buildMainHouseInfo from './house_helper_functions.js';
 
 const carousel = document.querySelector('#photos-carousel');
 const housePrice = document.querySelector('#reserve div:nth-child(3) p:last-child strong');
 const totalPrice = document.querySelector('#reserve div:nth-child(3) p:first-child strong');
-const urlParams = new URL(window.location).searchParams;
+const reviews = document.querySelector('#reviews');
+const houseInformation = document.querySelector('#house-information');
 
+const urlParams = new URL(window.location).searchParams;
 
 const housesCarousel = {
   selected: 0,
@@ -26,7 +28,12 @@ const checkout = reservation.querySelector('#check-out');
 const dateListener = async () => {
   removeError('invalid-dates');
   if (checkin.value != '' && checkout.value != '') {
-    const validation = await validateDate(checkin.value, checkout.value);
+    const startDate = new Date(checkin.value);
+    const endDate = new Date(checkout.value);
+    const calendar = await buildCalendar(startDate, true);
+    houseInformation.removeChild(document.querySelector('.calendar'));
+    houseInformation.insertBefore(calendar, reviews);
+    const validation = await validateDate(startDate, endDate, calendar.querySelectorAll('td'));
     if (!validation) {
       checkin.value = '';
       checkout.value = '';
@@ -51,7 +58,6 @@ function buildCarousel(house) {
     return container;
   });
 
-
   displayNewCarousel();
 }
 
@@ -75,8 +81,19 @@ function removeCarouselData() {
   }
 }
 
+async function drawCalendar(date) {
+  const calendar = await buildCalendar(date, true);
+  const previous = calendar.querySelector('.fa-chevron-left');
+  const next = calendar.querySelector('.fa-chevron-right');
+  const previousCalendar = houseInformation.querySelector('.calendar');
+  previousCalendar && houseInformation.removeChild(previousCalendar);
+  houseInformation.insertBefore(calendar, reviews);
+  previous.addEventListener('click', () => drawCalendar(new Date(date.getFullYear(), date.getMonth() - 1), true));
+  next.addEventListener('click', () => drawCalendar(new Date(date.getFullYear(), date.getMonth() + 1), true));
+}
+
 export default async function getHouseInfo() {
-  buildCalendar(new Date(), true);
+  drawCalendar(new Date());
 
   document.querySelector('.fa-arrow-left').addEventListener('click', () => {
     housesCarousel.houses[housesCarousel.selected].removeAttribute('class');
@@ -91,7 +108,6 @@ export default async function getHouseInfo() {
     housesCarousel.selected = nextSelection;
     displayNewCarousel();
   });
-
 
   checkin.addEventListener('change', dateListener);
   checkout.addEventListener('change', dateListener);
@@ -157,4 +173,3 @@ export default async function getHouseInfo() {
   buildMainHouseInfo(house);
   buildCarousel(house);
 }
-

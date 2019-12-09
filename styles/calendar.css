@@ -43,6 +43,11 @@
     color: var(--reserved);
 }
 
+#calendars .calendar table td.unavailable {
+    color: white;
+    background-color: var(--primary-color);
+}
+
 .calendar table td.selected{
     background-color: var(--primary-color);
     color: white;

@@ -82,8 +82,6 @@ function getTouristHousePage()
                     <p id="required-input" class="form-error">** Field is required</p>
                 </form>
             </article>
-            <?php include_once('../templates/calendar.php');
-                getCalendar(); ?>
             <article id="reviews">
                 <span>
                     <h2 class="title">
