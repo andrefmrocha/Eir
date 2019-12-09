@@ -676,25 +676,25 @@ i.fa-star{
   min-height: 130vh;
 }
 
-#rentals-history {
+#profile-carrousel{
   padding: 1em 10vw;
   height: max-content;
 }
 
-#rentals-history > h3 {
+#profile-carrousel > h3 {
   font-size: 1.7em;
   color: var(--primary-color);
   padding-bottom: 1em;
 }
 
-#rentals-history > div > p {
+#profile-carrousel > div > p {
   display: flex;
   flex-wrap: nowrap;
   justify-content: space-between;
   flex-basis: 90%;
 }
 
-#rentals-history > div{
+#profile-carrousel > div{
   display: flex;
   flex-wrap:  nowrap;
   align-items: center;
@@ -703,36 +703,36 @@ i.fa-star{
   margin: auto;
 }
 
-#rentals-history > div > i{
+#profile-carrousel > div > i{
   flex-basis: 5%;
   margin: 0 1em;
 }
 
 
-#rentals-history > div span {
+#profile-carrousel > div span {
   flex-basis: 49%;
 }
 
-#rentals-history > div span img {
+#profile-carrousel > div span img {
   width: 100%;
   height: 35vh;
   border-radius: 0.5em;
 }
 
-#rentals-history > div p:nth-child(2){
+#profile-carrousel > div p:nth-child(2){
   color: var(--accent-color);
   font-size: 1.2em;
 }
 
-#rentals-history > div > p p:nth-child(2)::before,
-#rentals-history > div > p p:nth-child(2)::after{
+#profile-carrousel > div > p p:nth-child(2)::before,
+#profile-carrousel > div > p p:nth-child(2)::after{
   content: "\"";
 }
 
-#rentals-history > div p > strong{
+#profile-carrousel > div p > strong{
   color: var(--primary-color);
 }
-#rentals-history > div p:last-child{
+#profile-carrousel > div p:last-child{
   font-weight: lighter;
   color: var(--accent-color);
   text-align: right;
