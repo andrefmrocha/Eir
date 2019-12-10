@@ -3,7 +3,15 @@ import { getPlacePhoto } from './image.js';
 import { request } from './network.js';
 import env from './env.js';
 
-export default async function getOwnProperties() {
+export function tintProfileLeaves() {
+  const leaves = document.querySelectorAll('.profile-leaf');
+  leaves.forEach(node => node.setAttribute(
+    'class',
+    `${node.getAttribute('class')} gold-leaf`
+  ));
+}
+
+export async function getOwnProperties() {
   const houses = await request({
     url: `${env.host}api/get_properties.php`,
     method: 'GET',
@@ -26,6 +34,7 @@ export default async function getOwnProperties() {
     left.remove();
     right.remove();
   }
+  addAddPropertyButton();
 }
 
 function buildProperty(property) {
@@ -44,4 +53,12 @@ function buildProperty(property) {
   wrapper.appendChild(title);
   wrapper.appendChild(stays);
   return wrapper;
+}
+
+function addAddPropertyButton() {
+  const addPropertyButton = document.createElement('div');
+  addPropertyButton.innerText = 'Add Property';
+  addPropertyButton.setAttribute('class', 'button');
+  const carrouselNode = document.querySelector('#profile-carrousel');
+  carrouselNode.appendChild(addPropertyButton);
 }

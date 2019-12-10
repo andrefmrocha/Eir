@@ -3,7 +3,7 @@ import { request } from './network.js';
 import { getPersonPhoto } from './image.js';
 import { removeError, showError, validateEmail } from './form_validation.js';
 import { TOURIST, OWNER } from './common.js';
-import getOwnProperties from './profile_page_owner.js';
+import { getOwnProperties, tintProfileLeaves } from './profile_page_owner.js';
 import getRentalHistory from './profile_page_tourist.js';
 
 const profilePic = document.querySelector('.card section div img');
@@ -110,4 +110,5 @@ if (pageView == TOURIST) {
   getRentalHistory();
 } else {
   getOwnProperties();
+  tintProfileLeaves();
 }
