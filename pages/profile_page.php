@@ -8,7 +8,7 @@ function drawMainPage()
         <span class="card profile">
             <form action="#" method="get" enctype="multipart/form-data">
                 <section>
-                    <img src="../assets/profile-leaf.svg" alt="Profile ornament left leaf" />
+                    <img class="profile-leaf" src="../assets/profile-leaf.svg" alt="Profile ornament left leaf" />
                     <div class="image-upload">
                         <label for="profile-picture">
                             <img src="https://icon-library.net/images/upload-photo-icon/upload-photo-icon-21.jpg" />
@@ -16,7 +16,7 @@ function drawMainPage()
 
                         <input id="profile-picture" name="profile-picture" type="file" alt="Profile picture" />
                     </div>
-                    <img src="../assets/profile-leaf.svg" alt="Profile ornament left leaf" />
+                    <img class="profile-leaf" src="../assets/profile-leaf.svg" alt="Profile ornament right leaf" />
                 </section>
                 <div>
                     <label for="full-name">

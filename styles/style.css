@@ -250,6 +250,7 @@ div#dates label > input {
 
 .button {
   background: var(--accent-color);
+  color: white;
   padding: 0.5em;
   width: 10em;
   text-align: center;
@@ -729,4 +730,12 @@ i.fa-star{
   font-weight: lighter;
   color: var(--accent-color);
   text-align: right;
+}
+
+#profile-carrousel .button {
+  background-color: var(--gold-color);
+}
+
+.gold-leaf {
+  fill: var(--gold-color);
 }
