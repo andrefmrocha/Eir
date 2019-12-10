@@ -8,6 +8,19 @@
     display: none;
 }
 
+#carousel.owner-view .fa-trash{
+  padding:  0.3em 0.3em 0 0;
+  color: var(--reserved);
+  font-size: 1.3em;
+  text-align: right;
+  margin: 0;
+  display: none;
+}
+
+.editable #carousel.owner-view .fa-trash{
+  display: block;
+}
+
 #carousel .add-new-photo label {
     height: 100%;
 }
@@ -19,9 +32,10 @@
     text-align: center;
 }
 
-#carousel > div.owner-photos > img{
+#carousel > div.owner-photos > div{
     width: 100%;
     height: 100%;
+    background-size: cover;
 } 
 
 #carousel.owner-view{
@@ -46,8 +60,98 @@
     color: var(--reserved);
 }
 
-#edit-button {
-    padding: 0.8em 3.5em;
-    background-color: var(--primary-color);
-    color: white;
+#house-information > aside > div select{
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  outline: 0;
+  box-shadow: none;
+  border: 0 !important;
+  color: var(--reserved);
+  background-image: none;
+  background: white;
 }
+
+#house-information > aside > div select::-ms-expand {
+  display: none;
+}
+
+.select {
+  position: relative;
+  display: flex;
+  width: 20em;
+  height: 3em;
+  background-color: white;
+  overflow: hidden;
+  border-radius: .25em;
+}
+
+
+#house-information > aside > div > div select {
+  flex: 1;
+  padding: 0 .5em;
+  color: var(--reserved);
+  cursor: pointer;
+}
+
+.select::after {
+  content: '\25BC';
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0 1em;
+  background-color: white;
+  color: var(--reserved);
+  cursor: pointer;
+  pointer-events: none;
+  -webkit-transition: .25s all ease;
+  -o-transition: .25s all ease;
+  transition: .25s all ease;
+}
+
+.select:hover::after {
+  color: var(--primary-color);
+}
+
+
+#house-information > aside > div > div > i{
+    color: var(--reserved);
+    display: none;
+}
+
+.editable #house-information > aside > div > div > i{
+    display: inline-block;
+}
+
+.editable input {
+  border: none;
+  font-size: 1.2em;
+  color: var(--primary-color);
+  appearance: none;
+}
+
+.editable #description textarea{
+  font-size: 1.2em;
+  border-style: none;
+  border-color:transparent;
+}
+
+#description > div > input {
+  width: 4em;
+  text-align: right;
+}
+
+#description > div{
+  color: var(--primary-color);
+}
+
+#house-information > aside > div > div > i:nth-child(2){
+    margin-left: 1em;
+}
+
+#house-information > aside > div span i{
+  margin-right: 0.5em;
+}
+
+

@@ -1,4 +1,4 @@
-import { createHouseInformation, getIcon } from './tags.js';
+import { createHouseDetails, getIcon } from './tags.js';
 import { getPersonPhoto } from './image.js';
 
 const houseInformation = document.querySelector('#house-information');
@@ -34,7 +34,7 @@ export default function buildMainHouseInfo(house) {
   description.appendChild(innerText);
 
   const tags = document.createElement('div');
-  createHouseInformation(tags, house);
+  createHouseDetails(tags, house);
   information.appendChild(tags);
   const comments = document.createElement('div');
 

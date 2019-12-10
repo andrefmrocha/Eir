@@ -76,11 +76,23 @@ export function createHouseTags(node, house) {
   }
 }
 
+export function createTrashIcon() {
+  const icon = document.createElement('i');
+  icon.setAttribute('class', 'fas fa-trash');
+  return icon;
+}
+
+function createDeletableTag(tagText, icon) {
+  const wrapper = document.createElement('div');
+  wrapper.appendChild(createOptionalTag(tagText, icon));
+  wrapper.appendChild(createTrashIcon());
+  return wrapper;
+}
+
 export function createHouseInformation(node, house) {
   const icons = generateIcons();
   node.appendChild(generateInformation(house.name, icons.houseIcon));
   node.appendChild(generateInformation(`${house.max_guest_number} Beds`, icons.bedIcon));
-  node.appendChild(generateInformation(`${house.price_per_day}€`, icons.moneyIcon));
 
   if (house.tags.indexOf('Baby Friendly') != -1) {
     node.appendChild(createOptionalTag('Baby Friendly', icons.babyIcon));
@@ -96,5 +108,44 @@ export function createHouseInformation(node, house) {
   }
   if (house.tags.indexOf('Green Spaces') != -1) {
     node.appendChild(createOptionalTag('Green Spaces', icons.greenSpacesIcon));
+  }
+}
+
+export function createHouseDetails(node, house) {
+  const icons = generateIcons();
+  node.appendChild(generateInformation(house.type, icons.houseIcon));
+  node.appendChild(generateInformation(`${house.max_guest_number} Beds`, icons.bedIcon));
+
+  if (house.tags.indexOf('Baby Friendly') != -1) {
+    node.appendChild(createDeletableTag('Baby Friendly', icons.babyIcon));
+  }
+  if (house.tags.indexOf('Pet Friendly') != -1) {
+    node.appendChild(createDeletableTag('Pet Friendly', icons.petIcon));
+  }
+  if (house.tags.indexOf('Swimming Pool') != -1) {
+    node.appendChild(createDeletableTag('Swimming Pool', icons.swimmingPoolIcon));
+  }
+  if (house.tags.indexOf('Breakfast Included') != -1) {
+    node.appendChild(createDeletableTag('Breakfast Included', icons.breakfastIcon));
+  }
+  if (house.tags.indexOf('Green Spaces') != -1) {
+    node.appendChild(createDeletableTag('Green Spaces', icons.greenSpacesIcon));
+  }
+}
+
+export function buildTag(tag) {
+  const icons = generateIcons();
+
+  switch (tag) {
+    case 'Baby Friendly':
+      return createDeletableTag('Baby Friendly', icons.babyIcon);
+    case 'Pet Friendly':
+      return createDeletableTag('Pet Friendly', icons.petIcon);
+    case 'Swimming Pool':
+      return createDeletableTag('Swimming Pool', icons.swimmingPoolIcon);
+    case 'Breakfast Included':
+      return createDeletableTag('Breakfast Included', icons.breakfastIcon);
+    case 'Green Spaces':
+      return createDeletableTag('Green Spaces', icons.greenSpacesIcon);
   }
 }

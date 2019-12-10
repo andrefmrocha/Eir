@@ -4,6 +4,7 @@ const urlParams = new URL(window.location).searchParams;
 
 const checkin = document.querySelector('#check-in');
 const checkout = document.querySelector('#check-out');
+let selecting = false;
 
 const months = [
   'January',
@@ -97,7 +98,7 @@ export async function buildCalendar(date, single) {
   }
 
   if (single) {
-    calendarClicks(article);
+    calendarClicks(article, date);
   }
   return article;
 }
@@ -109,14 +110,14 @@ function fillSelected(start, end, table) {
   }
 }
 
-function calendarClicks(article) {
+function calendarClicks(article, date) {
   const table = article.querySelector('table');
   const cells = table.querySelectorAll('td');
   cells.forEach((day, index) => {
     day.className != 'unavailable' &&
       day.addEventListener('click', () => {
-        if (!calendarTable.selecting) {
-          calendarTable.selecting = true;
+        if (!selecting) {
+          selecting = true;
           cells.forEach(day => {
             if (day.className != 'unavailable') day.removeAttribute('class');
           });
@@ -131,10 +132,10 @@ function calendarClicks(article) {
             cells[i].addEventListener('click', () => {
               const newTable = table.cloneNode(true);
               article.replaceChild(newTable, table);
-              calendarClicks(article);
-              checkin.value = generateDateString(calendarTable.date, day.innerText);
-              checkout.value = generateDateString(calendarTable.date, cells[i].innerText);
-              calendarTable.selecting = false;
+              calendarClicks(article, date);
+              checkin.value = generateDateString(date, day.innerText);
+              checkout.value = generateDateString(date, cells[i].innerText);
+              selecting = false;
             });
           }
         }

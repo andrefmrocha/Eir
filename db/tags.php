@@ -10,3 +10,13 @@
             return $tag["name"];
         }, $tags);
     }
+
+    function getAllTypes(){
+        $db = Database::instance()->db();
+        $stmt = $db->prepare('SELECT * FROM PlaceType');
+        $stmt->execute();
+        $tags = $stmt->fetchAll();
+        return array_map(function ($tag){
+            return $tag["name"];
+        }, $tags);
+    }

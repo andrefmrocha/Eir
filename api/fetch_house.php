@@ -8,4 +8,5 @@
     $house['reviews'] = getHouseReviews($_GET['id']);
     $house['photos'] = getHousePhotos($house);
     $house['owner'] = getOwnerInfo($house['place_owner']);
+    $house['type'] = getHouseType($_GET['id']);
     echo json_encode($house);

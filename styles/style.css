@@ -176,7 +176,7 @@ span.card{
   flex-basis: 50%;
 }
 
-form .form-error{
+.form-error{
   font-size: 0.7em;
   display: none;
   color: var(--alert-color);
@@ -255,6 +255,7 @@ div#dates label > input {
   text-align: center;
   margin: 0.5em auto;
   border-radius: 5%;
+  color: white;
 }
 
 

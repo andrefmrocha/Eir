@@ -78,7 +78,7 @@ function getHousebyId($id)
     $stmt = $db->prepare('
             SELECT *
             FROM Place NATURAL JOIN City, Region
-            WHERE Place.id = ? AND City.region = Region.id
+            WHERE Place.id = ? AND City.region = Region.id AND Place.type
         ');
     $stmt->execute(array($id));
     $house = $stmt->fetch();
@@ -143,4 +143,15 @@ function getOwnerInfo($owner){
     ');
     $stmt->execute(array($owner));
     return $stmt->fetch();
+}
+
+function getHouseType($id){
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('
+        SELECT PlaceType.name
+        FROM Place, PlaceType
+        WHERE Place.type = PlaceType.id AND Place.id = ?
+    ');
+    $stmt->execute(array($id));
+    return $stmt->fetch()['name'];
 }
