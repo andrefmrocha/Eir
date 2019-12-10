@@ -5,7 +5,7 @@ function drawMainPage()
     ?>
     <section id="form-section"class="user-form">
         <img id="signup-img" src="../assets/login-house.jpg" alt="Beautiful House">
-        <span class="card">
+        <span class="card login">
             <form action="list_houses.php" method="get">
                 <div>
                     <label for="form-email">
@@ -29,7 +29,7 @@ function drawMainPage()
                     <input id="submit" type="submit" value="Log In">
                 </div>
                 <p>
-                    Don't have an account? <a href="sign_up_page.php">Sign in</a>
+                    Don't have an account? <strong href="sign_up_page.php">Sign in</strong>
                 </p>
             </form>
         </span>

@@ -1,19 +1,15 @@
 @media screen and (max-width: 810px){
-    #mainpage-img , #profile-img{
-        position: relative;
-        width: 100%;
-        height: auto;
+    #mainpage-img , #profile-img, #signup-img{
+        position: relative !important;
+        width: 100% !important;
+        height: auto !important;
     }
 
-    .card {
+    .card, .card.profile, .card.login, .card.signin {
         display: block;
         position: static;
-        width: 29em;
-        margin: 2em auto;
+        margin: 2em;
         padding: 0em;
-    }
-
-    .card.profile {
         width: auto;
     }
 
@@ -35,11 +31,6 @@
         padding: auto;
     }
 
-    div#dates label > input{
-        display: flex;
-        width: 15em;
-    }
-
     #photos-carousel,
     #photos-carousel > div{
         width: 65vw;
@@ -51,6 +42,23 @@
 
     .card.profile .two-inputs div {
         flex-basis: 100%;
+    }
+}
+
+@media screen and (max-width: 475px){
+    div#dates, .two-inputs{
+        flex-wrap: wrap;
+        width: 100%;
+    }
+
+    div#dates label:first-child, .two-inputs label:first-child, .card.signin div.two-inputs div:first-child {
+        margin: auto;
+        margin-bottom: 1vh;
+    }
+
+    .card.profile div.two-inputs div:last-child {
+        margin: auto;
+
     }
 }
 
