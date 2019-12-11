@@ -182,11 +182,11 @@ span.card{
   color: var(--alert-color);
 }
 
-form p.form-error{
+p.form-error{
   flex-basis: 100%;
 }
 
-form .form-error.active{
+.form-error.active{
   display: block;
 }
 
