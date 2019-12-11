@@ -5,7 +5,7 @@ import env from './env.js';
 
 export function tintProfileLeaves() {
   const leaves = document.querySelectorAll('.profile-leaf');
-  leaves.forEach(node => node.setAttribute('class', `${node.getAttribute('class')} gold-leaf`));
+  leaves.forEach(node => node.setAttribute('src', `${env.host}assets/gold-profile-leaf.svg`));
 }
 
 export async function getOwnProperties() {
