@@ -2,13 +2,12 @@
 function drawErrorPage()
 {
     ?>
-    <section id="page404error-section">
-        <div>
+    <section id="page403error-section">
+        <img id="page403-img" src="../assets/prison-laurel.svg" alt="Prison Laurel"> 
             <p>
-                <strong>404</strong> 
-                Page Not Found 
+                <strong>403</strong> 
+                Forbidden
             </p>
-        </div>
     </section>
 <?php }
     include_once('../templates/common.php');

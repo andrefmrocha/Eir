@@ -154,4 +154,23 @@
         text-align: center;
     }
 
+    section#page404error-section, section#page401error-section, section#page403error-section {
+        min-height: 15em;
+      }
 }
+
+@media screen and (max-width: 500px){
+
+section#page404error-section p {
+    font-size: 3.2vw;
+    padding-bottom: 5vh;
+  }
+
+section#page401error-section p, section#page403error-section p{
+      padding-top: 2vh
+  }
+
+}
+
+
+

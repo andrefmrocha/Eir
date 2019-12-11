@@ -901,3 +901,57 @@ i.fa-star{
   color: var(--accent-color);
   text-align: right;
 }
+
+/* 404 Error page */
+
+section#page404error-section {
+  display: block;
+  min-height: 30em;
+  padding: 2em;
+}
+
+section#page404error-section div {
+  display: flex;
+  margin: auto;
+  box-sizing: border-box;
+  height: 30em;
+
+  background-image: url("../assets/broken-laurel.svg");
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+section#page404error-section div p {
+  font-weight: lighter;
+  color: var(--accent-color);
+  text-align: left;
+  font-size: 2.8vw;
+  padding-bottom: 7vh;
+  margin: auto 26% auto auto
+}
+
+/* 401 Error page */
+
+section#page401error-section, section#page403error-section {
+  display: flex;
+  min-height: 30em;
+  padding: 2em;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+}
+
+section#page401error-section img, section#page403error-section img {
+  width: 32vw;
+  margin: auto;
+  margin-right: 7vw;
+  min-width: 10em
+}
+
+section#page401error-section p, section#page403error-section p {
+  font-weight: lighter;
+  color: var(--accent-color);
+  text-align: left;
+  font-size: 2.8vw;
+  margin: auto auto auto 0;
+  padding-top: 7vh;
+}
