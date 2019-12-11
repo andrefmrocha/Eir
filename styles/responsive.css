@@ -117,23 +117,30 @@
     #houses article div{
         padding: 0;
         margin: auto;
+        box-sizing: border-box;
+
     }
 
     #houses article img{
         margin: auto;
-        width: 30em;
+        max-width: 25em;
+        width: 100%;
     }
 
     #houses article header {
         margin-top: 1em;
+        text-align: center;
     }
 
     .fas{
         text-align: center;
+        margin: auto 0;
     }
 
-    #houses article div div span span{
-        margin: 0em 1.5em;
+    #houses article div div span {
+        display: flex;
+        justify-content: space-evenly;
+        min-width: 3em;
     }
 }
 
