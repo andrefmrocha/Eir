@@ -144,7 +144,7 @@
   text-align: right;
 }
 
-#description > div {
+.editable #description > div {
   color: var(--primary-color);
 }
 
@@ -154,4 +154,10 @@
 
 #house-information > aside > div span i {
   margin-right: 0.5em;
+}
+
+#google-maps{
+  flex-basis: 100%;
+  height: 30em;
+  overflow: auto;
 }

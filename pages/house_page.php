@@ -82,6 +82,8 @@ function getTouristHousePage()
                     <p id="required-input" class="form-error">** Field is required</p>
                 </form>
             </article>
+            <article id="google-maps">
+            </article>
             <article id="reviews">
                 <span>
                     <h2 class="title">
@@ -95,6 +97,8 @@ function getTouristHousePage()
                     </span>
                 </span>
             </article>
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_H2rJ_UoIMyraXQLybpu1GPwhXd5lKMw"
+             defer></script>
         </section>
     </div>
 <?php

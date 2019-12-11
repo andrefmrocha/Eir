@@ -9,7 +9,7 @@ function displayHouseTitle(house) {
   const title = document.querySelector('#house-description h1');
   const location = document.querySelector('#house-description h3 span');
   title.innerText = house.title;
-  location.innerText = house.name;
+  location.innerText = house.address;
 
   const img = document.querySelector('#house-title aside img');
   img.src = getPersonPhoto(house.owner.photo);
@@ -37,6 +37,17 @@ export default function buildMainHouseInfo(house) {
   createHouseDetails(tags, house);
   information.appendChild(tags);
   const comments = document.createElement('div');
+  const pos = { lat: Number(house.latitude), lng: Number(house.longitude) };
+  const maps = new google.maps.Map(document.querySelector('#google-maps'), {
+    center: pos,
+    zoom: 19
+  });
+
+  const marker = new google.maps.Marker({
+    position: pos,
+    map: maps
+  });
+  maps.panTo(pos);
 
   house.reviews.forEach(review => {
     const comment = document.createElement('article');
@@ -60,5 +71,11 @@ export default function buildMainHouseInfo(house) {
   rating.appendChild(ratingAvg);
   rating.appendChild(getIcon('fa-star'));
   numReviews.innerText = `${house.reviews.length} Reviews`;
-  return house;
+  return {
+    maps: {
+      maps,
+      marker
+    },
+    house
+  };
 }

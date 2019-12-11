@@ -5,7 +5,9 @@ import { getPlacePhoto } from './image.js';
 import { getTourist } from './common.js';
 import { buildCalendar } from './calendar.js';
 import { buildTag, createTrashIcon } from './tags.js';
-import { showError, removeError } from './form_validation.js';
+import { showError } from './form_validation.js';
+import { getHouseLocation } from './maps.js';
+
 import carousel from './carousel.js';
 
 const photos = document.querySelector('#carousel');
@@ -19,7 +21,7 @@ function tagOption(tag, select) {
   select.appendChild(option);
 }
 
-async function buildEditableView(house) {
+async function buildEditableView(house, maps) {
   const removingTags = [];
   const selectedTags = [];
   const selectedPhotos = [];
@@ -190,17 +192,33 @@ async function buildEditableView(house) {
   errorLabel.setAttribute('id', errorId);
   errorLabel.classList.add('form-error');
   houseInformation.insertBefore(errorLabel, document.querySelector('#reviews'));
+  let marker;
+
+  maps.maps.addListener('click', e => {
+    const newMarker = new google.maps.Marker({
+      position: e.latLng,
+      map: maps.maps
+    });
+    if (maps.marker) {
+      maps.marker.setMap(null);
+      maps.marker = undefined;
+    } else {
+      marker.setMap(null);
+    }
+
+    marker = newMarker;
+    newMarker.setMap(maps.maps);
+  });
 
   submitButton.addEventListener('click', () => {
     // title, country, location, type, numBeds, tags, description, photos, price
     const formData = {
       title: inputTitle.value,
-      country: inputCountry.value,
-      location: inputLocation.value,
       type: types.value,
       max_guest_number: numBeds.value,
       description: descriptionTextField.value,
-      price: price.value
+      price: price.value,
+      coords: marker || maps.marker
     };
 
     let error = false;
@@ -217,14 +235,17 @@ async function buildEditableView(house) {
     formData.removing_photos = removingPhotos;
     formData.new_tags = selectedTags;
     formData.removing_tags = removingTags;
-
-    console.log(formData);
+    formData.house_id = urlParams.get('id');
+    getHouseLocation(formData.coords, coords => {
+      formData.coords = coords;
+      console.log(formData);
+    });
   });
 }
 
 async function buildDashboard(house) {
   houseInformation.removeChild(document.querySelector('#reserve'));
-  buildMainHouseInfo(house);
+  const { maps } = buildMainHouseInfo(house);
   while (photos.firstElementChild) {
     photos.removeChild(photos.firstElementChild);
   }
@@ -284,7 +305,7 @@ async function buildDashboard(house) {
   editButton.setAttribute('id', 'edit-button');
   editButton.innerText = 'Edit';
   houseInformation.insertBefore(editButton, document.querySelector('#reviews'));
-  editButton.addEventListener('click', () => buildEditableView(house));
+  editButton.addEventListener('click', () => buildEditableView(house, maps));
 
   carousel.buildCarousel(calendarDiv);
 }
