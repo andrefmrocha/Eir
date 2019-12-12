@@ -79,9 +79,9 @@ async function buildEditableView(house, maps) {
         photos.insertBefore(wrapper, addNewPhoto);
         const trash = createTrashIcon();
         img.appendChild(trash);
-        selectedPhotos.push(e.target.result);
+        selectedPhotos.push(input.files[0]);
         trash.addEventListener('click', () => {
-          selectedPhotos.splice(selectedPhotos.indexOf(e.target.result, 1));
+          selectedPhotos.splice(selectedPhotos.indexOf(input.files[0], 1));
           photos.removeChild(wrapper);
         });
       };
@@ -173,7 +173,7 @@ async function buildEditableView(house, maps) {
     trash.addEventListener('click', () => {
       currentTags.removeChild(tag);
       tagOption(tag.innerText, select);
-      removingTags.push(selectedTags);
+      removingTags.push(tag.innerText);
     });
   });
   tagsWrapper.appendChild(addNewTag);
@@ -231,14 +231,27 @@ async function buildEditableView(house, maps) {
       }
     });
 
-    formData.new_photos = selectedPhotos;
+
     formData.removing_photos = removingPhotos;
     formData.new_tags = selectedTags;
     formData.removing_tags = removingTags;
     formData.house_id = urlParams.get('id');
-    getHouseLocation(formData.coords, coords => {
+    getHouseLocation(formData.coords, async coords => {
       formData.coords = coords;
-      console.log(formData);
+      const body = new FormData();
+      Object.keys(formData).forEach(key => typeof formData[key] === 'object' ?
+        body.append(key, JSON.stringify(formData[key])) :
+        body.append(key, formData[key]));
+      selectedPhotos.forEach(photo => body.append('new_photos[]', photo));
+      const response = await fetch(
+        `${env.host}api/house_update.php`,{
+          method: 'POST',
+          body
+        });
+
+      console.log(response);
+
+
     });
   });
 }

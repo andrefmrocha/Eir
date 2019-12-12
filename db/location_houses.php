@@ -170,7 +170,7 @@ function updateHouse($house, $type, $location){
         ':price' => $house['price'],
         ':max_guest_number' => $house['max_guest_number'],
         ':description' => $house['description'],
-        ':location' => $house['location'],
+        ':location' => $location,
     ]);
 }
 

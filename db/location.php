@@ -6,34 +6,29 @@ function storeLocation($location){
     $db = Database::instance()->db();
     $stmt = $db->prepare('SELECT * FROM Region WHERE country = ? AND name = ?');
     $stmt->execute(array($location['country'], $location['region']));
-    $region_id = $stmt->fetch()['id'];
+    $region_id = $stmt->fetch();
     if($region_id == false){
         $stmt = $db->prepare('INSERT INTO Region (country, name) VALUES (?, ?)');
         $stmt->execute(array($location['country'], $location['region']));
-        createCity($location, $db->lastInsertId());
-        return $db->lastInsertId();
+        return createCity($location, $db->lastInsertId());
     }
 
     $stmt = $db->prepare('SELECT * FROM City WHERE region = ? AND name = ?');
-    $stmt->execute(array($location['region'], $location['city']));
+    $stmt->execute(array($region_id['id'], $location['city']));
 
-    $city_id = $stmt->fetch()['id'];
+    $city_id = $stmt->fetch();
 
     if($city_id == false){
-        $stmt = $db->prepare('INSERT INTO City (region, name) VALUES (?, ?)');
-        $stmt->execute(array($location['region'], $location['city']));
-        storeAddress($location, $db->lastInsertId());
-        return $db->lastInsertId();
+        return createCity($location, $location['region']);
     }
-    storeAddress($location, $city_id);
-    return $db->lastInsertId();
+    return storeAddress($location, $city_id['id']);
 }
 
 function createCity($location, $id){
     $db = Database::instance()->db();
     $stmt = $db->prepare('INSERT INTO City (region, name) VALUES (?, ?)');
     $stmt->execute(array($id, $location['city']));
-    storeAddress($location, $db->lastInsertId());
+    return storeAddress($location, $db->lastInsertId());
 }
 
 function storeAddress($location, $id){
@@ -41,7 +36,13 @@ function storeAddress($location, $id){
     $stmt = $db->prepare('SELECT * FROM PlaceLocation WHERE city = ? AND address = ? AND latitude = ? AND longitude = ?');
     $stmt->execute(array($id, $location['address'], $location['coords']['lat'], $location['coords']['lng']));
 
-    $stmt = $db->prepare('INSERT INTO PlaceLocation (city, address, latitude, longitude) 
-        VALUES (?, ?, ?, ?)');
-    $stmt->execute(array($id, $location['address'], $location['coords']['lat'], $location['coords']['lng']));
+    $location_id = $stmt->fetch();
+    if($location_id == false){
+        $stmt = $db->prepare('INSERT INTO PlaceLocation (city, address, latitude, longitude) 
+            VALUES (?, ?, ?, ?)');
+        $stmt->execute(array($id, $location['address'], $location['coords']['lat'], $location['coords']['lng']));
+        return $db->lastInsertId();
+    }
+
+    return $location_id['id'];
 }

@@ -1,5 +1,7 @@
 <?php
     function storeUserPhoto(){
+        print_r($_POST);
+        print_r($_FILES);
         $original = imagecreatefromjpeg($_FILES['photo']['tmp_name']);
 
         $width = imagesx($original);
@@ -18,8 +20,8 @@
 
 
     function storePlacesPhotos($house_id){
-        foreach($_FILES['new_photos'] as $photo){
-            $original = imagecreatefromjpeg($photo['tmp_name']);
+        foreach($_FILES['new_photos']['tmp_name'] as $photo){
+            $original = imagecreatefromjpeg($photo);
     
             $width = imagesx($original);
             $height = imagesy($original);
@@ -36,7 +38,8 @@
     }
 
     function deletePlacePhotos($house_id, $photos){
-        foreach($photos as $photo){
+        $removing_photos = json_decode($photos, true);
+        foreach($removing_photos as $photo){
             unlink("../assets/place_photos/eir_$photo.jpg");
             deletePhoto($house_id, $photo);
         }
