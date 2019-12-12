@@ -87,7 +87,7 @@ async function drawCalendar(date) {
   const next = calendar.querySelector('.fa-chevron-right');
   const previousCalendar = houseInformation.querySelector('.calendar');
   previousCalendar && houseInformation.removeChild(previousCalendar);
-  houseInformation.insertBefore(calendar, reviews);
+  houseInformation.insertBefore(calendar, document.querySelector('#google-maps'));
   previous.addEventListener('click', () => drawCalendar(new Date(date.getFullYear(), date.getMonth() - 1), true));
   next.addEventListener('click', () => drawCalendar(new Date(date.getFullYear(), date.getMonth() + 1), true));
 }

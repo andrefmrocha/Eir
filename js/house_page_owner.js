@@ -93,19 +93,12 @@ async function buildEditableView(house, maps) {
   const houseDescription = document.querySelector('#house-description');
   const locationWrapper = document.querySelector('#house-description h3');
   const houseTitle = document.querySelector('#house-description h1');
-  const houseLocation = document.querySelector('#house-description h3 span');
 
   const inputTitle = document.createElement('input');
   inputTitle.value = houseTitle.innerText;
 
-  const inputCountry = document.createElement('input');
-  inputCountry.value = house.country;
-  const inputLocation = document.createElement('input');
-  inputLocation.value = houseLocation.innerText;
-
   houseDescription.replaceChild(inputTitle, houseTitle);
-  locationWrapper.replaceChild(inputLocation, houseLocation);
-  locationWrapper.appendChild(inputCountry);
+  houseDescription.removeChild(locationWrapper);
 
   const currentTags = document.querySelector('#house-information > aside > div');
   const infoWrapper = document.querySelectorAll('#house-information > aside > div > span');
@@ -231,7 +224,6 @@ async function buildEditableView(house, maps) {
       }
     });
 
-
     formData.removing_photos = removingPhotos;
     formData.new_tags = selectedTags;
     formData.removing_tags = removingTags;
@@ -239,19 +231,19 @@ async function buildEditableView(house, maps) {
     getHouseLocation(formData.coords, async coords => {
       formData.coords = coords;
       const body = new FormData();
-      Object.keys(formData).forEach(key => typeof formData[key] === 'object' ?
-        body.append(key, JSON.stringify(formData[key])) :
-        body.append(key, formData[key]));
+      Object.keys(formData).forEach(key =>
+        typeof formData[key] === 'object'
+          ? body.append(key, JSON.stringify(formData[key]))
+          : body.append(key, formData[key])
+      );
       selectedPhotos.forEach(photo => body.append('new_photos[]', photo));
-      const response = await fetch(
-        `${env.host}api/house_update.php`,{
-          method: 'POST',
-          body
-        });
-
-      console.log(response);
-
-
+      const response = await fetch(`${env.host}api/house_update.php`, {
+        method: 'POST',
+        body
+      });
+      if (response.status == 200) {
+        location.reload();
+      }
     });
   });
 }
