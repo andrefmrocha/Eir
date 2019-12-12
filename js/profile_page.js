@@ -2,7 +2,9 @@ import env from './env.js';
 import { request } from './network.js';
 import { getPersonPhoto } from './image.js';
 import { removeError, showError, validateEmail } from './form_validation.js';
-import { TOURIST, OWNER } from './common.js';
+import carousel from './carousel.js';
+import { generateHouseUrl } from './houses.js';
+import { TOURIST } from './common.js';
 import { getOwnProperties, tintProfileLeaves } from './profile_page_owner.js';
 import getRentalHistory from './profile_page_tourist.js';
 
@@ -105,6 +107,7 @@ async function getProfile() {
 }
 
 const pageView = localStorage.getItem('page-view');
+
 getProfile();
 if (pageView == TOURIST) {
   getRentalHistory();

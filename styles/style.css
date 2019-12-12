@@ -9,20 +9,33 @@
   --calendar-border: #707070;
 }
 
+body {
+  font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+  font: normal 15px 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+::placeholder {
+  color: lightgrey;
+  opacity: 50%;
+}
+
 nav {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
   padding: 1em 0;
-  border-bottom: 0.8em solid var(--primary-color);
+  width: 100%;
+  border-bottom: 0.5em solid var(--primary-color);
 }
 
 nav img {
   width: 5em;
   height: 5em;
+  padding-left: 1.5em;
 }
 
 nav ul {
+  padding-right: 1.5em;
   display: flex;
   justify-content: space-between;
 }
@@ -31,10 +44,10 @@ nav li:first-child {
   color: var(--gold-color);
 }
 
-nav li:last-child.last {
-  padding: 0.5em;
+nav li:last-child {
+  padding: 0.8em 0.4em 0.8em 0.4em;
   border-radius: 0.3em;
-  border: 2px solid var(--accent-color);
+  border: 1.5px solid var(--accent-color);
 }
 
 nav li:last-child img{
@@ -54,6 +67,7 @@ nav li {
   display: inline-block;
   padding: 0 1em;
   font-size: 0.9em;
+  font-weight: bold;
   margin: auto;
   color: var(--accent-color);
   text-transform: uppercase;
@@ -63,7 +77,7 @@ footer {
   display: flex;
   justify-content: space-between;
   background-color: var(--primary-color);
-  padding: 1.3em 1vw;
+  padding: 1vw 3vw 0.5vw 3vw;
   flex-wrap: wrap;
 }
 
@@ -75,6 +89,7 @@ footer li {
   display: block;
   color: white;
   margin: 0.4em 0.5em;
+  padding-top: 0.5vw;
   font-size: 0.8em;
 }
 
@@ -87,7 +102,7 @@ footer li:first-child {
 #email {
   background-color: var(--primary-color);
   color: white;
-  border: 2px solid;
+  border: 1.5px solid;
   padding: 0.5em;
   border-radius: 0.3em;
 }
@@ -98,12 +113,13 @@ footer li:first-child {
   padding: 0.5em 2em;
   border-radius: 0.4em;
   margin: 1em;
+  font-weight: bold;
 }
 
-#signup-img,
+
 #mainpage-img {
-  width: 98.9%;
-  height: 100%;
+  width: 98.95%;
+  height: 40em;
   position: absolute;
 }
 
@@ -111,65 +127,85 @@ footer li:first-child {
   position: relative;
   display: inline-block;
   padding: 1.5em;
+  border-radius: 0.5em;
   background-color: var(--background-color);
-  margin: 0 0 0 8em;
-  width: 17em;
+  margin: 0 8em 0 8em;
+  width: 30em;
 }
 
 span.card{
   top: 7em;
 }
 
-.card > div {
+.card > p {
+  text-align: center;
   font-size: 1.1em;
   font-weight: bold;
   margin: auto;
+  letter-spacing: 0.4px;
 }
 
-.card > div > h6 {
+.card > p > strong {
   display: inline-block;
-  font-size: 1em;
+  font-size: 1.0em;
   margin: auto;
   color: var(--primary-color);
 }
 
-#form-section {
-  min-height: 100vh;
+.card > p > strong:last-child {
+  margin-right: 0;
 }
 
-
-.user-form .card div {
-  display: flex;
+#mainpage-section {
+  min-height: 40em;
 }
 
 .card div {
-  flex-basis: 100%;
+  display: flex;
   margin: 0.5em auto;
+  padding: 0.1vh 0.3em;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .card label {
   font-size: 0.8em;
   color: var(--primary-color);
-  flex-basis: 90%;
+  font-weight: bold;
+  padding-bottom: 0.1em;
+  width: 100%;
+  box-sizing: border-box;
 }
-.card label > input, 
-.card label > textarea {
-  display: block;
-  border: 0.5px solid var(--primary-color);
+
+.card #dates label{
+  flex-basis: 0;
+}
+
+.card label > input {
+  border: 1.5px solid var(--primary-color);
+  border-radius: 0.3em;
+  flex-grow: 0;
+  width: 100%;
   padding: 0.5em;
   margin-bottom: 0.5em;
   margin-top: 0.3em;
-  width: 100%;
-}
-.card label > span {
-  flex-basis: 5%;
+  box-sizing: border-box;
 }
 
 .card #submit {
+  cursor: pointer;
+  display: block;
   background-color: var(--primary-color);
+  color: white;
+  font-weight: bold;
+  border-radius: 0.3em;
   border: 0;
-  padding: 0.8em 2em;
+  width: 100%;
   font-size: 0.8em;
+  padding: 1em 3em;
+  margin-right: auto;
+  margin-top: 1vh;
+  flex-grow: 1;
 }
 
 #dates label{
@@ -192,18 +228,19 @@ p.form-error{
 
 div#dates {
   display: flex;
-  flex-wrap: wrap;
+  justify-content: space-between;
 }
+
 div#dates label > input {
-  display: block;
-  width: 80%;
+  width: auto;
+  position: static;
+  width: 16em;
 }
 
 #filters {
   background-color: var(--primary-variant);
   color: var(--background-color);
   font-size: 0.7em;
-  margin-bottom: 4em;
   padding: 1em;
 }
 
@@ -224,7 +261,8 @@ div#dates label > input {
 }
 
 #filters li {
-  display: block;
+  display: flex;
+  align-items: center;
 }
 
 #filters li input {
@@ -233,6 +271,8 @@ div#dates label > input {
   -o-appearance: none;
   appearance: none;
   border: 1px solid var(--background-color);
+  height: 0.5em;
+  width: 0.5em;
   padding: 0.3em;
   border-radius: 20%;
   transition-duration: 0.3s;
@@ -245,46 +285,59 @@ div#dates label > input {
 
 #filters li label {
   display: inline-block;
+  font-weight: lighter;
   height: 100%;
+  margin: 0.5vh 0.4vw;
+  margin-top: 0.9vh;
+  letter-spacing: 0.05em;
+
+}
+
+#filters li:first-child {
+  margin-bottom: 1vh;
 }
 
 .button {
   background: var(--accent-color);
   color: white;
-  padding: 0.5em;
+  padding: 0.8em 0.5em;
   width: 10em;
   text-align: center;
+  font-weight: bold;
   margin: 0.5em auto;
-  border-radius: 5%;
-  color: white;
+  border-radius: 0.3em;
+  letter-spacing: 0.1em;
+  cursor: pointer;
 }
 
 
 #houses article{
   display: flex;
-  margin: auto;
+  margin: 2em auto;
   flex-wrap: wrap;
-  max-width: 45em;
+  max-width: 55em;
   justify-content: center;
-  padding-bottom: 1em;
+  padding: 6vh 0em;
 }
 
 #houses article img {
-  width: 20em;
+  width: 25em;
   height: 15em;
-  border-radius: 3%;
+  border-radius: 0.4em;
 }
 
 #houses article div div {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  max-width: 20em;
+  max-width: 25em;
 }
 
 #houses article header {
   font-size: 1.5em;
+  font-weight: bold;
   color: var(--accent-color);
+  margin-bottom: 2vh;
 }
 
 #houses article header:hover {
@@ -298,17 +351,16 @@ div#dates label > input {
 
 #houses article > div{
   padding: 0.5em;
-  margin-left: 1em;
-  max-width: 20em;
-}
+  margin-left: 1.5em;
+  max-width: 30em;
+  margin-left: 1.5em;
 
-#houses article > div > div{
-  margin-left: 0.4em;
 }
-
 
 .fas{
+  text-align: center;
   font-size: 1.5em;
+  width: 3vw;
   color: var(--accent-color);
 }
 
@@ -321,10 +373,12 @@ i.fa-star{
   display: inline-block;
   padding: 0.7em 0;
   color: var(--primary-color);
+  font-weight: lighter;
+  letter-spacing: 0.05em;
 }
 
 #houses article div div span span {
-  margin: 0 0.5em;
+  margin: 0em 0.6em;
 }
 
 #houses article div div span:nth-child(even){
@@ -564,8 +618,82 @@ i.fa-star{
   font-weight: normal;
 }
 
+/* Profile Page  */
+
+.card.profile {
+  position: relative;
+  display: inline-block;
+  padding: 1.5em;
+  border-radius: 0.5em;
+  background-color: var(--background-color);
+  margin: 0 8em 0 8em;
+  width: 30em;
+}
+
+.card.profile div {
+  display: flex;
+  margin: 0.1em auto;
+  padding: 0.4em 0.3em 0em 0.3em;
+  width: 100%;
+}
+
+.card.profile label {
+  font-size: 0.8em;
+  color: var(--primary-color);
+  font-weight: bold;
+  padding-bottom: 0.1em;
+  flex-basis: 100%;
+}
+
+.card.profile div.image-upload {
+  display: inline;
+  text-align: center;
+}
+
+#profile-img {
+  width: 98.95%;
+  height: 60em;
+  position: absolute;
+}
+
+.card.profile div.two-inputs div {
+  margin: 0;
+  padding: 0;
+  position: static;
+}
+
+
+.card.profile div.two-inputs div:last-child{
+  margin-left: 1em;
+}
+
+.card.profile div.two-inputs div label input#country{
+  padding: 0.65em 0.5em;
+}
+
+.card.profile textarea#description{
+  width: 100%;
+  border: 1.5px solid var(--primary-color);
+}
+
+.card.profile textarea#description:focus{
+  outline: none !important;
+  width: 100%;
+  border: 2px solid var(--primary-color);
+}
+
+input:focus {
+  outline: none !important
+}
+
+.card.profile div label div{
+  padding-left: 0em;
+}
+
+
 .user-form{
   display: flex;
+  flex-wrap: wrap;
 }
 
 .user-form{
@@ -582,8 +710,9 @@ i.fa-star{
   color: white;
   padding: 1em 4em;
   border-radius: 0.5em;
-  margin: auto;
+  margin: 1em auto 0.5em auto;
   display: block;
+  width: 100%;
 }
 
 .user-form form{
@@ -609,7 +738,6 @@ i.fa-star{
 .two-inputs{
   display: flex;
   justify-content: space-between;
-  flex-wrap: wrap;
 }
 
 .two-inputs > div {
@@ -617,37 +745,46 @@ i.fa-star{
 }
 
 .two-inputs label > input{
-  width: 95%;
+  width: 100%;
 }
 
-
-.card section{
+.card > section{
   margin: auto;
   display: flex;
   justify-content: center;
   align-items: baseline;
 }
-.card section > img:first-child,
-.card section > img:last-child{
-  width: 30%;
+
+.card section{
+  display: inline-block;
+  align-content: space-between;
+  margin: 0.5em auto;
+  margin-bottom: 1.5em;
+}
+
+.card section div img{
+  width: 11vw;
+  border-radius: 50%;
+  cursor: pointer;
+  vertical-align: bottom;
+}
+
+.card section > img:first-child, .card section > img:last-child{
+  width: 13vw;
+  vertical-align: bottom;
 }
 
 .card.profile{
-  width: 60vw;
-  padding: 3em;
+  width: 45vw;
+  padding: 7vh 5vw;
+  margin: auto;
 }
 
 .card section > img:first-child{
   transform: scaleX(-1) ;
 }
 
-.card section div img{
-  width: 30%;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-.card .image-upload label{
+.card.image-upload label{
   flex-basis: 80%;
   margin: auto;
 }
@@ -660,20 +797,12 @@ i.fa-star{
   flex-basis: 35%;
 } 
 
-.card section > div > label > img {
-  width: 100%;
-}
-
-.card section > div {
-  margin: 0;
-}
-
 .image-upload>input {
   display: none;
 }
 
 #form-section.profile{
-  min-height: 130vh;
+  min-height: 60em;
 }
 
 #form-section.profile #signup-img{
@@ -682,6 +811,10 @@ i.fa-star{
 
 #profile-carrousel{
   padding: 1em 10vw;
+}
+
+#rentals-history {
+  padding: 1em 5vw;
   height: max-content;
 }
 
@@ -689,13 +822,13 @@ i.fa-star{
   font-size: 1.7em;
   color: var(--primary-color);
   padding-bottom: 1em;
+  padding-left: 5vw;
 }
 
 #profile-carrousel > div > p {
   display: flex;
   flex-wrap: nowrap;
   justify-content: space-between;
-  flex-basis: 90%;
 }
 
 #profile-carrousel > div{
@@ -703,7 +836,6 @@ i.fa-star{
   flex-wrap:  nowrap;
   align-items: center;
   justify-content: space-around;
-  max-width: 60em;
   margin: auto;
 }
 
@@ -719,7 +851,7 @@ i.fa-star{
 
 #profile-carrousel > div span img {
   width: 100%;
-  height: 35vh;
+  height: 25vw;
   border-radius: 0.5em;
 }
 

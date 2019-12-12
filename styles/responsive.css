@@ -71,6 +71,117 @@
   }
 }
 
+
+@media screen and (max-width: 810px){
+    #mainpage-img , #profile-img{
+        position: relative;
+        width: 100%;
+        height: auto;
+    }
+
+    .card {
+        display: block;
+        position: static;
+        width: 29em;
+        margin: 2em auto;
+        padding: 0em;
+    }
+
+    .card.profile {
+        width: auto;
+    }
+
+    .card label {
+        font-size: 0.8em;
+    }
+      
+    .card label > input {
+        display: flex;
+        flex-grow: 1;
+        padding: 0.5em;
+        margin-bottom: 0.5em;
+        margin-top: 0.3em;
+    }
+
+    .card #submit {
+        text-align: center;
+        flex-grow: 0;
+        padding: auto;
+    }
+
+    div#dates label > input{
+        display: flex;
+        width: 15em;
+    }
+
+    #photos-carousel,
+    #photos-carousel > div{
+        width: 65vw;
+    }
+
+    #photos-carousel img.active{
+        height: 100%;
+    }
+
+    .card.profile .two-inputs div {
+        flex-basis: 100%;
+    }
+}
+
+@media screen and (max-width: 900px){
+
+    nav ul li{
+        display: block;
+        width: 10em;
+        margin: auto auto;
+    }
+
+    nav div{
+        display: block;
+        font-size: 1.5em;
+        color: var(--accent-color);
+        margin: auto 1.5em auto auto;
+        border: 2px solid var(--accent-color);
+        padding: 0.2em 0.5em;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    
+    nav ul{
+        display: none;
+    }
+
+    nav ul.visible{
+        display: flex;
+        flex-basis: auto;
+        justify-content: space-between;
+        padding-left: 0;
+        margin: 1.5em auto 0.5em auto;
+        max-width: 90%;
+    }
+
+    nav li:last-child {
+        padding: 0.8em 0em;
+        text-align: center;
+    }
+
+
+    #reviews > span{
+        justify-content: space-evenly;
+    }
+
+    #reserve{
+        margin: auto;
+        grid-column: 1/5;
+        margin: 0;
+        margin-bottom: 2em;
+    }
+
+    #reserve.card{
+        width: 80%;
+    }
+}
+
 @media screen and (max-width: 750px) {
   #houses article div {
     padding: 0;
@@ -91,6 +202,52 @@
   #description {
     max-width: 40%;
   }
+}
+
+@media screen and (max-width: 700px){
+    #rentals-history > div > p {
+        justify-content: center;
+    }
+    #rentals-history > div > p > span:nth-child(1){
+        flex-basis: 80%;
+    }
+
+
+    #rentals-history > div > p > span:nth-child(2){
+        display: none;
+    }
+}
+
+
+@media screen and (max-width: 750px){
+    #houses article div{
+        padding: 0;
+        margin: auto;
+        box-sizing: border-box;
+
+    }
+
+    #houses article img{
+        margin: auto;
+        max-width: 25em;
+        width: 100%;
+    }
+
+    #houses article header {
+        margin-top: 1em;
+        text-align: center;
+    }
+
+    .fas{
+        text-align: center;
+        margin: auto 0;
+    }
+
+    #houses article div div span {
+        display: flex;
+        justify-content: space-evenly;
+        min-width: 3em;
+    }
 }
 
 @media screen and (max-width: 750px) {

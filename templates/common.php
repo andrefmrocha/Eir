@@ -36,6 +36,7 @@ function drawHeader($scripts, $styles)
         <link rel="apple-touch-icon" sizes="76x76" href="../assets/favicon/favicon-76.png">
         <link rel="apple-touch-icon" sizes="152x152" href="../assets/favicon/favicon-152.png">
         <link rel="apple-touch-icon" sizes="180x180" href="../assets/favicon/favicon-180.png">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
         <meta name="msapplication-TileColor" content="#FFFFFF">
         <meta name="msapplication-TileImage" content="../assets/favicon/favicon-144.png">
         <meta name="msapplication-config" content="../assets/favicon/browserconfig.xml">
