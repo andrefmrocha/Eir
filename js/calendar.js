@@ -24,7 +24,8 @@ const months = [
 const weekDays = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
 
 function generateYearandMonthString(date) {
-  return `${date.getFullYear()}-${date.getMonth() + 1}`;
+  const month = date.getMonth() + 1;
+  return `${date.getFullYear()}-${month < 10 ? '0' + month : month}`;
 }
 
 function generateDateString(date, text) {
@@ -122,8 +123,32 @@ function calendarClicks(article, date) {
             if (day.className != 'unavailable') day.removeAttribute('class');
           });
           day.setAttribute('class', 'selected');
+          for (let i = index + 1; i >= 0; i--) {
+            console.log(cells[i]);
+            if (cells[i].className == 'unavailable' || cells[i].innerText == '') break;
+            cells[i].addEventListener('mouseover', () => {
+              fillSelected(i, index, cells);
+            });
+
+            cells[i].addEventListener('click', () => {
+              const newTable = table.cloneNode(true);
+              article.replaceChild(newTable, table);
+              calendarClicks(article, date);
+              checkout.value = generateDateString(date, day.innerText);
+              checkin.value = generateDateString(date, cells[i].innerText);
+              selecting = false;
+            });
+          }
+
+          cells[index].addEventListener('click', () => {
+            const newTable = table.cloneNode(true);
+            article.replaceChild(newTable, table);
+            calendarClicks(article, date);
+            selecting = false;
+          });
+
           for (let i = index + 1; i < cells.length; i++) {
-            if (cells[i].className == 'unavailable') break;
+            if (cells[i].className == 'unavailable' || cells[i].innerText == '') break;
 
             cells[i].addEventListener('mouseover', () => {
               fillSelected(index, i, cells);

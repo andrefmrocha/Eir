@@ -10,23 +10,19 @@ if (!viewMode || (viewMode != TOURIST && viewMode != OWNER)) {
 }
 
 export function getOwnerView() {
-  pageView.addEventListener('click', () => {
-    localStorage.setItem('page-view', OWNER);
-    location.reload();
-  });
+  localStorage.setItem('page-view', OWNER);
+  location.reload();
 }
 
 export function getTourist() {
-  pageView.addEventListener('click', () => {
-    localStorage.setItem('page-view', TOURIST);
-    location.reload();
-  });
+  localStorage.setItem('page-view', TOURIST);
+  location.reload();
 }
 
 if (viewMode == TOURIST) {
   pageView.innerText = OWNER;
-  getOwnerView();
+  pageView.addEventListener('click', getOwnerView);
 } else {
   pageView.innerText = TOURIST;
-  getTourist();
+  pageView.addEventListener('click', getTourist);
 }

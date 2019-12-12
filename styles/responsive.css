@@ -93,7 +93,7 @@
   }
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 750px) {
   #house-information > aside {
     flex-basis: 100%;
     border-left: 0px;

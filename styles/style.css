@@ -182,11 +182,11 @@ span.card{
   color: var(--alert-color);
 }
 
-form p.form-error{
+p.form-error{
   flex-basis: 100%;
 }
 
-form .form-error.active{
+.form-error.active{
   display: block;
 }
 
@@ -285,6 +285,10 @@ div#dates label > input {
 #houses article header {
   font-size: 1.5em;
   color: var(--accent-color);
+}
+
+#houses article header:hover {
+ text-decoration: underline; 
 }
 
 #houses article header::before,
@@ -505,7 +509,6 @@ i.fa-star{
 
 
 #photos-carousel img.active{
-  flex-basis: 100%;
   order: 1;
   border: 0.5px solid black;
   height: 30vw;

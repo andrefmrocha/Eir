@@ -5,7 +5,9 @@ import { getPlacePhoto } from './image.js';
 import { getTourist } from './common.js';
 import { buildCalendar } from './calendar.js';
 import { buildTag, createTrashIcon } from './tags.js';
-import { showError, removeError } from './form_validation.js';
+import { showError } from './form_validation.js';
+import { getHouseLocation } from './maps.js';
+
 import carousel from './carousel.js';
 
 const photos = document.querySelector('#carousel');
@@ -19,7 +21,7 @@ function tagOption(tag, select) {
   select.appendChild(option);
 }
 
-async function buildEditableView(house) {
+async function buildEditableView(house, maps) {
   const removingTags = [];
   const selectedTags = [];
   const selectedPhotos = [];
@@ -77,9 +79,9 @@ async function buildEditableView(house) {
         photos.insertBefore(wrapper, addNewPhoto);
         const trash = createTrashIcon();
         img.appendChild(trash);
-        selectedPhotos.push(e.target.result);
+        selectedPhotos.push(input.files[0]);
         trash.addEventListener('click', () => {
-          selectedPhotos.splice(selectedPhotos.indexOf(e.target.result, 1));
+          selectedPhotos.splice(selectedPhotos.indexOf(input.files[0], 1));
           photos.removeChild(wrapper);
         });
       };
@@ -91,19 +93,12 @@ async function buildEditableView(house) {
   const houseDescription = document.querySelector('#house-description');
   const locationWrapper = document.querySelector('#house-description h3');
   const houseTitle = document.querySelector('#house-description h1');
-  const houseLocation = document.querySelector('#house-description h3 span');
 
   const inputTitle = document.createElement('input');
   inputTitle.value = houseTitle.innerText;
 
-  const inputCountry = document.createElement('input');
-  inputCountry.value = house.country;
-  const inputLocation = document.createElement('input');
-  inputLocation.value = houseLocation.innerText;
-
   houseDescription.replaceChild(inputTitle, houseTitle);
-  locationWrapper.replaceChild(inputLocation, houseLocation);
-  locationWrapper.appendChild(inputCountry);
+  houseDescription.removeChild(locationWrapper);
 
   const currentTags = document.querySelector('#house-information > aside > div');
   const infoWrapper = document.querySelectorAll('#house-information > aside > div > span');
@@ -171,7 +166,7 @@ async function buildEditableView(house) {
     trash.addEventListener('click', () => {
       currentTags.removeChild(tag);
       tagOption(tag.innerText, select);
-      removingTags.push(selectedTags);
+      removingTags.push(tag.innerText);
     });
   });
   tagsWrapper.appendChild(addNewTag);
@@ -190,17 +185,33 @@ async function buildEditableView(house) {
   errorLabel.setAttribute('id', errorId);
   errorLabel.classList.add('form-error');
   houseInformation.insertBefore(errorLabel, document.querySelector('#reviews'));
+  let marker;
+
+  maps.maps.addListener('click', e => {
+    const newMarker = new google.maps.Marker({
+      position: e.latLng,
+      map: maps.maps
+    });
+    if (maps.marker) {
+      maps.marker.setMap(null);
+      maps.marker = undefined;
+    } else {
+      marker.setMap(null);
+    }
+
+    marker = newMarker;
+    newMarker.setMap(maps.maps);
+  });
 
   submitButton.addEventListener('click', () => {
     // title, country, location, type, numBeds, tags, description, photos, price
     const formData = {
       title: inputTitle.value,
-      country: inputCountry.value,
-      location: inputLocation.value,
       type: types.value,
       max_guest_number: numBeds.value,
       description: descriptionTextField.value,
-      price: price.value
+      price: price.value,
+      coords: marker || maps.marker
     };
 
     let error = false;
@@ -213,18 +224,33 @@ async function buildEditableView(house) {
       }
     });
 
-    formData.new_photos = selectedPhotos;
     formData.removing_photos = removingPhotos;
     formData.new_tags = selectedTags;
     formData.removing_tags = removingTags;
-
-    console.log(formData);
+    formData.house_id = urlParams.get('id');
+    getHouseLocation(formData.coords, async coords => {
+      formData.coords = coords;
+      const body = new FormData();
+      Object.keys(formData).forEach(key =>
+        typeof formData[key] === 'object'
+          ? body.append(key, JSON.stringify(formData[key]))
+          : body.append(key, formData[key])
+      );
+      selectedPhotos.forEach(photo => body.append('new_photos[]', photo));
+      const response = await fetch(`${env.host}api/house_update.php`, {
+        method: 'POST',
+        body
+      });
+      if (response.status == 200) {
+        location.reload();
+      }
+    });
   });
 }
 
 async function buildDashboard(house) {
   houseInformation.removeChild(document.querySelector('#reserve'));
-  buildMainHouseInfo(house);
+  const { maps } = buildMainHouseInfo(house);
   while (photos.firstElementChild) {
     photos.removeChild(photos.firstElementChild);
   }
@@ -284,7 +310,7 @@ async function buildDashboard(house) {
   editButton.setAttribute('id', 'edit-button');
   editButton.innerText = 'Edit';
   houseInformation.insertBefore(editButton, document.querySelector('#reviews'));
-  editButton.addEventListener('click', () => buildEditableView(house));
+  editButton.addEventListener('click', () => buildEditableView(house, maps));
 
   carousel.buildCarousel(calendarDiv);
 }
