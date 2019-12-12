@@ -19,12 +19,13 @@ function storeLocation($location){
     $city_id = $stmt->fetch();
 
     if($city_id == false){
-        return createCity($location, $location['region']);
+        return createCity($location, $region_id['id']);
     }
     return storeAddress($location, $city_id['id']);
 }
 
 function createCity($location, $id){
+    echo $id;
     $db = Database::instance()->db();
     $stmt = $db->prepare('INSERT INTO City (region, name) VALUES (?, ?)');
     $stmt->execute(array($id, $location['city']));

@@ -5,7 +5,7 @@ import { getPlacePhoto } from './image.js';
 import { getTourist } from './common.js';
 import { buildCalendar } from './calendar.js';
 import { buildTag, createTrashIcon } from './tags.js';
-import { showError } from './form_validation.js';
+import { showError, removeError } from './form_validation.js';
 import { getHouseLocation } from './maps.js';
 
 import carousel from './carousel.js';
@@ -14,7 +14,7 @@ const photos = document.querySelector('#carousel');
 const urlParams = new URL(window.location).searchParams;
 const houseInformation = document.querySelector('#house-information');
 
-function tagOption(tag, select) {
+export function tagOption(tag, select) {
   const option = document.createElement('option');
   option.setAttribute('id', tag.split(' ').join('-'));
   option.innerText = tag;
@@ -205,6 +205,7 @@ async function buildEditableView(house, maps) {
 
   submitButton.addEventListener('click', () => {
     // title, country, location, type, numBeds, tags, description, photos, price
+    removeError(errorId);
     const formData = {
       title: inputTitle.value,
       type: types.value,
@@ -323,6 +324,8 @@ export default async function buildOwnerView() {
       id: urlParams.get('id')
     }
   });
+
+  console.log(house);
 
   if (house.status == 403 || house.status == 401) {
     getTourist();

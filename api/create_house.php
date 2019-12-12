@@ -5,10 +5,9 @@ include_once('../db/location.php');
 include_once('../db/images/images.php');
 include_once('session.php');
 
-
 $required_values = [
-    'coords', 'description', 'max_guest_number', 'new_tags', 'house_id',
-    'price', 'removing_photos', 'removing_tags', 'title', 'type'
+    'coords', 'description', 'max_guest_number', 'new_tags',
+    'price', 'title', 'type'
 ];
 
 $location_values = [
@@ -41,32 +40,16 @@ foreach ($location_values as $value) {
     }
 }
 
-$id = $_POST['house_id'];
-$house = getHousebyIds($id, $_SESSION['user']);
-if($house == false){
-    http_response_code(403);
-    echo 'You are not the owner of this house';
-    die();
-}
-
-
 $type = getPlaceType($_POST['type']);
 $location = storeLocation($coords);
-updateHouse($_POST, $type, $location);
+$id = createHouse($_POST, $type, $location);
 
 $new_tags = json_decode($_POST['new_tags'], true);
-$removed_tags = json_decode($_POST['removing_tags'], true);
-foreach($new_tags as $tag) {
+foreach ($new_tags as $tag) {
     addNewTag($id, $tag);
 }
+storePlacesPhotos($id);
 
-foreach($removed_tags as $tag) {
-    removeTag($id, $tag);
-}
-
-storePlacesPhotos($_POST['house_id']);
-
-deletePlacePhotos($_POST['house_id'],$_POST['removing_photos']);
-
-
-
+echo json_encode(array(
+    'id' => $id
+));

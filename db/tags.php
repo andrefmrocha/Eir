@@ -31,7 +31,6 @@
         $stmt = $db->prepare('INSERT INTO PlaceTag (
             place, tag)
             VALUES (?, ?)');
-        print_r($id);
         return $stmt->execute(array($house_id, $id));
     }
 

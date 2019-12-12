@@ -2,6 +2,7 @@ import carousel from './carousel.js';
 import { getPlacePhoto } from './image.js';
 import { request } from './network.js';
 import env from './env.js';
+import { generateHouseUrl } from './houses.js';
 
 export function tintProfileLeaves() {
   const leaves = document.querySelectorAll('.profile-leaf');
@@ -28,12 +29,12 @@ export async function getOwnProperties() {
     left.addEventListener('click', () => carousel.previous(housesNode));
     right.addEventListener('click', () => carousel.next(housesNode));
     carousel.buildCarousel(housesNode);
-    carousel.photos = houses.map(buildHouse);
+    carousel.photos = houses.map(buildProperty);
   } else if (houses.length == 1) {
     left.remove();
     right.remove();
     carousel.buildCarousel(housesNode);
-    carousel.photos = houses.map(buildHouse);
+    carousel.photos = houses.map(buildProperty);
   } else {
     left.remove();
     right.remove();
@@ -42,11 +43,17 @@ export async function getOwnProperties() {
 }
 
 function buildProperty(property) {
+  const imgReference = document.createElement('a');
+  imgReference.href = generateHouseUrl(property.id);
   const image = document.createElement('img');
+  imgReference.appendChild(image);
   image.src = getPlacePhoto(property.photo);
   const wrapper = document.createElement('span');
-  wrapper.appendChild(image);
+  wrapper.appendChild(imgReference);
   const title = document.createElement('p');
+  const titleWrapper = document.createElement('a');
+  titleWrapper.href = generateHouseUrl(property.id);
+  titleWrapper.appendChild(title);
   title.innerText = property.title;
   const stays = document.createElement('p');
   if (property.upcomingStays == 1) {
@@ -54,13 +61,14 @@ function buildProperty(property) {
   } else {
     stays.innerText = `${property.upcomingStays} upcoming stays`;
   }
-  wrapper.appendChild(title);
+  wrapper.appendChild(titleWrapper);
   wrapper.appendChild(stays);
   return wrapper;
 }
 
 function addAddPropertyButton() {
-  const addPropertyButton = document.createElement('div');
+  const addPropertyButton = document.createElement('a');
+  addPropertyButton.href = `${env.host}pages/create_house.php`;
   addPropertyButton.innerText = 'Add Property';
   addPropertyButton.setAttribute('class', 'button');
   const carrouselNode = document.querySelector('#profile-carrousel');

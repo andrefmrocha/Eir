@@ -566,6 +566,7 @@ i.fa-star{
   order: 1;
   border: 0.5px solid black;
   height: 30vw;
+  width: 100%;
 }
 
 #carousel {
@@ -876,4 +877,5 @@ input:focus {
 
 #profile-carrousel .button {
   background-color: var(--gold-color);
+  display: block;
 }

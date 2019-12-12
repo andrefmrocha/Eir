@@ -4,19 +4,24 @@ function getHousesByLocation($location)
 {
     $db = Database::instance()->db();
     $stmt = $db->prepare('
-        SELECT title, price_per_day, max_guest_number, Place.id, PlaceType.name
+        SELECT DISTINCT title, price_per_day, max_guest_number, Place.id, PlaceType.name
         FROM Place NATURAL JOIN City, Region, Rental, PlaceType
-        WHERE City.name = ? AND Region.country = ? AND Region.id = City.region
-        AND Rental.place = City.id AND ((checkin > ? AND checkout > ?) OR (checkin < ? AND checkout < ?)
-        AND Place.type = PlaceType.id);
+        WHERE City.name = :city AND Region.country = :country AND Region.id = City.region
+        AND Rental.place = City.id AND ((checkin > :checkin AND checkout > :checkin) 
+        OR (checkin < :checkout AND checkout < :checkout))
+        AND Place.type = PlaceType.id
+        UNION
+        SELECT DISTINCT title, price_per_day, max_guest_number, Place.id, PlaceType.name
+        FROM Place NATURAL JOIN City, Region, Rental, PlaceType
+        WHERE City.name = :city AND Region.country = :country AND Region.id = City.region
+        AND NOT EXISTS (SELECT * from Rental as NRental where NRental.place = Place.id)
+        AND Place.type = PlaceType.id
         ');
     $stmt->execute(array(
-        $location['city'],
-        $location['country'],
-        $location['checkin'],
-        $location['checkin'],
-        $location['checkout'],
-        $location['checkout']
+        ':city' => $location['city'],
+        ':country' => $location['country'],
+        ':checkin' => $location['checkin'],
+        ':checkout' => $location['checkout'],
     ));
     return $stmt->fetchAll();
 }
@@ -60,7 +65,12 @@ function getHouseRating(&$house)
                     WHERE Place.id = Rating.place AND Place.id = ?;
                 ');
     $stmt->execute(array($house['id']));
-    $ratings = array_map('getRating', $stmt->fetchAll());
+    $ratings = $stmt->fetchAll();
+    if($ratings == false){
+        return 'N/A';
+    }
+    
+    $ratings = array_map('getRating', $ratings);
     $num_ratings = count($ratings);
     return $num_ratings > 0 ? array_sum($ratings) / count($ratings) : 'N/A';
 }
@@ -76,9 +86,10 @@ function getHousebyId($id)
 {
     $db = Database::instance()->db();
     $stmt = $db->prepare('
-            SELECT *
-            FROM Place NATURAL JOIN City, Region, PlaceLocation
-            WHERE Place.id = ? AND City.region = Region.id AND Place.type AND PlaceLocation.id = Place.place_location
+            SELECT DISTINCT *
+            FROM Place, City, Region, PlaceLocation
+            WHERE Place.id = ? AND City.region = Region.id AND Place.type AND PlaceLocation.id = Place.place_location AND
+            PlaceLocation.city = City.id
         ');
     $stmt->execute(array($id));
     $house = $stmt->fetch();
@@ -178,11 +189,9 @@ function createHouse($house, $type, $location){
     $db = Database::instance()->db();
     $stmt = $db->prepare('INSERT INTO Place
     (title, type, price_per_day, max_guest_number, description, place_owner, place_location)
+    VALUES (:title, :type, :price, :max_guest_number, :description, :place_owner, :place_location);');
 
-    SET (:title, :type, :price, :max_guest_number, :description, :place_owner, :place_location) 
-    WHERE id = :id');
-
-    return $stmt->execute([
+    $stmt->execute([
         ':title' => $house['title'],
         ':type' => $type,
         ':price' => $house['price'],
@@ -191,6 +200,8 @@ function createHouse($house, $type, $location){
         ':place_owner' => $_SESSION['user'],
         ':place_location' => $location
     ]);
+
+    return $db->lastInsertId();
 }
 
 function storeNewPhoto($house_id, $photo){
