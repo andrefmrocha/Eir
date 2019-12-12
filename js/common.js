@@ -21,7 +21,7 @@ export function getTourist() {
 
 if (viewMode == TOURIST) {
   pageView.innerText = OWNER;
-  pageView.addEventListener('click',getOwnerView);
+  pageView.addEventListener('click', getOwnerView);
 } else {
   pageView.innerText = TOURIST;
   pageView.addEventListener('click', getTourist);

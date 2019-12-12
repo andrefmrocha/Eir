@@ -5,7 +5,7 @@ import env from './env.js';
 import { createHouseTags } from './tags.js';
 import { getPlacePhoto } from './image.js';
 
-export function generateHouseUrl(id){
+export function generateHouseUrl(id) {
   return `${env.host}pages/house_page.php?id=${id}`;
 }
 
