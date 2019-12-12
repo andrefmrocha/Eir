@@ -286,6 +286,10 @@ div#dates label > input {
   color: var(--accent-color);
 }
 
+#houses article header:hover {
+ text-decoration: underline; 
+}
+
 #houses article header::before,
 #houses article header::after{
   content: '"';
@@ -504,7 +508,6 @@ i.fa-star{
 
 
 #photos-carousel img.active{
-  flex-basis: 100%;
   order: 1;
   border: 0.5px solid black;
   height: 30vw;
