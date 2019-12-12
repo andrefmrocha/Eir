@@ -4,11 +4,11 @@ function drawMainPage()
 
     ?>
     <section id="mainpage-section">
-        <img id="mainpage-img" src="../assets/house.jpg" alt="Beautiful House">
+        <img id="mainpage-img" src="../assets/house.jpg" alt="Beautiful House"> 
         <span class="card">
-            <div>
-                Find <h6> the place </h6> to stay that best suits your <h6> personality </h6>
-            </div>
+            <p>
+                Find <strong> the place </strong> to stay that best suits your <strong> personality </strong>.
+            </p>
             <form action="list_houses.php" method="get">
                 <div>
                     <label for="country">
