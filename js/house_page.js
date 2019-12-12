@@ -71,10 +71,17 @@ async function getHouseInfo() {
 }
 
 function buildCarousel(house) {
-  housesCarousel.houses = house.photos.map(photo => {
+  housesCarousel.houses = house.photos.map((photo, index) => {
+    const container = document.createElement('div');
     const imageSel = document.createElement('img');
     imageSel.src = getPlacePhoto(photo);
-    return imageSel;
+    container.appendChild(imageSel);
+    container.addEventListener('click', () => {
+      housesCarousel.houses[housesCarousel.selected].removeAttribute('class');
+      housesCarousel.selected = index;
+      displayNewCarousel();
+    });
+    return container;
   });
 
   displayNewCarousel();
@@ -84,7 +91,7 @@ function displayNewCarousel() {
   removeCarouselData();
   const image = document.createElement('img');
   image.setAttribute('class', 'active');
-  image.src = housesCarousel.houses[housesCarousel.selected].src;
+  image.src = housesCarousel.houses[housesCarousel.selected].firstElementChild.src;
   carousel.appendChild(image);
   const row = document.createElement('div');
   housesCarousel.houses.forEach((house, index) => {
