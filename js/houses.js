@@ -5,6 +5,10 @@ import env from './env.js';
 import { createHouseTags } from './tags.js';
 import { getPlacePhoto } from './image.js';
 
+export function generateHouseUrl(id) {
+  return `${env.host}pages/house_page.php?id=${id}`;
+}
+
 const urlParams = new URL(window.location).searchParams;
 
 getAllHouses();
@@ -41,17 +45,24 @@ async function getAllHouses() {
 const housesSection = document.querySelector('#houses');
 
 function addNewHouses(houses) {
+  console.log(houses);
   houses.forEach(house => {
     const article = document.createElement('article');
+    const reference = document.createElement('a');
+    reference.href = generateHouseUrl(house.id);
     const img = document.createElement('img');
+    reference.appendChild(img);
     img.src = getPlacePhoto(house.photo);
     const houseDescription = document.createElement('div');
+    const headerReference = document.createElement('a');
+    headerReference.href = generateHouseUrl(house.id);
     const header = document.createElement('header');
+    headerReference.appendChild(header);
     header.innerText = house.title;
-    houseDescription.appendChild(header);
+    houseDescription.appendChild(headerReference);
     const houseCharateristics = document.createElement('div');
     createHouseTags(houseCharateristics, house);
-    article.appendChild(img);
+    article.appendChild(reference);
     houseDescription.appendChild(houseCharateristics);
     article.appendChild(houseDescription);
     housesSection.appendChild(article);
