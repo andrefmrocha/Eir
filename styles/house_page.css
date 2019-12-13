@@ -199,6 +199,7 @@
   border: 0.5px solid black;
   height: 30vw;
   width: 100%;
+  box-sizing: border-box;
 }
 
 #carousel {
