@@ -36,7 +36,7 @@ export async function getOwnProperties() {
     right.addEventListener('click', () => carousel.next(housesNode));
     carousel.buildCarousel(housesNode);
     carousel.photos = houses.map(buildProperty);
-  } else if (houses.length == 1) {
+  } else if (houses.length > 1) {
     left.remove();
     right.remove();
     carousel.buildCarousel(housesNode);

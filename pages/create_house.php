@@ -53,6 +53,7 @@ function getTouristHousePage()
             <div id="submit" class="button">Submit</div>
             <p id="house-error" class="form-error">Please leave no field empty</p>
             <p id="house-numbers-error" class="form-error">Price and Number of Guests must be a number greater than 0</p>
+            <p id="unknown-error" class="form-error">Unknown Error!</p>
             <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_H2rJ_UoIMyraXQLybpu1GPwhXd5lKMw" defer></script>
         </section>
     </div>

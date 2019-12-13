@@ -232,7 +232,6 @@ async function buildEditableView(house, maps) {
       }
     });
 
-
     [formData.max_guest_number, formData.price].forEach(numParam => {
       if (isNaN(numParam) && numParam > 0) {
         showError('house-numbers-error');
@@ -243,23 +242,24 @@ async function buildEditableView(house, maps) {
     formData.new_tags = selectedTags;
     formData.removing_tags = removingTags;
     formData.house_id = urlParams.get('id');
-    !error && getHouseLocation(formData.coords, async coords => {
-      formData.coords = coords;
-      const body = new FormData();
-      Object.keys(formData).forEach(key =>
-        typeof formData[key] === 'object'
-          ? body.append(key, JSON.stringify(formData[key]))
-          : body.append(key, formData[key])
-      );
-      selectedPhotos.forEach(photo => body.append('new_photos[]', photo));
-      const response = await fetch(`${env.host}api/house_update.php`, {
-        method: 'POST',
-        body
+    !error &&
+      getHouseLocation(formData.coords, async coords => {
+        formData.coords = coords;
+        const body = new FormData();
+        Object.keys(formData).forEach(key =>
+          typeof formData[key] === 'object'
+            ? body.append(key, JSON.stringify(formData[key]))
+            : body.append(key, formData[key])
+        );
+        selectedPhotos.forEach(photo => body.append('new_photos[]', photo));
+        const response = await fetch(`${env.host}api/house_update.php`, {
+          method: 'POST',
+          body
+        });
+        if (response.status == 200) {
+          location.reload();
+        }
       });
-      if (response.status == 200) {
-        location.reload();
-      }
-    });
   });
 }
 
