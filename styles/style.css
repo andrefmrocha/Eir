@@ -771,7 +771,6 @@ input:focus {
 #rentals-history > h3 {
   font-size: 1.7em;
   color: var(--primary-color);
-  padding-bottom: 1em;
   padding-left: 5vw;
 }
 
@@ -818,8 +817,13 @@ input:focus {
 #rentals-history > div p > strong{
   color: var(--primary-color);
 }
-#rentals-history > div p:last-child{
+
+#rentals-history > div p{
   font-weight: lighter;
   color: var(--accent-color);
   text-align: right;
+}   
+
+#rentals-history > div > p > span > a > p{
+  text-align: left;
 }
