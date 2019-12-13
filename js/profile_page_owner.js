@@ -10,20 +10,26 @@ export function tintProfileLeaves() {
 }
 
 export async function getOwnProperties() {
+  addAddPropertyButton();
   const houses = await request({
     url: `${env.host}api/get_properties.php`,
     method: 'GET',
     content: {}
   });
 
-  document.querySelector('#profile-carrousel > h3').innerText = 'Properties';
-  const housesNode = document.querySelector('#profile-carrousel > div > p');
-
-  carousel.photos = houses.map(buildProperty);
-  carousel.buildCarousel(housesNode);
-
   const left = document.querySelector('.fa-chevron-left');
   const right = document.querySelector('.fa-chevron-right');
+  document.querySelector('#profile-carrousel > h3').innerText = 'Properties';
+
+  if (!houses.length || houses.length < 1) {
+    left.remove();
+    right.remove();
+    return;
+  }
+
+  const housesNode = document.querySelector('#profile-carrousel > div > p');
+  carousel.photos = houses.map(buildProperty);
+  carousel.buildCarousel(housesNode);
 
   if (houses.length > 2) {
     left.addEventListener('click', () => carousel.previous(housesNode));
@@ -35,11 +41,7 @@ export async function getOwnProperties() {
     right.remove();
     carousel.buildCarousel(housesNode);
     carousel.photos = houses.map(buildProperty);
-  } else {
-    left.remove();
-    right.remove();
   }
-  addAddPropertyButton();
 }
 
 function buildProperty(property) {
