@@ -203,7 +203,14 @@ async function buildEditableView(house, maps) {
     newMarker.setMap(maps.maps);
   });
 
+  let clicked = false;
+
   submitButton.addEventListener('click', () => {
+    if (clicked) {
+      return;
+    }
+
+    clicked = true;
     // title, country, location, type, numBeds, tags, description, photos, price
     removeError(errorId);
     const formData = {
@@ -225,11 +232,18 @@ async function buildEditableView(house, maps) {
       }
     });
 
+
+    [formData.max_guest_number, formData.price].forEach(numParam => {
+      if (isNaN(numParam) && numParam > 0) {
+        showError('house-numbers-error');
+      }
+    });
+
     formData.removing_photos = removingPhotos;
     formData.new_tags = selectedTags;
     formData.removing_tags = removingTags;
     formData.house_id = urlParams.get('id');
-    getHouseLocation(formData.coords, async coords => {
+    !error && getHouseLocation(formData.coords, async coords => {
       formData.coords = coords;
       const body = new FormData();
       Object.keys(formData).forEach(key =>

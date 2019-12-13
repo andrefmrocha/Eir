@@ -4,6 +4,11 @@
   height: 20vh;
 }
 
+.editable ::placeholder{
+  color: gray;
+  opacity: 50%;
+}
+
 #carousel .add-new-photo input {
   display: none;
 }

@@ -118,7 +118,14 @@ async function getDetails() {
     }
   });
 
+  let clicked = false;
+
   document.querySelector('#submit').addEventListener('click', () => {
+    if(clicked){
+      return;
+    }
+
+    clicked = true;
     const houseError = 'house-error';
 
     removeError(houseError);
@@ -146,6 +153,12 @@ async function getDetails() {
       if (!formData[key]) {
         error = true;
         showError(houseError);
+      }
+    });
+
+    [formData.max_guest_number, formData.price].forEach(numParam => {
+      if (isNaN(numParam) && numParam > 0) {
+        showError('house-numbers-error');
       }
     });
 

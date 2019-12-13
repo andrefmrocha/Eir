@@ -5,14 +5,9 @@ function getTouristHousePage()
     <div id="house-page" class="editable">
         <section id="house-title">
             <div id="house-description">
-                <input id="title">
+                <input id="title" placeholder="Please insert a title">
                 </input>
             </div>
-            <aside>
-                <img src="" alt="House owner" class="photo-avatar" />
-                <span>
-                </span>
-            </aside>
         </section>
         <section id="carousel" class="owner-view">
             <div class="add-new-photo">
@@ -25,8 +20,11 @@ function getTouristHousePage()
                 <h2 class="title">
                     Description
                 </h2>
-                <textarea></textarea>
-                <div>Price:<input id="price"><i class="fas fa-money-bill-wave" aria-hidden="true"></i></div>
+                <textarea placeholder="Add your house description here"></textarea>
+                <div>Price:
+                    <input id="price" placeholder="House Price">
+                    <i class="fas fa-money-bill-wave" aria-hidden="true"></i>
+                </div>
             </article>
             <aside>
                 <h2 class="title">
@@ -40,7 +38,7 @@ function getTouristHousePage()
                     </span>
                     <span>
                         <i class="fas fa-lg fa-bed" aria-hidden="true"></i>
-                        <input type="number" id="max-guest-number">
+                        <input type="number" id="max-guest-number" placeholder="Number of guests">
                     </span>
                     <div class="select">
                         <i class="fas fa-plus" aria-hidden="true"></i>
@@ -54,6 +52,7 @@ function getTouristHousePage()
             </article>
             <div id="submit" class="button">Submit</div>
             <p id="house-error" class="form-error">Please leave no field empty</p>
+            <p id="house-numbers-error" class="form-error">Price and Number of Guests must be a number greater than 0</p>
             <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_H2rJ_UoIMyraXQLybpu1GPwhXd5lKMw" defer></script>
         </section>
     </div>
