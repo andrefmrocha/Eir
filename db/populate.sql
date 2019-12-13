@@ -26,8 +26,8 @@ VALUES
   (
     1,
     'joaonmatos@gmail.com',
-    '$2y$10$UxNzXmQyBMHndxhAQ7aBb.l4YkL.k / dfiIvOlYWLVkVWgbifb7bcC',
-    strftime('%s', '1999-11-15'),
+    '$2y$10$gZ6IGGnoKeaATn1QIVfuW.esKjKWzlxTj/nxyWDFdXk6jBFNhRlOy',
+    '1999-11-15',
     'PT',
     'João Matos',
     NULL,
@@ -36,8 +36,8 @@ VALUES
   (
     2,
     'brendinhacorreia@gmx.br',
-    '$2y$10$QA8fSnV6vHzD14LW65KISuXt3oDiilExT1w / 5gRdLUn9kBhPeQPn2',
-    strftime('%s', '1986-03-27'),
+    '$2y$10$gZ6IGGnoKeaATn1QIVfuW.esKjKWzlxTj/nxyWDFdXk6jBFNhRlOy',
+    '1986-03-27',
     'BR',
     'Brenda Correia',
     'Traveller, lifestyle influencer, proud mom to two babies. I am a super quiet guest and can negotiate reviews for a discount.',
@@ -46,8 +46,8 @@ VALUES
   (
     3,
     'acelinedegrasse@rhyta.com',
-    '$2y$10$0pbyO5DVZFLHh898P3Os5OA5mWkDqNb01v8fpMC2KijanWH3CiG3K',
-    strftime('%s', '1994-01-02'),
+    '$2y$10$gZ6IGGnoKeaATn1QIVfuW.esKjKWzlxTj/nxyWDFdXk6jBFNhRlOy',
+    '1994-01-02',
     NULL,
     'Aceline DeGrasse',
     'Cat lover, loves culture. J''aime la France.',
@@ -56,8 +56,8 @@ VALUES
   (
     4,
     'acastellanosr@dayrep.com',
-    '$2y$10$M1thHXdgVJZf.3HBllYsneW.j4StLC0wPfKHFYcEKoBN9DeNFcmTO',
-    strftime('%s', '1962-08-13'),
+    '$2y$10$gZ6IGGnoKeaATn1QIVfuW.esKjKWzlxTj/nxyWDFdXk6jBFNhRlOy',
+    '1962-08-13',
     'ES',
     'A. Castellanos Roque',
     NULL,
@@ -66,8 +66,8 @@ VALUES
   (
     5,
     'CharlesAKessler@armyspy.com',
-    '$2y$10$9gNV9rrAdi0DnlV8wMNPQ.pWV8qO7vYfG5Xrq71YPUR67BQ.IDDwy',
-    strftime('%s', '1974-04-25'),
+    '$2y$10$gZ6IGGnoKeaATn1QIVfuW.esKjKWzlxTj/nxyWDFdXk6jBFNhRlOy',
+    '1974-04-25',
     'US',
     'Charles Kessler',
     'Loan officer from Michigan. Love nature.',
@@ -76,8 +76,8 @@ VALUES
   (
     6,
     'gustavoap@live.com.pt',
-    '$2y$10$BszOsIuPg9NkP71Ea5vZc.jVhOO221vC8qZ9AArJAo9CHGyHOo8da',
-    strftime('%s', '1988-06-23'),
+    '$2y$10$gZ6IGGnoKeaATn1QIVfuW.esKjKWzlxTj/nxyWDFdXk6jBFNhRlOy',
+    '1988-06-23',
     NULL,
     'Gustavo Almeida',
     NULL,
@@ -86,8 +86,8 @@ VALUES
   (
     7,
     'fakeemail@illegibledomain.net',
-    '$2y$10$l7R4lhaBAxp9wM0JHOA4x. / dzvFbdttnP.xtrFu4mrZ.KiW / 0Y.9G',
-    strftime('%s', '2000-01-01'),
+    '$2y$10$gZ6IGGnoKeaATn1QIVfuW.esKjKWzlxTj/nxyWDFdXk6jBFNhRlOy',
+    '2000-01-01',
     'UK',
     'A Catfish/Scammer',
     'Hey Cutie <3, following this there is usually a description of sexual acts the ''person'' implies they want to perform with the possible scam victim, or a link to a fake dating website',
@@ -96,8 +96,8 @@ VALUES
   (
     8,
     'GuilhermeGomesPereira@dayrep.com',
-    '$2y$10$V99fD / OM8Mmi86uLrFFpSuiemDDPVYeLoLGLs0uXiHgOFU / i6ml42',
-    strftime('%s', '1969-02-10'),
+    '$2y$10$gZ6IGGnoKeaATn1QIVfuW.esKjKWzlxTj/nxyWDFdXk6jBFNhRlOy',
+    '1969-02-10',
     'BR',
     'Guilherme G. Pereira',
     'Serial entrepreneur. Originally from Campinas, SP, but now living in Lisbon. Carpe Diem.',
@@ -106,8 +106,8 @@ VALUES
   (
     9,
     'alysatepas@jourrapide.com',
-    '$2y$10$ / d5wqZ / 2M / ltWvH6O0Rtwu / T7bijoCC3nFUoPsgiCnj4G84RzpL9W',
-    strftime('%s', '1982-07-12'),
+    '$2y$10$gZ6IGGnoKeaATn1QIVfuW.esKjKWzlxTj/nxyWDFdXk6jBFNhRlOy',
+    '1982-07-12',
     'BE',
     'Alysa te Pas',
     NULL,
@@ -294,38 +294,50 @@ VALUES
   (
     2,
     1,
-    strftime('%s', '2019-12-13'),
-    strftime('%s', '2019-12-16')
+    '2019-12-13',
+    '2019-12-16'
+  ),
+  (
+    1,
+    4,
+    '2019-12-13',
+    '2019-12-16'
+  ),
+  (
+    1,
+    3,
+    '2019-12-13',
+    '2019-12-16'
   ),
   (
     1,
     6,
-    strftime('%s', '2019-11-14'),
-    strftime('%s', '2019-11-16')
+    '2019-11-14',
+    '2019-11-16'
   ),
   (
     9,
     3,
-    strftime('%s', '2020-02-01'),
-    strftime('%s', '2020-02-09')
+    '2020-02-01',
+    '2020-02-09'
   ),
   (
     5,
     4,
-    strftime('%s', '2019-12-21'),
-    strftime('%s', '2019-12-27')
+    '2019-12-21',
+    '2019-12-27'
   ),
   (
     6,
     6,
-    strftime('%s', '2019-11-16'),
-    strftime('%s', '2019-11-19')
+    '2019-11-16',
+    '2019-11-19'
   ),
   (
     3,
     5,
-    strftime('%s', '2020-01-04'),
-    strftime('%s', '2020-01-07')
+    '2020-01-04',
+    '2020-01-07'
   );
 INSERT INTO Rating (place, user, rating, comment)
 VALUES

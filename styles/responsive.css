@@ -1,6 +1,6 @@
 @media screen and (max-width: 810px){
-    #mainpage-img {
-        position: static;
+    #mainpage-img , #profile-img{
+        position: relative;
         width: 100%;
         height: auto;
     }
@@ -13,6 +13,10 @@
         padding: 0em;
     }
 
+    .card.profile {
+        width: auto;
+    }
+
     .card label {
         font-size: 0.8em;
     }
@@ -20,7 +24,6 @@
     .card label > input {
         display: flex;
         flex-grow: 1;
-        width: 33em;
         padding: 0.5em;
         margin-bottom: 0.5em;
         margin-top: 0.3em;
@@ -28,7 +31,6 @@
 
     .card #submit {
         text-align: center;
-        width: 36em;
         flex-grow: 0;
         padding: auto;
     }
@@ -45,6 +47,10 @@
 
     #photos-carousel img.active{
         height: 100%;
+    }
+
+    .card.profile .two-inputs div {
+        flex-basis: 100%;
     }
 }
 
@@ -107,27 +113,49 @@
 
 }
 
+@media screen and (max-width: 700px){
+    #rentals-history > div > p {
+        justify-content: center;
+    }
+    #rentals-history > div > p > span:nth-child(1){
+        flex-basis: 80%;
+    }
+
+
+    #rentals-history > div > p > span:nth-child(2){
+        display: none;
+    }
+}
+
+
 @media screen and (max-width: 750px){
     #houses article div{
         padding: 0;
         margin: auto;
+        box-sizing: border-box;
+
     }
 
     #houses article img{
         margin: auto;
-        width: 30em;
+        max-width: 25em;
+        width: 100%;
     }
 
     #houses article header {
         margin-top: 1em;
+        text-align: center;
     }
 
     .fas{
         text-align: center;
+        margin: auto 0;
     }
 
-    #houses article div div span span{
-        margin: 0em 1.5em;
+    #houses article div div span {
+        display: flex;
+        justify-content: space-evenly;
+        min-width: 3em;
     }
 }
 

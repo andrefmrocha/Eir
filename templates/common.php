@@ -51,12 +51,31 @@ function drawHeader($scripts)
                 <li>
                     <a href="#">Eur €</a>
                 </li>
-                <li>
-                    <a href="#">Log In</a>
-                </li>
-                <li>
-                    <a href="#">Sign Up</a>
-                </li>
+                <?php
+                    if (isset($_SESSION['user'])) {
+                        include_once('../db/user.php');
+                        $user = getUserById($_SESSION['user']);
+                        $photoSrc = "../assets/user_photos/eir_${user['photo']}.jpg"
+                        ?>
+                    <li>
+                        <a href="logout_page.php">Log out</a>
+                    </li>
+                    <li>
+                        <a href="profile_page.php">
+                            <img alt="User profile picture" src=<?= $photoSrc ?> />
+                        </a>
+                    </li>
+                <?php    } else { ?>
+                    <li>
+                        <a href="login_page.php">Log In</a>
+                    </li>
+                    <li class="last">
+                        <a href="sign_up_page.php">Sign Up</a>
+                    </li>
+                <?php
+                    }
+                    ?>
+
             </ul>
         </nav>
     <?php }
