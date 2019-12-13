@@ -20,7 +20,6 @@ const housesCarousel = {
   houses: []
 };
 
-let max_guest = 0;
 const reservation = document.querySelector('#reserve');
 const checkin = reservation.querySelector('#check-in');
 const checkout = reservation.querySelector('#check-out');
@@ -112,6 +111,18 @@ export default async function getHouseInfo() {
   checkin.addEventListener('change', dateListener);
   checkout.addEventListener('change', dateListener);
 
+  const id = urlParams.get('id');
+  const house = await request({
+    url: `${env.host}/api/fetch_house.php`,
+    method: 'GET',
+    content: {
+      id
+    }
+  });
+
+  buildMainHouseInfo(house);
+  buildCarousel(house);
+
   reservation.addEventListener('submit', async ev => {
     ev.preventDefault();
     const number = reservation.querySelector('#people');
@@ -134,7 +145,7 @@ export default async function getHouseInfo() {
       }
     });
 
-    if (number.value > max_guest) {
+    if (number.value > house.max_guest_number) {
       showError('num-people');
     }
 
@@ -160,16 +171,4 @@ export default async function getHouseInfo() {
       }
     }
   });
-
-  const id = urlParams.get('id');
-  const house = await request({
-    url: `${env.host}/api/fetch_house.php`,
-    method: 'GET',
-    content: {
-      id
-    }
-  });
-
-  buildMainHouseInfo(house);
-  buildCarousel(house);
 }

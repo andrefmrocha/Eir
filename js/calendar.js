@@ -111,6 +111,12 @@ function fillSelected(start, end, table) {
   }
 }
 
+function removeSelected(cells) {
+  cells.forEach(day => {
+    if (day.className != 'unavailable') day.removeAttribute('class');
+  });
+}
+
 function calendarClicks(article, date) {
   const table = article.querySelector('table');
   const cells = table.querySelectorAll('td');
@@ -119,12 +125,9 @@ function calendarClicks(article, date) {
       day.addEventListener('click', () => {
         if (!selecting) {
           selecting = true;
-          cells.forEach(day => {
-            if (day.className != 'unavailable') day.removeAttribute('class');
-          });
+          removeSelected(cells);
           day.setAttribute('class', 'selected');
-          for (let i = index + 1; i >= 0; i--) {
-            console.log(cells[i]);
+          for (let i = index - 1; i >= 0; i--) {
             if (cells[i].className == 'unavailable' || cells[i].innerText == '') break;
             cells[i].addEventListener('mouseover', () => {
               fillSelected(i, index, cells);
@@ -141,10 +144,15 @@ function calendarClicks(article, date) {
           }
 
           cells[index].addEventListener('click', () => {
+            removeSelected(cells);
             const newTable = table.cloneNode(true);
             article.replaceChild(newTable, table);
             calendarClicks(article, date);
             selecting = false;
+          });
+
+          cells[index].addEventListener('mouseover', () => {
+            fillSelected(index, index, cells);
           });
 
           for (let i = index + 1; i < cells.length; i++) {
