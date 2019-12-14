@@ -200,6 +200,10 @@
         justify-content: center;
     }
 
+    section#page404error-section, section#page401error-section, section#page403error-section {
+        min-height: 15em;
+      }
+
     #profile-carrousel > div > p > span:nth-child(1){
         flex-basis: 80%;
     }
@@ -208,3 +212,18 @@
         display: none;
     }
 }
+
+@media screen and (max-width: 500px){
+
+section#page404error-section p {
+    font-size: 3.2vw;
+    padding-left: 8vw;
+    padding-bottom: 5vh;
+  }
+
+section#page401error-section p, section#page403error-section p{
+      padding-top: 2vh
+  }
+
+}
+
