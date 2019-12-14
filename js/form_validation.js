@@ -1,6 +1,5 @@
 export function showError(id) {
   const errorInfo = document.querySelector(`#${id}`);
-
   errorInfo.setAttribute('class', 'form-error active');
 }
 

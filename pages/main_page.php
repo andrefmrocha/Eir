@@ -50,7 +50,7 @@ function drawMainPage()
 <?php }
 
 include_once('../templates/common.php');
-drawHeader(['../js/main_page.js']);
+drawHeader(['../js/main_page.js'], []);
 drawMainPage();
 drawFooter();
 ?>

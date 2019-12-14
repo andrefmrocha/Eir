@@ -5,6 +5,8 @@
   --accent-color: #39734e;
   --alert-color: #b00000;
   --primary-variant: #75b68d;
+  --reserved: #9D9D9D;
+  --calendar-border: #707070;
 }
 
 body {
@@ -210,7 +212,7 @@ span.card{
   flex-basis: 100%;
 }
 
-form .form-error{
+.form-error{
   font-size: 0.7em;
   display: none;
   color: var(--alert-color);
@@ -307,6 +309,7 @@ div#dates label:first-child {
   text-align: center;
   font-weight: bold;
   margin: 0.5em auto;
+  color: white;
   border-radius: 0.3em;
   letter-spacing: 0.1em;
   cursor: pointer;
@@ -342,6 +345,10 @@ div#dates label:first-child {
   margin-bottom: 2vh;
 }
 
+#houses article header:hover {
+ text-decoration: underline; 
+}
+
 #houses article header::before,
 #houses article header::after{
   content: '"';
@@ -366,118 +373,8 @@ i.fa-star{
   color: var(--gold-color);
 }
 
-#houses article div div span {
-  flex-basis: 50%;
-  display: inline-block;
-  padding: 0.7em 0;
-  color: var(--primary-color);
-  font-weight: lighter;
-  letter-spacing: 0.05em;
-}
-
-#houses article div div span span {
-  margin: 0em 0.6em;
-}
-
-#houses article div div span:nth-child(even){
-  text-align: end;
-}
-
-#house-page{
-  padding: 0 15em;
-}
-
-#house-information{
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-}
-
-#description{
-  grid-column: 1/4;
-  font-size: 1.1em;
-  padding-right: 1em;
-}
-#house-information aside{
-  grid-column: 4/5;
-  border-left: 1px solid var(--accent-color);
-  padding-left: 2em;
-}
-
-#house-information aside > div{
-  display: flex;
-  flex-direction: column;
-}
-
-#house-information aside > div > *{
-  flex-basis: 100%;
-  margin: 0.5em 0;
-  color: var(--primary-color);
-}
-
-#house-information aside > div > span > span {
-  display: inline-block;
-  padding: 0 0.5em;
-}
-
-#reviews{
-  grid-column: 1/3;
-}
-
-#reviews div{
-  font-size: 0.9em;
-}
-
-#reviews > span{
-  display: flex;
-  justify-content: space-between;
-  padding: 0.7em 0;
-}
-
-#reviews > span > span{
-  display: flex;
-  justify-content: space-between;
-  padding: 0.7em 0;
-  font-size: 0.9em;
-}
-
-
-#reviews > span > span > span{
-  margin: 0.5em;
-  padding-right: 1em;
-  color: var(--primary-color);
-}
-
-#reviews > span > span > span:first-child{
-  border-right: 1px solid var(--accent-color);
-}
-
-#reviews > div > article {
-  margin: 1em 0;
-}
-
-#reviews > div > article > div {
-  display: flex;
-  align-items: center;
-}
-
-#reviews > div h4{
-  font-size: 1.2em;
-  font-weight: normal;
-  display: inline-block;
-  margin: 0;
-  padding-left: 0.8em;
-  color: var(--primary-color);
-}
-
-#reviews > div p{
-  font-size: 0.9em;
-}
-
-#reserve{
-  grid-column: 3/5;
-  padding: 1.5em;
-  border: 1px solid var(--primary-color);
-  margin: 4em 1em;
+.calendar{
+  flex-grow: 1;
 }
 
 .title{
@@ -486,73 +383,6 @@ i.fa-star{
   padding: 0.7em 0;
   margin: 0;
   font-weight: normal;
-}
-
-#photos-carousel{
-  width: 45vw;
-  display: flex;
-  flex-wrap: wrap;
-  border: 0.5px solid black;
-  align-items: center;
-}
-
-#photos-carousel > div{
-  display: flex;
-  justify-content: center;
-  flex-wrap: nowrap;
-  width: 45vw;
-  order: 2;
-}
-
-
-#photos-carousel div div img{
-  width: 100%;
-  height: 100%;
-}
-
-#photos-carousel div div {
-  flex: 1 1 0px;
-  border: 0.5px solid black;
-}
-
-#photos-carousel div div.selected {
-  opacity: 60%;
-}
-
-
-#photos-carousel img.active{
-  flex-basis: 100%;
-  order: 1;
-  border: 0.5px solid black;
-  height: 30vw;
-}
-
-#carousel {
-  display: flex;
-  flex-wrap: nowrap;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 4em;
-}
-
-#carousel i {
-  margin: 0 1em;
-}
-
-#house-title{
-  display: flex;
-  justify-content: space-between;
-  margin: 1.5em 0;
-}
-
-#house-title aside  {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-#house-title aside span {
-  margin: auto;
 }
 
 .photo-avatar {
