@@ -357,7 +357,8 @@ div#dates label > input {
 
 }
 
-.fas{
+.fas,
+.far{
   text-align: center;
   font-size: 1.5em;
   width: 3vw;

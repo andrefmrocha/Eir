@@ -6,6 +6,7 @@ import { getPlacePhoto } from './image.js';
 import { showError, removeError } from './form_validation.js';
 import { buildCalendar, validateDate } from './calendar.js';
 import buildMainHouseInfo from './house_helper_functions.js';
+import { buildComment } from './house_helper_functions.js';
 
 const carousel = document.querySelector('#photos-carousel');
 const housePrice = document.querySelector('#reserve div:nth-child(3) p:last-child strong');
@@ -59,6 +60,119 @@ function buildCarousel(house) {
   });
 
   displayNewCarousel();
+}
+
+async function buildCommentsSection(id, house) {
+  const date = new Date();
+  const currentDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+  const response = await request({
+    url: `${env.host}api/rate_eligible.php`,
+    method: 'POST',
+    content: {
+      house_id: id,
+      date: currentDate
+    }
+  });
+
+  const reviewsSection = document.querySelector('#reviews');
+  const comments = document.querySelector('#reviews > div');
+  if (response.eligible) {
+    const textarea = document.createElement('textarea');
+    textarea.rows = 4;
+
+    const wrapper = document.createElement('form');
+    wrapper.id = 'add-review';
+    wrapper.appendChild(textarea);
+    const rating = document.createElement('span');
+    wrapper.appendChild(rating);
+    const stars = [];
+    let starRating;
+
+    for (let i = 0; i < 5; i++) {
+      const star = document.createElement('i');
+      star.setAttribute('class', 'far fa-star');
+      stars.push(star);
+      rating.appendChild(star);
+      const addStars = clicked => {
+        for (let j = 0; j <= i; j++) {
+          stars[j].classList.replace('far', 'fas');
+          clicked && stars[j].classList.add('clicked');
+        }
+
+        for (let j = i + 1; j < 5; j++) {
+          stars[j].classList.replace('fas', 'far');
+          clicked && stars[j].classList.remove('clicked');
+        }
+      };
+      star.addEventListener('mouseover', () => addStars(false));
+      star.addEventListener('click', () => {
+        addStars(true);
+        starRating = i;
+      });
+    }
+
+    const submit = document.createElement('input');
+    submit.type = 'submit';
+    submit.classList.add('button');
+    submit.value = 'POST';
+    wrapper.appendChild(submit);
+
+    reviewsSection.insertBefore(wrapper, comments);
+    const removeStars = () => {
+      stars.forEach(star => {
+        if (star.className.search('clicked') == -1) {
+          star.classList.add('far');
+          star.classList.remove('fas');
+        }
+      });
+    };
+
+    comments.addEventListener('mouseover', removeStars);
+    textarea.addEventListener('mouseover', removeStars);
+    submit.addEventListener('mouseover', removeStars);
+
+    const submitForm = async () => {
+      const formData = {
+        comment: textarea.value,
+        rating: starRating
+      };
+
+      let error = false;
+      Object.keys(formData).forEach(key => {
+        if (!formData[key] || formData[key] == '') error = true;
+      });
+
+      if (error) return;
+
+      const response = await request({
+        url: `${env.host}api/add_comment.php`,
+        method: 'POST',
+        content: {
+          house_id: id,
+          date: currentDate,
+          ...formData
+        }
+      });
+
+      document.querySelector('#reviews > span > span > span').innerText = response.rating;
+      document.querySelector('#reviews > span > span > span:nth-child(2)').innerText = `${house.reviews.length +
+        1} Reviews`;
+
+      comments.appendChild(buildComment(response));
+      wrapper.remove();
+    };
+
+    textarea.addEventListener('keydown', e => {
+      if (e.key == 'Enter' && !e.shiftKey) {
+        submitForm();
+      }
+    });
+
+    wrapper.addEventListener('submit', ev => {
+      ev.preventDefault();
+      submitForm();
+    });
+  }
 }
 
 function displayNewCarousel() {
@@ -172,4 +286,5 @@ export default async function getHouseInfo() {
 
   buildMainHouseInfo(house);
   buildCarousel(house);
+  buildCommentsSection(id, house);
 }

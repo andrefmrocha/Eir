@@ -18,13 +18,13 @@ export default async function getRentalHistory() {
   if (houses.length > 2) {
     left.addEventListener('click', () => carousel.previous(housesNode));
     right.addEventListener('click', () => carousel.next(housesNode));
-    carousel.buildCarousel(housesNode);
     carousel.photos = houses.map(buildHouse);
+    carousel.buildCarousel(housesNode);
   } else if (houses.length > 1) {
     left.remove();
     right.remove();
-    carousel.buildCarousel(housesNode);
     carousel.photos = houses.map(buildHouse);
+    carousel.buildCarousel(housesNode);
   } else {
     left.remove();
     right.remove();

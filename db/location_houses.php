@@ -126,6 +126,19 @@ function getHouseReviews($id)
     return $stmt->fetchAll();
 }
 
+function getHouseReviewByPerson($id, $person){
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('
+            SELECT Rating.rating, Rating.comment, Rating.user, User.full_name, User.photo
+            FROM
+                Place, Rating INNER JOIN User 
+                ON Rating.user = User.id
+            WHERE Place.id = ? AND Rating.place = Place.id = AND User.id = ?
+        ');
+    $stmt->execute(array($id, $person));
+    return $stmt->fetch();
+}
+
 function getHousePhotos(&$house)
 {
     $db = Database::instance()->db();
