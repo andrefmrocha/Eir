@@ -256,6 +256,7 @@ div#dates label > input {
   margin: 0.5em auto;
   border-radius: 5%;
   color: white;
+  cursor: pointer;
 }
 
 
