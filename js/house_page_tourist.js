@@ -87,6 +87,17 @@ async function buildCommentsSection(id, house) {
     wrapper.appendChild(rating);
     const stars = [];
     let starRating;
+    const removeStars = () => {
+      stars.forEach(star => {
+        if (star.className.search('clicked') == -1) {
+          star.classList.add('far');
+          star.classList.remove('fas');
+        } else if (star.className.search('fas') == -1) {
+          star.classList.add('fas');
+          star.classList.remove('far');
+        }
+      });
+    };
 
     for (let i = 0; i < 5; i++) {
       const star = document.createElement('i');
@@ -104,10 +115,12 @@ async function buildCommentsSection(id, house) {
           clicked && stars[j].classList.remove('clicked');
         }
       };
-      star.addEventListener('mouseover', () => addStars(false));
+      star.addEventListener('mouseenter', () => addStars(false));
+      star.addEventListener('mouseleave', removeStars);
+
       star.addEventListener('click', () => {
         addStars(true);
-        starRating = i;
+        starRating = i + 1;
       });
     }
 
@@ -118,21 +131,6 @@ async function buildCommentsSection(id, house) {
     wrapper.appendChild(submit);
 
     reviewsSection.insertBefore(wrapper, comments);
-    const removeStars = () => {
-      stars.forEach(star => {
-        if (star.className.search('clicked') == -1) {
-          star.classList.add('far');
-          star.classList.remove('fas');
-        } else if(star.className.search('fas') == -1){
-          star.classList.add('fas');
-          star.classList.remove('far');
-        }
-      });
-    };
-
-    comments.addEventListener('mouseover', removeStars);
-    textarea.addEventListener('mouseover', removeStars);
-    submit.addEventListener('mouseover', removeStars);
 
     const submitForm = async () => {
       const formData = {
@@ -157,7 +155,9 @@ async function buildCommentsSection(id, house) {
         }
       });
 
-      document.querySelector('#reviews > span > span > span').innerText = response.rating.toString().substr(0, 3);
+      document.querySelector('#reviews > span > span > span > span').innerText = response.rating
+        .toString()
+        .substr(0, 3);
       document.querySelector('#reviews > span > span > span:nth-child(2)').innerText = `${house.reviews.length +
         1} Reviews`;
 
