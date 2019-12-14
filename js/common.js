@@ -26,3 +26,5 @@ if (viewMode == TOURIST) {
   pageView.innerText = TOURIST;
   pageView.addEventListener('click', getTourist);
 }
+
+

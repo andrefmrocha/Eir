@@ -25,7 +25,6 @@ function storeLocation($location){
 }
 
 function createCity($location, $id){
-    echo $id;
     $db = Database::instance()->db();
     $stmt = $db->prepare('INSERT INTO City (region, name) VALUES (?, ?)');
     $stmt->execute(array($id, $location['city']));
