@@ -69,6 +69,10 @@ function updateMarker(e, maps, marker) {
   return newMarker;
 }
 
+function generateTagId(tag) {
+  return tag.split(' ').join('-');
+}
+
 async function getDetails() {
   const selectedTags = [];
   const selectedPhotos = [];
@@ -111,15 +115,12 @@ async function getDetails() {
       tagOption(tag.innerText, tags);
       selectedTags.splice(selectedTags.indexOf(tags.value), 1);
     });
+    document.querySelector(`#${generateTagId(tags.value)}`).remove();
     info.insertBefore(tag, select);
     tags.value = 'New Information';
   });
 
-  allTags.forEach(tag => {
-    const option = document.createElement('option');
-    option.innerText = tag;
-    tags.appendChild(option);
-  });
+  allTags.forEach(tag => tagOption(tag, tags));
 
   let marker;
 
@@ -162,7 +163,7 @@ async function getDetails() {
         selectedPhotos.push(photo.files[0]);
         trash.addEventListener('click', () => {
           selectedPhotos.splice(selectedPhotos.indexOf(photo.files[0], 1));
-          photos.removeChild(wrapper);
+          wrapper.remove();
         });
       };
 
@@ -173,14 +174,15 @@ async function getDetails() {
   let clicked = false;
 
   document.querySelector('#submit').addEventListener('click', () => {
-    if(clicked){
+    if (clicked) {
       return;
     }
 
     clicked = true;
     const houseError = 'house-error';
 
-    removeError(houseError);
+    [houseError, 'house-numbers-error', 'unknown-error'].forEach(removeError);
+
     const formData = {
       title: document.querySelector('#title').value,
       type: types.value,
@@ -190,11 +192,12 @@ async function getDetails() {
       new_tags: selectedTags
     };
 
+    let error = false;
+
     if (!marker) {
       showError(houseError);
-      return;
+      error = true;
     }
-    let error = false;
 
     if (selectedPhotos.length == 0) {
       error = true;
@@ -209,12 +212,13 @@ async function getDetails() {
     });
 
     [formData.max_guest_number, formData.price].forEach(numParam => {
-      if (isNaN(numParam) && numParam > 0) {
+      if (isNaN(numParam) || numParam < 0) {
+        error = true;
         showError('house-numbers-error');
       }
     });
 
-    !error &&
+    if (!error) {
       getHouseLocation(marker, async coords => {
         formData.coords = coords;
         const body = new FormData();
@@ -234,8 +238,14 @@ async function getDetails() {
         
         if (house.id) {
           draw_success(house.id);
+        } else {
+          clicked = false;
+          showError('unknown-error');
         }
       });
+    } else {
+      clicked = false;
+    }
   });
 }
 

@@ -47,3 +47,4 @@
             deletePhoto($house_id, $photo);
         }
     }
+    

@@ -20,45 +20,45 @@ function drawMainPage()
                 <div>
                     <label for="full-name">
                         Full Name
+                        <span id="fullname-input" class="form-error">**</span>
                         <input name="full-name" id="full-name" type="text">
                     </label>
-                    <span id="fullname-input" class="form-error">**</span>
                 </div>
                 <div>
                     <label for="form-email">
                         Email
+                        <span id="email-input" class="form-error">**</span>
                         <input name="form-email" id="form-email" type="text">
                     </label>
-                    <span id="email-input" class="form-error">**</span>
                 </div>
                 <div>
                     <label for="password">
                         New Password
+                        <span id="password-input" class="form-error">**</span>
                         <input name="password" id="password" type="password">
                     </label>
-                    <span id="password-input" class="form-error">**</span>
                 </div>
                 <div>
                     <label for="confirm-password">
                         Confirm New Password
+                        <span id="confirm-password-input" class="form-error">**</span>
                         <input name="confirm-password" id="confirm-password" type="password">
                     </label>
-                    <span id="confirm-password-input" class="form-error">**</span>
                 </div>
                 <div class="two-inputs">
                     <div>
                         <label for="birthday">
                             Birthday
+                            <span id="birthday-input" class="form-error">**</span>
                             <input name="birthday" id="birthday" type="date">
                         </label>
-                        <span id="birthday-input" class="form-error">**</span>
                     </div>
                     <div>
                         <label for="country">
                             Country
+                            <span id="country-input" class="form-error">**</span>
                             <input name="country" id="country" type="text">
                         </label>
-                        <span id="country-input" class="form-error">**</span>
                     </div>
                 </div>
                 <div>
