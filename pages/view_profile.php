@@ -22,7 +22,7 @@ function drawPageBody()
             </section>
         </span>
     </section>
-    <section id="rentals-history">
+    <section id="profile-carrousel">
         <h3>Reviews</h3>
         <div>
             <i class="fas fa-chevron-left"></i>

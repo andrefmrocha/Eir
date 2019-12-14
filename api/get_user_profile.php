@@ -1,5 +1,7 @@
 <?php
 include_once('../db/user.php');
+include_once('../db/reviews.php');
+include_once('../db/location_houses.php');
 
 if (!isset($_GET['id'])) {
     http_response_code(400);
@@ -15,13 +17,18 @@ if (!$user || empty($user)) {
     return;
 }
 
+$user['reviews'] = getUserReviews($_GET['id']);
+
+getHousesPhotos($user['reviews']);
+
+
 header('Content-Type: application/json');
 http_response_code(200);
 echo json_encode(
     array_filter(
         $user,
         function ($key) {
-            return in_array($key, ['photo', 'full_name', 'bio', 'country']);
+            return in_array($key, ['photo', 'full_name', 'bio', 'country', 'reviews']);
         },
         ARRAY_FILTER_USE_KEY
     )
