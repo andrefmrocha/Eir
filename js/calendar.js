@@ -32,6 +32,13 @@ function generateDateString(date, text) {
   return `${generateYearandMonthString(date)}-${text < 10 ? '0' + text : text}`;
 }
 
+export function updatePrice(checkin, checkout) {
+  const housePrice = document.querySelector('#reserve div:nth-child(3) p:last-child strong');
+  const totalPrice = document.querySelector('#reserve div:nth-child(3) p:first-child strong');
+  const numDays = (new Date(checkout.value) - new Date(checkin.value)) / (1000 * 60 * 60 * 24) + 1;
+  totalPrice.innerText = Number(housePrice.innerText) * numDays;
+}
+
 export async function buildCalendar(date, single) {
   const article = document.createElement('article');
   article.setAttribute('class', 'calendar');
@@ -139,6 +146,7 @@ function calendarClicks(article, date) {
               calendarClicks(article, date);
               checkout.value = generateDateString(date, day.innerText);
               checkin.value = generateDateString(date, cells[i].innerText);
+              updatePrice(checkin, checkout);
               selecting = false;
             });
           }
@@ -168,6 +176,7 @@ function calendarClicks(article, date) {
               calendarClicks(article, date);
               checkin.value = generateDateString(date, day.innerText);
               checkout.value = generateDateString(date, cells[i].innerText);
+              updatePrice(checkin, checkout);
               selecting = false;
             });
           }
