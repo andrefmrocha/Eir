@@ -10,7 +10,6 @@ import { getHouseLocation } from './maps.js';
 const body = document.querySelector('body');
 let active_modal = false;
 
-
 function draw_success(house_id) {
     if (active_modal)
         leave_modal();
