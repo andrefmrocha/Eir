@@ -64,7 +64,7 @@ document.querySelector('form').addEventListener('submit', async ev => {
     };
     if (password.value != '' && confirmPassword.value != '' && password.value != confirmPassword.value) {
       showError('password-match-input');
-    } else if (password.value != '' && confirmPassword != value) {
+    } else if (password.value != '' && confirmPassword.value != password.value) {
       body.password = password.value;
     }
 

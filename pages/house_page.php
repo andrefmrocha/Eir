@@ -62,7 +62,7 @@ function getTouristHousePage()
                         <p>
                             Total:
                             <strong>
-                                0€
+                                0
                             </strong>
                         </p>
                         <p>

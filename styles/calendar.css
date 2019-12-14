@@ -37,6 +37,11 @@
     text-align: center;
     color: var(--primary-color);
     font-size: 0.9em;
+    cursor: pointer;
+}
+
+.calendar .fa{
+    cursor: pointer;
 }
 
 .calendar table td.unavailable,
