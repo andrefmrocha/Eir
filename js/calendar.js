@@ -32,6 +32,13 @@ function generateDateString(date, text) {
   return `${generateYearandMonthString(date)}-${text < 10 ? '0' + text : text}`;
 }
 
+export function updatePrice(checkin, checkout) {
+  const housePrice = document.querySelector('#reserve div:nth-child(3) p:last-child strong');
+  const totalPrice = document.querySelector('#reserve div:nth-child(3) p:first-child strong');
+  const numDays = (new Date(checkout.value) - new Date(checkin.value)) / (1000 * 60 * 60 * 24) + 1;
+  totalPrice.innerText = Number(housePrice.innerText) * numDays;
+}
+
 export async function buildCalendar(date, single) {
   const article = document.createElement('article');
   article.setAttribute('class', 'calendar');
@@ -111,6 +118,12 @@ function fillSelected(start, end, table) {
   }
 }
 
+function removeSelected(cells) {
+  cells.forEach(day => {
+    if (day.className != 'unavailable') day.removeAttribute('class');
+  });
+}
+
 function calendarClicks(article, date) {
   const table = article.querySelector('table');
   const cells = table.querySelectorAll('td');
@@ -119,12 +132,9 @@ function calendarClicks(article, date) {
       day.addEventListener('click', () => {
         if (!selecting) {
           selecting = true;
-          cells.forEach(day => {
-            if (day.className != 'unavailable') day.removeAttribute('class');
-          });
+          removeSelected(cells);
           day.setAttribute('class', 'selected');
-          for (let i = index + 1; i >= 0; i--) {
-            console.log(cells[i]);
+          for (let i = index - 1; i >= 0; i--) {
             if (cells[i].className == 'unavailable' || cells[i].innerText == '') break;
             cells[i].addEventListener('mouseover', () => {
               fillSelected(i, index, cells);
@@ -136,15 +146,21 @@ function calendarClicks(article, date) {
               calendarClicks(article, date);
               checkout.value = generateDateString(date, day.innerText);
               checkin.value = generateDateString(date, cells[i].innerText);
+              updatePrice(checkin, checkout);
               selecting = false;
             });
           }
 
           cells[index].addEventListener('click', () => {
+            removeSelected(cells);
             const newTable = table.cloneNode(true);
             article.replaceChild(newTable, table);
             calendarClicks(article, date);
             selecting = false;
+          });
+
+          cells[index].addEventListener('mouseover', () => {
+            fillSelected(index, index, cells);
           });
 
           for (let i = index + 1; i < cells.length; i++) {
@@ -160,6 +176,7 @@ function calendarClicks(article, date) {
               calendarClicks(article, date);
               checkin.value = generateDateString(date, day.innerText);
               checkout.value = generateDateString(date, cells[i].innerText);
+              updatePrice(checkin, checkout);
               selecting = false;
             });
           }
