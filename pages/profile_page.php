@@ -10,7 +10,9 @@ function drawMainPage()
                 <section>
                     <img src="../assets/profile-leaf.svg" alt="Profile ornament left leaf" />
                     <div class="image-upload">
+                        <label for="profile-picture">
                             <img src="https://icon-library.net/images/upload-photo-icon/upload-photo-icon-21.jpg" />
+                        </label>
                         <input id="profile-picture" name="profile-picture" type="file" alt="Profile picture" />
                     </div>
                     <img src="../assets/profile-leaf.svg" alt="Profile ornament left leaf" />
