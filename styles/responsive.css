@@ -136,23 +136,7 @@
   #description {
     max-width: 40%;
   }
-<<<<<<< HEAD
 }
-
-@media screen and (max-width: 700px){
-    #rentals-history > div > p {
-        justify-content: center;
-    }
-    #rentals-history > div > p > span:nth-child(1){
-        flex-basis: 80%;
-    }
-
-
-    #rentals-history > div > p > span:nth-child(2){
-        display: none;
-    }
-}
-
 
 @media screen and (max-width: 750px){
     #houses article div{
@@ -162,8 +146,6 @@
 
     }
 
-=======
->>>>>>> master
     #houses article img{
         margin: auto;
         width: 30em;
