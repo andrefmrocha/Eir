@@ -19,6 +19,10 @@ body {
   opacity: 50%;
 }
 
+input:focus {
+  outline: none !important
+}
+
 nav {
   display: flex;
   justify-content: space-between;
@@ -57,6 +61,7 @@ nav li:last-child img{
 a {
   text-decoration: none;
   color: inherit;
+  padding: 0vw 0.7vw;
 }
 
 nav div {
@@ -165,7 +170,6 @@ span.card{
   margin: 0.5em auto;
   padding: 0.1vh 0.3em;
   width: 100%;
-  box-sizing: border-box;
 }
 
 .card label {
@@ -175,10 +179,6 @@ span.card{
   padding-bottom: 0.1em;
   width: 100%;
   box-sizing: border-box;
-}
-
-.card #dates label{
-  flex-basis: 0;
 }
 
 .card label > input {
@@ -209,7 +209,7 @@ span.card{
 }
 
 #dates label{
-  flex-basis: 50%;
+  flex-basis: 100%;
 }
 
 .form-error{
@@ -218,12 +218,19 @@ span.card{
   color: var(--alert-color);
 }
 
-p.form-error{
+form p.form-error{
+  margin: 0;
   flex-basis: 100%;
+}
+
+form .form-error.active{
+  display: inline;
+  margin-left: 0.5em;
 }
 
 .form-error.active{
   display: block;
+  flex-basis: 100%;
 }
 
 div#dates {
@@ -232,9 +239,12 @@ div#dates {
 }
 
 div#dates label > input {
-  width: auto;
   position: static;
-  width: 16em;
+  width: 100%;
+}
+
+div#dates label:first-child {
+  margin-right: 1em;
 }
 
 #filters {
@@ -305,6 +315,7 @@ div#dates label > input {
   text-align: center;
   font-weight: bold;
   margin: 0.5em auto;
+  color: white;
   border-radius: 0.3em;
   letter-spacing: 0.1em;
   cursor: pointer;
@@ -369,24 +380,6 @@ i.fa-star{
   color: var(--gold-color);
 }
 
-#houses article div div span {
-  flex-basis: 50%;
-  display: inline-block;
-  padding: 0.7em 0;
-  color: var(--primary-color);
-  font-weight: lighter;
-  letter-spacing: 0.05em;
-}
-
-#houses article div div span span {
-  margin: 0em 0.6em;
-}
-
-#houses article div div span:nth-child(even){
-  text-align: end;
-}
-
-
 .calendar{
   flex-grow: 1;
 }
@@ -397,73 +390,6 @@ i.fa-star{
   padding: 0.7em 0;
   margin: 0;
   font-weight: normal;
-}
-
-#photos-carousel{
-  width: 45vw;
-  display: flex;
-  flex-wrap: wrap;
-  border: 0.5px solid black;
-  align-items: center;
-}
-
-#photos-carousel > div{
-  display: flex;
-  justify-content: center;
-  flex-wrap: nowrap;
-  width: 45vw;
-  order: 2;
-}
-
-
-#photos-carousel div div img{
-  width: 100%;
-  height: 100%;
-}
-
-#photos-carousel div div {
-  flex: 1 1 0px;
-  border: 0.5px solid black;
-}
-
-#photos-carousel div div.selected {
-  opacity: 60%;
-}
-
-
-#photos-carousel img.active{
-  order: 1;
-  border: 0.5px solid black;
-  height: 30vw;
-  width: 100%;
-}
-
-#carousel {
-  display: flex;
-  flex-wrap: nowrap;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 4em;
-}
-
-#carousel i {
-  margin: 0 1em;
-}
-
-#house-title{
-  display: flex;
-  justify-content: space-between;
-  margin: 1.5em 0;
-}
-
-#house-title aside  {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-#house-title aside span {
-  margin: auto;
 }
 
 .photo-avatar {
@@ -487,79 +413,6 @@ i.fa-star{
   font-size: 0.9em;
   font-weight: normal;
 }
-
-/* Profile Page  */
-
-.card.profile {
-  position: relative;
-  display: inline-block;
-  padding: 1.5em;
-  border-radius: 0.5em;
-  background-color: var(--background-color);
-  margin: 0 8em 0 8em;
-  width: 30em;
-}
-
-.card.profile div {
-  display: flex;
-  margin: 0.1em auto;
-  padding: 0.4em 0.3em 0em 0.3em;
-  width: 100%;
-}
-
-.card.profile label {
-  font-size: 0.8em;
-  color: var(--primary-color);
-  font-weight: bold;
-  padding-bottom: 0.1em;
-  flex-basis: 100%;
-}
-
-.card.profile div.image-upload {
-  display: inline;
-  text-align: center;
-}
-
-#profile-img {
-  width: 98.95%;
-  height: 60em;
-  position: absolute;
-}
-
-.card.profile div.two-inputs div {
-  margin: 0;
-  padding: 0;
-  position: static;
-}
-
-
-.card.profile div.two-inputs div:last-child{
-  margin-left: 1em;
-}
-
-.card.profile div.two-inputs div label input#country{
-  padding: 0.65em 0.5em;
-}
-
-.card.profile textarea#description{
-  width: 100%;
-  border: 1.5px solid var(--primary-color);
-}
-
-.card.profile textarea#description:focus{
-  outline: none !important;
-  width: 100%;
-  border: 2px solid var(--primary-color);
-}
-
-input:focus {
-  outline: none !important
-}
-
-.card.profile div label div{
-  padding-left: 0em;
-}
-
 
 .user-form{
   display: flex;
@@ -611,10 +464,22 @@ input:focus {
 }
 
 .two-inputs > div {
-  flex-basis: 50%;
+  flex-basis: 100%;
 }
 
 .two-inputs label > input{
+  width: 100%;
+}
+
+#photos-carousel div div.selected {
+  opacity: 60%;
+}
+
+
+#photos-carousel img.active{
+  order: 1;
+  border: 0.5px solid black;
+  height: 30vw;
   width: 100%;
 }
 
@@ -644,12 +509,6 @@ input:focus {
   vertical-align: bottom;
 }
 
-.card.profile{
-  width: 45vw;
-  padding: 7vh 5vw;
-  margin: auto;
-}
-
 .card section > img:first-child{
   transform: scaleX(-1) ;
 }
@@ -671,17 +530,162 @@ input:focus {
   display: none;
 }
 
-#form-section.profile{
+/* Profile Page  */
+
+.card.profile {
+  position: relative;
+  display: inline-block;
+  padding: 1.5em;
+  border-radius: 0.5em;
+  background-color: var(--background-color);
+  width: 40vw;
+  padding: 7vh 5vw;
+  margin: auto;
+}
+
+.card.profile div {
+  display: flex;
+  margin: 0.1em auto;
+  padding: 0.4em 0.3em 0em 0.3em;
+  width: 100%;
+}
+
+.card.profile label {
+  font-size: 0.8em;
+  color: var(--primary-color);
+  font-weight: bold;
+  padding-bottom: 0.1em;
+  flex-basis: 100%;
+}
+
+.card.profile div.image-upload {
+  display: inline;
+  text-align: center;
+}
+
+.card.profile div.two-inputs div {
+  margin: 0;
+  padding: 0;
+  position: static;
+}
+
+.card.profile div.two-inputs div:last-child{
+  margin-left: 1em;
+}
+
+.card.profile div.two-inputs div label input#country{
+  padding: 0.65em 0.5em;
+}
+
+.card.profile textarea#description{
+  width: 100%;
+  border: 1.5px solid var(--primary-color);
+}
+
+.card.profile textarea#description:focus{
+  outline: none !important;
+  width: 100%;
+  border: 2px solid var(--primary-color);
+}
+
+.card.profile div label div{
+  padding-left: 0em;
+}
+
+#form-section.user-form.profile{
   min-height: 60em;
 }
 
-#form-section.profile #signup-img{
-  min-height: 130vh;
+#profile-img {
+  width: 98.95%;
+  height: 60em;
+  position: absolute;
 }
 
-#profile-carrousel{
-  padding: 1em 10vw;
+/* Log In page */
+
+#form-section.user-form {
+  min-height: 45em;
 }
+
+.card.login {
+  position: relative;
+  display: inline-block;
+  padding: 1.5em;
+  border-radius: 0.5em;
+  background-color: var(--background-color);
+  width: 30vw;
+  padding: 5vh 3vw;
+  margin: auto;
+  height: max-content;
+}
+
+.card.login div {
+  display: flex;
+  margin: 0.1em auto;
+  padding: 0.4em 0.3em 0em 0.3em;
+  width: 100%;
+}
+
+#form-section.user-form #signup-img{
+  position: absolute;
+  width: 98.95%;
+  height: 45em;
+}
+
+.card.login p {
+  padding-top: 0.5em;
+}
+
+.card.login strong{
+  color: var(--gold-color );
+  cursor: pointer;
+}
+
+/* Log In page */
+
+.card.signin {
+  position: relative;
+  display: inline-block;
+  padding: 1.5em;
+  border-radius: 0.5em;
+  background-color: var(--background-color);
+  width: 40vw;
+  padding: 5vh 3vw;
+  margin: auto;
+  height: max-content;
+}
+
+.card.signin div {
+  display: flex;
+  margin: 0.1em auto;
+  padding: 0.4em 0.3em 0em 0.3em;
+  width: 100%;
+}
+
+.card.signin strong{
+  color: var(--gold-color );
+  cursor: pointer;
+}
+
+.card.signin p {
+  padding-top: 0.5em;
+}
+
+.card.signin div.two-inputs div {
+  margin: 0;
+  padding: 0;
+  position: static;
+}
+
+.card.signin div.two-inputs div:first-child{
+  margin-right: 1em;
+}
+
+.card.signin div.two-inputs div label input#country{
+  padding: 0.65em 0.5em;
+}
+
 
 #rentals-history {
   padding: 1em 5vw;
@@ -725,23 +729,27 @@ input:focus {
   border-radius: 0.5em;
 }
 
-#profile-carrousel > div p:nth-child(2){
+#profile-carrousel > div > p a:nth-child(2) p{
   color: var(--accent-color);
   font-size: 1.2em;
+  margin: 0;
 }
 
-#profile-carrousel > div > p p:nth-child(2)::before,
-#profile-carrousel > div > p p:nth-child(2)::after{
+#profile-carrousel > div > p a:nth-child(2) p::before,
+#profile-carrousel > div > p a:nth-child(2) p::after{
   content: "\"";
 }
 
 #profile-carrousel > div p > strong{
   color: var(--primary-color);
 }
-#profile-carrousel > div p:last-child{
+
+#profile-carrousel > div span > p:last-child{
   font-weight: lighter;
   color: var(--accent-color);
   text-align: right;
+  max-width: 80vw;
+  margin: 0;
 }
 
 #profile-carrousel .button {
