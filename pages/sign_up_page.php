@@ -3,20 +3,10 @@ function drawMainPage()
 {
 
     ?>
-    <section id="form-section" class="user-form profile">
-        <img id="profile-img" src="../assets/profile.jpg" alt="Pool House">
-        <span class="card profile">
-            <form action="#" method="get" enctype="multipart/form-data">
-                <section>
-                    <img src="../assets/profile-leaf.svg" alt="Profile ornament left leaf" />
-                    <div class="image-upload">
-                        <label for="profile-picture">
-                            <img src="https://icon-library.net/images/upload-photo-icon/upload-photo-icon-21.jpg" />
-                        </label>
-                        <input id="profile-picture" name="profile-picture" type="file" alt="Profile picture" />
-                    </div>
-                    <img src="../assets/profile-leaf.svg" alt="Profile ornament left leaf" />
-                </section>
+    <section id="form-section" class="user-form">
+        <img id="signup-img" src="../assets/login-house.jpg" alt="Beautiful House">
+        <span class="card signin">
+            <form action="list_houses.php" method="get">
                 <div>
                     <label for="full-name">
                         Full Name
@@ -33,14 +23,14 @@ function drawMainPage()
                 </div>
                 <div>
                     <label for="password">
-                        New Password
+                        Password
                         <span id="password-input" class="form-error">**</span>
                         <input name="password" id="password" type="password">
                     </label>
                 </div>
                 <div>
                     <label for="confirm-password">
-                        Confirm New Password
+                        Confirm Password
                         <span id="confirm-password-input" class="form-error">**</span>
                         <input name="confirm-password" id="confirm-password" type="password">
                     </label>
@@ -56,46 +46,30 @@ function drawMainPage()
                     <div>
                         <label for="country">
                             Country
-                            <span id="country-input" class="form-error">**</span>
+                            <span id="country-input" class="form-error">**</span>                    
                             <input name="country" id="country" type="text">
                         </label>
                     </div>
-                </div>
-                <div>
-                    <label for="description">
-                        Description
-                        <div>
-                        <textarea name="description" id="description" rows="5" cols="40" type="textarea">
-                        </textarea>
-                        <span id="description-input" class="form-error">**</span>
-                        </div>
-                    </label>
                 </div>
                 <p id="valid-email-input" class="form-error">* Please insert a valid email</p>
                 <p id="password-match-input" class="form-error">* Passwords must match</p>
                 <p id="register-email-input" class="form-error">* Email is already registed!</p>
                 <p id="required-input" class="form-error">** Field is required</p>
                 <div>
-                    <input id="submit" type="submit" value="Update">
+                    <input id="submit" type="submit" value="Sign Up">
                 </div>
+                <p>
+                    Alread have an account? <strong href="login_page.php">Log in</strong>
+                </p>
             </form>
         </span>
-    </section>
-    <section id="rentals-history">
-        <h3>History</h3>
-        <div>
-            <i class="fas fa-chevron-left"></i>
-            <p>
-
-            </p>
-            <i class="fas fa-chevron-right"></i>
-        </div>
     </section>
 
 <?php }
 
 include_once('../templates/common.php');
-drawHeader(['../js/profile_page.js']);
+include_once('../templates/on_logged_in.php');
+drawHeader(['../js/signup_page.js']);
 drawMainPage();
 drawFooter();
 ?>

@@ -3,7 +3,6 @@ import { request } from './network.js';
 import { getPersonPhoto, getPlacePhoto } from './image.js';
 import { removeError, showError, validateEmail } from './form_validation.js';
 import carousel from './carousel.js';
-import { generateHouseUrl } from './houses.js';
 
 const profilePic = document.querySelector('.card section div img');
 const picInput = document.querySelector('#profile-picture');
@@ -128,21 +127,15 @@ async function getRentalHistory() {
 }
 
 function buildHouse(house) {
-  const imgReference = document.createElement('a');
-  imgReference.href = generateHouseUrl(house.id);
   const image = document.createElement('img');
-  imgReference.appendChild(image);
   image.src = getPlacePhoto(house.photo);
   const wrapper = document.createElement('span');
-  wrapper.appendChild(imgReference);
+  wrapper.appendChild(image);
   const title = document.createElement('p');
-  const titleWrapper = document.createElement('a');
-  titleWrapper.href = generateHouseUrl(house.id);
-  titleWrapper.appendChild(title);
   title.innerText = house.title;
   const dates = document.createElement('p');
   dates.innerHTML = `Between <strong> ${house.checkin} </strong> and <strong> ${house.checkout} </strong>`;
-  wrapper.appendChild(titleWrapper);
+  wrapper.appendChild(title);
   wrapper.appendChild(dates);
   return wrapper;
 }

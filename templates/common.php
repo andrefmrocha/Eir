@@ -1,4 +1,5 @@
 <?php
+include_once('../api/session.php');
 function drawHeader($scripts)
 { ?>
     <!DOCTYPE html>

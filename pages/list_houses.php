@@ -52,8 +52,8 @@ drawHeader([
                 <label for="green-spaces">Green Spaces</label>
             </li>
             <li>
-                <input id="swimming-pool" type="checkbox">
-                <label for="swimming-pool">Swimming Pool</label>
+                <input id="resorts" type="checkbox">
+                <label for="resorts">Swimming Pool</label>
             </li>
         </ul>
         <ul>
@@ -82,7 +82,7 @@ drawHeader([
             </li>
             <li>
                 <input id="250-plus" type="checkbox">
-                <label for="250-plus">+250€</label>
+                <label for="250-plug">+250€</label>
             </li>
         </ul>
         <ul>
