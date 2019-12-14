@@ -114,17 +114,36 @@
     #reserve.card{
         width: 80%;
     }
+}
 
-    #reviews{
-        grid-column: 1/5;
-    }
+@media screen and (max-width: 750px) {
+  #houses article div {
+    padding: 0;
+    margin: auto;
+  }
 
+  #houses article img {
+    margin: auto;
+    width: 18em;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  #house-page {
+    padding: 0;
+  }
+
+  #description {
+    max-width: 40%;
+  }
 }
 
 @media screen and (max-width: 750px){
     #houses article div{
         padding: 0;
         margin: auto;
+        box-sizing: border-box;
+
     }
 
     #houses article img{
@@ -145,18 +164,53 @@
     }
 }
 
-@media screen and (max-width: 800px){
-    #house-page{
-        padding: 0;
+@media screen and (max-width: 750px) {
+  #house-information > aside {
+    flex-basis: 100%;
+    border-left: 0px;
+    margin-bottom: 2em;
+    margin: 1em 2em;
+    padding-left: 0px;
+  }
+
+  #description {
+    max-width: 100%;
+  }
+
+  #house-information article {
+    flex-basis: 100%;
+    margin: 1em 2em;
+  }
+
+  #house-information h2 {
+    text-align: left;
+  }
+}
+
+@media screen and (max-width: 500px) {
+    #reserve,
+    .calendar{
+        max-width: 100%;
     }
 
-    #house-information article h2{
-        text-align: center;
+}
+
+@media screen and (max-width: 700px){
+    #profile-carrousel > div > p {
+        justify-content: center;
     }
 
     section#page404error-section, section#page401error-section, section#page403error-section {
         min-height: 15em;
       }
+
+    #profile-carrousel > div > p > span:nth-child(1){
+        flex-basis: 80%;
+    }
+
+    #profile-carrousel > div > p > span:nth-child(2){
+        display: none;
+    }
 }
 
 @media screen and (max-width: 500px){
@@ -172,6 +226,4 @@ section#page401error-section p, section#page403error-section p{
   }
 
 }
-
-
 

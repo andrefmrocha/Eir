@@ -3,6 +3,6 @@ export function getPlacePhoto(photourl) {
 }
 
 export function getPersonPhoto(photourl) {
-  const photo = photourl ? photourl : 'unkwown';
+  const photo = photourl ? photourl : 'unknown';
   return `../assets/user_photos/eir_${photo}.jpg`;
 }

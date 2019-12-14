@@ -1,6 +1,6 @@
 <?php
 include_once('../api/session.php');
-function drawHeader($scripts)
+function drawHeader($scripts, $styles)
 { ?>
     <!DOCTYPE html>
     <html>
@@ -10,8 +10,12 @@ function drawHeader($scripts)
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://kit.fontawesome.com/ac3e82986f.js" crossorigin="anonymous"></script>
         <script src="../js/hamburguer.js" type="module"></script>
+        <script src="../js/common.js" defer type="module"></script>
         <?php foreach ($scripts as $script) { ?>
             <script src=<?= $script ?> type="module"></script>
+        <?php } ?>
+        <?php foreach ($styles as $style) { ?>
+            <link href=<?= $style ?> rel="stylesheet">
         <?php } ?>
         <link href="../styles/style.css" rel="stylesheet">
         <link href="../styles/responsive.css" rel="stylesheet">
@@ -47,7 +51,7 @@ function drawHeader($scripts)
             <div>☰</div>
             <ul>
                 <li>
-                    <a href="#">Owner</a>
+                    <a href="#" id="page-view"></a>
                 </li>
                 <li>
                     <a href="#">Eur €</a>
@@ -56,6 +60,7 @@ function drawHeader($scripts)
                     if (isset($_SESSION['user'])) {
                         include_once('../db/user.php');
                         $user = getUserById($_SESSION['user']);
+                        if ($user['photo'] == '') $user['photo'] = 'unknown';
                         $photoSrc = "../assets/user_photos/eir_${user['photo']}.jpg"
                         ?>
                     <li>

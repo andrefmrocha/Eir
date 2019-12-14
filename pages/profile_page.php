@@ -8,12 +8,14 @@ function drawMainPage()
         <span class="card profile">
             <form action="#" method="get" enctype="multipart/form-data">
                 <section>
-                    <img src="../assets/profile-leaf.svg" alt="Profile ornament left leaf" />
+                    <img class="profile-leaf" src="../assets/profile-leaf.svg" alt="Profile ornament left leaf" />
                     <div class="image-upload">
+                        <label for="profile-picture">
                             <img src="https://icon-library.net/images/upload-photo-icon/upload-photo-icon-21.jpg" />
+                        </label>
                         <input id="profile-picture" name="profile-picture" type="file" alt="Profile picture" />
                     </div>
-                    <img src="../assets/profile-leaf.svg" alt="Profile ornament left leaf" />
+                    <img class="profile-leaf" src="../assets/profile-leaf.svg" alt="Profile ornament right leaf" />
                 </section>
                 <div>
                     <label for="full-name">
@@ -79,8 +81,8 @@ function drawMainPage()
             </form>
         </span>
     </section>
-    <section id="rentals-history">
-        <h3>History</h3>
+    <section id="profile-carrousel">
+        <h3></h3>
         <div>
             <i class="fas fa-chevron-left"></i>
             <p>
@@ -93,7 +95,7 @@ function drawMainPage()
 <?php }
 
 include_once('../templates/common.php');
-drawHeader(['../js/profile_page.js']);
+drawHeader(['../js/profile_page.js'], []);
 drawMainPage();
 drawFooter();
 ?>
