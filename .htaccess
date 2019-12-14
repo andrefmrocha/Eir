@@ -1,3 +1,8 @@
-ErrorDocument 401 /pages/401page.php
-ErrorDocument 403 /pages/403page.php
-ErrorDocument 404 /pages/404page.php
+ErrorDocument 401 http://gnomo.fe.up.pt/~up201706462/pages/401page.php
+ErrorDocument 403 http://gnomo.fe.up.pt/~up201706462/pages/403page.php
+ErrorDocument 404 http://gnomo.fe.up.pt/~up201706462/pages/404page.php
+
+<Files ~ "\.(sql|db|sh)$">
+Order Allow,Deny
+Deny from All
+</Files>
