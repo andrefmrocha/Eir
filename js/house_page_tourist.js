@@ -123,6 +123,9 @@ async function buildCommentsSection(id, house) {
         if (star.className.search('clicked') == -1) {
           star.classList.add('far');
           star.classList.remove('fas');
+        } else if(star.className.search('fas') == -1){
+          star.classList.add('fas');
+          star.classList.remove('far');
         }
       });
     };
@@ -154,7 +157,7 @@ async function buildCommentsSection(id, house) {
         }
       });
 
-      document.querySelector('#reviews > span > span > span').innerText = response.rating;
+      document.querySelector('#reviews > span > span > span').innerText = response.rating.toString().substr(0, 3);
       document.querySelector('#reviews > span > span > span:nth-child(2)').innerText = `${house.reviews.length +
         1} Reviews`;
 

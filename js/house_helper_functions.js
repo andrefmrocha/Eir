@@ -74,7 +74,7 @@ export default function buildMainHouseInfo(house) {
 
   reviews.appendChild(comments);
   const ratingAvg = document.createElement('span');
-  ratingAvg.innerText = house.rating;
+  ratingAvg.innerText = house.rating.toString().substr(0, 3);
   house && rating.appendChild(ratingAvg);
   house && rating.appendChild(getIcon('fa-star'));
   house && (numReviews.innerText = `${house.reviews.length} Reviews`);
