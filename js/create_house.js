@@ -4,58 +4,7 @@ import { buildTag, createTrashIcon } from './tags.js';
 import { tagOption } from './house_page_owner.js';
 import { showError, removeError } from './form_validation.js';
 import { getHouseLocation } from './maps.js';
-
-//======================================================
-
-const body = document.querySelector('body');
-let active_modal = false;
-
-function draw_success(house_id) {
-    if (active_modal)
-        leave_modal();
-    
-    let img = document.createElement('img');
-    img.src = "../assets/success-property.svg";
-
-    let message = document.createElement('p');
-    let text = document.createTextNode("Property successfuly added!");
-    message.setAttribute('class', 'success_message');
-    message.appendChild(text);
-
-    let content = document.createElement('div');
-    content.appendChild(img);
-
-    let modal_bg = document.createElement('div');
-    modal_bg.setAttribute('class', 'modal_bg');
-
-    let modal = document.createElement('div');
-    modal.setAttribute('class', 'modal');
-
-    let leave = document.createElement('input');
-    leave.setAttribute('class', 'continue');
-    leave.setAttribute('type', 'submit');
-    leave.setAttribute('value', 'Continue');
-    leave.addEventListener('click', function(){leave_modal(house_id)});
-
-    content.setAttribute('class', 'modal_body');
-
-    modal.appendChild(message);
-    modal.appendChild(content);
-    modal.appendChild(leave);
-    modal_bg.appendChild(modal);
-    body.appendChild(modal_bg);
-
-    active_modal = true;
-}
-
-function leave_modal(house_id) {
-    document.querySelector('.modal_bg').remove();
-    active_modal = false;
-
-    window.location.replace(`${env.host}pages/house_page.php?id=${house_id}`);
-}
-
-//======================================================
+import successfulAddition from './modal.js';
 
 function updateMarker(e, maps, marker) {
   const newMarker = new google.maps.Marker({
@@ -237,7 +186,7 @@ async function getDetails() {
         const house = await response.json();
         
         if (house.id) {
-          draw_success(house.id);
+          successfulAddition("Property successfuly added!", '../assets/success-property.svg', `${env.host}pages/house_page.php?id=${house.id}`);
         } else {
           clicked = false;
           showError('unknown-error');

@@ -6,62 +6,13 @@ import { getPlacePhoto } from './image.js';
 import { showError, removeError } from './form_validation.js';
 import { buildCalendar, validateDate, updatePrice } from './calendar.js';
 import buildMainHouseInfo from './house_helper_functions.js';
+import successfulReservation from './modal.js';
 
 const carousel = document.querySelector('#photos-carousel');
 const reviews = document.querySelector('#reviews');
 const houseInformation = document.querySelector('#house-information');
 
 const urlParams = new URL(window.location).searchParams;
-
-//======================================================
-
-const body = document.querySelector('body');
-let active_modal = false;
-
-function successful_reservation_modal() {
-    if (active_modal)
-        leave_modal();
-    
-    let img = document.createElement('img');
-    img.src = "../assets/success-badge.svg";
-
-    let message = document.createElement('p');
-    let text = document.createTextNode("Reservation was successful!");
-    message.setAttribute('class', 'success_message');
-    message.appendChild(text);
-
-    let content = document.createElement('div');
-    content.appendChild(img);
-
-    let modal_bg = document.createElement('div');
-    modal_bg.setAttribute('class', 'modal_bg');
-
-    let modal = document.createElement('div');
-    modal.setAttribute('class', 'modal');
-
-    let leave = document.createElement('input');
-    leave.setAttribute('class', 'continue');
-    leave.setAttribute('type', 'submit');
-    leave.setAttribute('value', 'Continue');
-    leave.addEventListener('click', leave_modal);
-
-    content.setAttribute('class', 'modal_body');
-
-    modal.appendChild(message);
-    modal.appendChild(content);
-    modal.appendChild(leave);
-    modal_bg.appendChild(modal);
-    body.appendChild(modal_bg);
-
-    active_modal = true;
-}
-
-function leave_modal() {
-    document.querySelector('.modal_bg').remove();
-    active_modal = false;
-}
-
-//======================================================
 
 const housesCarousel = {
   selected: 0,
@@ -215,7 +166,7 @@ export default async function getHouseInfo() {
           showError('login-error');
           break;
         case 201:
-          successful_reservation_modal();
+            successfulReservation("Reservation was successful!", '../assets/success-badge.svg', `${env.host}pages/profile_page.php`);
           break;
       }
     }

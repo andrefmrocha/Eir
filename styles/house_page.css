@@ -391,4 +391,5 @@
   background-color: var(--primary-color);
   color: white;
   padding: 0.8em;
+  cursor: pointer;
 }
