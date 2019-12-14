@@ -394,18 +394,19 @@ i.fa-star{
   flex-wrap: wrap;
   justify-content: center;
   align-content: space-between;
-  align-items: center;
 }
 
 #house-information article{
-  margin: 1em 2em;
+  margin: 0em 2em 1em 2em;
 }
 
 #description{
   font-size: 1.1em;
   padding-right: 1em;
+  margin-top: 0;
   flex: 1 0 40em;
   max-width: 55%;
+  overflow-wrap: break-word;
 }
 
 #description textarea{
