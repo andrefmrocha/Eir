@@ -180,6 +180,13 @@ VALUES
     '510 East 6th Street',
     40.725088,
     -73.983283
+  ),
+  (
+    8,
+    1,
+    'Rua São Tomé 23',
+    38.713562,
+    -9.130562
   );
 INSERT INTO Place (
     id,
@@ -261,15 +268,27 @@ VALUES
     5,
     'In the East Village district of New York, close to NYU - New York University, Luxury Flats NYC has free WiFi and washing machine. This appartment has accomodations with a balcony.' || char(10) || 'The appartment is composed of 3 separate bedrooms, a living room, a fully equiped kitchen with a dishwasher and oven, and 3 bathrooms. A TV is available.' || char(10) || 'Bloomingdales is 1.8 km from the apartement, while Flatiron Building is 1.9 km from the property. The nearest airport is LaGuardia Airport, 14.5 km from Luxury Flats NYC.' || char(10) || 'East Village is a great choice for travellers interested in food, restaurants and culture',
     7
+  ),
+  (
+    8,
+    'Charming 3bedroom apartment',
+    1,
+    1,
+    120,
+    3,
+    'A first floor charming apartment with high ceilings.Genuine and full of little corners where you can relax and take your time. This apartment is experiencing what is nice about living in an historic quarter.',
+    8
   );
 INSERT INTO PlaceTag (place, tag)
 VALUES
   (1, 1),
+  (1, 3),
   (2, 2),
   (2, 3),
   (3, 2),
   (3, 3),
-  (6, 1);
+  (6, 1),
+  (8, 1);
 INSERT INTO Rental (guest, place, checkin, checkout)
 VALUES
   (
@@ -333,7 +352,8 @@ VALUES
   ),
   (4, 1, 5, 'Interesting experience!'),
   (5, 9, 5, 'Interesting experience!'),
-  (6, 6, 5, 'Loved the place!');
+  (6, 6, 5, 'Loved the place!'),
+  (8, 2, 5, 'Such an authentic neighborhood!');
 INSERT INTO PlacePhoto (place, author, resource_id)
 VALUES
   (1, 4, '5dc959eea7d5f'),
@@ -351,4 +371,5 @@ VALUES
   (7, 5, '5dd2923c89025'),
   (1, 4, '5dd94c9056d22'),
   (1, 4, '5dd94ce8b087c'),
-  (1, 2, '5dd94cd89d11b');
+  (1, 2, '5dd94cd89d11b'),
+  (8, 1, '5dec2418cd1ae');
