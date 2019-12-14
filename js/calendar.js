@@ -96,11 +96,10 @@ export async function buildCalendar(date, single) {
   const now = new Date();
   for (let i = 1; i <= numDays; i++, day++) {
     const currentDay = `${generateYearandMonthString(date)}-${i}`;
-    if (
-      now > new Date(year, month, i) ||
-      rentals.find(rental => rental.checkin <= currentDay && rental.checkout >= currentDay)
-    ) {
+    if (rentals.find(rental => rental.checkin <= currentDay && rental.checkout >= currentDay)) {
       tableCells[day].setAttribute('class', 'unavailable');
+    } else if (now > new Date(year, month, i)) {
+      tableCells[day].setAttribute('class', 'past-date unavailable');
     }
     tableCells[day].innerText = i;
   }

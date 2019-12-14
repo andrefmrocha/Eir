@@ -44,8 +44,10 @@
     cursor: pointer;
 }
 
-.calendar table td.unavailable {
+.calendar table td.unavailable,
+#calendars .calendar table td.unavailable.past-date {
     color: var(--reserved);
+    background-color: white;
 }
 
 #calendars .calendar table td.unavailable {

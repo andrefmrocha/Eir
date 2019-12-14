@@ -4,6 +4,11 @@
   height: 20vh;
 }
 
+.editable ::placeholder{
+  color: gray;
+  opacity: 50%;
+}
+
 #carousel .add-new-photo input {
   display: none;
 }
@@ -15,6 +20,7 @@
   text-align: right;
   margin: 0;
   display: none;
+  width: 100%;
   cursor: pointer;
 }
 
@@ -259,18 +265,19 @@
   flex-wrap: wrap;
   justify-content: center;
   align-content: space-between;
-  align-items: center;
 }
 
 #house-information article{
-  margin: 1em 2em;
+  margin: 0em 2em 1em 2em;
 }
 
 #description{
   font-size: 1.1em;
   padding-right: 1em;
+  margin-top: 0;
   flex: 1 0 40em;
   max-width: 55%;
+  overflow-wrap: break-word;
 }
 
 #description textarea{

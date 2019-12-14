@@ -5,7 +5,7 @@ import { getPlacePhoto } from './image.js';
 import { getTourist } from './common.js';
 import { buildCalendar } from './calendar.js';
 import { buildTag, createTrashIcon } from './tags.js';
-import { showError } from './form_validation.js';
+import { showError, removeError } from './form_validation.js';
 import { getHouseLocation } from './maps.js';
 
 import carousel from './carousel.js';
@@ -14,7 +14,7 @@ const photos = document.querySelector('#carousel');
 const urlParams = new URL(window.location).searchParams;
 const houseInformation = document.querySelector('#house-information');
 
-function tagOption(tag, select) {
+export function tagOption(tag, select) {
   const option = document.createElement('option');
   option.setAttribute('id', tag.split(' ').join('-'));
   option.innerText = tag;
@@ -203,8 +203,16 @@ async function buildEditableView(house, maps) {
     newMarker.setMap(maps.maps);
   });
 
+  let clicked = false;
+
   submitButton.addEventListener('click', () => {
+    if (clicked) {
+      return;
+    }
+
+    clicked = true;
     // title, country, location, type, numBeds, tags, description, photos, price
+    removeError(errorId);
     const formData = {
       title: inputTitle.value,
       type: types.value,
@@ -224,27 +232,34 @@ async function buildEditableView(house, maps) {
       }
     });
 
+    [formData.max_guest_number, formData.price].forEach(numParam => {
+      if (isNaN(numParam) && numParam > 0) {
+        showError('house-numbers-error');
+      }
+    });
+
     formData.removing_photos = removingPhotos;
     formData.new_tags = selectedTags;
     formData.removing_tags = removingTags;
     formData.house_id = urlParams.get('id');
-    getHouseLocation(formData.coords, async coords => {
-      formData.coords = coords;
-      const body = new FormData();
-      Object.keys(formData).forEach(key =>
-        typeof formData[key] === 'object'
-          ? body.append(key, JSON.stringify(formData[key]))
-          : body.append(key, formData[key])
-      );
-      selectedPhotos.forEach(photo => body.append('new_photos[]', photo));
-      const response = await fetch(`${env.host}api/house_update.php`, {
-        method: 'POST',
-        body
+    !error &&
+      getHouseLocation(formData.coords, async coords => {
+        formData.coords = coords;
+        const body = new FormData();
+        Object.keys(formData).forEach(key =>
+          typeof formData[key] === 'object'
+            ? body.append(key, JSON.stringify(formData[key]))
+            : body.append(key, formData[key])
+        );
+        selectedPhotos.forEach(photo => body.append('new_photos[]', photo));
+        const response = await fetch(`${env.host}api/house_update.php`, {
+          method: 'POST',
+          body
+        });
+        if (response.status == 200) {
+          location.reload();
+        }
       });
-      if (response.status == 200) {
-        location.reload();
-      }
-    });
   });
 }
 
@@ -323,6 +338,8 @@ export default async function buildOwnerView() {
       id: urlParams.get('id')
     }
   });
+
+  console.log(house);
 
   if (house.status == 403 || house.status == 401) {
     getTourist();

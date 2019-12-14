@@ -3,24 +3,27 @@ include_once('../db/connection.php');
 function getHousesByLocation($location)
 {
     $db = Database::instance()->db();
-    $query = '
-        SELECT DISTINCT title, price_per_day, max_guest_number, Place.id, PlaceType.name AS type
-        FROM Place INNER JOIN City, Region, Rental, PlaceType, PlaceLocation
-        WHERE City.name = :city AND Region.country = :country
-        AND Region.id = City.region
-        AND City.id = PlaceLocation.city
-        AND (
-            (checkin > :checkin AND checkout > :checkin)
-            OR (checkin < :checkout AND checkout < :checkout)
-        AND Place.type = PlaceType.id AND Place.place_location = PlaceLocation.id);
-        ';
-    $stmt = $db->prepare($query);
-    $stmt->execute([
+    $stmt = $db->prepare('
+        SELECT DISTINCT title, price_per_day, max_guest_number, Place.id, PlaceType.name
+        FROM Place, City, Region, Rental, PlaceType, PlaceLocation
+        WHERE City.name = :city AND Region.country = :country AND Region.id = City.region AND 
+        PlaceLocation.id = Place.place_location AND PlaceLocation.city = City.id
+        AND ((checkin > :checkin AND checkout > :checkin) OR (checkin < :checkout AND checkout < :checkout))
+        AND Place.type = PlaceType.id
+        UNION
+        SELECT DISTINCT title, price_per_day, max_guest_number, Place.id, PlaceType.name
+        FROM Place, City, Region, Rental, PlaceType, PlaceLocation
+        WHERE City.name = :city AND Region.country = :country AND Region.id = City.region AND 
+        PlaceLocation.id = Place.place_location AND PlaceLocation.city = City.id
+        AND NOT EXISTS (SELECT * from Rental as NRental where NRental.place = Place.id)
+        AND Place.type = PlaceType.id
+        ');
+    $stmt->execute(array(
         ':city' => $location['city'],
         ':country' => $location['country'],
         ':checkin' => $location['checkin'],
-        ':checkout' => $location['checkout']
-    ]);
+        ':checkout' => $location['checkout'],
+    ));
     return $stmt->fetchAll();
 }
 
@@ -192,9 +195,10 @@ function getHousebyId($id)
 {
     $db = Database::instance()->db();
     $stmt = $db->prepare('
-            SELECT *
-            FROM Place NATURAL JOIN City, Region, PlaceLocation
-            WHERE Place.id = ? AND City.region = Region.id AND Place.type AND PlaceLocation.id = Place.place_location
+            SELECT DISTINCT *
+            FROM Place, City, Region, PlaceLocation
+            WHERE Place.id = ? AND City.region = Region.id AND Place.type AND PlaceLocation.id = Place.place_location AND
+            PlaceLocation.city = City.id
         ');
     $stmt->execute(array($id));
     $house = $stmt->fetch();
@@ -204,7 +208,8 @@ function getHousebyId($id)
     return $house;
 }
 
-function getHousebyIds($house_id, $user_id){
+function getHousebyIds($house_id, $user_id)
+{
     $db = Database::instance()->db();
     $stmt = $db->prepare('
             SELECT *
@@ -267,7 +272,8 @@ function getOwnerInfo($owner_id)
     return $stmt->fetch();
 }
 
-function getHouseType($id){
+function getHouseType($id)
+{
     $db = Database::instance()->db();
     $stmt = $db->prepare('
         SELECT PlaceType.name
@@ -278,7 +284,8 @@ function getHouseType($id){
     return $stmt->fetch()['name'];
 }
 
-function updateHouse($house, $type, $location){
+function updateHouse($house, $type, $location)
+{
     $db = Database::instance()->db();
     $stmt = $db->prepare('UPDATE Place
     SET title = :title, type = :type, price_per_day = :price,
@@ -296,15 +303,14 @@ function updateHouse($house, $type, $location){
     ]);
 }
 
-function createHouse($house, $type, $location){
+function createHouse($house, $type, $location)
+{
     $db = Database::instance()->db();
     $stmt = $db->prepare('INSERT INTO Place
     (title, type, price_per_day, max_guest_number, description, place_owner, place_location)
+    VALUES (:title, :type, :price, :max_guest_number, :description, :place_owner, :place_location);');
 
-    SET (:title, :type, :price, :max_guest_number, :description, :place_owner, :place_location) 
-    WHERE id = :id');
-
-    return $stmt->execute([
+    $stmt->execute([
         ':title' => $house['title'],
         ':type' => $type,
         ':price' => $house['price'],
@@ -313,18 +319,21 @@ function createHouse($house, $type, $location){
         ':place_owner' => $_SESSION['user'],
         ':place_location' => $location
     ]);
+
+    return $db->lastInsertId();
 }
 
-function storeNewPhoto($house_id, $photo){
+function storeNewPhoto($house_id, $photo)
+{
     $db = Database::instance()->db();
     $stmt = $db->prepare('INSERT INTO PlacePhoto 
     (place, author, resource_id) VALUES(?, ?, ?)');
     return $stmt->execute(array($house_id, $_SESSION['user'], $photo));
 }
 
-function deletePhoto($house_id, $photo){
+function deletePhoto($house_id, $photo)
+{
     $db = Database::instance()->db();
     $stmt = $db->prepare('DELETE FROM PlacePhoto WHERE place = ? AND resource_id = ?');
     return $stmt->execute(array($house_id, $photo));
 }
-

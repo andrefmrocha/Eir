@@ -60,6 +60,7 @@ function drawHeader($scripts, $styles)
                     if (isset($_SESSION['user'])) {
                         include_once('../db/user.php');
                         $user = getUserById($_SESSION['user']);
+                        if ($user['photo'] == '') $user['photo'] = 'unknown';
                         $photoSrc = "../assets/user_photos/eir_${user['photo']}.jpg"
                         ?>
                     <li>

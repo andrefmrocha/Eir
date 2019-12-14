@@ -21,9 +21,9 @@ function displayHouseTitle(house) {
 export default function buildMainHouseInfo(house) {
   max_guest = house.max_guest_number;
 
-  displayHouseTitle(house);
+  house && displayHouseTitle(house);
 
-  housePrice.innerText = house.price_per_day;
+  house && (housePrice.innerText = house.price_per_day);
 
   const description = houseInformation.querySelector('#description');
   const information = houseInformation.querySelector('aside');
@@ -31,11 +31,11 @@ export default function buildMainHouseInfo(house) {
   const rating = reviews.querySelector('span > span > span:first-child');
   const numReviews = reviews.querySelector('span > span > span:last-child');
   const innerText = document.createElement('div');
-  innerText.innerText = house.description;
+  innerText.innerText = house && house.description;
   description.appendChild(innerText);
 
   const tags = document.createElement('div');
-  createHouseDetails(tags, house);
+  house && createHouseDetails(tags, house);
   information.appendChild(tags);
   const comments = document.createElement('div');
   const pos = { lat: Number(house.latitude), lng: Number(house.longitude) };
@@ -48,30 +48,32 @@ export default function buildMainHouseInfo(house) {
     position: pos,
     map: maps
   });
+
   maps.panTo(pos);
 
-  house.reviews.forEach(review => {
-    const comment = document.createElement('article');
-    const commentName = document.createElement('h4');
-    commentName.innerText = review.full_name;
-    const avatar = document.createElement('img');
-    avatar.setAttribute('class', 'photo-avatar');
-    avatar.src = getPersonPhoto(review.photo);
-    const commentOwner = document.createElement('div');
-    commentOwner.appendChild(avatar);
-    commentOwner.appendChild(commentName);
-    const commentText = document.createElement('p');
-    commentText.innerText = review.comment;
-    comment.appendChild(commentOwner);
-    comment.appendChild(commentText);
-    comments.appendChild(comment);
-  });
+  house &&
+    house.reviews.forEach(review => {
+      const comment = document.createElement('article');
+      const commentName = document.createElement('h4');
+      commentName.innerText = review.full_name;
+      const avatar = document.createElement('img');
+      avatar.setAttribute('class', 'photo-avatar');
+      avatar.src = getPersonPhoto(review.photo);
+      const commentOwner = document.createElement('div');
+      commentOwner.appendChild(avatar);
+      commentOwner.appendChild(commentName);
+      const commentText = document.createElement('p');
+      commentText.innerText = review.comment;
+      comment.appendChild(commentOwner);
+      comment.appendChild(commentText);
+      comments.appendChild(comment);
+    });
   reviews.appendChild(comments);
   const ratingAvg = document.createElement('span');
   ratingAvg.innerText = house.rating;
-  rating.appendChild(ratingAvg);
-  rating.appendChild(getIcon('fa-star'));
-  numReviews.innerText = `${house.reviews.length} Reviews`;
+  house && rating.appendChild(ratingAvg);
+  house && rating.appendChild(getIcon('fa-star'));
+  house && (numReviews.innerText = `${house.reviews.length} Reviews`);
   return {
     maps: {
       maps,
