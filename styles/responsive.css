@@ -196,15 +196,15 @@
 }
 
 @media screen and (max-width: 700px){
-    #rentals-history > div > p {
+    #profile-carrousel > div > p {
         justify-content: center;
     }
-    #rentals-history > div > p > span:nth-child(1){
+
+    #profile-carrousel > div > p > span:nth-child(1){
         flex-basis: 80%;
     }
 
-
-    #rentals-history > div > p > span:nth-child(2){
+    #profile-carrousel > div > p > span:nth-child(2){
         display: none;
     }
 }

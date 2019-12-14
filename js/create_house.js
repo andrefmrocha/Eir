@@ -161,6 +161,8 @@ async function getDetails() {
 
     [formData.max_guest_number, formData.price].forEach(numParam => {
       if (isNaN(numParam) || numParam < 0) {
+        console.log(numParam);
+        error = true;
         showError('house-numbers-error');
       }
     });

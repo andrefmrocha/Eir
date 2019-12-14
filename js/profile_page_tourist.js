@@ -16,7 +16,6 @@ export default async function getRentalHistory() {
   const right = document.querySelector('.fa-chevron-right');
   document.querySelector('#profile-carrousel > h3').innerText = 'History';
 
-
   if (houses.length > 2) {
     left.addEventListener('click', () => carousel.previous(housesNode));
     right.addEventListener('click', () => carousel.next(housesNode));
