@@ -10,16 +10,16 @@ function drawMainPage()
                 <div>
                     <label for="form-email">
                         Email
+                        <span id="email-input" class="form-error">**</span>
                         <input name="form-email" id="form-email" type="text">
                     </label>
-                    <span id="email-input" class="form-error">**</span>
                 </div>
                 <div>
                     <label for="password">
                         Password
+                        <span id="password-input" class="form-error">**</span>
                         <input name="password" id="password" type="password">
                     </label>
-                    <span id="password-input" class="form-error">**</span>
                 </div>
                 <p id="valid-email-input" class="form-error">* Please insert a valid email</p>
                 <p id="wrong-password" class="form-error">* Wrong Password</p>

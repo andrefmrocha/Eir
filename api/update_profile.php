@@ -11,6 +11,6 @@
 
     $photo = storeUserPhoto();
     
-    updateUser($_SESSION['user'], $_POST, $photo);
+    updateUserWithPhoto($_SESSION['user'], $_POST, $photo);
     http_response_code(200);
     echo "Success";
