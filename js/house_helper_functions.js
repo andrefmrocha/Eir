@@ -12,6 +12,7 @@ function displayHouseTitle(house) {
   location.innerText = house.address;
 
   const img = document.querySelector('#house-title aside img');
+  console.log(house);
   img.src = getPersonPhoto(house.owner.photo);
   const name = document.querySelector('#house-title aside span');
   name.innerText = house.owner.full_name;

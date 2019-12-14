@@ -1,74 +1,119 @@
-@media screen and (max-width: 550px) {
-  #mainpage-img {
-    position: static;
-  }
+@media screen and (max-width: 810px){
+    #mainpage-img , #profile-img, #signup-img{
+        position: relative !important;
+        width: 100% !important;
+        height: auto !important;
+    }
 
-  .card {
-    position: static;
-    width: 100%;
-    margin: auto;
-    margin-top: 1em;
-    padding: 0.5em;
-  }
+    .card, .card.profile, .card.login, .card.signin {
+        display: block;
+        position: static;
+        margin: 2em;
+        padding: 0em;
+        width: auto;
+    }
 
-  #form-section.profile .card {
-    position: relative;
-  }
+    .card label {
+        font-size: 0.8em;
+    }
+      
+    .card label > input {
+        display: flex;
+        flex-grow: 1;
+        padding: 0.5em;
+        margin-bottom: 0.5em;
+        margin-top: 0.3em;
+    }
 
-  div#dates {
-    display: block;
-  }
-  div#dates label > input {
-    display: block;
-    width: 100%;
-  }
+    .card #submit {
+        text-align: center;
+        flex-grow: 0;
+        padding: auto;
+    }
 
-  .card form > div {
-    width: 90%;
-  }
+    #photos-carousel,
+    #photos-carousel > div{
+        width: 65vw;
+    }
 
-  #photos-carousel,
-  #photos-carousel > div {
-    width: 65vw;
-  }
+    #photos-carousel img.active{
+        height: 100%;
+    }
 
-  #photos-carousel img.active {
-    height: 100%;
-  }
-
-  .card.profile .two-inputs div {
-    flex-basis: 100%;
-  }
+    .card.profile .two-inputs div {
+        flex-basis: 100%;
+    }
 }
 
-@media screen and (max-width: 900px) {
-  nav ul li {
-    display: block;
-    width: 10em;
-    margin: auto 0;
-  }
+@media screen and (max-width: 475px){
+    div#dates, .two-inputs{
+        flex-wrap: wrap;
+        width: 100%;
+    }
 
-  nav div {
-    display: block;
-    font-size: 1.5em;
-    color: var(--accent-color);
-    margin: auto 1.5em auto auto;
-    border: 0.5px solid var(--accent-color);
-    padding: 0.2em 0.4em;
-    border-radius: 5px;
-  }
+    div#dates label:first-child, .two-inputs label:first-child, .card.signin div.two-inputs div:first-child {
+        margin: auto;
+        margin-bottom: 1vh;
+    }
 
-  nav ul {
-    display: none;
-  }
+    .card.profile div.two-inputs div:last-child {
+        margin: auto;
 
-  nav ul.visible {
-    display: block;
-    flex-basis: 100%;
-    flex-grow: 1;
-    padding-left: 0;
-    margin-top: 1.5em;
-  }
+    }
+}
+
+@media screen and (max-width: 900px){
+
+    nav ul li{
+        display: block;
+        width: 10em;
+        margin: auto auto;
+    }
+
+    nav div{
+        display: block;
+        font-size: 1.5em;
+        color: var(--accent-color);
+        margin: auto 1.5em auto auto;
+        border: 2px solid var(--accent-color);
+        padding: 0.2em 0.5em;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    
+    nav ul{
+        display: none;
+    }
+
+    nav ul.visible{
+        display: flex;
+        flex-basis: auto;
+        justify-content: space-between;
+        padding-left: 0;
+        margin: 1.5em auto 0.5em auto;
+        max-width: 90%;
+    }
+
+    nav li:last-child {
+        padding: 0.8em 0em;
+        text-align: center;
+    }
+
+
+    #reviews > span{
+        justify-content: space-evenly;
+    }
+
+    #reserve{
+        margin: auto;
+        grid-column: 1/5;
+        margin: 0;
+        margin-bottom: 2em;
+    }
+
+    #reserve.card{
+        width: 80%;
+    }
 }
 
 @media screen and (max-width: 750px) {
@@ -91,6 +136,22 @@
   #description {
     max-width: 40%;
   }
+    #houses article img{
+        margin: auto;
+        width: 30em;
+    }
+
+    #houses article header {
+        margin-top: 1em;
+    }
+
+    .fas{
+        text-align: center;
+    }
+
+    #houses article div div span span{
+        margin: 0em 1.5em;
+    }
 }
 
 @media screen and (max-width: 750px) {
@@ -120,5 +181,20 @@
     #reserve,
     .calendar{
         max-width: 100%;
+    }
+
+}
+
+@media screen and (max-width: 700px){
+    #rentals-history > div > p {
+        justify-content: center;
+    }
+    #rentals-history > div > p > span:nth-child(1){
+        flex-basis: 80%;
+    }
+
+
+    #rentals-history > div > p > span:nth-child(2){
+        display: none;
     }
 }
