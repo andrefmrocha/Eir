@@ -23,6 +23,7 @@ const housesCarousel = {
 const reservation = document.querySelector('#reserve');
 const checkin = reservation.querySelector('#check-in');
 const checkout = reservation.querySelector('#check-out');
+const csrf = document.querySelector('#csrf').value;
 
 const dateListener = async () => {
   removeError('invalid-dates');
@@ -131,7 +132,8 @@ async function buildCommentsSection(id, house) {
     const submitForm = async () => {
       const formData = {
         comment: textarea.value,
-        rating: starRating
+        rating: starRating,
+        csrf
       };
 
       let error = false;
@@ -246,7 +248,8 @@ export default async function getHouseInfo() {
 
     const formValues = {
       'checkin-checkout-input': [checkin.value, checkout],
-      'people-input': [number.value]
+      'people-input': [number.value],
+      csrf: [csrf]
     };
 
     Object.keys(formValues).forEach(key => {
@@ -273,7 +276,8 @@ export default async function getHouseInfo() {
         content: {
           house_id: urlParams.get('id'),
           checkin: checkin.value,
-          checkout: checkout.value
+          checkout: checkout.value,
+          csrf
         }
       });
       switch (response.status) {

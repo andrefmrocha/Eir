@@ -33,8 +33,8 @@ function generateDateString(date, text) {
 }
 
 export function updatePrice(checkin, checkout) {
-  const housePrice = document.querySelector('#reserve div:nth-child(3) p:last-child strong');
-  const totalPrice = document.querySelector('#reserve div:nth-child(3) p:first-child strong');
+  const housePrice = document.querySelector('#reserve div:nth-child(4) p:last-child strong');
+  const totalPrice = document.querySelector('#reserve div:nth-child(4) p:first-child strong');
   const numDays = (new Date(checkout.value) - new Date(checkin.value)) / (1000 * 60 * 60 * 24) + 1;
   totalPrice.innerText = Number(housePrice.innerText) * numDays;
 }
