@@ -228,6 +228,10 @@
   order: 2;
 }
 
+#photos-carousel div div.selected {
+  opacity: 60%;
+}
+
 
 #photos-carousel div div img{
   width: 100%;
@@ -236,17 +240,15 @@
 
 #photos-carousel div div {
   flex-basis: 25%;
-  border: 0.5px solid black;
 }
 
 #photos-carousel div div.selected {
-  opacity: 60%;
+  opacity: 40%;
 }
 
 
 #photos-carousel img.active{
   order: 1;
-  border: 0.5px solid black;
   height: 30vw;
   width: 100%;
   box-sizing: border-box;

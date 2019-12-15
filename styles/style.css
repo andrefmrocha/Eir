@@ -506,18 +506,6 @@ i.fa-star{
   width: 100%;
 }
 
-#photos-carousel div div.selected {
-  opacity: 60%;
-}
-
-
-#photos-carousel img.active{
-  order: 1;
-  border: 0.5px solid black;
-  height: 30vw;
-  width: 100%;
-}
-
 .card > section{
   margin: auto;
   display: flex;
