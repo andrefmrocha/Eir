@@ -186,7 +186,9 @@ async function getDetails() {
         const house = await response.json();
         
         if (house.id) {
-          successfulAddition("Property successfuly added!", '../assets/success-property.svg', `${env.host}pages/house_page.php?id=${house.id}`);
+          successfulAddition("Property successfuly added!", 
+                             '../assets/success-property.svg', 
+                             `${env.host}pages/house_page.php?id=${house.id}`);
         } else {
           clicked = false;
           showError('unknown-error');
