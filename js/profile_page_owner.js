@@ -31,14 +31,14 @@ export async function getOwnProperties() {
   carousel.photos = houses.map(buildProperty);
   carousel.buildCarousel(housesNode);
 
+  left.addEventListener('click', () => carousel.previous(housesNode));
+  right.addEventListener('click', () => carousel.next(housesNode));
   if (houses.length > 2) {
-    left.addEventListener('click', () => carousel.previous(housesNode));
-    right.addEventListener('click', () => carousel.next(housesNode));
     carousel.photos = houses.map(buildProperty);
     carousel.buildCarousel(housesNode);
   } else if (houses.length > 1) {
-    left.remove();
-    right.remove();
+    left.classList.add('small');
+    right.classList.add('small');
     carousel.photos = houses.map(buildProperty);
     carousel.buildCarousel(housesNode);
   }
@@ -50,6 +50,7 @@ function buildProperty(property) {
   const image = document.createElement('img');
   imgReference.appendChild(image);
   image.src = getPlacePhoto(property.photo);
+  image.alt = 'Property photo';
   const wrapper = document.createElement('span');
   wrapper.appendChild(imgReference);
   const title = document.createElement('p');

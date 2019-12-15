@@ -1,5 +1,6 @@
 import { createHouseDetails, getIcon } from './tags.js';
 import { getPersonPhoto } from './image.js';
+import env from './env.js';
 
 const houseInformation = document.querySelector('#house-information');
 const housePrice = document.querySelector('#reserve div:nth-child(4) p:last-child strong');
@@ -10,22 +11,31 @@ function displayHouseTitle(house) {
   const location = document.querySelector('#house-description h3 span');
   title.innerText = house.title;
   location.innerText = house.address;
-
+  document.querySelector('#house-title aside a').href = generateProfileUrl(house.owner.id);
   const img = document.querySelector('#house-title aside img');
   img.src = getPersonPhoto(house.owner.photo);
+  img.alt = 'Owner of the house photo';
   const name = document.querySelector('#house-title aside span');
   name.innerText = house.owner.full_name.substr(0, house.owner.full_name.indexOf(" "));
+}
+
+function generateProfileUrl(personId) {
+  return `${env.host}pages/view_profile.php?id=${personId}`;
 }
 
 export function buildComment(review) {
   const comment = document.createElement('article');
   const commentName = document.createElement('h4');
   commentName.innerText = review.full_name;
+  const photoWrapper = document.createElement('a');
+  photoWrapper.href = generateProfileUrl(review.user);
   const avatar = document.createElement('img');
   avatar.setAttribute('class', 'photo-avatar');
   avatar.src = getPersonPhoto(review.photo);
+  avatar.alt = 'User photo';
+  photoWrapper.appendChild(avatar);
   const commentOwner = document.createElement('div');
-  commentOwner.appendChild(avatar);
+  commentOwner.appendChild(photoWrapper);
   commentOwner.appendChild(commentName);
   const commentText = document.createElement('p');
   commentText.innerText = review.comment;

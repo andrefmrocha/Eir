@@ -14,7 +14,9 @@ function getTouristHousePage()
                 </h3>
             </div>
             <aside>
-                <img src="" alt="House owner" class="photo-avatar" />
+                <a>
+                    <img src="" alt="House owner" class="photo-avatar" />
+                </a>
                 <span>
                 </span>
             </aside>
@@ -59,7 +61,7 @@ function getTouristHousePage()
                         <span id="people-input" class="form-error">**</span>
                     </div>
                     <div>
-                        <input id="csrf" type="hidden" name="csrf" value=<?=$_SESSION['csrf']?>>
+                        <input id="csrf" type="hidden" name="csrf" value=<?= $_SESSION['csrf'] ?>>
                     </div>
                     <div>
                         <p>
@@ -75,10 +77,11 @@ function getTouristHousePage()
                     </div>
                     <div>
                         <label for="submit">
-                            <input name="submit" id="people" type="submit" value="Make Reservation">
+                            <input name="submit" id="submit" type="submit" value="Make Reservation">
                         </label>
                     </div>
                     <p id="num-people" class="form-error">* Exceeded number of guests!</p>
+                    <p id="less-than-zero-people" class="form-error">* Number of guests must be greather than 0!</p>
                     <p id="invalid-dates" class="form-error">* Invalid dates</p>
                     <p id="server-error" class="form-error">* An error has ocurred, please try again later</p>
                     <p id="login-error" class="form-error">* Please Log In Before Making a Reservation</p>
@@ -100,8 +103,7 @@ function getTouristHousePage()
                     </span>
                 </span>
             </article>
-            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_H2rJ_UoIMyraXQLybpu1GPwhXd5lKMw"
-             defer></script>
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_H2rJ_UoIMyraXQLybpu1GPwhXd5lKMw" defer></script>
         </section>
     </div>
 <?php

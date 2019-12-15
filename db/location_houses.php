@@ -275,7 +275,7 @@ function getOwnerInfo($owner_id)
 {
     $db = Database::instance()->db();
     $stmt = $db->prepare('
-        SELECT photo, full_name
+        SELECT photo, full_name, id
         FROM User
         WHERE User.id = :id
     ');

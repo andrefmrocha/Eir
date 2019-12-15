@@ -64,7 +64,7 @@ document.querySelector('form').addEventListener('submit', async ev => {
     };
     if (password.value != '' && confirmPassword.value != '' && password.value != confirmPassword.value) {
       showError('password-match-input');
-    } else if (password.value != '' && confirmPassword.value != password.value) {
+    } else if (password.value != '' && confirmPassword.value == password.value) {
       body.password = password.value;
     }
 
@@ -104,6 +104,7 @@ async function getProfile() {
   );
   const personPhoto = getPersonPhoto(profile.photo);
   profilePic.src = personPhoto;
+  profilePic.alt = 'Profile picture';
 }
 
 const pageView = localStorage.getItem('page-view');

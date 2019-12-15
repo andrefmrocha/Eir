@@ -3,14 +3,14 @@ include_once('../api/session.php');
 function drawHeader($scripts, $styles)
 { ?>
     <!DOCTYPE html>
-    <html>
+    <html lang="en">
 
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://kit.fontawesome.com/ac3e82986f.js" crossorigin="anonymous"></script>
         <script src="../js/hamburguer.js" type="module"></script>
-        <script src="../js/common.js" defer type="module"></script>
+        <script src="../js/common.js" type="module"></script>
         <?php foreach ($scripts as $script) { ?>
             <script src=<?= $script ?> type="module"></script>
         <?php } ?>
