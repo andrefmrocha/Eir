@@ -251,7 +251,7 @@ export default async function getHouseInfo() {
     ev.preventDefault();
     const number = reservation.querySelector('#people');
     let error = false;
-    removeError('num-people');
+    ['num-people', 'less-than-zero-people'].forEach(removeError);
 
     const formValues = {
       'checkin-checkout-input': [checkin.value, checkout],
@@ -273,6 +273,10 @@ export default async function getHouseInfo() {
 
     if (Number(number.value) > Number(house.max_guest_number)) {
       showError('num-people');
+      error = true;
+    }
+    if (Number(number.value) <= 0) {
+      showError('less-than-zero-people');
       error = true;
     }
 

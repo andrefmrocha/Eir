@@ -1,5 +1,6 @@
 import { request } from './network.js';
 import env from './env.js';
+import { removeError } from './form_validation.js';
 const urlParams = new URL(window.location).searchParams;
 
 const checkin = document.querySelector('#check-in');
@@ -141,6 +142,7 @@ function removeSelected(cells) {
 }
 
 function calendarClicks(article, date) {
+  removeError('invalid-dates');
   const table = article.querySelector('table');
   const cells = table.querySelectorAll('td');
   cells.forEach((day, index) => {
