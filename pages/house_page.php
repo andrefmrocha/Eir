@@ -14,7 +14,9 @@ function getTouristHousePage()
                 </h3>
             </div>
             <aside>
-                <img src="" alt="House owner" class="photo-avatar" />
+                <a>
+                    <img src="" alt="House owner" class="photo-avatar" />
+                </a>
                 <span>
                 </span>
             </aside>
