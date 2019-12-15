@@ -55,12 +55,11 @@ async function buildReviewsCarrousel(reviews) {
   carousel.photos = reviews.map(buildReview);
   carousel.buildCarousel(reviewsNode);
 
-  if (reviews.length > 2) {
-    left.addEventListener('click', () => carousel.previous(reviewsNode));
-    right.addEventListener('click', () => carousel.next(reviewsNode));
-  } else {
-    left.remove();
-    right.remove();
+  left.addEventListener('click', () => carousel.previous(reviewsNode));
+  right.addEventListener('click', () => carousel.next(reviewsNode));
+  if (reviews.length <= 2) {
+    left.classList.add('small');
+    right.classList.add('small');
   }
 }
 

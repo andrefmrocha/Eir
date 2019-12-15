@@ -6,6 +6,7 @@ import { getPlacePhoto } from './image.js';
 import { showError, removeError } from './form_validation.js';
 import { buildCalendar, validateDate, updatePrice } from './calendar.js';
 import buildMainHouseInfo from './house_helper_functions.js';
+import successfulReservation from './modal.js';
 import { buildComment } from './house_helper_functions.js';
 
 const carousel = document.querySelector('#photos-carousel');
@@ -22,21 +23,21 @@ const housesCarousel = {
 const reservation = document.querySelector('#reserve');
 const checkin = reservation.querySelector('#check-in');
 const checkout = reservation.querySelector('#check-out');
+const csrf = document.querySelector('#csrf').value;
 
 const dateListener = async () => {
   removeError('invalid-dates');
-  if (checkin.value != '' && checkout.value != '') {
+  if (checkin.value != '' && checkout.value != '' && checkin.value < checkout.value) {
     const startDate = new Date(checkin.value);
     const endDate = new Date(checkout.value);
-    const calendar = await buildCalendar(startDate, true);
-    houseInformation.replaceChild(calendar, document.querySelector('.calendar'));
-    const validation = await validateDate(startDate, endDate, calendar.querySelectorAll('td'));
+    await drawCalendar(startDate);
+    const validation = await validateDate(startDate, endDate, document.querySelectorAll('.calendar td'));
     if (!validation) {
       checkin.value = '';
       checkout.value = '';
       showError('invalid-dates');
     }
-    updatePrice(checkin, checkout);
+    updatePrice(startDate, endDate);
   }
 };
 
@@ -130,7 +131,8 @@ async function buildCommentsSection(id, house) {
     const submitForm = async () => {
       const formData = {
         comment: textarea.value,
-        rating: starRating
+        rating: starRating,
+        csrf
       };
 
       let error = false;
@@ -180,10 +182,18 @@ function displayNewCarousel() {
   image.src = housesCarousel.houses[housesCarousel.selected].firstElementChild.src;
   carousel.appendChild(image);
   const row = document.createElement('div');
-  housesCarousel.houses.forEach((house, index) => {
-    if (index === housesCarousel.selected) house.setAttribute('class', 'selected');
-    row.appendChild(house);
-  });
+
+  if (housesCarousel.selected >= 3) {
+    for (let i = housesCarousel.selected - 3; i <= housesCarousel.selected; i++) {
+      row.appendChild(housesCarousel.houses[i]);
+    }
+  } else {
+    for (let i = 0; i <= 3 && i < housesCarousel.houses.length; i++) {
+      row.appendChild(housesCarousel.houses[i]);
+    }
+  }
+
+  housesCarousel.houses[housesCarousel.selected].setAttribute('class', 'selected');
   carousel.appendChild(row);
 }
 
@@ -241,10 +251,12 @@ export default async function getHouseInfo() {
     ev.preventDefault();
     const number = reservation.querySelector('#people');
     let error = false;
+    removeError('num-people');
 
     const formValues = {
       'checkin-checkout-input': [checkin.value, checkout],
-      'people-input': [number.value]
+      'people-input': [number.value],
+      csrf: [csrf]
     };
 
     Object.keys(formValues).forEach(key => {
@@ -261,6 +273,7 @@ export default async function getHouseInfo() {
 
     if (number.value > house.max_guest_number) {
       showError('num-people');
+      error = true;
     }
 
     if (!error) {
@@ -270,7 +283,8 @@ export default async function getHouseInfo() {
         content: {
           house_id: urlParams.get('id'),
           checkin: checkin.value,
-          checkout: checkout.value
+          checkout: checkout.value,
+          csrf
         }
       });
       switch (response.status) {
@@ -281,6 +295,11 @@ export default async function getHouseInfo() {
           showError('login-error');
           break;
         case 201:
+          successfulReservation(
+            'Reservation was successful!',
+            '../assets/success-badge.svg',
+            `${env.host}pages/profile_page.php`
+          );
           break;
       }
     }

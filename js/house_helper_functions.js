@@ -2,7 +2,7 @@ import { createHouseDetails, getIcon } from './tags.js';
 import { getPersonPhoto } from './image.js';
 
 const houseInformation = document.querySelector('#house-information');
-const housePrice = document.querySelector('#reserve div:nth-child(3) p:last-child strong');
+const housePrice = document.querySelector('#reserve div:nth-child(4) p:last-child strong');
 let max_guest = 0;
 
 function displayHouseTitle(house) {
