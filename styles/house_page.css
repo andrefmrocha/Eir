@@ -171,6 +171,29 @@
   overflow: auto;
 }
 
+#add-review {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+#add-review textarea {
+  flex-basis: 100%;
+  border: 0.8px solid black;
+  resize: none;
+}
+
+#add-review span,
+#add-review input{
+  flex-basis: 15%;
+  margin: 0;
+}
+
+#add-review i.fa-star {
+  font-size: 1.5em;
+  width: auto;
+}
+
 #photos-carousel{
   width: 45vw;
   display: flex;
