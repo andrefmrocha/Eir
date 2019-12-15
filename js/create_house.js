@@ -4,6 +4,7 @@ import { buildTag, createTrashIcon } from './tags.js';
 import { tagOption } from './house_page_owner.js';
 import { showError, removeError } from './form_validation.js';
 import { getHouseLocation } from './maps.js';
+import successfulAddition from './modal.js';
 
 function updateMarker(e, maps, marker) {
   const newMarker = new google.maps.Marker({
@@ -176,6 +177,7 @@ async function getDetails() {
             : body.append(key, formData[key])
         );
         selectedPhotos.forEach(photo => body.append('new_photos[]', photo));
+
         const response = await fetch(`${env.host}api/create_house.php`, {
           method: 'POST',
           body
@@ -184,7 +186,11 @@ async function getDetails() {
         const house = await response.json();
 
         if (house.id) {
-          window.location.replace(`${env.host}pages/house_page.php?id=${house.id}`);
+          successfulAddition(
+            'Property successfuly added!',
+            '../assets/success-property.svg',
+            `${env.host}pages/house_page.php?id=${house.id}`
+          );
         } else {
           clicked = false;
           showError('unknown-error');

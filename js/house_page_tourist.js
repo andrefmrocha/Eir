@@ -6,6 +6,7 @@ import { getPlacePhoto } from './image.js';
 import { showError, removeError } from './form_validation.js';
 import { buildCalendar, validateDate, updatePrice } from './calendar.js';
 import buildMainHouseInfo from './house_helper_functions.js';
+import successfulReservation from './modal.js';
 import { buildComment } from './house_helper_functions.js';
 
 const carousel = document.querySelector('#photos-carousel');
@@ -241,6 +242,7 @@ export default async function getHouseInfo() {
     ev.preventDefault();
     const number = reservation.querySelector('#people');
     let error = false;
+    removeError('num-people');
 
     const formValues = {
       'checkin-checkout-input': [checkin.value, checkout],
@@ -261,6 +263,7 @@ export default async function getHouseInfo() {
 
     if (number.value > house.max_guest_number) {
       showError('num-people');
+      error = true;
     }
 
     if (!error) {
@@ -281,6 +284,11 @@ export default async function getHouseInfo() {
           showError('login-error');
           break;
         case 201:
+          successfulReservation(
+            'Reservation was successful!',
+            '../assets/success-badge.svg',
+            `${env.host}pages/profile_page.php`
+          );
           break;
       }
     }
