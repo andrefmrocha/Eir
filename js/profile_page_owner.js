@@ -50,6 +50,7 @@ function buildProperty(property) {
   const image = document.createElement('img');
   imgReference.appendChild(image);
   image.src = getPlacePhoto(property.photo);
+  image.alt = 'Property photo';
   const wrapper = document.createElement('span');
   wrapper.appendChild(imgReference);
   const title = document.createElement('p');
