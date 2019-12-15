@@ -38,7 +38,7 @@ function buildHouse(house) {
   const image = document.createElement('img');
   imgReference.appendChild(image);
   image.src = getPlacePhoto(house.photo);
-  image.src = 'Visited property photo';
+  image.alt = 'Visited property photo';
   const wrapper = document.createElement('span');
   wrapper.appendChild(imgReference);
   const title = document.createElement('p');
