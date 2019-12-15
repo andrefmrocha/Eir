@@ -59,6 +59,9 @@ function getTouristHousePage()
                         <span id="people-input" class="form-error">**</span>
                     </div>
                     <div>
+                        <input id="csrf" type="hidden" name="csrf" value=<?=$_SESSION['csrf']?>>
+                    </div>
+                    <div>
                         <p>
                             Total:
                             <strong>

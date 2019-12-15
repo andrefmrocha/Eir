@@ -23,21 +23,21 @@ const housesCarousel = {
 const reservation = document.querySelector('#reserve');
 const checkin = reservation.querySelector('#check-in');
 const checkout = reservation.querySelector('#check-out');
+const csrf = document.querySelector('#csrf').value;
 
 const dateListener = async () => {
   removeError('invalid-dates');
-  if (checkin.value != '' && checkout.value != '') {
+  if (checkin.value != '' && checkout.value != '' && checkin.value < checkout.value) {
     const startDate = new Date(checkin.value);
     const endDate = new Date(checkout.value);
-    const calendar = await buildCalendar(startDate, true);
-    houseInformation.replaceChild(calendar, document.querySelector('.calendar'));
-    const validation = await validateDate(startDate, endDate, calendar.querySelectorAll('td'));
+    await drawCalendar(startDate);
+    const validation = await validateDate(startDate, endDate, document.querySelectorAll('.calendar td'));
     if (!validation) {
       checkin.value = '';
       checkout.value = '';
       showError('invalid-dates');
     }
-    updatePrice(checkin, checkout);
+    updatePrice(startDate, endDate);
   }
 };
 
@@ -131,7 +131,8 @@ async function buildCommentsSection(id, house) {
     const submitForm = async () => {
       const formData = {
         comment: textarea.value,
-        rating: starRating
+        rating: starRating,
+        csrf
       };
 
       let error = false;
@@ -181,10 +182,18 @@ function displayNewCarousel() {
   image.src = housesCarousel.houses[housesCarousel.selected].firstElementChild.src;
   carousel.appendChild(image);
   const row = document.createElement('div');
-  housesCarousel.houses.forEach((house, index) => {
-    if (index === housesCarousel.selected) house.setAttribute('class', 'selected');
-    row.appendChild(house);
-  });
+
+  if (housesCarousel.selected >= 3) {
+    for (let i = housesCarousel.selected - 3; i <= housesCarousel.selected; i++) {
+      row.appendChild(housesCarousel.houses[i]);
+    }
+  } else {
+    for (let i = 0; i <= 3 && i < housesCarousel.houses.length; i++) {
+      row.appendChild(housesCarousel.houses[i]);
+    }
+  }
+
+  housesCarousel.houses[housesCarousel.selected].setAttribute('class', 'selected');
   carousel.appendChild(row);
 }
 
@@ -246,7 +255,8 @@ export default async function getHouseInfo() {
 
     const formValues = {
       'checkin-checkout-input': [checkin.value, checkout],
-      'people-input': [number.value]
+      'people-input': [number.value],
+      csrf: [csrf]
     };
 
     Object.keys(formValues).forEach(key => {
@@ -273,7 +283,8 @@ export default async function getHouseInfo() {
         content: {
           house_id: urlParams.get('id'),
           checkin: checkin.value,
-          checkout: checkout.value
+          checkout: checkout.value,
+          csrf
         }
       });
       switch (response.status) {

@@ -2,6 +2,7 @@
     include_once('session.php');
     include_once('../db/rentals.php');
     include_once('../db/location_houses.php');
+    include_once('csrf.php');
 
 
     if(!array_key_exists('house_id', $_POST) &&

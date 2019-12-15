@@ -217,7 +217,6 @@
   width: 45vw;
   display: flex;
   flex-wrap: wrap;
-  border: 0.5px solid black;
   align-items: center;
 }
 
@@ -236,7 +235,7 @@
 }
 
 #photos-carousel div div {
-  flex: 1 1 0px;
+  flex-basis: 25%;
   border: 0.5px solid black;
 }
 
@@ -293,7 +292,6 @@
   width: 2vw;
   margin: 0 0.2em;
 }
-
 
 #houses article div div span {
   flex-basis: 50%;
@@ -445,24 +443,24 @@
   max-width: 50vw;
 }
 
-#reserve  div:nth-child(3){
+#reserve  div:nth-child(4){
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-#reserve  div:nth-child(3) > p {
+#reserve  div:nth-child(4) > p {
   color: var(--accent-color);
 }
-#reserve  div:nth-child(3) > p > strong{
+#reserve  div:nth-child(4) > p > strong{
   color: var(--primary-color);
   font-weight: normal;
 }
-#reserve  div:nth-child(3) > p > strong::after{
+#reserve  div:nth-child(4) > p > strong::after{
   content: "€";
 }
 
-#reserve div:nth-child(4) input{
+#reserve div:nth-child(5) input{
   background-color: var(--primary-color);
   color: white;
   padding: 0.8em;

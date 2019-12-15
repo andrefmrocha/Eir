@@ -45,7 +45,7 @@ function drawHeader($scripts, $styles)
 
     <body>
         <nav>
-            <a href="/">
+            <a href="main_page.php">
                 <img src="../assets/logo.svg" alt="Eir logo">
             </a>
             <div>☰</div>
