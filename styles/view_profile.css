@@ -6,10 +6,6 @@
   color: var(--primary-color);
 }
 
-#user-details section {
-  display: block;
-}
-
 #user-details section.profile-picture {
   display: flex;
   justify-content: space-around;
@@ -34,6 +30,18 @@
     margin: auto;
     text-align: center;
     font-size: 0.9em;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#country i.fas,
+#profile-carrousel i.fas{
+  width: auto;
+}
+
+#country span{
+  padding-left: 0.5em;
 }
 
 #bio h3{

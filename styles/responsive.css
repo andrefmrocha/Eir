@@ -43,6 +43,10 @@
     .card.profile .two-inputs div {
         flex-basis: 100%;
     }
+
+    #user-details.user-form.profile{
+        min-height: auto;
+    }
 }
 
 @media screen and (max-width: 475px){
