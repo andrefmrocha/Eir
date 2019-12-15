@@ -43,6 +43,10 @@
     .card.profile .two-inputs div {
         flex-basis: 100%;
     }
+
+    #user-details.user-form.profile{
+        min-height: auto;
+    }
 }
 
 @media screen and (max-width: 475px){
@@ -210,6 +214,11 @@
 
     #profile-carrousel > div > p > span:nth-child(2){
         display: none;
+    }
+
+
+    #profile-carrousel i.fas.small{
+        display: block;
     }
 }
 

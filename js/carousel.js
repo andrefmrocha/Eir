@@ -7,7 +7,7 @@ const carousel = {
     this.buildCarousel(node);
   },
   previous: function(node) {
-    this.index = this.index < 1 < 0 ? this.photos.length - 1 : this.index - 1;
+    this.index = this.index < 0 ? this.photos.length - 1 : this.index - 1;
     this.buildCarousel(node);
   },
   buildCarousel: function(node) {
