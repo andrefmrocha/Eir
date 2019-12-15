@@ -68,7 +68,7 @@ function buildReview(review) {
 
   const image = document.createElement('img');
   image.src = getPlacePhoto(review.photo);
-  image.src = 'Reviewed house photo';
+  image.alt = 'Reviewed house photo';
   const imgAnchor = document.createElement('a');
   imgAnchor.href = placeUrl;
   imgAnchor.appendChild(image);
