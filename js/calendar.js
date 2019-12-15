@@ -1,5 +1,6 @@
 import { request } from './network.js';
 import env from './env.js';
+import { removeError } from './form_validation.js';
 const urlParams = new URL(window.location).searchParams;
 
 const checkin = document.querySelector('#check-in');
@@ -100,7 +101,7 @@ export async function buildCalendar(date, single) {
   currentYear = year;
   const now = new Date();
   for (let i = 1; i <= numDays; i++, day++) {
-    const currentDay = `${generateYearandMonthString(date)}-${i}`;
+    const currentDay = `${generateYearandMonthString(date)}-${i < 10 ? '0' + i : i}`;
     if (rentals.find(rental => rental.checkin <= currentDay && rental.checkout >= currentDay)) {
       tableCells[day].setAttribute('class', 'unavailable');
     } else if (now > new Date(year, month, i)) {
@@ -141,10 +142,12 @@ function removeSelected(cells) {
 }
 
 function calendarClicks(article, date) {
+  removeError('invalid-dates');
   const table = article.querySelector('table');
   const cells = table.querySelectorAll('td');
   cells.forEach((day, index) => {
     day.className.search('unavailable') == -1 &&
+      day.innerText != '' &&
       day.addEventListener('click', () => {
         if (!selecting) {
           selecting = true;
