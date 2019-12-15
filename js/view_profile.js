@@ -13,7 +13,6 @@ async function buildUserProfile() {
     method: 'GET',
     content: { id }
   });
-  console.log(user);
   buildUserProfileCard(user);
   buildReviewsCarrousel(user.reviews);
 }
@@ -31,15 +30,15 @@ async function buildUserProfileCard(user) {
       }
     })
   ).name;
-  document.querySelector('#country p').innerText = country;
+  document.querySelector('#country span').innerText = country;
 
   const bio = user['bio'] ? user['bio'] : "This user hasn't set their bio yet";
-  document.querySelector('#bio p').innerText = bio;
+  document.querySelector('#bio div').innerText = bio;
 
   const photo = getPersonPhoto(user['photo']);
   const img = document.createElement('img');
   img.src = photo;
-  document.querySelector('.profile-picture').appendChild(img);
+  document.querySelector('.profile-picture div').appendChild(img);
 }
 
 async function buildReviewsCarrousel(reviews) {

@@ -3,22 +3,22 @@ function drawPageBody()
 {
     ?>
     <section id="user-details" class="user-form profile">
-        <img id="signup-img" src="../assets/login-house.jpg" alt="Beautiful House">
+        <img id="profile-img" src="../assets/login-house.jpg" alt="Pool House">
         <span class="card profile">
-            <section>
-                <img src="../assets/profile-leaf.svg" alt="Profile ornament left leaf" />
-                <div class="profile-picture">
+            <section class="profile-picture">
+                <img class="profile-leaf" src="../assets/profile-leaf.svg" alt="Profile ornament left leaf" />
+                <div>
                 </div>
-                <img src="../assets/profile-leaf.svg" alt="Profile ornament left leaf" />
+                <img class="profile-leaf" src="../assets/profile-leaf.svg" alt="Profile ornament left leaf" />
             </section>
             <p id="full-name"></p>
             <section id="country">
                 <i class="fas fa-flag"></i>
-                <p></p>
+                <span></span>
             </section>
             <section id="bio">
                 <h3>About</h3>
-                <p></p>
+                <div></div>
             </section>
         </span>
     </section>

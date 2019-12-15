@@ -352,7 +352,7 @@ div#dates label:first-child {
 }
 
 #houses article header:hover {
- text-decoration: underline; 
+ text-decoration: underline;
 }
 
 #houses article header::before,
@@ -520,11 +520,11 @@ i.fa-star{
 
 .card section > img {
   flex-basis: 30%;
-} 
+}
 
 .card section > div {
   flex-basis: 35%;
-} 
+}
 
 .image-upload>input {
   display: none;
@@ -600,6 +600,27 @@ i.fa-star{
   width: 98.95%;
   height: 60em;
   position: absolute;
+}
+
+/* View Profile Page */
+
+#user-details.user-form.profile{
+  min-height: 60em;
+  justify-content: center;
+}
+
+#user-details section {
+  display: block;
+}
+
+#user-details section.profile-picture {
+  display: flex;
+  justify-content: space-around;
+}
+
+#user-details section.profile-picture div {
+  display: flex;
+  justify-content: space-around;
 }
 
 /* Log In page */
@@ -756,4 +777,3 @@ i.fa-star{
   background-color: var(--gold-color);
   display: block;
 }
-
