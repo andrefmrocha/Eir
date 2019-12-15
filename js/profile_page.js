@@ -104,7 +104,7 @@ async function getProfile() {
   );
   const personPhoto = getPersonPhoto(profile.photo);
   profilePic.src = personPhoto;
-  profilePic.src = 'Profile picture';
+  profilePic.alt = 'Profile picture';
 }
 
 const pageView = localStorage.getItem('page-view');
