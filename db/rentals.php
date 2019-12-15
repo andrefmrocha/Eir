@@ -4,17 +4,16 @@ include_once('../db/connection.php');
 function getRentals($date, $id)
 {
     $db = Database::instance()->db();
-    $begin = "$date-1";
+    $begin = "$date-01";
     $end = "$date-31";
     $stmt = $db->prepare('
             SELECT checkin, checkout
             FROM Rental
-            WHERE place = :id AND checkin >= :begin AND checkout <= :end
+            WHERE place = :id AND (checkin >= :begin OR checkout >= :begin)
         ');
     $stmt->execute([
         ':id' => $id,
-        ':begin' => $begin,
-        ':end' => $end,
+        ':begin' => $begin
     ]);
     return $stmt->fetchAll();
 }

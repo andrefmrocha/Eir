@@ -1,6 +1,6 @@
 import { createHouseDetails, getIcon } from './tags.js';
 import { getPersonPhoto } from './image.js';
-import env from './env.js'
+import env from './env.js';
 
 const houseInformation = document.querySelector('#house-information');
 const housePrice = document.querySelector('#reserve div:nth-child(4) p:last-child strong');
@@ -18,7 +18,7 @@ function displayHouseTitle(house) {
   name.innerText = house.owner.full_name;
 }
 
-function generateProfileUrl(personId){
+function generateProfileUrl(personId) {
   return `${env.host}pages/view_profile.php?id=${personId}`;
 }
 
