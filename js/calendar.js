@@ -5,6 +5,8 @@ const urlParams = new URL(window.location).searchParams;
 const checkin = document.querySelector('#check-in');
 const checkout = document.querySelector('#check-out');
 let selecting = false;
+let currentStart, currentEnd;
+let currentYear, currentMonth;
 
 const months = [
   'January',
@@ -35,7 +37,7 @@ function generateDateString(date, text) {
 export function updatePrice(checkin, checkout) {
   const housePrice = document.querySelector('#reserve div:nth-child(4) p:last-child strong');
   const totalPrice = document.querySelector('#reserve div:nth-child(4) p:first-child strong');
-  const numDays = (new Date(checkout.value) - new Date(checkin.value)) / (1000 * 60 * 60 * 24) + 1;
+  const numDays = (checkout - checkin) / (1000 * 60 * 60 * 24) + 1;
   totalPrice.innerText = Number(housePrice.innerText) * numDays;
 }
 
@@ -94,6 +96,8 @@ export async function buildCalendar(date, single) {
   titleText.innerText = `${months[month]} ${year}`;
   const numDays = new Date(year, month + 1, 0).getDate();
   let day = new Date(year, month).getDay();
+  currentMonth = month;
+  currentYear = year;
   const now = new Date();
   for (let i = 1; i <= numDays; i++, day++) {
     const currentDay = `${generateYearandMonthString(date)}-${i}`;
@@ -120,7 +124,12 @@ function fillSelected(start, end, table) {
 
 function fillSelectedDate(startDate, endDate, table) {
   for (let j = 0; j < table.length; j++) {
-    if (table[j].innerText >= startDate && table[j].innerText <= endDate) table[j].setAttribute('class', 'selected');
+    if (
+      table[j].innerText != '' &&
+      new Date(currentYear, currentMonth, table[j].innerText) >= startDate &&
+      new Date(currentYear, currentMonth, table[j].innerText) <= endDate
+    )
+      table[j].setAttribute('class', 'selected');
     else if (table[j].className != 'unavailable') table[j].removeAttribute('class');
   }
 }
@@ -149,11 +158,15 @@ function calendarClicks(article, date) {
 
             cells[i].addEventListener('click', () => {
               const newTable = table.cloneNode(true);
-              article.replaceChild(newTable, table);
-              calendarClicks(article, date);
               checkout.value = generateDateString(date, day.innerText);
               checkin.value = generateDateString(date, cells[i].innerText);
-              updatePrice(checkin, checkout);
+              const checkinDate = new Date(checkin.value);
+              const checkoutDate = new Date(checkout.value);
+              currentStart = checkinDate;
+              currentEnd = checkoutDate;
+              article.replaceChild(newTable, table);
+              calendarClicks(article, date);
+              updatePrice(checkinDate, checkoutDate);
               selecting = false;
             });
           }
@@ -180,16 +193,24 @@ function calendarClicks(article, date) {
             cells[i].addEventListener('click', () => {
               const newTable = table.cloneNode(true);
               article.replaceChild(newTable, table);
-              calendarClicks(article, date);
               checkin.value = generateDateString(date, day.innerText);
               checkout.value = generateDateString(date, cells[i].innerText);
-              updatePrice(checkin, checkout);
+              const checkinDate = new Date(checkin.value);
+              const checkoutDate = new Date(checkout.value);
+              updatePrice(checkinDate, checkoutDate);
+              currentStart = checkinDate;
+              currentEnd = checkoutDate;
+              calendarClicks(article, date);
               selecting = false;
             });
           }
         }
       });
   });
+
+  if (currentStart && currentEnd) {
+    fillSelectedDate(currentStart, currentEnd, cells);
+  }
 }
 
 export async function validateDate(startDate, endDate, cells) {
@@ -199,6 +220,8 @@ export async function validateDate(startDate, endDate, cells) {
       cell.className == 'unavailable' && startDate.getDate() <= cell.innerText && endDate.getDate() >= cell.innerText
   );
   if (unavailable) return false;
-  fillSelectedDate(startDate.getDate(), endDate.getDate(), cells);
+  fillSelectedDate(startDate, endDate, cells);
+  currentStart = startDate;
+  currentEnd = endDate;
   return true;
 }

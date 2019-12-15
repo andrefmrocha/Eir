@@ -37,7 +37,7 @@ const dateListener = async () => {
       checkout.value = '';
       showError('invalid-dates');
     }
-    updatePrice(checkin, checkout);
+    updatePrice(startDate, endDate);
   }
 };
 
