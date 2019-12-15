@@ -4,46 +4,47 @@ const body = document.querySelector('body');
 let active_modal = false;
 
 export default function successModal(successMessage, imageURL, continuePage) {
-    if (active_modal)
-        exitModal();
-    
-    let img = document.createElement('img');
-    img.src = imageURL;
+  if (active_modal) exitModal();
 
-    let message = document.createElement('p');
-    let text = document.createTextNode(successMessage);
-    message.setAttribute('class', 'success_message');
-    message.appendChild(text);
+  let img = document.createElement('img');
+  img.src = imageURL;
 
-    let content = document.createElement('div');
-    content.appendChild(img);
+  let message = document.createElement('p');
+  let text = document.createTextNode(successMessage);
+  message.setAttribute('class', 'success_message');
+  message.appendChild(text);
 
-    let modal_bg = document.createElement('div');
-    modal_bg.setAttribute('class', 'modal_bg');
+  let content = document.createElement('div');
+  content.appendChild(img);
 
-    let modal = document.createElement('div');
-    modal.setAttribute('class', 'modal');
+  let modal_bg = document.createElement('div');
+  modal_bg.setAttribute('class', 'modal_bg');
 
-    let leave = document.createElement('input');
-    leave.setAttribute('class', 'button');
-    leave.setAttribute('type', 'submit');
-    leave.setAttribute('value', 'Continue');
-    leave.addEventListener('click', function(){exitModal(continuePage)});
+  let modal = document.createElement('div');
+  modal.setAttribute('class', 'modal');
 
-    content.setAttribute('class', 'modal_body');
+  let leave = document.createElement('input');
+  leave.setAttribute('class', 'button');
+  leave.setAttribute('type', 'submit');
+  leave.setAttribute('value', 'Continue');
+  leave.addEventListener('click', function() {
+    exitModal(continuePage);
+  });
 
-    modal.appendChild(message);
-    modal.appendChild(content);
-    modal.appendChild(leave);
-    modal_bg.appendChild(modal);
-    body.appendChild(modal_bg);
+  content.setAttribute('class', 'modal_body');
 
-    active_modal = true;
+  modal.appendChild(message);
+  modal.appendChild(content);
+  modal.appendChild(leave);
+  modal_bg.appendChild(modal);
+  body.appendChild(modal_bg);
+
+  active_modal = true;
 }
 
 function exitModal(continuePage) {
-    document.querySelector('.modal_bg').remove();
-    active_modal = false;
+  document.querySelector('.modal_bg').remove();
+  active_modal = false;
 
-    window.location.replace(continuePage);
+  window.location.replace(continuePage);
 }

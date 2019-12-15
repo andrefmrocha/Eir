@@ -284,9 +284,11 @@ export default async function getHouseInfo() {
           showError('login-error');
           break;
         case 201:
-            successfulReservation("Reservation was successful!", 
-                                  '../assets/success-badge.svg', 
-                                  `${env.host}pages/profile_page.php`);
+          successfulReservation(
+            'Reservation was successful!',
+            '../assets/success-badge.svg',
+            `${env.host}pages/profile_page.php`
+          );
           break;
       }
     }
