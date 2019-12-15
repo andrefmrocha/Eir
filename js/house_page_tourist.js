@@ -46,6 +46,7 @@ function buildCarousel(house) {
     const container = document.createElement('div');
     const imageSel = document.createElement('img');
     imageSel.src = getPlacePhoto(photo);
+    imageSel.alt = 'Place photo';
     container.appendChild(imageSel);
     container.addEventListener('click', () => {
       housesCarousel.houses[housesCarousel.selected].removeAttribute('class');
@@ -180,6 +181,7 @@ function displayNewCarousel() {
   const image = document.createElement('img');
   image.setAttribute('class', 'active');
   image.src = housesCarousel.houses[housesCarousel.selected].firstElementChild.src;
+  image.alt = 'Selected House Photo';
   carousel.appendChild(image);
   const row = document.createElement('div');
 

@@ -77,7 +77,7 @@ function getTouristHousePage()
                     </div>
                     <div>
                         <label for="submit">
-                            <input name="submit" id="people" type="submit" value="Make Reservation">
+                            <input name="submit" id="submit" type="submit" value="Make Reservation">
                         </label>
                     </div>
                     <p id="num-people" class="form-error">* Exceeded number of guests!</p>

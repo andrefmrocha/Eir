@@ -45,7 +45,6 @@ async function getAllHouses() {
 const housesSection = document.querySelector('#houses');
 
 function addNewHouses(houses) {
-  console.log(houses);
   houses.forEach(house => {
     const article = document.createElement('article');
     const reference = document.createElement('a');
@@ -53,6 +52,7 @@ function addNewHouses(houses) {
     const img = document.createElement('img');
     reference.appendChild(img);
     img.src = getPlacePhoto(house.photo);
+    img.alt = 'House images';
     const houseDescription = document.createElement('div');
     const headerReference = document.createElement('a');
     headerReference.href = generateHouseUrl(house.id);

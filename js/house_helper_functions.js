@@ -14,6 +14,7 @@ function displayHouseTitle(house) {
   document.querySelector('#house-title aside a').href = generateProfileUrl(house.owner.id);
   const img = document.querySelector('#house-title aside img');
   img.src = getPersonPhoto(house.owner.photo);
+  img.alt = 'Owner of the house photo';
   const name = document.querySelector('#house-title aside span');
   name.innerText = house.owner.full_name;
 }
@@ -31,6 +32,7 @@ export function buildComment(review) {
   const avatar = document.createElement('img');
   avatar.setAttribute('class', 'photo-avatar');
   avatar.src = getPersonPhoto(review.photo);
+  avatar.alt = 'User photo';
   photoWrapper.appendChild(avatar);
   const commentOwner = document.createElement('div');
   commentOwner.appendChild(photoWrapper);
