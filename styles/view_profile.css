@@ -1,0 +1,52 @@
+/* View Profile Page */
+
+#user-details.user-form.profile{
+  min-height: 60em;
+  justify-content: center;
+  color: var(--primary-color);
+}
+
+#user-details section {
+  display: block;
+}
+
+#user-details section.profile-picture {
+  display: flex;
+  justify-content: space-around;
+}
+
+#user-details section.profile-picture div > img {
+    border: 3px solid var(--primary-color);
+}
+
+#user-details section.profile-picture div {
+  display: flex;
+  justify-content: space-around;
+}
+
+#full-name{
+    margin: auto;
+    padding: 0.5em;
+    font-size: 1.4em;
+}
+
+#country{
+    margin: auto;
+    text-align: center;
+    font-size: 0.9em;
+}
+
+#bio h3{
+    font-size: 1.0em;
+    font-weight: bold;
+}
+
+#bio p{
+    font-size: 0.9em;
+    font-weight: lighter;
+}
+
+#profile-carrousel > div > p > span > span{
+    text-align: right;
+    display: block;
+}

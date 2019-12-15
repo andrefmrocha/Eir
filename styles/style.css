@@ -602,26 +602,7 @@ i.fa-star{
   position: absolute;
 }
 
-/* View Profile Page */
 
-#user-details.user-form.profile{
-  min-height: 60em;
-  justify-content: center;
-}
-
-#user-details section {
-  display: block;
-}
-
-#user-details section.profile-picture {
-  display: flex;
-  justify-content: space-around;
-}
-
-#user-details section.profile-picture div {
-  display: flex;
-  justify-content: space-around;
-}
 
 /* Log In page */
 

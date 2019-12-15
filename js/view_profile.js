@@ -33,7 +33,7 @@ async function buildUserProfileCard(user) {
   document.querySelector('#country span').innerText = country;
 
   const bio = user['bio'] ? user['bio'] : "This user hasn't set their bio yet";
-  document.querySelector('#bio div').innerText = bio;
+  document.querySelector('#bio p').innerText = bio;
 
   const photo = getPersonPhoto(user['photo']);
   const img = document.createElement('img');

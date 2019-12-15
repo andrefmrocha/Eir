@@ -18,7 +18,7 @@ function drawPageBody()
             </section>
             <section id="bio">
                 <h3>About</h3>
-                <div></div>
+                <p></p>
             </section>
         </span>
     </section>
@@ -35,7 +35,7 @@ function drawPageBody()
 <?php }
 
 include_once('../templates/common.php');
-drawHeader(['../js/view_profile.js'], []);
+drawHeader(['../js/view_profile.js'], ['../styles/view_profile.css']);
 drawPageBody();
 drawFooter();
 ?>
