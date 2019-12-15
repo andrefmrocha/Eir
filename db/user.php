@@ -19,10 +19,8 @@ function storeNewUser($user, $hash)
 
 function updateUserWithPhoto($id, $user, $photo){
     if(!$photo){
-        echo 'No photo found!';
         updateUser($id, $user);
     } else {
-        echo 'Found photo!';
         $storedUser = getUserById($id);
         $password = isset($user['password']) ? password_hash($user['password'], PASSWORD_DEFAULT) : $storedUser['password_hash']; 
         $db = Database::instance()->db();

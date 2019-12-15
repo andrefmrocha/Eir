@@ -100,7 +100,7 @@ export async function buildCalendar(date, single) {
   currentYear = year;
   const now = new Date();
   for (let i = 1; i <= numDays; i++, day++) {
-    const currentDay = `${generateYearandMonthString(date)}-${i}`;
+    const currentDay = `${generateYearandMonthString(date)}-${i < 10 ? '0' + i : i}`;
     if (rentals.find(rental => rental.checkin <= currentDay && rental.checkout >= currentDay)) {
       tableCells[day].setAttribute('class', 'unavailable');
     } else if (now > new Date(year, month, i)) {
@@ -145,6 +145,7 @@ function calendarClicks(article, date) {
   const cells = table.querySelectorAll('td');
   cells.forEach((day, index) => {
     day.className.search('unavailable') == -1 &&
+      day.innerText != '' &&
       day.addEventListener('click', () => {
         if (!selecting) {
           selecting = true;

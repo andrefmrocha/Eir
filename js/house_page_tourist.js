@@ -271,7 +271,7 @@ export default async function getHouseInfo() {
       }
     });
 
-    if (number.value > house.max_guest_number) {
+    if (Number(number.value) > Number(house.max_guest_number)) {
       showError('num-people');
       error = true;
     }
