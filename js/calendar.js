@@ -40,6 +40,7 @@ export function updatePrice(checkin, checkout) {
 }
 
 export async function buildCalendar(date, single) {
+  selecting = false;
   const article = document.createElement('article');
   article.setAttribute('class', 'calendar');
   const title = document.createElement('div');
@@ -134,7 +135,7 @@ function calendarClicks(article, date) {
   const table = article.querySelector('table');
   const cells = table.querySelectorAll('td');
   cells.forEach((day, index) => {
-    day.className != 'unavailable' &&
+    day.className.search('unavailable') == -1 &&
       day.addEventListener('click', () => {
         if (!selecting) {
           selecting = true;
