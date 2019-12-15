@@ -14,7 +14,7 @@ function displayHouseTitle(house) {
   const img = document.querySelector('#house-title aside img');
   img.src = getPersonPhoto(house.owner.photo);
   const name = document.querySelector('#house-title aside span');
-  name.innerText = house.owner.full_name;
+  name.innerText = house.owner.full_name.substr(0, house.owner.full_name.indexOf(" "));
 }
 
 export function buildComment(review) {

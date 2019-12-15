@@ -106,6 +106,25 @@
   cursor: pointer;
 }
 
+
+#house-description h1::before,
+#house-description h1::after{
+  content: "\"";
+}
+
+#house-description h1{
+  color: var(--primary-color);
+  letter-spacing: 2px;
+  font-size: 1.6em;
+}
+
+#house-description h3{
+  color: var(--accent-color);
+  font-size: 1em;
+  font-weight: normal;
+  letter-spacing: 1px;
+}
+
 .select::after {
   content: '\25BC';
   position: absolute;
@@ -246,22 +265,34 @@
   margin: 0 1em;
 }
 
+#house-description {
+  margin-left: 3vw;
+}
+
 #house-title{
   display: flex;
   justify-content: space-between;
-  margin: 1.5em 0;
+  margin: 2.5em 1em 2em 1em;
 }
 
 #house-title aside  {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-right: 5vw;
 }
 
 #house-title aside span {
   margin: auto;
+  color: var(--accent-color);
+  font-weight: lighter;
 }
 
+.fas.fa-map-marker-alt {
+  font-size: 1.2em;
+  width: 2vw;
+  margin: 0 0.2em;
+}
 
 
 #houses article div div span {
@@ -294,9 +325,14 @@
   margin: 0em 2em 1em 2em;
 }
 
+#house-information .title {
+  padding: 0 0 0.7em 0;
+  font-weight: bold;
+}
+
 #description{
   font-size: 1.1em;
-  padding-right: 1em;
+  padding-right: 2em;
   margin-top: 0;
   flex: 1 0 40em;
   max-width: 55%;
@@ -309,16 +345,17 @@
   font-size: inherit;
 }
 
-
 #house-information aside{
   flex-grow: 1;
   border-left: 1px solid var(--accent-color);
-  padding-left: 2em;
+  padding-left: 3em;
+  margin-bottom: 2em;
 }
 
 #house-information aside > div{
   display: flex;
   flex-direction: column;
+  padding-left: 1em;
 }
 
 #house-information aside > div > *{
@@ -332,8 +369,19 @@
   padding: 0 0.5em;
 }
 
+#google-maps {
+  border: 2px solid var(--primary-color);
+  border-radius: 0.5em;
+}
+
 #reviews{
   flex-basis: 100%;
+}
+
+#reviews .title {
+  padding: 0;
+  padding-left: 0.5em;
+  margin: auto 0;
 }
 
 #reviews div{
@@ -343,7 +391,8 @@
 #reviews > span{
   display: flex;
   justify-content: space-between;
-  padding: 0.7em 0;
+  margin: 1em auto 1.5em auto;
+  border-bottom: 2px solid var(--accent-color);
 }
 
 #reviews > span > span{
@@ -365,7 +414,7 @@
 }
 
 #reviews > div > article {
-  margin: 1em 0;
+  margin: 0 0 2.5em 2em;
 }
 
 #reviews > div > article > div {
@@ -378,12 +427,15 @@
   font-weight: normal;
   display: inline-block;
   margin: 0;
-  padding-left: 0.8em;
+  padding-left: 1em;
   color: var(--primary-color);
 }
 
 #reviews > div p{
   font-size: 0.9em;
+  font-weight: bold;
+  padding-top: 0.5em;
+  padding-left: 1em;
 }
 
 #reserve{

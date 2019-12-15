@@ -42,26 +42,7 @@ nav ul {
   padding-right: 1.5em;
   display: flex;
   justify-content: space-between;
-}
-
-nav li:first-child {
-  color: var(--gold-color);
-}
-
-nav li:last-child {
-  padding: 0.8em 0.4em 0.8em 0.4em;
-  border-radius: 0.3em;
-  border: 1.5px solid var(--accent-color);
-}
-
-nav li:last-child img{
-  border-radius: 50%;
-}
-
-a {
-  text-decoration: none;
-  color: inherit;
-  padding: 0vw 0.7vw;
+  margin: 0;
 }
 
 nav div {
@@ -77,6 +58,74 @@ nav li {
   color: var(--accent-color);
   text-transform: uppercase;
 }
+
+nav li:first-child {
+  color: var(--gold-color);
+}
+
+nav li:last-child {
+  padding: 0.8em 0.4em 0.8em 0.4em;
+  border-radius: 0.3em;
+  border: 1.5px solid var(--accent-color);
+}
+
+nav li#logged_in_photo {
+  border: none;
+}
+
+nav li:last-child img{
+  border-radius: 50%;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  padding: 0;
+  padding-bottom: 0.3em;
+  margin: 0 0.7vw;
+}
+
+nav li a {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  position: relative;
+  overflow: hidden;
+}
+nav li a:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 51%;
+  right: 51%;
+  bottom: 0;
+  background: var(--accent-color);
+  height: 2px;
+  -webkit-transition-property: left, right;
+  transition-property: left, right;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
+nav li a#page-view:before {
+  background: var(--gold-color);
+}
+nav li#logged_in_photo a:before {
+  background: none;
+}
+
+nav li a:hover:before, nav li a:focus:before, nav li a:active:before {
+  left: 0;
+  right: 0;
+}
+
+
+
+
 
 footer {
   display: flex;
@@ -399,20 +448,6 @@ i.fa-star{
 }
 
 
-#house-description h1::before,
-#house-description h1::after{
-  content: "\"";
-}
-
-#house-description h1{
-  color: var(--primary-color);
-}
-
-#house-description h3{
-  color: var(--accent-color);
-  font-size: 0.9em;
-  font-weight: normal;
-}
 
 .user-form{
   display: flex;
@@ -755,6 +790,21 @@ i.fa-star{
 #profile-carrousel .button {
   background-color: var(--gold-color);
   display: block;
+}
+
+#houses article div div span {
+  flex-basis: 50%;
+  display: inline-block;
+  padding: 0.7em 0;
+  color: var(--primary-color);
+}
+
+#houses article div div span span {
+  margin: 0 0.5em;
+}
+
+#houses article div div span:nth-child(even){
+  text-align: end;
 }
 
 

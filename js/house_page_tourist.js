@@ -208,14 +208,14 @@ async function drawCalendar(date) {
 export default async function getHouseInfo() {
   drawCalendar(new Date());
 
-  document.querySelector('.fa-arrow-left').addEventListener('click', () => {
+  document.querySelector('.fa-chevron-left').addEventListener('click', () => {
     housesCarousel.houses[housesCarousel.selected].removeAttribute('class');
     const nextSelection = housesCarousel.selected - 1;
     housesCarousel.selected = nextSelection < 0 ? housesCarousel.houses.length - 1 : nextSelection;
     displayNewCarousel();
   });
 
-  document.querySelector('.fa-arrow-right').addEventListener('click', () => {
+  document.querySelector('.fa-chevron-right').addEventListener('click', () => {
     housesCarousel.houses[housesCarousel.selected].removeAttribute('class');
     const nextSelection = ++housesCarousel.selected % housesCarousel.houses.length;
     housesCarousel.selected = nextSelection;

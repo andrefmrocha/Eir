@@ -20,10 +20,10 @@ function getTouristHousePage()
             </aside>
         </section>
         <section id="carousel">
-            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-chevron-left"></i>
             <section id="photos-carousel">
             </section>
-            <i class="fas fa-arrow-right"></i>
+            <i class="fas fa-chevron-right"></i>
         </section>
         <section id="house-information">
             <article id="description">

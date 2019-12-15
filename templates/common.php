@@ -66,7 +66,7 @@ function drawHeader($scripts, $styles)
                     <li>
                         <a href="logout_page.php">Log out</a>
                     </li>
-                    <li>
+                    <li id="logged_in_photo">
                         <a href="profile_page.php">
                             <img alt="User profile picture" src=<?= $photoSrc ?> />
                         </a>
