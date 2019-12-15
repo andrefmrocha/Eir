@@ -50,7 +50,7 @@ document.querySelector('form').addEventListener('submit', async ev => {
         showError('user-not-found');
         break;
       default:
-        window.location.replace(`${env.host}`);
+        window.history.back();
         break;
     }
   }
