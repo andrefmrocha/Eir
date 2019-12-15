@@ -758,10 +758,7 @@ i.fa-star{
 }
 
 
-
-
-
-
+/* Modal */
 
 .modal_bg {
   background-color: rgba(0.0, 0.0, 0.0, 0.6);
@@ -772,7 +769,6 @@ i.fa-star{
   justify-content: center;
   align-items: center;
   
-  /* TODO: this is probably not the correct way of doing this */
   top: 0;
   left: 0;
 }
@@ -783,16 +779,19 @@ i.fa-star{
   background-color: white;
   text-align: center;
   padding: 2em;
-  position: fixed;
   border-radius: 7px;
   z-index: 1;
+  left: 0;
+  top: 0;
+  margin: 1em;
 }
 
 .modal div {
   display: block;
   box-sizing: border-box;
   width: 60vw;
-  height: 60vh;
+  height: 50vh;
+  margin: auto;
 }
 
 .modal img {
@@ -803,14 +802,18 @@ i.fa-star{
 }
 
 .modal input {
-  border: none;
-  border-radius: 0.3em;
-  width: 10vw;
-  padding: 0.5em;
-  margin: 1.5em 0 0.5em 0;
-  background: var(--accent-color);
-  color: white;
   cursor: pointer;
+  display: block;
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: bold;
+  border-radius: 0.3em;
+  border: 0;
+  width: auto;
+  min-width: 15em;
+  font-size: 0.8em;
+  padding: 1em 3em;
+  margin: 3vh auto 0em auto;
 }
 
 .modal p {
@@ -819,7 +822,7 @@ i.fa-star{
   font-weight: bold;
   margin: auto;
   letter-spacing: 0.4px;
-  padding: 0.5em 0 1em 0;
+  padding: 0 0 3vh 0;
   color: var(--accent-color);;
 }
 

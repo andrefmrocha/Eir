@@ -25,7 +25,7 @@ export default function successModal(successMessage, imageURL, continuePage) {
     modal.setAttribute('class', 'modal');
 
     let leave = document.createElement('input');
-    leave.setAttribute('class', 'continue');
+    leave.setAttribute('class', 'button');
     leave.setAttribute('type', 'submit');
     leave.setAttribute('value', 'Continue');
     leave.addEventListener('click', function(){exitModal(continuePage)});
