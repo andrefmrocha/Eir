@@ -77,3 +77,44 @@ function getHousesUpcomingStays(&$houses)
         addUpcomingRentalsCount($house);
     }
 }
+
+function getRentalByPerson($id, $house_id, $date){
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('SELECT * FROM Rental
+    WHERE guest = :guest AND checkout < :date AND place = :place');
+    $stmt->execute(array(
+        ':guest' => $id,
+        ':date' => $date,
+        ':place' => $house_id
+    ));
+    return $stmt->fetch();
+}
+
+function getUserHouseRating($id, $house_id){
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('SELECT *  FROM Rating
+    WHERE place = :place AND user = :user');
+    $stmt->execute(array(
+        ':user' => $id,
+        ':place' => $house_id
+    ));
+    return $stmt->fetch();
+}
+
+function addNewRating($id, $house_id, $rating, $comment){
+    $db = Database::instance()->db();
+    $stmt = $db->prepare('INSERT INTO Rating
+    (place, rating, user, comment) VALUES(:place, :rating, :user, :comment)');
+    $stmt->execute(array(
+        ':user' => $id,
+        ':place' => $house_id,
+        ':rating' => $rating,
+        ':comment' => $comment
+    ));
+    
+    $stmt = $db->prepare('SELECT Rating.rating, Rating.comment, Rating.user, User.full_name, User.photo
+    FROM Rating, User
+    WHERE Rating.id = ? AND User.id = Rating.User');
+    $stmt->execute(array($db->lastInsertId()));
+    return $stmt->fetch();
+}
