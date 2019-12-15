@@ -117,6 +117,13 @@ function fillSelected(start, end, table) {
   }
 }
 
+function fillSelectedDate(startDate, endDate, table) {
+  for (let j = 0; j < table.length; j++) {
+    if (table[j].innerText >= startDate && table[j].innerText <= endDate) table[j].setAttribute('class', 'selected');
+    else if (table[j].className != 'unavailable') table[j].removeAttribute('class');
+  }
+}
+
 function removeSelected(cells) {
   cells.forEach(day => {
     if (day.className != 'unavailable') day.removeAttribute('class');
@@ -191,6 +198,6 @@ export async function validateDate(startDate, endDate, cells) {
       cell.className == 'unavailable' && startDate.getDate() <= cell.innerText && endDate.getDate() >= cell.innerText
   );
   if (unavailable) return false;
-  fillSelected(startDate.getDate() - 1, endDate.getDate() - 1, cells);
+  fillSelectedDate(startDate.getDate(), endDate.getDate(), cells);
   return true;
 }

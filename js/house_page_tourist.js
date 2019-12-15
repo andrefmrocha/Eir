@@ -27,12 +27,11 @@ const csrf = document.querySelector('#csrf').value;
 
 const dateListener = async () => {
   removeError('invalid-dates');
-  if (checkin.value != '' && checkout.value != '') {
+  if (checkin.value != '' && checkout.value != '' && checkin.value < checkout.value) {
     const startDate = new Date(checkin.value);
     const endDate = new Date(checkout.value);
-    const calendar = await buildCalendar(startDate, true);
-    houseInformation.replaceChild(calendar, document.querySelector('.calendar'));
-    const validation = await validateDate(startDate, endDate, calendar.querySelectorAll('td'));
+    await drawCalendar(startDate);
+    const validation = await validateDate(startDate, endDate, document.querySelectorAll('.calendar td'));
     if (!validation) {
       checkin.value = '';
       checkout.value = '';
