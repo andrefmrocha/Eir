@@ -182,10 +182,18 @@ function displayNewCarousel() {
   image.src = housesCarousel.houses[housesCarousel.selected].firstElementChild.src;
   carousel.appendChild(image);
   const row = document.createElement('div');
-  housesCarousel.houses.forEach((house, index) => {
-    if (index === housesCarousel.selected) house.setAttribute('class', 'selected');
-    row.appendChild(house);
-  });
+
+  if (housesCarousel.selected >= 3) {
+    for (let i = housesCarousel.selected - 3; i <= housesCarousel.selected; i++) {
+      row.appendChild(housesCarousel.houses[i]);
+    }
+  } else {
+    for (let i = 0; i <= 3 && i < housesCarousel.houses.length; i++) {
+      row.appendChild(housesCarousel.houses[i]);
+    }
+  }
+
+  housesCarousel.houses[housesCarousel.selected].setAttribute('class', 'selected');
   carousel.appendChild(row);
 }
 

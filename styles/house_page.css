@@ -198,7 +198,6 @@
   width: 45vw;
   display: flex;
   flex-wrap: wrap;
-  border: 0.5px solid black;
   align-items: center;
 }
 
@@ -217,7 +216,7 @@
 }
 
 #photos-carousel div div {
-  flex: 1 1 0px;
+  flex-basis: 25%;
   border: 0.5px solid black;
 }
 
