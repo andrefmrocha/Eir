@@ -8,6 +8,7 @@ export default function successModal(successMessage, imageURL, continuePage) {
 
   let img = document.createElement('img');
   img.src = imageURL;
+  img.alt = 'Success photo';
 
   let message = document.createElement('p');
   let text = document.createTextNode(successMessage);
