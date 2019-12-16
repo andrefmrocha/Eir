@@ -11,7 +11,7 @@ function getTouristHousePage()
         </section>
         <section id="carousel" class="owner-view">
             <div class="add-new-photo">
-                <label for="new-photo"><i class="fas fa-plus" aria-hidden="true"></i></label>
+                <label for="new-photo"><div><i class="fas fa-plus" aria-hidden="true"></div></i></label>
                 <input id="new-photo" name="new-photo" type="file">
             </div>
         </section>

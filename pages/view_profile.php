@@ -35,7 +35,7 @@ function drawPageBody()
 <?php }
 
 include_once('../templates/common.php');
-drawHeader(['../js/view_profile.js'], ['../styles/view_profile.css']);
+drawHeader(['../js/view_profile.js'], ['../styles/view_profile.css', '../styles/profile.css']);
 drawPageBody();
 drawFooter();
 ?>

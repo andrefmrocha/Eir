@@ -2,7 +2,7 @@
 include_once('../templates/common.php');
 drawHeader([
     '../js/houses.js'
-], []);
+], ['../styles/house_listing.css']);
 ?>
 <section id="filters">
     <div>

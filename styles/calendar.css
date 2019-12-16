@@ -1,7 +1,8 @@
 .calendar {
-    border: 1px solid var(--primary-color);
-    padding: 0 1em;
+    border: 2px solid var(--primary-color);
+    padding: 1em;
     max-width: 50vw;
+    border-radius: 0.5em;
 }
 
 .calendar > div {
@@ -15,28 +16,30 @@
 
 .calendar > div.controllers{
     justify-content: space-between;
+    padding: 1em;
 }
 
 .calendar > div h5 {
     font-size: 1em;
-    margin: 1em 0;
+    margin: 0;
 }
 
 .calendar table{
     empty-cells: show;
     border-collapse: collapse;
     margin: auto;
-    margin-bottom: 1em;
+    margin-top: 1em;
     width: 90%;
 }
 
 .calendar table td {
     width: 2.5em;
     height: 2.5em;
-    border: 0.5px solid var(--calendar-border);
+    border: 2px solid var(--calendar-border);
     text-align: center;
     color: var(--primary-color);
     font-size: 0.9em;
+    font-weight: bold;
     cursor: pointer;
 }
 
@@ -48,6 +51,7 @@
 #calendars .calendar table td.unavailable.past-date {
     color: var(--reserved);
     background-color: white;
+    text-decoration: line-through;
 }
 
 #calendars .calendar table td.unavailable {
@@ -62,10 +66,10 @@
 
 .calendar table th{
     font-size: 0.7em;
+    padding-bottom: 0.4em;
     color: var(--primary-color);
 }
 
 .calendar > div i{
-    flex-basis: 5%;
     font-size: 0.8em;
 }

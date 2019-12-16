@@ -16,7 +16,7 @@ function displayHouseTitle(house) {
   img.src = getPersonPhoto(house.owner.photo);
   img.alt = 'Owner of the house photo';
   const name = document.querySelector('#house-title aside span');
-  name.innerText = house.owner.full_name;
+  name.innerText = house.owner.full_name.substr(0, house.owner.full_name.indexOf(' '));
 }
 
 function generateProfileUrl(personId) {

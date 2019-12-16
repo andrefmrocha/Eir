@@ -119,7 +119,7 @@ export async function buildCalendar(date, single) {
 function fillSelected(start, end, table) {
   for (let j = 0; j < table.length; j++) {
     if (j >= start && j <= end) table[j].setAttribute('class', 'selected');
-    else if (table[j].className != 'unavailable') table[j].removeAttribute('class');
+    else if (table[j].className.search('unavailable') == -1) table[j].removeAttribute('class');
   }
 }
 
@@ -131,13 +131,13 @@ function fillSelectedDate(startDate, endDate, table) {
       new Date(currentYear, currentMonth, table[j].innerText) <= endDate
     )
       table[j].setAttribute('class', 'selected');
-    else if (table[j].className != 'unavailable') table[j].removeAttribute('class');
+    else if (table[j].className.search('unavailable') == -1) table[j].removeAttribute('class');
   }
 }
 
 function removeSelected(cells) {
   cells.forEach(day => {
-    if (day.className != 'unavailable') day.removeAttribute('class');
+    if (day.className.search('unavailable') == -1) day.removeAttribute('class');
   });
 }
 
@@ -154,7 +154,7 @@ function calendarClicks(article, date) {
           removeSelected(cells);
           day.setAttribute('class', 'selected');
           for (let i = index - 1; i >= 0; i--) {
-            if (cells[i].className == 'unavailable' || cells[i].innerText == '') break;
+            if (cells[i].className.search('unavailable') != -1 || cells[i].innerText == '') break;
             cells[i].addEventListener('mouseover', () => {
               fillSelected(i, index, cells);
             });
@@ -187,7 +187,7 @@ function calendarClicks(article, date) {
           });
 
           for (let i = index + 1; i < cells.length; i++) {
-            if (cells[i].className == 'unavailable' || cells[i].innerText == '') break;
+            if (cells[i].className.search('unavailable') != -1 || cells[i].innerText == '') break;
 
             cells[i].addEventListener('mouseover', () => {
               fillSelected(index, i, cells);
@@ -220,7 +220,9 @@ export async function validateDate(startDate, endDate, cells) {
   const unavailable = [].find.call(
     cells,
     cell =>
-      cell.className == 'unavailable' && startDate.getDate() <= cell.innerText && endDate.getDate() >= cell.innerText
+      cell.className.search('unavailable') != -1 &&
+      startDate.getDate() <= cell.innerText &&
+      endDate.getDate() >= cell.innerText
   );
   if (unavailable) return false;
   fillSelectedDate(startDate, endDate, cells);
