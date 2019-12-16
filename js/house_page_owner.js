@@ -54,9 +54,11 @@ async function buildEditableView(house, maps) {
   const addNewPhoto = document.createElement('div');
   addNewPhoto.setAttribute('class', 'add-new-photo');
   const label = document.createElement('label');
+  const div = document.createElement('div');
   const icon = document.createElement('i');
   icon.setAttribute('class', 'fas fa-plus');
-  label.appendChild(icon);
+  div.appendChild(icon);
+  label.appendChild(div);
   label.htmlFor = 'new-photo';
   const input = document.createElement('input');
   input.setAttribute('id', 'new-photo');

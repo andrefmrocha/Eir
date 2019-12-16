@@ -9,8 +9,11 @@
         display: block;
         position: static;
         margin: 2em;
-        padding: 0em;
         width: auto;
+    }
+
+    .card.profile, .card.login, .card.signin {
+        padding: 0em;
     }
 
     .card label {
@@ -61,6 +64,24 @@
     }
 
     .card.profile div.two-inputs div:last-child {
+        margin: auto;
+
+    }
+}
+
+@media screen and (max-width: 950px){
+    .reservation_dates{
+        flex-wrap: wrap;
+        width: 100%;
+    }
+
+    .reservation_dates label:first-child, .reservation_dates div:first-child {
+        margin: auto;
+        margin-bottom: 1vh;
+        margin-right: 0 !important;
+    }
+
+    .reservation_dates div:last-child {
         margin: auto;
 
     }
@@ -132,43 +153,15 @@
   }
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1130px) {
   #house-page {
     padding: 0;
   }
 
-  #description {
-    max-width: 40%;
+  #house-information #description {
+    max-width: 90%;
   }
-}
 
-@media screen and (max-width: 750px){
-    #houses article div{
-        padding: 0;
-        margin: auto;
-        box-sizing: border-box;
-
-    }
-
-    #houses article img{
-        margin: auto;
-        width: 30em;
-    }
-
-    #houses article header {
-        margin-top: 1em;
-    }
-
-    .fas{
-        text-align: center;
-    }
-
-    #houses article div div span span{
-        margin: 0em 1.5em;
-    }
-}
-
-@media screen and (max-width: 750px) {
   #house-information > aside {
     flex-basis: 100%;
     border-left: 0px;
@@ -191,12 +184,51 @@
   }
 }
 
-@media screen and (max-width: 500px) {
-    #reserve,
-    .calendar{
-        max-width: 100%;
+@media screen and (max-width: 750px){
+    #houses article div{
+        padding: 0;
+        margin: auto;
+        box-sizing: border-box;
+
     }
 
+    #houses article img{
+        margin: auto;
+        width: 100%;
+    }
+
+    #houses article header {
+        margin-top: 1em;
+    }
+
+    .fas{
+        text-align: center;
+    }
+
+    #houses article div div span span{
+        margin: 0em 1.5em;
+    }
+}
+
+@media screen and (max-width: 1050px) {
+    #reserve,
+    .calendar{
+        max-width: 90%;
+        padding-bottom: 2em;
+    }
+
+    #calendars > div {
+        justify-content: center;
+        width: 90%;
+    }
+
+    #calendars > div article:nth-child(1){
+        flex-basis: 80%;
+    }
+    
+    #calendars > div article:nth-child(2){
+        display: none;
+    }
 }
 
 @media screen and (max-width: 700px){

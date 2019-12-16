@@ -40,9 +40,9 @@ function getTouristHousePage()
             </aside>
 
             <article id="reserve" class="card">
-                <h3>Make a reservation now</h3>
+                <h3>Make a reservation <strong>now</strong></h3>
                 <form action="#" method="post">
-                    <div id="dates">
+                    <div id="dates" class="reservation_dates">
                         <label for="check-in">
                             Check In
                             <input name="checkin" id="check-in" type="date">
@@ -60,7 +60,7 @@ function getTouristHousePage()
                         </label>
                         <span id="people-input" class="form-error">**</span>
                     </div>
-                    <div>
+                    <div id="no_display">
                         <input id="csrf" type="hidden" name="csrf" value=<?= $_SESSION['csrf'] ?>>
                     </div>
                     <div>
