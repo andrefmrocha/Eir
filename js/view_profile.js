@@ -1,6 +1,6 @@
 import { request } from './network.js';
 import { getPlacePhoto, getPersonPhoto } from './image.js';
-import { generateHouseUrl } from './houses.js';
+import { generateHouseUrl } from './house_helper_functions.js';
 import carousel from './carousel.js';
 import env from './env.js';
 
