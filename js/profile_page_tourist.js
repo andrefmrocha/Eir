@@ -2,7 +2,7 @@ import carousel from './carousel.js';
 import { getPlacePhoto } from './image.js';
 import { request } from './network.js';
 import env from './env.js';
-import { generateHouseUrl } from './houses.js';
+import { generateHouseUrl } from './house_helper_functions.js';
 
 export default async function getRentalHistory() {
   const houses = await request({

@@ -96,3 +96,7 @@ export default function buildMainHouseInfo(house) {
     house
   };
 }
+
+export function generateHouseUrl(id) {
+  return `${env.host}pages/house_page.php?id=${id}`;
+}

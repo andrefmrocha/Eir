@@ -3,7 +3,7 @@ import { request } from './network.js';
 import { getPersonPhoto } from './image.js';
 import { removeError, showError, validateEmail } from './form_validation.js';
 import carousel from './carousel.js';
-import { generateHouseUrl } from './houses.js';
+import { generateHouseUrl } from './house_helper_functions.js';
 import { TOURIST } from './common.js';
 import { getOwnProperties, tintProfileLeaves } from './profile_page_owner.js';
 import getRentalHistory from './profile_page_tourist.js';
