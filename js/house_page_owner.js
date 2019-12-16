@@ -341,8 +341,6 @@ export default async function buildOwnerView() {
     }
   });
 
-  console.log(house);
-
   if (house.status == 403 || house.status == 401) {
     getTourist();
   } else {

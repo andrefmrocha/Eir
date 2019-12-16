@@ -39,7 +39,7 @@ function drawMainPage()
 
 include_once('../templates/common.php');
 include_once('../templates/on_logged_in.php');
-drawHeader(['../js/login_page.js'], []);
+drawHeader(['../js/login_page.js'], ['../styles/profile.css']);
 drawMainPage();
 drawFooter();
 ?>

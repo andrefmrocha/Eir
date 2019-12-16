@@ -1,0 +1,132 @@
+
+#houses article{
+  display: flex;
+  margin: 2em auto;
+  flex-wrap: wrap;
+  max-width: 55em;
+  justify-content: center;
+  align-items: center;
+  padding: 6vh 0em;
+}
+
+#houses article img {
+  width: 25em;
+  height: 15em;
+  border-radius: 0.4em;
+}
+
+#houses article div div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 25em;
+}
+
+#houses article header {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: var(--accent-color);
+  margin-bottom: 2vh;
+  max-width: 15em;
+}
+
+#houses article header:hover {
+ text-decoration: underline;
+}
+
+#houses article header::before,
+#houses article header::after{
+  content: '"';
+}
+
+#houses article > div{
+  padding: 0.5em;
+  margin-left: 1.5em;
+  max-width: 30em;
+  margin-left: 1.5em;
+
+}
+
+#houses article > div > a {
+  margin: 0;
+}
+
+
+#filters {
+  background-color: var(--primary-variant);
+  color: var(--background-color);
+  font-size: 0.7em;
+  padding: 1em;
+}
+
+#filters div:first-child{
+  display: flex;
+  flex-wrap: wrap;
+  margin: auto;
+  width: 75%;
+}
+
+#filters div ul:last-child {
+  margin-left: auto;
+}
+
+#filters ul li:first-child {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+#filters li {
+  display: flex;
+  align-items: center;
+}
+
+#filters li input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  border: 1px solid var(--background-color);
+  height: 0.5em;
+  width: 0.5em;
+  padding: 0.3em;
+  border-radius: 20%;
+  transition-duration: 0.3s;
+  background-color: var(--primary-variant);
+}
+
+#filters li input:checked{
+  background-color: var(--background-color);
+}
+
+#filters li label {
+  display: inline-block;
+  font-weight: lighter;
+  height: 100%;
+  margin: 0.5vh 0.4vw;
+  margin-top: 0.9vh;
+  letter-spacing: 0.05em;
+
+}
+
+#filters li:first-child {
+  margin-bottom: 1vh;
+}
+
+#houses article div div span {
+  flex-basis: 50%;
+  display: inline-block;
+  padding: 0.7em 0;
+  color: var(--primary-color);
+}
+
+#houses article div div span:nth-child(n + 5) {
+  flex-basis: 100%;
+  text-align: left !important;
+}
+#houses article div div span span {
+  margin: 0 0.5em;
+}
+
+#houses article div div span:nth-child(even){
+  text-align: end;
+}
