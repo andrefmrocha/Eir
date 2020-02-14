@@ -27,7 +27,7 @@ async function getDetails() {
   const selectedPhotos = [];
 
   const allTypes = await request({
-    url: `${env.host}api/types.php`,
+    url: `${env.host}/api/types.php`,
     method: 'GET',
     content: {}
   });
@@ -45,7 +45,7 @@ async function getDetails() {
   });
 
   const allTags = await request({
-    url: `${env.host}api/tags.php`,
+    url: `${env.host}/api/tags.php`,
     method: 'GET',
     content: {}
   });
@@ -178,7 +178,7 @@ async function getDetails() {
         );
         selectedPhotos.forEach(photo => body.append('new_photos[]', photo));
 
-        const response = await fetch(`${env.host}api/create_house.php`, {
+        const response = await fetch(`${env.host}/api/create_house.php`, {
           method: 'POST',
           body
         });
@@ -189,7 +189,7 @@ async function getDetails() {
           successfulAddition(
             'Property successfuly added!',
             '../assets/success-property.svg',
-            `${env.host}pages/house_page.php?id=${house.id}`
+            `${env.host}/pages/house_page.php?id=${house.id}`
           );
         } else {
           clicked = false;

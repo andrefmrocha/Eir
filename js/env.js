@@ -1,3 +1,3 @@
 export default {
-  host: 'http://localhost:8000/'
+  host: `${window.location.protocol}//${window.location.host}`
 };

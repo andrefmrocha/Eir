@@ -84,7 +84,7 @@ export async function buildCalendar(date, single) {
   }
 
   const rentals = await request({
-    url: `${env.host}api/house_rentals.php`,
+    url: `${env.host}/api/house_rentals.php`,
     method: 'POST',
     content: {
       house_id: urlParams.get('id'),

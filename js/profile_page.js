@@ -77,7 +77,7 @@ document.querySelector('form').addEventListener('submit', async ev => {
     }
 
     const response = await request({
-      url: `${env.host}api/update_profile.php`,
+      url: `${env.host}/api/update_profile.php`,
       method: 'POST',
       content: body
     });
@@ -86,7 +86,7 @@ document.querySelector('form').addEventListener('submit', async ev => {
 
 async function getProfile() {
   const profile = await request({
-    url: `${env.host}api/get_profile.php`,
+    url: `${env.host}/api/get_profile.php`,
     method: 'GET',
     content: {}
   });

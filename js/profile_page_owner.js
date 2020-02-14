@@ -6,13 +6,13 @@ import { generateHouseUrl } from './house_helper_functions.js';
 
 export function tintProfileLeaves() {
   const leaves = document.querySelectorAll('.profile-leaf');
-  leaves.forEach(node => node.setAttribute('src', `${env.host}assets/gold-profile-leaf.svg`));
+  leaves.forEach(node => node.setAttribute('src', `${env.host}/assets/gold-profile-leaf.svg`));
 }
 
 export async function getOwnProperties() {
   addAddPropertyButton();
   const houses = await request({
-    url: `${env.host}api/get_properties.php`,
+    url: `${env.host}/api/get_properties.php`,
     method: 'GET',
     content: {}
   });
@@ -71,7 +71,7 @@ function buildProperty(property) {
 
 function addAddPropertyButton() {
   const addPropertyButton = document.createElement('a');
-  addPropertyButton.href = `${env.host}pages/create_house.php`;
+  addPropertyButton.href = `${env.host}/pages/create_house.php`;
   addPropertyButton.innerText = 'Add Property';
   addPropertyButton.setAttribute('class', 'button');
   const carrouselNode = document.querySelector('#profile-carrousel');

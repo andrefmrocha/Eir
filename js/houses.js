@@ -35,7 +35,7 @@ async function getHouses(extraParams) {
         ...extraParams
       };
       const houses = await request({
-        url: `${env.host}api/get_houses.php`,
+        url: `${env.host}/api/get_houses.php`,
         method: 'POST',
         content
       });

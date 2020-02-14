@@ -9,7 +9,7 @@ const urlParams = new URL(window.location).searchParams;
 async function buildUserProfile() {
   const id = urlParams.get('id');
   const user = await request({
-    url: `${env.host}api/get_user_profile.php`,
+    url: `${env.host}/api/get_user_profile.php`,
     method: 'GET',
     content: { id }
   });
