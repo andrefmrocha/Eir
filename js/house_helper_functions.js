@@ -20,7 +20,7 @@ function displayHouseTitle(house) {
 }
 
 function generateProfileUrl(personId) {
-  return `${env.host}pages/view_profile.php?id=${personId}`;
+  return `${env.host}/pages/view_profile.php?id=${personId}`;
 }
 
 export function buildComment(review) {
@@ -98,5 +98,5 @@ export default function buildMainHouseInfo(house) {
 }
 
 export function generateHouseUrl(id) {
-  return `${env.host}pages/house_page.php?id=${id}`;
+  return `${env.host}/pages/house_page.php?id=${id}`;
 }

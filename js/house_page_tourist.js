@@ -63,7 +63,7 @@ async function buildCommentsSection(id, house) {
   const date = new Date();
   const currentDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
   const response = await request({
-    url: `${env.host}api/rate_eligible.php`,
+    url: `${env.host}/api/rate_eligible.php`,
     method: 'POST',
     content: {
       house_id: id,
@@ -144,7 +144,7 @@ async function buildCommentsSection(id, house) {
       if (error) return;
 
       const response = await request({
-        url: `${env.host}api/add_comment.php`,
+        url: `${env.host}/api/add_comment.php`,
         method: 'POST',
         content: {
           house_id: id,
@@ -284,7 +284,7 @@ export default async function getHouseInfo() {
 
     if (!error) {
       const response = await request({
-        url: `${env.host}api/reserve.php`,
+        url: `${env.host}/api/reserve.php`,
         method: 'POST',
         content: {
           house_id: urlParams.get('id'),
@@ -304,7 +304,7 @@ export default async function getHouseInfo() {
           successfulReservation(
             'Reservation was successful!',
             '../assets/success-badge.svg',
-            `${env.host}pages/profile_page.php`
+            `${env.host}/pages/profile_page.php`
           );
           break;
       }

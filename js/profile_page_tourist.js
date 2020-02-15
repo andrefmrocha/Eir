@@ -6,7 +6,7 @@ import { generateHouseUrl } from './house_helper_functions.js';
 
 export default async function getRentalHistory() {
   const houses = await request({
-    url: `${env.host}api/get_rental_history.php`,
+    url: `${env.host}/api/get_rental_history.php`,
     method: 'GET',
     content: {}
   });

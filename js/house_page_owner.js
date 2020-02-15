@@ -111,7 +111,7 @@ async function buildEditableView(house, maps) {
   numBeds.value = house.max_guest_number;
 
   const allTypes = await request({
-    url: `${env.host}api/types.php`,
+    url: `${env.host}/api/types.php`,
     method: 'GET',
     content: {}
   });
@@ -126,7 +126,7 @@ async function buildEditableView(house, maps) {
   infoWrapper[1].replaceChild(numBeds, tags[1]);
 
   const allTags = await request({
-    url: `${env.host}api/tags.php`,
+    url: `${env.host}/api/tags.php`,
     method: 'GET',
     content: {}
   });
@@ -254,7 +254,7 @@ async function buildEditableView(house, maps) {
             : body.append(key, formData[key])
         );
         selectedPhotos.forEach(photo => body.append('new_photos[]', photo));
-        const response = await fetch(`${env.host}api/house_update.php`, {
+        const response = await fetch(`${env.host}/api/house_update.php`, {
           method: 'POST',
           body
         });
@@ -334,7 +334,7 @@ async function buildDashboard(house) {
 
 export default async function buildOwnerView() {
   const house = await request({
-    url: `${env.host}api/owner_house_view.php`,
+    url: `${env.host}/api/owner_house_view.php`,
     method: 'GET',
     content: {
       id: urlParams.get('id')

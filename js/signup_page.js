@@ -46,7 +46,7 @@ document.querySelector('form').addEventListener('submit', async ev => {
   }
   if (!error) {
     const response = await request({
-      url: `${env.host}api/signup.php`,
+      url: `${env.host}/api/signup.php`,
       method: 'POST',
       content: {
         full_name: name.value,
@@ -64,7 +64,7 @@ document.querySelector('form').addEventListener('submit', async ev => {
         showError('register-email-input');
         break;
       default:
-        window.location.replace(`${env.host}`);
+        window.location.replace(`${env.host}/`);
         break;
     }
   }

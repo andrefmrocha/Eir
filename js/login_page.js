@@ -35,7 +35,7 @@ document.querySelector('form').addEventListener('submit', async ev => {
 
   if (!error) {
     const response = await request({
-      url: `${env.host}api/login.php`,
+      url: `${env.host}/api/login.php`,
       method: 'POST',
       content: {
         email: email.value,
